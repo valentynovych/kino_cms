@@ -19,6 +19,7 @@ public class Hall {
     private String name;
     private String descriptions;
     private String hallSchema; //image
+    private String firstBanner;
     private String image1;
     private String image2;
     private String image3;

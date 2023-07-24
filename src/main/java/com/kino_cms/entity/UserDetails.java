@@ -1,6 +1,7 @@
 package com.kino_cms.entity;
 
 import com.kino_cms.enums.City;
+import com.kino_cms.enums.Language;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,15 +13,16 @@ import java.sql.Date;
 public class UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String firstName;
-    String lastName;
-    String address;
-    String cardNumber;
-    String sex;
-    String phone;
-    Date dateOfBirth;
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String cardNumber;
+    private String sex;
+    private String phone;
+    private Date dateOfBirth;
     @Enumerated(EnumType.STRING)
-    City city;
-
+    private City city;
+    @Enumerated(EnumType.STRING)
+    private Language language;
 }

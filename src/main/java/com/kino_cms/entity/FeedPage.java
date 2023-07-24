@@ -1,6 +1,7 @@
 package com.kino_cms.entity;
 
 import com.kino_cms.enums.FeedType;
+import com.kino_cms.enums.Language;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -30,4 +31,6 @@ public class FeedPage {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private SeoBlock seoBlock;
     private Boolean isActivate;
+    @Enumerated(EnumType.STRING)
+    private Language language;
 }
