@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Користувачі</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="/assets/css/core/libs.min.css"/>
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="/assets/css/hope-ui.min.css?v=2.0.0"/>
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="/assets/css/custom.min.css?v=2.0.0"/>
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="/assets/css/dark.min.css"/>
+    <!-- Customizer Css -->
+    <link rel="stylesheet" href="/assets/css/customizer.min.css"/>
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
+    <!-- Flatpickr css -->
+    <link rel="stylesheet" href="/assets/vendor/flatpickr/dist/flatpickr.min.css"/>
+</head>
+<body>
+<div id="loading">
+    <div class="loader simple-loader">
+        <div class="loader-body"></div>
+    </div>
+</div>
+<aside th:replace="templateParts/sidebar"></aside>
+<main class="main-content">
+    <nav th:replace="templateParts/navbar_admin"></nav>
+
+    <div class="container-fluid" style="padding: 5rem 2rem;">
+        <div class="card">
+            <div class="table-responsive">
+                <table id="datatable" class="table table-striped" data-toggle="data-table"
+                       aria-describedby="datatable_info">
+                    <thead>
+                    <tr>
+                        <td>Id</td>
+                        <td>Дата реєстрації</td>
+                        <td>Дата народження</td>
+                        <td>E-Mail</td>
+                        <td>Телефон</td>
+                        <td>Ім`я</td>
+                        <td>Псевдонім</td>
+                        <td>Місто</td>
+                        <td></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.id}"></td>
+                        <td th:text="${user.createTime}"></td>
+                        <td th:text="${user.userDetails.dateOfBirth}"></td>
+                        <td th:text="${user.email}"></td>
+                        <td th:text="${user.userDetails.phone}"></td>
+                        <td th:text="${user.userDetails.firstName} + ' ' + ${user.userDetails.lastName}"></td>
+                        <td th:text="${user.username}"></td>
+                        <td th:text="${user.userDetails.city}"></td>
+                        <td>
+                            <a th:href="@{/admin/edit-user/{id}(id=${user.id})}" class="me-2">
+                                <svg class="icon-22" width="32" viewBox="0 0 24 24" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13.7476 20.4428H21.0002" stroke="currentColor" stroke-width="1.5"
+                                          stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                          d="M12.78 3.79479C13.5557 2.86779 14.95 2.73186 15.8962 3.49173C15.9485 3.53296 17.6295 4.83879 17.6295 4.83879C18.669 5.46719 18.992 6.80311 18.3494 7.82259C18.3153 7.87718 8.81195 19.7645 8.81195 19.7645C8.49578 20.1589 8.01583 20.3918 7.50291 20.3973L3.86353 20.443L3.04353 16.9723C2.92866 16.4843 3.04353 15.9718 3.3597 15.5773L12.78 3.79479Z"
+                                          stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                          stroke-linejoin="round"></path>
+                                    <path d="M11.021 6.00098L16.4732 10.1881" stroke="currentColor" stroke-width="1.5"
+                                          stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </a>
+                            <a th:href="@{/admin/delete-user/{id}(id=${user.id})}">
+                                <svg class="icon-22" width="32" viewBox="0 0 24 24" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19.3248 9.46826C19.3248 9.46826 18.7818 16.2033 18.4668 19.0403C18.3168 20.3953 17.4798 21.1893 16.1088 21.2143C13.4998 21.2613 10.8878 21.2643 8.27979 21.2093C6.96079 21.1823 6.13779 20.3783 5.99079 19.0473C5.67379 16.1853 5.13379 9.46826 5.13379 9.46826"
+                                          stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                          stroke-linejoin="round"></path>
+                                    <path d="M20.708 6.23975H3.75" stroke="currentColor" stroke-width="1.5"
+                                          stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M17.4406 6.23973C16.6556 6.23973 15.9796 5.68473 15.8256 4.91573L15.5826 3.69973C15.4326 3.13873 14.9246 2.75073 14.3456 2.75073H10.1126C9.53358 2.75073 9.02558 3.13873 8.87558 3.69973L8.63258 4.91573C8.47858 5.68473 7.80258 6.23973 7.01758 6.23973"
+                                          stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                          stroke-linejoin="round"></path>
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="/assets/js/core/libs.min.js"></script>
+
+<!-- External Library Bundle Script -->
+<script src="/assets/js/core/external.min.js"></script>
+
+<!-- Widgetchart Script -->
+<script src="/assets/js/charts/widgetcharts.js"></script>
+
+<!-- mapchart Script -->
+<script src="/assets/js/charts/vectore-chart.js"></script>
+<script src="/assets/js/charts/dashboard.js"></script>
+
+<!-- fslightbox Script -->
+<script src="/assets/js/plugins/fslightbox.js"></script>
+
+<!-- Settings Script -->
+<script src="/assets/js/plugins/setting.js"></script>
+
+<!-- Slider-tab Script -->
+<script src="/assets/js/plugins/slider-tabs.js"></script>
+
+<!-- Form Wizard Script -->
+<script src="/assets/js/plugins/form-wizard.js"></script>
+
+<!-- AOS Animation Plugin-->
+<script src="/assets/vendor/aos/dist/aos.js"></script>
+<!-- App Script -->
+<script src="/assets/js/hope-ui.js" defer></script>
+
+<!--<script type="text/javascript" th:src="@{/js/validate.js}"></script>-->
+</body>
+</html>
