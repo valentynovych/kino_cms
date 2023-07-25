@@ -5,5 +5,7 @@ public enum PageType {
     CAFE_BAR,
     VIP_HALL,
     ADVERTISING,
-    CHILD_ROOM
+    CHILD_ROOM,
+    HOME_PAGE,
+    CONTACT_PAGE
 }

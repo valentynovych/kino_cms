@@ -1,18 +1,26 @@
 package com.kino_cms.entity;
 
+
 import com.kino_cms.enums.Language;
+import com.kino_cms.enums.PageType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @NoArgsConstructor
 @Data
 @Entity
-public class HomePage {
+public class HomePage implements Page {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Enumerated(EnumType.STRING)
+    private PageType pageType;
+    private String title;
     private String phone_main;
     private String phone_other;
     private String seoText;
@@ -20,5 +28,7 @@ public class HomePage {
     private SeoBlock seoBlock;
     @Enumerated(EnumType.STRING)
     private Language language;
-    private Boolean isActivate;
+    private Boolean isActive;
+    @CreationTimestamp
+    private Timestamp createTime;
 }

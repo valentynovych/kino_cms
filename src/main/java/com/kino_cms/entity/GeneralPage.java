@@ -4,13 +4,15 @@ import com.kino_cms.enums.Language;
 import com.kino_cms.enums.PageType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @NoArgsConstructor
 @Data
 @Entity
-public class GeneralPage {
+public class GeneralPage implements Page{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,6 +29,8 @@ public class GeneralPage {
     private SeoBlock seoBlock;
     @Enumerated(EnumType.STRING)
     private Language language;
-    private Boolean isActivate;
+    private Boolean isActive;
+    @CreationTimestamp
+    private Timestamp createTime;
 
 }
