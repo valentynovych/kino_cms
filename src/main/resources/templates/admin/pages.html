@@ -30,8 +30,24 @@
 <aside th:replace="templateParts/sidebar"></aside>
 <main class="main-content">
     <nav th:replace="templateParts/navbar_admin"></nav>
+    <div class="row mt-4">
+        <div class="col-9 d-flex justify-content-center">
+        <span class="h3">Всі сторінки</span>
+        </div>
+        <div class="col-3">
+        <a th:href="@{admin/add-page}" class="btn btn-soft-secondary">
+            <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.0001 8.32739V15.6537" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M15.6668 11.9904H8.3335" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M16.6857 2H7.31429C4.04762 2 2 4.31208 2 7.58516V16.4148C2 19.6879 4.0381 22 7.31429 22H16.6857C19.9619 22 22 19.6879 22 16.4148V7.58516C22 4.31208 19.9619 2 16.6857 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            Створити сторінку
+        </a>
+<!--            <button type="button" class="btn btn-soft-primary" onclick="location.href='/editPage/addPage'">Створити сторінку</button>-->
+    </div>
+    </div>
 
-    <div class="container-fluid" style="padding: 5rem 2rem;">
+    <div class="container-fluid" style="padding: 2rem;">
         <div class="card">
             <div class="table-responsive">
                 <table id="datatable" class="table table-striped" data-toggle="data-table"
@@ -50,7 +66,7 @@
                         <td th:text="${page.createTime}"></td>
                         <td th:text="${page.isActive} ? 'Вкл' : 'Викл'"></td>
                         <td>
-                            <a th:href="@{/pages}" class="me-2">
+                            <a th:href="@{/admin/edit-page/{pageType}/{id}(id=${page.id}, pageType=${page.pageType})}" class="me-2">
                                 <svg class="icon-22" width="32" viewBox="0 0 24 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M13.7476 20.4428H21.0002" stroke="currentColor" stroke-width="1.5"
@@ -63,7 +79,7 @@
                                           stroke-linecap="round" stroke-linejoin="round"></path>
                                 </svg>
                             </a>
-                            <a th:href="@{/pages}">
+                            <a th:href="@{/admin/delete-page/{pageType}/{id}(id=${page.id}, pageType=${page.pageType})}">
                                 <svg class="icon-22" width="32" viewBox="0 0 24 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M19.3248 9.46826C19.3248 9.46826 18.7818 16.2033 18.4668 19.0403C18.3168 20.3953 17.4798 21.1893 16.1088 21.2143C13.4998 21.2613 10.8878 21.2643 8.27979 21.2093C6.96079 21.1823 6.13779 20.3783 5.99079 19.0473C5.67379 16.1853 5.13379 9.46826 5.13379 9.46826"

@@ -20,6 +20,7 @@ public class GeneralPage implements Page{
     private PageType pageType;
     private String title;
     private String description;
+    private String mainImage;
     private String image1;
     private String image2;
     private String image3;
