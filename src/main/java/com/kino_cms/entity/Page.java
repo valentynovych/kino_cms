@@ -2,8 +2,8 @@ package com.kino_cms.entity;
 
 import com.kino_cms.enums.PageType;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import java.sql.Timestamp;
 
 public interface Page {

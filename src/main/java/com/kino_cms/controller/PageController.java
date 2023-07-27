@@ -107,8 +107,12 @@ public class PageController {
     @GetMapping("/admin/edit-aboutcinema/{id}")
     public String editAboutCinema(@PathVariable Long id, Model model) {
         Optional<GeneralPage> generalPage = pageRepo.findById(id);
+
         if (generalPage.isPresent()){
             model.addAttribute("aboutPage", generalPage.get());
+            File image = new File(generalPage.get().getMainImage());
+            model.addAttribute("mainImageOther", image);
+
         } else {
             model.addAttribute("aboutPage", new GeneralPage());
         }

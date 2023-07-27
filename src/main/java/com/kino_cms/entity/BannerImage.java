@@ -3,7 +3,7 @@ package com.kino_cms.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @NoArgsConstructor
 @Data

@@ -3,10 +3,8 @@ package com.kino_cms.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.sql.Date;
+import jakarta.persistence.*;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @NoArgsConstructor

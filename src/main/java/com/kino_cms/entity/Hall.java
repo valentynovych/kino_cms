@@ -4,7 +4,7 @@ import com.kino_cms.enums.Language;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.List;
 
 @NoArgsConstructor
