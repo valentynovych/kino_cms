@@ -7,5 +7,6 @@ public enum PageType {
     ADVERTISING,
     CHILD_ROOM,
     HOME_PAGE,
-    CONTACT_PAGE
+    CONTACT_PAGE,
+    OTHER_PAGE
 }

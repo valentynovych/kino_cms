@@ -14,7 +14,7 @@ public class UserDTO {
     private Long id;
     private String username;
     private String email;
-    private Timestamp createTime;
+    private String createTime;
     private String firstName;
     private String lastName;
     private String address;
@@ -27,7 +27,7 @@ public class UserDTO {
     @Enumerated(EnumType.STRING)
     private Language language;
 
-    public UserDTO(Long id, String username, String email, Timestamp createTime,
+    public UserDTO(Long id, String username, String email, String createTime,
                    String firstName, String lastName, String address,
                    String cardNumber, String sex, String phone, Date dateOfBirth,
                    City city, Language language) {

@@ -1,5 +1,9 @@
 img {
-    background: url("//##### SpaceLab\kino_cms\uploads\Placeholder_view_vector.svg");
+    background-image: url("/uploads/image_placeholder.svg");
+    object-fit: cover;
+}
+figure {
+    overflow: hidden;
 }
 .choose_file {
     position: relative;
@@ -17,4 +21,19 @@ img {
     opacity:0;
     width: 100%;
     height: 100%;
+}
+.load_image {
+    width: 90px;
+}
+.gallery-images img {
+    width: 10rem;
+    height: 7rem;
+}
+
+.file-input {
+    display: none;
+}
+td {
+    width: fit-content;
+    min-width: 7rem;
 }

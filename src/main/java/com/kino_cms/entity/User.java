@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @NoArgsConstructor
@@ -17,7 +18,7 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private Timestamp createTime;
+    private String createTime;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private UserDetails userDetails;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

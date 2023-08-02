@@ -1,22 +1,14 @@
-package com.kino_cms.entity;
+package com.kino_cms.dto;
 
-import com.kino_cms.dto.Page;
+import com.kino_cms.entity.SeoBlock;
 import com.kino_cms.enums.Language;
 import com.kino_cms.enums.PageType;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.OneToOne;
 
-import jakarta.persistence.*;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-
-@NoArgsConstructor
-@Data
-@Entity
-public class GeneralPage implements Page {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class GeneralPageDTO {
     private Long id;
     @Enumerated(EnumType.STRING)
     private PageType pageType;
@@ -28,11 +20,12 @@ public class GeneralPage implements Page {
     private String image3;
     private String image4;
     private String image5;
-    @OneToOne(cascade = CascadeType.ALL)
-    private SeoBlock seoBlock;
     @Enumerated(EnumType.STRING)
     private Language language;
     private Boolean isActive;
     private String createTime;
-
+    private String seoUrl;
+    private String seoTitle;
+    private String seoKeywords;
+    private String seoDescription;
 }

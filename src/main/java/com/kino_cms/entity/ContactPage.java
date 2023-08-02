@@ -1,5 +1,6 @@
 package com.kino_cms.entity;
 
+import com.kino_cms.dto.Page;
 import com.kino_cms.enums.Language;
 import com.kino_cms.enums.PageType;
 import lombok.Data;
@@ -7,13 +8,16 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Parent;
+
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @NoArgsConstructor
 @Data
 @Entity
-public class ContactPage implements Page{
+public class ContactPage implements Page {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,7 +30,6 @@ public class ContactPage implements Page{
     private List<ContactCinema> contactCinemaList;
     @Enumerated(EnumType.STRING)
     private Language language;
-    @CreationTimestamp
-    private Timestamp createTime;
+    private String createTime;
     private Boolean isActive;
 }

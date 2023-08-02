@@ -1,4 +1,4 @@
-package com.kino_cms.entity;
+package com.kino_cms.dto;
 
 import com.kino_cms.enums.PageType;
 

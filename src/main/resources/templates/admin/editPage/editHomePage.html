@@ -27,9 +27,9 @@
         <div class="loader-body"></div>
     </div>
 </div>
-<aside th:replace="templateParts/sidebar"></aside>
+<aside th:replace="fragments/sidebar"></aside>
 <main class="main-content">
-    <nav th:replace="templateParts/navbar_admin"></nav>
+    <nav th:replace="fragments/navbar_admin"></nav>
 
     <div class="container-fluid" style="padding: 2rem;">
         <form class="needs-validation" th:method="post" th:object="${page}" novalidate>
@@ -127,8 +127,8 @@
                     </div>
                 </div>
                 <div class="hidden">
-                    <input type="hidden" th:field="*{seoBlock.id}">
-                    <input type="hidden" th:field="*{createTime}">
+<!--                    <input type="hidden" th:field="*{seoBlock.id}">-->
+<!--                    <input type="hidden" th:field="*{createTime}">-->
                     <input type="hidden" th:field="*{pageType}">
                     <input type="hidden" th:field="*{title}">
                     <input type="hidden" th:field="*{language}">

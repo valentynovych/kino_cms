@@ -1,6 +1,6 @@
 package com.kino_cms.service;
 
-import com.kino_cms.entity.Page;
+import com.kino_cms.dto.Page;
 import com.kino_cms.repository.ContactPageRepo;
 import com.kino_cms.repository.GeneralPageRepo;
 import com.kino_cms.repository.HomePageRepo;

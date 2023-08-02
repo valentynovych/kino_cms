@@ -8,3 +8,4 @@ function validatePassword () {
         this.value !== pass1.value ? this.setCustomValidity('Password incorrect') : this.setCustomValidity('')
     })
 }
+
