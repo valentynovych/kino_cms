@@ -1,10 +1,12 @@
 package com.kino_cms.controller;
 
+import com.kino_cms.dto.UserDTO;
 import com.kino_cms.entity.User;
 import com.kino_cms.entity.UserDetails;
 import com.kino_cms.enums.City;
 import com.kino_cms.enums.Language;
 import com.kino_cms.repository.UserRepository;
+import com.kino_cms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,11 +27,11 @@ import java.util.stream.Collectors;
 @Controller
 public class UserController {
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     @GetMapping("/admin/view-users")
     public String viewUsers(Model model) {
-        model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("users", userService.getUserDTOList());
         return "/admin/view_users";
     }
 
@@ -45,22 +47,22 @@ public class UserController {
 //    }
 
     @PostMapping("/admin/edit-user/{id}")
-    public String saveUser(@ModelAttribute User user, @PathVariable Long id) {
+    public String saveUser(@ModelAttribute UserDTO user, @PathVariable Long id) {
 
         if (user.getCreateTime() == null){
             user.setCreateTime(new Timestamp(new Date().getTime()));
         }
         System.out.println(user);
 
-        userRepository.save(user);
+        userService.saveUserDTO(user);
 
         return "redirect:/admin/view-users";
     }
 
     @GetMapping("admin/edit-user/{id}")
     public String editUser(Model model, @PathVariable Long id) {
-        Optional<User> optionalUser = userRepository.findById(id);
-        User user = null;
+        Optional<UserDTO> optionalUser = userService.getUserDTOById(id);
+        UserDTO user = null;
         if (optionalUser.isPresent()) {
             user = optionalUser.get();
         }
@@ -70,8 +72,8 @@ public class UserController {
 
     @GetMapping("/admin/delete-user/{id}")
     public String deleteUser(@PathVariable Long id){
-        Optional<User> optionalUser = userRepository.findById(id);
-        optionalUser.ifPresent(user -> userRepository.delete(user));
+        Optional<User> optionalUser = userService.findById(id);
+        optionalUser.ifPresent(user -> userService.delete(user));
         return "redirect:/admin/view-users";
     }
     @ModelAttribute("allCities")
@@ -80,10 +82,5 @@ public class UserController {
                 .map(city -> city.name())
                 .collect(Collectors.toList());
         return cities;
-    }
-    @ModelAttribute("users")
-    public List<User> allUsers(){
-        List<User> users = userRepository.findAll();
-        return users;
     }
 }

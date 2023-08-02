@@ -27,9 +27,9 @@
         <div class="loader-body"></div>
     </div>
 </div>
-<aside th:replace="templateParts/sidebar"></aside>
+<aside th:replace="fragments/sidebar"></aside>
 <main class="main-content">
-    <nav th:replace="templateParts/navbar_admin"></nav>
+    <nav th:replace="fragments/navbar_admin"></nav>
 
     <div class="container-fluid" style="padding: 5rem 2rem;">
         <div class="card">
@@ -53,12 +53,12 @@
                     <tr th:each="user : ${users}">
                         <td th:text="${user.id}"></td>
                         <td th:text="${user.createTime}"></td>
-                        <td th:text="${user.userDetails.dateOfBirth}"></td>
+                        <td th:text="${user.dateOfBirth}"></td>
                         <td th:text="${user.email}"></td>
-                        <td th:text="${user.userDetails.phone}"></td>
-                        <td th:text="${user.userDetails.firstName} + ' ' + ${user.userDetails.lastName}"></td>
+                        <td th:text="${user.phone}"></td>
+                        <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
                         <td th:text="${user.username}"></td>
-                        <td th:text="${user.userDetails.city}"></td>
+                        <td th:text="${user.city}"></td>
                         <td>
                             <a th:href="@{/admin/edit-user/{id}(id=${user.id})}" class="me-2">
                                 <svg class="icon-22" width="32" viewBox="0 0 24 24" fill="none"
@@ -73,7 +73,9 @@
                                           stroke-linecap="round" stroke-linejoin="round"></path>
                                 </svg>
                             </a>
-                            <a th:href="@{/admin/delete-user/{id}(id=${user.id})}">
+                            <button class="btn btn-link deleteRecord" data-bs-toggle="modal"
+                                    data-bs-target="#deletedPage"
+                                    style="padding: 0" onclick="copyHref(this)">
                                 <svg class="icon-22" width="32" viewBox="0 0 24 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M19.3248 9.46826C19.3248 9.46826 18.7818 16.2033 18.4668 19.0403C18.3168 20.3953 17.4798 21.1893 16.1088 21.2143C13.4998 21.2613 10.8878 21.2643 8.27979 21.2093C6.96079 21.1823 6.13779 20.3783 5.99079 19.0473C5.67379 16.1853 5.13379 9.46826 5.13379 9.46826"
@@ -85,7 +87,8 @@
                                           stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                           stroke-linejoin="round"></path>
                                 </svg>
-                            </a>
+                            </button>
+                            <a class="hidden" th:href="@{/admin/delete-user/{id}(id=${user.id})}"></a>
                         </td>
                     </tr>
                     </tbody>
@@ -93,7 +96,35 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="deletedPage" tabindex="-1" aria-labelledby="deletedPage"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Видалити сторінку ?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Відновлення користавача після видалення не можливе !!!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-gray" data-bs-dismiss="modal">
+                        Скасувати
+                    </button>
+                    <a id="deleteLink" href="#">
+                        <button type="button" class="btn btn-outline-danger">Видалити</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
+<script>
+    function copyHref(el) {
+        document.getElementById('deleteLink').href = el.nextElementSibling.getAttribute("href");
+    }
+</script>
 
 <script src="/assets/js/core/libs.min.js"></script>
 
@@ -124,6 +155,6 @@
 <!-- App Script -->
 <script src="/assets/js/hope-ui.js" defer></script>
 
-<!--<script type="text/javascript" th:src="@{/js/validate.js}"></script>-->
+<!--<script type="text/javascript" th:src="@{/js/inputsFunction.js}"></script>-->
 </body>
 </html>

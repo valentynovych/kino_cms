@@ -27,9 +27,9 @@
         <div class="loader-body"></div>
     </div>
 </div>
-<aside th:replace="templateParts/sidebar"></aside>
+<aside th:replace="fragments/sidebar"></aside>
 <main class="main-content">
-    <nav th:replace="templateParts/navbar_admin"></nav>
+    <nav th:replace="fragments/navbar_admin"></nav>
 
     <div class="container-fluid" style="padding: 5rem 2rem;">
         <form class="needs-validation" th:method="post" th:object="${user}" novalidate>
@@ -38,7 +38,7 @@
                     <div class="row mb-4">
                         <label for="name" class="col col-form-label-sm">Ім'я</label>
                         <div class="col-sm-8">
-                            <input type="text" id="name" th:field="*{userDetails.firstName}"
+                            <input type="text" id="name" th:field="*{firstName}"
                                    class="form-control form-control-sm"
                                    required>
                             <div class="invalid-feedback">
@@ -50,7 +50,7 @@
                     <div class="row mb-4">
                         <label for="last" class="col-sm-4 col-form-label-sm">Прізвище</label>
                         <div class="col-sm-8">
-                            <input type="text" id="last" th:field="*{userDetails.lastName}"
+                            <input type="text" id="last" th:field="*{lastName}"
                                    class="form-control form-control-sm" required>
                             <div class="invalid-feedback">
                                 Обов'язкове поле
@@ -80,27 +80,27 @@
                     <div class="row mb-4">
                         <label for="address" class="col-sm-4 col-form-label-sm">Адреса</label>
                         <div class="col-sm-8">
-                            <input type="text" id="address" th:field="*{userDetails.address}"
+                            <input type="text" id="address" th:field="*{address}"
                                    class="form-control form-control-sm" required>
                             <div class="invalid-feedback">
                                 Обов'язкове поле
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-4">
-                        <label for="password" class="col-sm-4 col-form-label-sm">Пароль</label>
-                        <div class="col-sm-8">
-                            <input type="text" id="password" th:field="*{password}"
-                                   class="form-control form-control-sm" required>
-                            <div class="invalid-feedback">
-                                Обов'язкове поле
-                            </div>
-                        </div>
-                    </div>
+<!--                    <div class="row mb-4">-->
+<!--                        <label for="password" class="col-sm-4 col-form-label-sm">Пароль</label>-->
+<!--                        <div class="col-sm-8">-->
+<!--                            <input type="text" id="password" th:field="*{password}"-->
+<!--                                   class="form-control form-control-sm" required>-->
+<!--                            <div class="invalid-feedback">-->
+<!--                                Обов'язкове поле-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <div class="row mb-4">
                         <label for="card_number" class="col-sm-4 col-form-label-sm">Номер карти</label>
                         <div class="col-sm-8">
-                            <input type="text" id="card_number" th:field="*{userDetails.cardNumber}"
+                            <input type="text" id="card_number" th:field="*{cardNumber}"
                                    class="form-control form-control-sm" required>
                             <div class="invalid-feedback">
                                 Обов'язкове поле
@@ -114,7 +114,7 @@
                         <div class="col-sm-8">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="language"
-                                       th:field="*{userDetails.language}" id="language1"
+                                       th:field="*{language}" id="language1"
                                        th:value="UKRAINIAN" required>
                                 <div class="invalid-feedback">
                                     Обов'язкове поле
@@ -123,7 +123,7 @@
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="language" id="language2"
-                                       value="ENGLISH" th:field="*{userDetails.language}">
+                                       value="ENGLISH" th:field="*{language}">
                                 <label class="form-check-label small" for="language2">English</label>
                             </div>
                         </div>
@@ -133,7 +133,7 @@
                         <div class="col-sm-8">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="sex" id="sex1"
-                                       value="Male" th:field="*{userDetails.sex}" required>
+                                       value="Male" th:field="*{sex}" required>
                                 <div class="invalid-feedback">
                                     Обов'язкове поле
                                 </div>
@@ -141,7 +141,7 @@
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="sex" id="sex2"
-                                       value="Female" th:field="*{userDetails.sex}">
+                                       value="Female" th:field="*{sex}">
                                 <label class="form-check-label small" for="sex2">Жінка</label>
                             </div>
                         </div>
@@ -150,7 +150,7 @@
                         <label for="phone" class="col-sm-4 col-form-label-sm">Телефон</label>
                         <div class="col-sm-8">
                             <input type="text" id="phone" class="form-control form-control-sm"
-                                   th:field="*{userDetails.phone}" required>
+                                   th:field="*{phone}" required>
                             <div class="invalid-feedback">
                                 Обов'язкове поле
                             </div>
@@ -160,7 +160,7 @@
                         <label for="date_of_birth" class="col-sm-4 col-form-label-sm">Дата народження</label>
                         <div class="col-sm-8">
                             <input type="date" id="date_of_birth" class="form-control form-control-sm"
-                                   th:field="*{userDetails.dateOfBirth}" required>
+                                   th:field="*{dateOfBirth}" required>
                             <div class="invalid-feedback">
                                 Обов'язкове поле
                             </div>
@@ -172,7 +172,7 @@
                             <select class="form-select form-select-sm col-sm-9 text-capitalize"
                                     aria-label="form-select-lg"
                                     id="city" required
-                                    th:field="*{userDetails.city}">
+                                    th:field="*{city}">
                                 <option value="">Оберіть місто</option>
                                 <option th:each="city : ${allCities}"
                                         th:value="${city}"
@@ -183,16 +183,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-4">
-                        <label for="confirmPassword" class="col-sm-4 col-form-label-sm">Повторіть пароль</label>
-                        <div class="col-sm-8">
-                            <input type="text" id="confirmPassword" class="form-control form-control-sm"
-                                   required>
-                            <div class="invalid-feedback">
-                                Обов'язкове поле
-                            </div>
-                        </div>
-                    </div>
+<!--                    <div class="row mb-4">-->
+<!--                        <label for="confirmPassword" class="col-sm-4 col-form-label-sm">Повторіть пароль</label>-->
+<!--                        <div class="col-sm-8">-->
+<!--                            <input type="text" id="confirmPassword" class="form-control form-control-sm"-->
+<!--                                   required>-->
+<!--                            <div class="invalid-feedback">-->
+<!--                                Обов'язкове поле-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -204,9 +204,7 @@
             </div>
             <div class="hidden">
                 <input type="hidden" th:field="${user.createTime}">
-                <input type="hidden" th:field="${user.userDetails.id}">
-<!--                <input type="hidden" th:field="${user.tickets}">-->
-<!--                <input type="hidden" th:field="${user.userSessionList}">-->
+                <input type="hidden" th:field="${user.id}">
             </div>
         </form>
     </div>
