@@ -14,8 +14,15 @@ public class GeneralPageService {
     @Autowired
     GeneralPageRepo generalPageRepo;
 
-    public Optional<GeneralPageDTO> getGeneralPageById(Long id) {
-        return generalPageRepo.getGeneralPageById(id);
+    public Optional<GeneralPageDTO> getGeneralPageDTOById(Long id) {
+        System.out.println("Find generalPage by id: " + id);
+        Optional<GeneralPageDTO> generalPageDTO = generalPageRepo.getGeneralPageDTOById(id);
+        System.out.println("finding generalPageDTO: " + generalPageDTO);
+        return generalPageDTO;
+    }
+
+    public Optional<GeneralPage> findById(Long id){
+        return generalPageRepo.findById(id);
     }
 
     public void deleteGeneralPageById(Long id) {
@@ -43,6 +50,7 @@ public class GeneralPageService {
         generalPage.setImage3(generalPageDTO.getImage3());
         generalPage.setImage4(generalPageDTO.getImage4());
         generalPage.setImage5(generalPageDTO.getImage5());
+        generalPage.setIsActive(generalPageDTO.getIsActive());
 
         seoBlock.setSeoUrl(generalPageDTO.getSeoUrl());
         seoBlock.setSeoTitle(generalPageDTO.getSeoTitle());
@@ -52,5 +60,13 @@ public class GeneralPageService {
         generalPage.setSeoBlock(seoBlock);
 
         generalPageRepo.save(generalPage);
+    }
+
+    public void delete(GeneralPage generalPage) {
+        generalPageRepo.deleteById(generalPage.getId());
+    }
+
+    public void save(GeneralPage generalPageModel) {
+        generalPageRepo.save(generalPageModel);
     }
 }

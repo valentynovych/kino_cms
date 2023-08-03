@@ -15,7 +15,6 @@ function uploadImage(event) {
             reader.readAsDataURL(input.files[0]);
         }
     }
-
     input.addEventListener('change', handleFileSelect);
 }
 

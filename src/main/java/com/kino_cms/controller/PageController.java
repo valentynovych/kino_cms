@@ -1,11 +1,12 @@
 package com.kino_cms.controller;
 
+import com.kino_cms.dto.GeneralPageDTO;
 import com.kino_cms.dto.Page;
 import com.kino_cms.entity.GeneralPage;
 import com.kino_cms.entity.HomePage;
 import com.kino_cms.enums.PageType;
-import com.kino_cms.repository.GeneralPageRepo;
 import com.kino_cms.repository.HomePageRepo;
+import com.kino_cms.service.GeneralPageService;
 import com.kino_cms.service.PageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +25,7 @@ import java.util.*;
 public class PageController {
 
     @Autowired
-    GeneralPageRepo pageRepo;
+    GeneralPageService generalPageService;
     @Autowired
     PageService pageService;
     @Autowired
@@ -47,11 +48,11 @@ public class PageController {
         page.setId(0L);
         switch (pageType) {
             case "HOME_PAGE":
-                return "redirect:/admin/edit-homepage/" + page.getId() + "?title=" + page.getTitle();
+                return "redirect:/admin/edit-homepage/" + page.getId() + "?firstTitle=" + page.getTitle();
             case "CONTACT_PAGE":
-                return "redirect:/admin/edit-contactpage/" + page.getId() + "?title=" + page.getTitle();
+                return "redirect:/admin/edit-contactpage/" + page.getId() + "?firstTitle=" + page.getTitle();
             case "ABOUT_CINEMA", "CHILD_ROOM", "ADVERTISING", "CAFE_BAR", "VIP_HALL":
-                return "redirect:/admin/edit-generalpage/" + page.getId() + "?title=" + page.getTitle()
+                return "redirect:/admin/edit-generalpage/" + page.getId() + "?firstTitle=" + page.getTitle()
                         + "&pageType=" + pageType;
         }
         return "redirect:/admin/view-pages";
@@ -89,8 +90,8 @@ public class PageController {
             case "CONTACT_PAGE":
                 break;
             case "ABOUT_CINEMA", "CAFE_BAR", "VIP_HALL", "ADVERTISING", "CHILD_ROOM", "OTHER_PAGE":
-                GeneralPage generalPage = pageRepo.findById(id).get();
-                pageRepo.delete(generalPage);
+                GeneralPage generalPage = generalPageService.findById(id).get();
+                generalPageService.delete(generalPage);
                 break;
         }
         return "redirect:/admin/view-pages";
@@ -98,16 +99,15 @@ public class PageController {
 
     //mapping for home page
     @GetMapping("/admin/edit-homepage/{id}")
-    public String editHomePage(@PathVariable Long id, Model model, @RequestParam(required = false) String title) {
+    public String editHomePage(@PathVariable Long id, Model model, @RequestParam(required = false) String firstTitle) {
 
         Optional<HomePage> optionalHomePage = homePageRepo.findById(id);
         if (optionalHomePage.isPresent()) {
             HomePage homePage = optionalHomePage.get();
-
             model.addAttribute("page", homePage);
         } else {
             HomePage homePage = new HomePage();
-            homePage.setTitle(title);
+            homePage.setTitle(firstTitle);
             homePage.setPageType(PageType.HOME_PAGE);
             homePage.setCreateTime(LocalDateTime.now().format(dateTimeFormatter));
             model.addAttribute("page", homePage);
@@ -125,15 +125,16 @@ public class PageController {
     // mapping for general page
     @GetMapping("/admin/edit-generalpage/{id}")
     public String editGeneralPage(@PathVariable Long id, Model model,
-                                  @RequestParam(required = false) String title,
+                                  @RequestParam(required = false) String firstTitle,
                                   @RequestParam(required = false) String pageType) {
-        Optional<GeneralPage> generalPage = pageRepo.findById(id);
+        Optional<GeneralPageDTO> generalPage = generalPageService.getGeneralPageDTOById(id);
 
         if (generalPage.isPresent()) {
-            model.addAttribute("generalPage", generalPage.get());
+            GeneralPageDTO generalPageDTO = generalPage.get();
+            model.addAttribute("generalPage", generalPageDTO);
         } else {
-            GeneralPage newPage = new GeneralPage();
-            newPage.setTitle(title);
+            GeneralPageDTO newPage = new GeneralPageDTO();
+            newPage.setTitle(firstTitle);
             newPage.setCreateTime(LocalDateTime.now().format(dateTimeFormatter));
             newPage.setPageType(PageType.valueOf(pageType));
             model.addAttribute("generalPage", newPage);
@@ -142,7 +143,7 @@ public class PageController {
     }
 
     @PostMapping("/admin/edit-generalpage/{id}")
-    public String saveGeneralPage(@ModelAttribute GeneralPage generalPageModel,
+    public String saveGeneralPage(@ModelAttribute GeneralPageDTO generalPageModel,
                                   @PathVariable Long id,
                                   @RequestParam("mainImage1") MultipartFile mainImage,
                                   @RequestParam("image11") MultipartFile image1,
@@ -150,18 +151,21 @@ public class PageController {
                                   @RequestParam("image31") MultipartFile image3,
                                   @RequestParam("image41") MultipartFile image4,
                                   @RequestParam("image51") MultipartFile image5) throws IOException {
-        Optional<GeneralPage> optionalGeneralPage = pageRepo.findById(id);
-        GeneralPage generalPage1;
-        ArrayList<String> imageList = new ArrayList<>();
+        Optional<GeneralPageDTO> optionalGeneralPage = generalPageService.getGeneralPageDTOById(generalPageModel.getId());
+        GeneralPageDTO generalPage1;
+        ArrayList<String> imageList;
         if (optionalGeneralPage.isPresent()) {
             generalPage1 = optionalGeneralPage.get();
+            imageList = new ArrayList<>(6);
             imageList.add(generalPage1.getMainImage());
             imageList.add(generalPage1.getImage1());
             imageList.add(generalPage1.getImage2());
             imageList.add(generalPage1.getImage3());
             imageList.add(generalPage1.getImage4());
             imageList.add(generalPage1.getImage5());
-
+        } else {
+            imageList = new ArrayList<>(List.of("", "", "", "", "", ""));
+            generalPageModel.setCreateTime(LocalDateTime.now().format(dateTimeFormatter));
         }
 
         ArrayList<MultipartFile> images = new ArrayList<>();
@@ -176,9 +180,9 @@ public class PageController {
         if (!uploadDir.exists()) {
             uploadDir.mkdir();
         }
-        for (int i = 0; i < images.size(); i++){
+        for (int i = 0; i < images.size(); i++) {
             MultipartFile image = images.get(i);
-            if (image.getOriginalFilename().equals("empty.png")){
+            if (image.getOriginalFilename().equals("empty.png")) {
                 imageList.add(i, null);
             } else if (!image.isEmpty()) {
                 String uuidFile = UUID.randomUUID().toString();
@@ -194,36 +198,16 @@ public class PageController {
         generalPageModel.setImage3(imageList.get(3));
         generalPageModel.setImage4(imageList.get(4));
         generalPageModel.setImage5(imageList.get(5));
-//        for (MultipartFile image : images) {
-//            if (!image.isEmpty()) {
-//                String uuidFile = UUID.randomUUID().toString();
-//                String fileName = uuidFile + "_" + image.getOriginalFilename();
-//                image.transferTo(new File(uploadPath + "/" + fileName));
-//                if (image.equals(mainImage)) {
-//                    generalPageModel.setMainImage(fileName);
-//                } else if (image.equals(image1)) {
-//                    generalPageModel.setImage1(fileName);
-//                } else if (image.equals(image2)) {
-//                    generalPageModel.setImage2(fileName);
-//                } else if (image.equals(image3)) {
-//                    generalPageModel.setImage3(fileName);
-//                } else if (image.equals(image4)) {
-//                    generalPageModel.setImage4(fileName);
-//                } else if (image.equals(image5)) {
-//                    generalPageModel.setImage5(fileName);
-//                }
-//            }
-//        }
 
-        pageRepo.save(generalPageModel);
+        generalPageService.saveGeneralPageDTO(generalPageModel);
         return "redirect:/admin/view-pages";
     }
 
     // model attribute
-    @ModelAttribute("getGeneralPages")
-    public List<GeneralPage> getGeneralPages() {
-        return pageRepo.findAll();
-    }
+//    @ModelAttribute("getGeneralPages")
+//    public List<GeneralPage> getGeneralPages() {
+//        return generalPageService.findAll();
+//    }
 
     public List<Page> getAllPages() {
         return pageService.getAllPages();
