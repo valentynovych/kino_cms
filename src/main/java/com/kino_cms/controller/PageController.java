@@ -18,10 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class PageController {
@@ -155,42 +152,68 @@ public class PageController {
                                   @RequestParam("image51") MultipartFile image5) throws IOException {
         Optional<GeneralPage> optionalGeneralPage = pageRepo.findById(id);
         GeneralPage generalPage1;
+        ArrayList<String> imageList = new ArrayList<>();
         if (optionalGeneralPage.isPresent()) {
             generalPage1 = optionalGeneralPage.get();
-            generalPageModel.setMainImage(generalPage1.getMainImage());
-            generalPageModel.setImage1(generalPage1.getImage1());
-            generalPageModel.setImage2(generalPage1.getImage2());
-            generalPageModel.setImage3(generalPage1.getImage3());
-            generalPageModel.setImage4(generalPage1.getImage4());
-            generalPageModel.setImage5(generalPage1.getImage5());
+            imageList.add(generalPage1.getMainImage());
+            imageList.add(generalPage1.getImage1());
+            imageList.add(generalPage1.getImage2());
+            imageList.add(generalPage1.getImage3());
+            imageList.add(generalPage1.getImage4());
+            imageList.add(generalPage1.getImage5());
+
         }
 
-        List<MultipartFile> images = List.of(mainImage, image1, image2, image3, image4, image5);
+        ArrayList<MultipartFile> images = new ArrayList<>();
+        images.add(mainImage);
+        images.add(image1);
+        images.add(image2);
+        images.add(image3);
+        images.add(image4);
+        images.add(image5);
 
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdir();
         }
-        for (MultipartFile image : images) {
-            if (!image.isEmpty()) {
+        for (int i = 0; i < images.size(); i++){
+            MultipartFile image = images.get(i);
+            if (image.getOriginalFilename().equals("empty.png")){
+                imageList.add(i, null);
+            } else if (!image.isEmpty()) {
                 String uuidFile = UUID.randomUUID().toString();
                 String fileName = uuidFile + "_" + image.getOriginalFilename();
                 image.transferTo(new File(uploadPath + "/" + fileName));
-                if (image.equals(mainImage)) {
-                    generalPageModel.setMainImage(fileName);
-                } else if (image.equals(image1)) {
-                    generalPageModel.setImage1(fileName);
-                } else if (image.equals(image2)) {
-                    generalPageModel.setImage2(fileName);
-                } else if (image.equals(image3)) {
-                    generalPageModel.setImage3(fileName);
-                } else if (image.equals(image4)) {
-                    generalPageModel.setImage4(fileName);
-                } else if (image.equals(image5)) {
-                    generalPageModel.setImage5(fileName);
-                }
+                imageList.set(i, fileName);
             }
         }
+
+        generalPageModel.setMainImage(imageList.get(0));
+        generalPageModel.setImage1(imageList.get(1));
+        generalPageModel.setImage2(imageList.get(2));
+        generalPageModel.setImage3(imageList.get(3));
+        generalPageModel.setImage4(imageList.get(4));
+        generalPageModel.setImage5(imageList.get(5));
+//        for (MultipartFile image : images) {
+//            if (!image.isEmpty()) {
+//                String uuidFile = UUID.randomUUID().toString();
+//                String fileName = uuidFile + "_" + image.getOriginalFilename();
+//                image.transferTo(new File(uploadPath + "/" + fileName));
+//                if (image.equals(mainImage)) {
+//                    generalPageModel.setMainImage(fileName);
+//                } else if (image.equals(image1)) {
+//                    generalPageModel.setImage1(fileName);
+//                } else if (image.equals(image2)) {
+//                    generalPageModel.setImage2(fileName);
+//                } else if (image.equals(image3)) {
+//                    generalPageModel.setImage3(fileName);
+//                } else if (image.equals(image4)) {
+//                    generalPageModel.setImage4(fileName);
+//                } else if (image.equals(image5)) {
+//                    generalPageModel.setImage5(fileName);
+//                }
+//            }
+//        }
 
         pageRepo.save(generalPageModel);
         return "redirect:/admin/view-pages";

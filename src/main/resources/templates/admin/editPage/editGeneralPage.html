@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Редагування сторінки</title>
+    <link rel="stylesheet" href="/css/myCustom.css">
     <!-- Favicon -->
     <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
     <!-- Library / Plugin Css Build -->
@@ -20,7 +21,7 @@
     <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
     <!-- Flatpickr css -->
     <link rel="stylesheet" href="/assets/vendor/flatpickr/dist/flatpickr.min.css"/>
-    <link rel="stylesheet" href="/css/myCustom.css">
+
 </head>
 <body>
 <div id="loading">
@@ -78,36 +79,24 @@
                     </div>
                 </div>
             </div>
-            <div class="row col-11 d-flex row-cols-auto border align-items-center">
+            <div class="row col-11 d-flex row-cols-auto border align-items-center image-block">
                 <label for="fileInput1" class="form-control-sm my-auto col-sm-2">Головна картинка</label>
                 <figure class="figure">
                     <!--                    <img th:src="@{/uploads/{mainImage}(mainImage=*{mainImage})}" id="mainImage"-->
                     <!--                         class="figure-img img-fluid rounded" style="width: 15rem; height: 15rem"-->
                     <!--                         loading="eager" alt="file">-->
                     <img th:src="@{/uploads/{mainImage}(mainImage=*{mainImage})}"
-
                          style="width: 14rem; height: 8rem;"
                          class="figure-img img-fluid rounded" id="mainImage"
                          loading="eager" alt="file">
                 </figure>
-
-
                 <button type="button" class="btn btn-outline-secondary btn-sm upload-button mx-5" id="uploadButton1">
                     Додати
                 </button>
                 <input type="file" class="file-input" id="fileInput1"
                        accept="image/png, image/jpg, image/jpeg" name="mainImage1">
-                <button type="button" class="btn btn-outline-secondary btn-sm">Видалити</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm clear-image">Видалити</button>
 
-                <script>
-                    /*const loadFile = function (event) {
-                        const output = document.getElementById('mainImage');
-                        output.src = URL.createObjectURL(event.target.files[0])
-                        output.onload = function () {
-                            URL.revokeObjectURL(output.src)
-                        }
-                    };*/
-                </script>
             </div>
             <div class="row gallery-images">
                 <div class="row label">
@@ -117,69 +106,72 @@
                     <div class="col">
                         <span class="form-control-sm">Розмір 1000х190</span>
                     </div>
-                    <div class="col d-flex flex-column align-items-center">
+                    <div class="col d-flex flex-column align-items-center image-block">
                         <figure style="max-height: calc(100% - 40px)">
                             <img th:src="@{/uploads/{image1}(image1=*{image1})}"
-                                 class="figure-img img-fluid rounded" loading="eager" alt="file"
-                            >
+                                 class="figure-img img-fluid rounded" loading="eager" alt="file">
                         </figure>
+                        <button type="button" class="btn btn-close btn-sm clear-image"></button>
                         <button type="button" class="btn btn-outline-secondary btn-sm upload-button" id="uploadButton2">
                             Додати
                         </button>
+
                         <input type="file" id="fileInput2" class="file-input" accept="image/png, image/jpg, image/jpeg"
                                name="image11">
                     </div>
-                    <div class="col d-flex flex-column align-items-center">
+                    <div class="col d-flex flex-column align-items-center image-block">
                         <figure style="max-height: calc(100% - 40px)">
                             <img th:src="@{/uploads/{image2}(image2=*{image2})}"
                                  class="figure-img img-fluid rounded"
                                  loading="eager" alt="file">
                         </figure>
+                        <button type="button" class="btn btn-close btn-sm clear-image"></button>
                         <button type="button" class="btn btn-outline-secondary btn-sm upload-button" id="uploadButton3">
                             Додати
                         </button>
                         <input type="file" id="fileInput3" class="file-input" accept="image/png, image/jpg, image/jpeg"
                                name="image21">
                     </div>
-                    <div class="col d-flex flex-column align-items-center">
+                    <div class="col d-flex flex-column align-items-center image-block">
                         <figure style="max-height: calc(100% - 40px)">
                             <img th:src="@{/uploads/{image3}(image3=*{image3})}"
                                  class="figure-img img-fluid rounded"
                                  loading="eager" alt="file">
                         </figure>
+                        <button type="button" class="btn btn-close btn-sm clear-image"></button>
                         <button type="button" class="btn btn-outline-secondary btn-sm upload-button" id="uploadButton4">
                             Додати
                         </button>
                         <input type="file" id="fileInput4" class="file-input" accept="image/png, image/jpg, image/jpeg"
                                name="image31">
                     </div>
-                    <div class="col d-flex flex-column align-items-center">
+                    <div class="col d-flex flex-column align-items-center image-block">
                         <figure style="max-height: calc(100% - 40px)">
                             <img th:src="@{/uploads/{image4}(image4=*{image4})}"
                                  class="figure-img img-fluid rounded"
-                                 loading="eager" alt="file">
+                                 loading="eager" alt="file" id="12">
                         </figure>
+                        <button type="button" class="btn btn-close btn-sm clear-image"
+                                onclick="document.getElementById('12').src = ''"></button>
                         <button type="button" class="btn btn-outline-secondary btn-sm upload-button" id="uploadButton5">
                             Додати
                         </button>
                         <input type="file" id="fileInput5" class="file-input" accept="image/png, image/jpg, image/jpeg"
                                name="image41">
                     </div>
-                    <div class="col d-flex flex-column align-items-center">
+                    <div class="col d-flex flex-column align-items-center image-block">
                         <figure style="max-height: calc(100% - 40px)">
                             <img th:src="@{/uploads/{image5}(image5=*{image5})}"
                                  class="figure-img img-fluid rounded"
                                  loading="eager" alt="file" th:field="*{image5}">
                         </figure>
+                        <button type="button" class="btn btn-close btn-sm clear-image"></button>
                         <button type="button" class="btn btn-outline-secondary btn-sm upload-button" id="uploadButton6">
                             Додати
                         </button>
                         <input type="file" id="fileInput6" class="file-input" accept="image/png, image/jpg, image/jpeg"
                                name="image51">
                     </div>
-
-
-                    <script type="text/javascript" th:src="@{/js/file-upload.js}"></script>
                 </div>
             </div>
             <div class="row mt-5">
@@ -245,6 +237,7 @@
     </div>
 
 </main>
+<script type="text/javascript" th:src="@{/js/file-upload.js}"></script>
 
 <script src="/assets/js/core/libs.min.js"></script>
 
@@ -276,74 +269,4 @@
 <script src="/assets/js/hope-ui.js" defer></script>
 
 </body>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Знаходимо всі кнопки з класом "upload-button"
-        const uploadButtons = document.querySelectorAll('.upload-button');
-
-        // Прикріплюємо обробник події для кожної кнопки
-        uploadButtons.forEach(function (button) {
-            button.addEventListener('click', function () {
-                // Зупиняємо подальше виконання обробника події
-                event.stopPropagation();
-
-                // Отримуємо відповідний file-input для кожної кнопки
-                const fileInput = this.nextElementSibling;
-
-                // Запускаємо клік на file-input
-                fileInput.click();
-
-                // Додаємо обробник події для зміни значення file-input
-                function handleFileSelect() {
-                    // Перевіряємо, чи було обрано зображення
-                    if (fileInput.files && fileInput.files[0]) {
-                        // Отримуємо <img> для відображення завантаженого зображення
-                        const imagePreview = this.parentNode.querySelector('img');
-
-                        // Створюємо об'єкт FileReader
-                        const reader = new FileReader();
-
-                        // Обробник події для завершення читання файлу
-                        reader.onload = function (e) {
-                            // Встановлюємо src зображення на основі завантаженого файлу
-                            imagePreview.src = e.target.result;
-
-                            // Видаляємо обробник події з file-input після відображення зображення
-                            fileInput.removeEventListener('change', handleFileSelect);
-                        };
-
-                        // Читаємо файл як URL-адресу даних (data URL)
-                        reader.readAsDataURL(fileInput.files[0]);
-                    }
-                }
-
-                // Додаємо обробник події для зміни значення file-input
-                fileInput.addEventListener('change', handleFileSelect);
-            });
-        });
-    });
-</script>
 </html>
-<script>
-    const input = document.getElementById('fileInput');
-    const image = document.getElementById('image');
-
-    input.addEventListener('change', () => {
-        const file = input.files[0];
-
-        // Check the file type
-        if (!file.type.match('image.*')) {
-            alert('Please select an image file');
-            return;
-        }
-
-        // Create a new image element
-        const newImage = document.createElement('img');
-
-        // Set the image source to the selected file
-        newImage.src = file.url;
-
-        // Add the image element to the DOM
-        image.appendChild(newImage);
-    });
-</script>

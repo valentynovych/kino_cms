@@ -15,41 +15,51 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<UserDTO> getUserDTOList(){
+    public List<UserDTO> getUserDTOList() {
 
         return userRepository.getUserDTOList();
     }
-    public Optional<UserDTO> getUserDTOById(Long id){
+
+    public Optional<UserDTO> getUserDTOById(Long id) {
         return userRepository.getUserDTOById(id);
     }
 
-    public Optional<User> findById(Long id){
+    public Optional<User> findById(Long id) {
         return userRepository.findById(id);
     }
-    public void delete(User user){
+
+    public void delete(User user) {
         userRepository.delete(user);
     }
-    public void saveUserDTO(UserDTO userDTO){
+
+    public void saveUserDTO(UserDTO userDTO) {
         Optional<User> userOnDB = userRepository.findById(userDTO.getId());
-        if (userOnDB.isPresent()){
-            User user = userOnDB.get();
-            UserDetails userDetails = user.getUserDetails();
-
-            user.setEmail(userDTO.getEmail());
-            user.setUsername(userDTO.getUsername());
-            userDetails.setSex(userDTO.getSex());
-            userDetails.setCity(userDTO.getCity());
-            userDetails.setLanguage(userDTO.getLanguage());
-            userDetails.setAddress(userDTO.getAddress());
-            userDetails.setPhone(userDTO.getPhone());
-            userDetails.setCardNumber(userDTO.getCardNumber());
-            userDetails.setFirstName(userDTO.getFirstName());
-            userDetails.setLastName(userDTO.getLastName());
-            userDetails.setDateOfBirth(userDTO.getDateOfBirth());
-            user.setUserDetails(userDetails);
-
-            userRepository.save(user);
-
+        User user;
+        UserDetails userDetails;
+        if (userOnDB.isPresent()) {
+            user = userOnDB.get();
+            userDetails = user.getUserDetails();
+        } else {
+            user = new User();
+            userDetails = new UserDetails();
         }
+
+        user.setEmail(userDTO.getEmail());
+        user.setUsername(userDTO.getUsername());
+
+        userDetails.setSex(userDTO.getSex());
+        userDetails.setCity(userDTO.getCity());
+        userDetails.setLanguage(userDTO.getLanguage());
+        userDetails.setAddress(userDTO.getAddress());
+        userDetails.setPhone(userDTO.getPhone());
+        userDetails.setCardNumber(userDTO.getCardNumber());
+        userDetails.setFirstName(userDTO.getFirstName());
+        userDetails.setLastName(userDTO.getLastName());
+        userDetails.setDateOfBirth(userDTO.getDateOfBirth());
+        user.setUserDetails(userDetails);
+
+        userRepository.save(user);
+
+
     }
 }
