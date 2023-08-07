@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Редагування сторінки</title>
+    <link rel="stylesheet" href="/css/myCustom.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="/assets/css/core/libs.min.css"/>
+    <link rel="stylesheet" href="/assets/vendor/aos/dist/aos.css">
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="/assets/css/hope-ui.min.css?v=2.0.0"/>
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="/assets/css/custom.min.css?v=2.0.0"/>
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="/assets/css/dark.min.css"/>
+    <!-- Customizer Css -->
+    <link rel="stylesheet" href="/assets/css/customizer.min.css"/>
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
+    <!-- Flatpickr css -->
+    <link rel="stylesheet" href="/assets/vendor/flatpickr/dist/flatpickr.min.css"/>
+
+</head>
+<body>
+<div id="loading">
+    <div class="loader simple-loader">
+        <div class="loader-body"></div>
+    </div>
+</div>
+<aside th:replace="fragments/sidebar"></aside>
+<main class="main-content">
+    <nav th:replace="fragments/navbar_admin"></nav>
+    <div class="container">
+        <form method="post" th:object="${page}" enctype="multipart/form-data" novalidate>
+            <div class="container w-100 d-flex justify-content-center flex-column">
+
+                <div id="contact-cinema-list">
+                    <input type="hidden" th:field="*{pageType}">
+                    <input type="hidden" th:field="*{language}">
+                    <input type="hidden" th:field="*{title}">
+                    <input type="hidden" th:field="*{isActive}">
+                    <input type="hidden" th:field="*{createTime}">
+
+                    <div class="card mt-3 mx-auto contact-cinema-item" style="width: 90%"
+                         th:id="*{contactCinemaList[__${item.index}__].id}"
+                         th:each="contactCinemaItem, item : *{contactCinemaList}">
+                        <div class="card-body">
+                            <div class="row d-flex flex-row mt-3">
+                                <label class="col-3 form-control-sm">Назва кінотеатру</label>
+                                <div class="col col-6">
+                                    <input type="text" class="form-control form-control-sm"
+                                           th:field="*{contactCinemaList[__${item.index}__].title}"
+                                           required>
+                                    <div class="invalid-feedback">
+                                        Обов'язкове поле
+                                    </div>
+                                </div>
+
+                                <div th:if="${item.index} > 0"
+                                     class="col-2 form-check form-switch form-check-inline d-flex justify-content-end">
+                                    <input class="form-check-input" type="checkbox"
+                                           th:field="*{contactCinemaList[__${item.index}__].isActivate}">
+                                </div>
+
+                            </div>
+                            <div class="row d-flex flex-row mt-3">
+                                <label class="col-2 form-control-sm">Адреса</label>
+                                <div class="col col-8">
+                        <textarea type="text" class="form-control form-control-sm"
+                                  th:field="*{contactCinemaList[__${item.index}__].address}"
+                                  required rows="5"></textarea>
+                                    <div class="invalid-feedback">
+                                        Обов'язкове поле
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row d-flex flex-row mt-3">
+                                <label class="col-3 form-control-sm">Координати для карти</label>
+                                <div class="col col-7">
+                                    <input type="text" class="form-control form-control-sm"
+                                           th:field="*{contactCinemaList[__${item.index}__].coordinates}"
+                                           required>
+                                    <div class="invalid-feedback">
+                                        Обов'язкове поле
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row d-flex row-cols-auto align-items-center image-block mt-3">
+                                <label class="form-control-sm my-auto col-sm-3">Лого</label>
+                                <figure class="figure">
+                                    <img th:src="@{/uploads/{logo}(logo=*{contactCinemaList[__${item.index}__].logo_image})}"
+                                         style="width: 14rem; height: 8rem;"
+                                         class="figure-img img-fluid rounded" id="logo_image"
+                                         loading="eager" alt="file">
+                                </figure>
+                                <button type="button" class="btn btn-outline-secondary btn-sm upload-button mx-5"
+                                        id="uploadButton1">
+                                    Додати
+                                </button>
+                                <input type="file" class="file-input" id="fileInput1"
+                                       accept="image/png, image/jpg, image/jpeg" name="logo_image">
+                                <button type="button" class="btn btn-outline-secondary btn-sm clear-image">Видалити
+                                </button>
+                            </div>
+                            <input type="hidden" th:field="*{contactCinemaList[__${item.index}__].id}">
+                            <input type="hidden" th:field="*{contactCinemaList[__${item.index}__].contactPage.id}">
+                        </div>
+                    </div>
+                </div>
+                <div class="add-contact-cinema row-cols-3 mt-3 d-flex justify-content-center">
+                    <button type="button" class="btn btn-outline-primary" id="add-cinema-button">
+                        <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.0001 8.32739V15.6537" stroke="currentColor" stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"></path>
+                            <path d="M15.6668 11.9904H8.3335" stroke="currentColor" stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"></path>
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M16.6857 2H7.31429C4.04762 2 2 4.31208 2 7.58516V16.4148C2 19.6879 4.0381 22 7.31429 22H16.6857C19.9619 22 22 19.6879 22 16.4148V7.58516C22 4.31208 19.9619 2 16.6857 2Z"
+                                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                  stroke-linejoin="round"></path>
+                        </svg>
+                        Додати контакти конотеатру
+                    </button>
+
+                </div>
+                <div class="row my-5" style="width: 90%">
+                    <div class="col-2">
+                        <label class="col-form-label-sm">SEO блок</label>
+                    </div>
+                    <div class="col-10">
+                        <div class="seo_block col-sm-10">
+                            <div class="row">
+                                <label for="seoUrl" class="col-sm-2 col-form-label-sm justify-content-end">SEO
+                                    url:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="seoUrl" class="form-control form-control-sm col-sm-8"
+                                           th:field="*{seoBlock.seoUrl}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seo_block col-sm-10 mt-2">
+                            <div class="row">
+                                <label for="seoTitle" class="col-sm-2 col-form-label-sm justify-content-end">SEO
+                                    title:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="seoTitle" class="form-control form-control-sm col-sm-8"
+                                           th:field="*{seoBlock.seoTitle}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seo_block col-sm-10 mt-2">
+                            <div class="row">
+                                <label for="seoKeywords" class="col-sm-2 col-form-label-sm justify-content-end">SEO
+                                    keywords:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="seoKeywords" class="form-control form-control-sm col-sm-8"
+                                           th:field="*{seoBlock.seoKeywords}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seo_block col-sm-10 mt-2">
+                            <div class="row">
+                                <label for="seoDescription" class="col-sm-2 col-form-label-sm justify-content-end">SEO
+                                    description:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="seoDescription" class="form-control form-control-lg col-sm-8"
+                                           th:field="*{seoBlock.seoDescription}" style="height: 4rem">
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" th:field="*{seoBlock.id}">
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="d-grid gap-2 col-3 mx-auto mt-3">
+                            <button type="submit" class="btn btn-outline-primary">Зберегти
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+<script>
+    document.getElementById('add-cinema-button').addEventListener("click", addCinemaBlock);
+
+    function addCinemaBlock() {
+
+        const contactCinemaBlock = document.getElementsByClassName('contact-cinema-item');
+        const cloneCinema = contactCinemaBlock.item(contactCinemaBlock.length - 1).cloneNode(true);
+        console.log(cloneCinema);
+
+        cloneCinema.setAttribute('id', cloneCinema.id.replace(/\d/g, num => Number(num) + 1));
+        const selectorAll = cloneCinema.querySelectorAll('input, textarea');
+        for (const element of selectorAll) {
+            console.log(element)
+
+            element.setAttribute('id', element.id.replace(/\d/g, num => Number(num) + 1));
+            element.setAttribute('name', element.name.replace(/\d/g, num => Number(num) + 1));
+            if (element.value !== 'true'
+                && element.value !== 'false'
+                && element.type !== 'hidden') {
+                element.setAttribute('value', '');
+            }
+        }
+        cloneCinema.querySelector('.upload-button').addEventListener('click', uploadImage);
+        cloneCinema.querySelector('.clear-image').addEventListener('click', clearImage);
+
+        document.getElementById('contact-cinema-list').appendChild(cloneCinema);
+    }
+</script>
+<script src="/js/file-upload.js"></script>
+
+<script src="/assets/js/core/libs.min.js"></script>
+
+<!-- External Library Bundle Script -->
+<script src="/assets/js/core/external.min.js"></script>
+
+<!-- Widgetchart Script -->
+<script src="/assets/js/charts/widgetcharts.js"></script>
+
+<!-- mapchart Script -->
+<script src="/assets/js/charts/vectore-chart.js"></script>
+<script src="/assets/js/charts/dashboard.js"></script>
+
+<!-- fslightbox Script -->
+<script src="/assets/js/plugins/fslightbox.js"></script>
+
+<!-- Settings Script -->
+<script src="/assets/js/plugins/setting.js"></script>
+
+<!-- Slider-tab Script -->
+<script src="/assets/js/plugins/slider-tabs.js"></script>
+
+<!-- Form Wizard Script -->
+<script src="/assets/js/plugins/form-wizard.js"></script>
+
+<!-- AOS Animation Plugin-->
+<script src="/assets/vendor/aos/dist/aos.js"></script>
+<!-- App Script -->
+<script src="/assets/js/hope-ui.js" defer></script>
+
+</body>
+</html>

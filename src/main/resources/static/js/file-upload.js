@@ -1,3 +1,4 @@
+
 function uploadImage(event) {
     const button = event.target;
     const input = button.nextElementSibling;
@@ -46,8 +47,13 @@ document.querySelectorAll('.clear-image').forEach(button => {
 
 document.querySelectorAll('img').forEach(img => {
     img.addEventListener('error', function () {
-        img.src = "/uploads/image_placeholder.svg";
-        img.onerror = null;
+        img.src = "/image/placeholder_images.svg";
+        // img.onerror = null;
     })
 });
+
+// $(".sidebar ul li").on('click', function () {
+//     $(".sidebar ul li.active").removeClass('active');
+//     $(this).addClass('active');
+// });
 

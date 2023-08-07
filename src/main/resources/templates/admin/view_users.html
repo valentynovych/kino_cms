@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
     <!-- Flatpickr css -->
     <link rel="stylesheet" href="/assets/vendor/flatpickr/dist/flatpickr.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
 </head>
 <body>
 <div id="loading">
@@ -98,7 +100,7 @@
     </div>
     <div class="modal fade" id="deletedPage" tabindex="-1" aria-labelledby="deletedPage"
          aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Видалити сторінку ?</h5>
@@ -124,6 +126,7 @@
     function copyHref(el) {
         document.getElementById('deleteLink').href = el.nextElementSibling.getAttribute("href");
     }
+
 </script>
 
 <script src="/assets/js/core/libs.min.js"></script>

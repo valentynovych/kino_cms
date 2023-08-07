@@ -1,5 +1,5 @@
 img {
-    background: url("/uploads/360_F.jpg") no-repeat scroll 0 0;
+    background: url("/image/placeholder_images.svg") no-repeat scroll 0 0;
     object-fit: cover;
 }
 
@@ -49,5 +49,13 @@ button.clear-image.btn-close {
     background-color: #fff;
     padding: .4rem;
     border-radius: 50%;
+}
+.navbar-brand img {
+    object-fit: initial;
+}
+
+.card-body {
+    border: solid 0.1rem #0b1530;
+    border-radius: .5rem;
 }
 
