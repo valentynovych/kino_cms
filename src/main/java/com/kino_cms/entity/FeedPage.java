@@ -32,4 +32,5 @@ public class FeedPage {
     private Boolean isActivate;
     @Enumerated(EnumType.STRING)
     private Language language;
+    private String createTime;
 }

@@ -140,7 +140,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" >
+                    <a class="nav-link" th:href="@{/admin/view-feeds}" >
                         <i class="icon">
                             <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                                  class="icon-20">
@@ -228,7 +228,9 @@
         const menuItem = document.querySelectorAll('.nav-link');
         const menuLenght = menuItem.length
         for (let i = 0; i<menuLenght; i++) {
-            if (menuItem[i].href === currentLocation) {
+            const part = menuItem[i].querySelector('span').textContent;
+            console.log(part);
+            if (menuItem[i].href === currentLocation || document.title === part) {
                 menuItem[i].className = "nav-link active";
             }
         }
