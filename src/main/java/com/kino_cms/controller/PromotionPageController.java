@@ -1,6 +1,5 @@
 package com.kino_cms.controller;
 
-
 import com.kino_cms.entity.FeedPage;
 import com.kino_cms.enums.FeedType;
 import com.kino_cms.service.FeedPageService;
@@ -21,15 +20,15 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-public class FeedPageController {
+public class PromotionPageController {
     @Value("${upload.path}")
     private String uploadPath;
     @Autowired
     FeedPageService feedPageService;
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    @GetMapping("/admin/edit-feed/{id}")
-    public String editFeedPage(@PathVariable Long id, Model model) {
+    @GetMapping("/admin/edit-promotion/{id}")
+    public String editPromotionPage(@PathVariable Long id, Model model) {
         Optional<FeedPage> optionalFeedPage = feedPageService.getFeedPageById(id);
 
         FeedPage feedPageFromDB;
@@ -39,14 +38,14 @@ public class FeedPageController {
         } else {
             feedPageFromDB = new FeedPage();
             feedPageFromDB.setCreateTime(LocalDateTime.now().format(dateTimeFormatter));
-            feedPageFromDB.setFeedType(FeedType.FEED);
+            feedPageFromDB.setFeedType(FeedType.PROMOTION);
             model.addAttribute("feedPage", feedPageFromDB);
         }
-        return "admin/feedAndPromotion/feedPage";
+        return "admin/feedAndPromotion/promotionPage";
     }
 
-    @PostMapping("/admin/edit-feed/{id}")
-    public String saveFeedlPage(@ModelAttribute FeedPage feedPageModel,
+    @PostMapping("/admin/edit-promotion/{id}")
+    public String savePromotionPage(@ModelAttribute FeedPage feedPageModel,
                                   @PathVariable Long id,
                                   @RequestParam("mainImage1") MultipartFile mainImage,
                                   @RequestParam("image11") MultipartFile image1,
@@ -68,7 +67,7 @@ public class FeedPageController {
             imageList.add(feedPage.getImage5());
         } else {
             feedPageModel.setId(id);
-            feedPageModel.setFeedType(FeedType.FEED);
+            feedPageModel.setFeedType(FeedType.PROMOTION);
             imageList = new ArrayList<>(List.of("", "", "", "", "", ""));
             feedPageModel.setCreateTime(LocalDateTime.now().format(dateTimeFormatter));
         }
@@ -107,22 +106,22 @@ public class FeedPageController {
         feedPageModel.setImage5(imageList.get(5));
 
         feedPageService.saveFeedPage(feedPageModel);
-        return "redirect:/admin/view-feeds";
+        return "redirect:/admin/view-promotions";
     }
 
-    @GetMapping("/admin/view-feeds")
-    public String viewFeeds(Model model) {
-        List<FeedPage> feedPageList = feedPageService.findFeedPagesByFeedType(FeedType.FEED);
+    @GetMapping("/admin/view-promotions")
+    public String viewPromotions(Model model) {
+        List<FeedPage> feedPageList = feedPageService.findFeedPagesByFeedType(FeedType.PROMOTION);
         model.addAttribute("feedPages", feedPageList);
-        return "admin/feedAndPromotion/viewFeeds";
+        return "admin/feedAndPromotion/viewPromotions";
     }
 
-    @GetMapping("/admin/delete-feed/{id}")
-    public String deleteFeed(@PathVariable Long id) {
+    @GetMapping("/admin/delete-promotion/{id}")
+    public String deletePromotion(@PathVariable Long id) {
         Optional<FeedPage> feedPageOptional = feedPageService.getFeedPageById(id);
         if (feedPageOptional.isPresent()) {
             feedPageService.deleteFeedPage(feedPageOptional.get());
         }
-        return "redirect:/admin/view-feeds";
+        return "redirect:/admin/view-promotions";
     }
 }

@@ -1,6 +1,7 @@
 package com.kino_cms.service;
 
 import com.kino_cms.entity.FeedPage;
+import com.kino_cms.enums.FeedType;
 import com.kino_cms.repository.FeedPageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,9 @@ public class FeedPageService {
     }
     public void deleteFeedPage(FeedPage feedPage){
         feedPageRepo.delete(feedPage);
+    }
+
+    public List<FeedPage> findFeedPagesByFeedType(FeedType feedType) {
+        return feedPageRepo.findFeedPagesByFeedType(feedType);
     }
 }

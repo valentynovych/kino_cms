@@ -16,6 +16,7 @@ public class FeedPage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
+    @Column(name = "feed_type")
     private FeedType feedType;
     private String title;
     private String description;
