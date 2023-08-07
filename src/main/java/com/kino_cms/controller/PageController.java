@@ -87,7 +87,7 @@ public class PageController {
             homePage.setCreateTime(LocalDateTime.now().format(dateTimeFormatter));
             model.addAttribute("page", homePage);
         }
-        return "admin/editPage/editHomePage";
+        return "admin/pages/editHomePage";
     }
 
     @PostMapping("/admin/edit-homepage/{id}")
@@ -112,7 +112,7 @@ public class PageController {
             newPage.setPageType(PageType.valueOf(pageType));
             model.addAttribute("generalPage", newPage);
         }
-        return "admin/editPage/editGeneralPage";
+        return "admin/pages/editGeneralPage";
     }
 
     @PostMapping("/admin/edit-generalpage/{id}")
@@ -181,7 +181,8 @@ public class PageController {
 
     //mapping for contact page
     @GetMapping("/admin/edit-contacts/{id}")
-    public String editContactsPage(@PathVariable Long id, Model model, @RequestParam(required = false) String firstTitle) {
+    public String editContactsPage(@PathVariable Long id, Model model,
+                                   @RequestParam(required = false) String firstTitle) {
 
         Optional<ContactPage> optionalHomePage = contactPageService.getContactPageById(id);
         ContactPage contactPage;
@@ -195,7 +196,7 @@ public class PageController {
             contactPage.setCreateTime(LocalDateTime.now().format(dateTimeFormatter));
         }
         model.addAttribute("page", contactPage);
-        return "admin/editPage/editContacts";
+        return "admin/pages/editContacts";
     }
 
     @PostMapping("/admin/edit-contacts/{id}")

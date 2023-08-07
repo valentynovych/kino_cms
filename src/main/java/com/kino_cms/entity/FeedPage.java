@@ -2,17 +2,16 @@ package com.kino_cms.entity;
 
 import com.kino_cms.enums.FeedType;
 import com.kino_cms.enums.Language;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import jakarta.persistence.*;
 import java.sql.Date;
 
 @NoArgsConstructor
 @Data
 @Entity
 public class FeedPage {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
