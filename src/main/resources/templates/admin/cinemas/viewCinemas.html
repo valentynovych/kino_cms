@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Кінотеатри</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
+
+    <link rel="stylesheet" href="/css/myCustom.css"/>
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="/assets/css/core/libs.min.css"/>
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="/assets/css/hope-ui.min.css?v=2.0.0"/>
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="/assets/css/custom.min.css?v=2.0.0"/>
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="/assets/css/dark.min.css"/>
+    <!-- Customizer Css -->
+    <link rel="stylesheet" href="/assets/css/customizer.min.css"/>
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
+    <!-- Flatpickr css -->
+    <link rel="stylesheet" href="/assets/vendor/flatpickr/dist/flatpickr.min.css"/>
+
+</head>
+<body>
+<div id="loading">
+    <div class="loader simple-loader">
+        <div class="loader-body"></div>
+    </div>
+</div>
+<aside th:replace="fragments/sidebar"></aside>
+<main class="main-content">
+    <nav th:replace="fragments/navbar_admin"></nav>
+    <div class="row mt-4">
+        <div class="col-9 d-flex justify-content-center">
+            <span class="h3">Список Кінотеатрів</span>
+        </div>
+    </div>
+
+    <div class="container-md ms-5" style="padding: 2rem;">
+        <div class="mx-auto cinema-list">
+            <div class="col-2 cinema-item" th:each="cinema, iter : *{cinemaList}">
+                <div class="col image-block">
+                    <figure>
+                        <a th:href="@{/admin/edit-cinema/{id}(id=*{cinema.id})}">
+                        <img th:src="@{/uploads/{logoImage}(logoImage=*{cinema.logoImage})}"
+                             class="figure-img img-fluid rounded" loading="eager" alt="file"> </a>
+                    </figure>
+                    <div th:if="${iter.index} > 0">
+                        <button  type="button"
+                                class="btn btn-close btn-sm deleteRecord clear-image" data-bs-toggle="modal"
+                                data-bs-target="#deletedPage" onclick="copyHref(this)">
+                        </button>
+                        <a class="hidden" th:href="@{/admin/delete-cinema/{id}(id=*{cinema.id})}"></a>
+                    </div>
+                </div>
+                <span class="h4" th:text="*{cinema.name}"></span>
+            </div>
+            <div class="col-2 add-cinema">
+                <a th:href="@{/admin/edit-cinema/0}" class="mt-5">
+                    <svg class="icon-44" width="50" viewBox="0 0 24 24" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.0001 8.32739V15.6537" stroke="currentColor" stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"></path>
+                        <path d="M15.6668 11.9904H8.3335" stroke="currentColor" stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M16.6857 2H7.31429C4.04762 2 2 4.31208 2 7.58516V16.4148C2 19.6879 4.0381 22 7.31429 22H16.6857C19.9619 22 22 19.6879 22 16.4148V7.58516C22 4.31208 19.9619 2 16.6857 2Z"
+                              stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                              stroke-linejoin="round"></path>
+                    </svg>
+                </a>
+                <span class="h4">Додати</span>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="deletedPage" tabindex="-1" aria-labelledby="deletedPage"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Видалити кінотеатр ?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Відновлення кінотеатру після видалення не можливе !!!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-gray" data-bs-dismiss="modal">
+                        Скасувати
+                    </button>
+                    <a id="deleteLink" href="#">
+                        <button type="button" class="btn btn-outline-danger">Видалити</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!--copy href from link to button on modal-->
+<script>
+    function copyHref(el) {
+        document.getElementById('deleteLink').href = el.nextElementSibling.getAttribute("href");
+    }
+</script>
+
+<script src="/assets/js/core/libs.min.js"></script>
+
+<!-- External Library Bundle Script -->
+<script src="/assets/js/core/external.min.js"></script>
+
+<!-- Widgetchart Script -->
+<script src="/assets/js/charts/widgetcharts.js"></script>
+
+<!-- mapchart Script -->
+<script src="/assets/js/charts/vectore-chart.js"></script>
+<script src="/assets/js/charts/dashboard.js"></script>
+
+<!-- fslightbox Script -->
+<script src="/assets/js/plugins/fslightbox.js"></script>
+
+<!-- Settings Script -->
+<script src="/assets/js/plugins/setting.js"></script>
+
+<!-- Slider-tab Script -->
+<script src="/assets/js/plugins/slider-tabs.js"></script>
+
+<!-- Form Wizard Script -->
+<script src="/assets/js/plugins/form-wizard.js"></script>
+
+<!-- AOS Animation Plugin-->
+<script src="/assets/vendor/aos/dist/aos.js"></script>
+<!-- App Script -->
+<script src="/assets/js/hope-ui.js" defer></script>
+
+</body>
+</html>

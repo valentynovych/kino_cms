@@ -36,5 +36,17 @@ public class SaveUploadService {
             }
         }
         return fileNameList;
+
+    }
+    public void deleteUploadFiles(List<String> fileNameImages){
+
+        for (String fileName : fileNameImages){
+            File deletedImage = new File(uploadPath + "/" + fileName);
+            if (deletedImage.delete()) {
+                System.out.println("image" + deletedImage.getAbsolutePath() + "has been delete");
+            } else {
+                System.out.println("image" + deletedImage.getAbsolutePath() + "not delete");
+            }
+        }
     }
 }

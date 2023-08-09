@@ -31,4 +31,5 @@ public class Hall {
     private Language language;
     @OneToMany(mappedBy = "hall", cascade = CascadeType.ALL)
     private List<FilmSession> filmSessions;
+    private String createTime;
 }

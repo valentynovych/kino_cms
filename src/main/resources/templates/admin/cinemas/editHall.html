@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Кінотеатри</title>
+    <link rel="stylesheet" href="/css/myCustom.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="/assets/css/core/libs.min.css"/>
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="/assets/css/hope-ui.min.css?v=2.0.0"/>
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="/assets/css/custom.min.css?v=2.0.0"/>
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="/assets/css/dark.min.css"/>
+    <!-- Customizer Css -->
+    <link rel="stylesheet" href="/assets/css/customizer.min.css"/>
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
+    <!-- Flatpickr css -->
+    <link rel="stylesheet" href="/assets/vendor/flatpickr/dist/flatpickr.min.css"/>
+
+</head>
+<body>
+<div id="loading">
+    <div class="loader simple-loader">
+        <div class="loader-body"></div>
+    </div>
+</div>
+<aside th:replace="fragments/sidebar"></aside>
+<main class="main-content">
+    <nav th:replace="fragments/navbar_admin"></nav>
+
+    <div class="container-fluid" style="padding: 2rem;">
+        <form class="needs-validation" th:method="post" th:object="${hallDTO}" novalidate
+              enctype="multipart/form-data">
+            <div class="row justify-content-end">
+                <div class="d-flex justify-content-end col-2 ">
+                    <ul class="nav nav-tabs nav-tunnel nav-slider" data-toggle="slider-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active d-flex align-items-center" data-bs-toggle="tab"
+                                    data-bs-target="#content-accordion-prv" type="button" role="tab"
+                                    aria-selected="true">
+                                UK
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link d-flex align-items-center" data-bs-toggle="tab"
+                                    data-bs-target="#content-accordion-code" type="button" role="tab"
+                                    aria-selected="false">
+                                EN
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <label for="name" class="col-sm-1 col-form-label-sm">Назва</label>
+                <div class="col-sm-4">
+                    <input type="text" id="name" th:field="*{name}"
+                           class="form-control form-control-sm" required>
+                    <div class="invalid-feedback">
+                        Обов'язкове поле
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <label for="description" class="col-sm-1 col-form-label-sm">Опис залу</label>
+                <div class="col-sm-10">
+                    <textarea type="text" id="description" th:field="*{descriptions}"
+                              class="form-control" rows="5" required></textarea>
+                    <div class="invalid-feedback">
+                        Обов'язкове поле
+                    </div>
+                </div>
+            </div>
+            <div class="row col-11 d-flex row-cols-auto align-items-center image-block">
+                <label for="fileInput1" class="form-control-sm my-auto col-sm-2">Схема залу</label>
+                <figure class="figure">
+                    <img th:src="@{/uploads/{hallSchema}(hallSchema=*{hallSchema})}"
+                         style="width: 14rem; height: 8rem;"
+                         class="figure-img img-fluid rounded" id="hallSchema1"
+                         loading="eager" alt="file">
+                </figure>
+                <button type="button" class="btn btn-outline-secondary btn-sm upload-button mx-5" id="uploadButton1">
+                    Додати
+                </button>
+                <input type="file" class="file-input" id="fileInput1"
+                       accept="image/png, image/jpg, image/jpeg" name="hallSchema1">
+                <button type="button" class="btn btn-outline-secondary btn-sm clear-image">Видалити</button>
+            </div>
+            <div class="row col-11 d-flex row-cols-auto align-items-center image-block">
+                <label for="fileInput1" class="form-control-sm my-auto col-sm-2">Головний банер</label>
+                <figure class="figure">
+                    <img th:src="@{/uploads/{firstBanner}(firstBanner=*{firstBanner})}"
+                         style="width: 14rem; height: 8rem;"
+                         class="figure-img img-fluid rounded" id="firstBanner1"
+                         loading="eager" alt="file">
+                </figure>
+                <button type="button" class="btn btn-outline-secondary btn-sm upload-button mx-5" id="uploadButton2">
+                    Додати
+                </button>
+                <input type="file" class="file-input" id="fileInput2"
+                       accept="image/png, image/jpg, image/jpeg" name="firstBanner1">
+                <button type="button" class="btn btn-outline-secondary btn-sm clear-image">Видалити</button>
+            </div>
+            <div class="row gallery-images">
+                <div class="row label">
+                    <span class="form-control-sm">Галерея картинок</span>
+                </div>
+                <div class="row col-10 d-flex flex-row gap-2">
+                    <div class="col d-flex align-items-center pb-5">
+                        <span class="form-control-sm">Розмір 1000х190</span>
+                    </div>
+                    <div class="col d-flex flex-column align-items-center image-block">
+                        <figure style="max-height: calc(100% - 40px)">
+                            <img th:src="@{/uploads/{image1}(image1=*{image1})}"
+                                 class="figure-img img-fluid rounded" loading="eager" alt="file">
+                        </figure>
+                        <button type="button" class="btn btn-close btn-sm clear-image"></button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm upload-button" id="uploadButton3">
+                            Додати
+                        </button>
+
+                        <input type="file" id="fileInput3" class="file-input" accept="image/png, image/jpg, image/jpeg"
+                               name="image11">
+                    </div>
+                    <div class="col d-flex flex-column align-items-center image-block">
+                        <figure style="max-height: calc(100% - 40px)">
+                            <img th:src="@{/uploads/{image2}(image2=*{image2})}"
+                                 class="figure-img img-fluid rounded"
+                                 loading="eager" alt="file">
+                        </figure>
+                        <button type="button" class="btn btn-close btn-sm clear-image"></button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm upload-button" id="uploadButton4">
+                            Додати
+                        </button>
+                        <input type="file" id="fileInput4" class="file-input" accept="image/png, image/jpg, image/jpeg"
+                               name="image21">
+                    </div>
+                    <div class="col d-flex flex-column align-items-center image-block">
+                        <figure style="max-height: calc(100% - 40px)">
+                            <img th:src="@{/uploads/{image3}(image3=*{image3})}"
+                                 class="figure-img img-fluid rounded"
+                                 loading="eager" alt="file">
+                        </figure>
+                        <button type="button" class="btn btn-close btn-sm clear-image"></button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm upload-button" id="uploadButton5">
+                            Додати
+                        </button>
+                        <input type="file" id="fileInput5" class="file-input" accept="image/png, image/jpg, image/jpeg"
+                               name="image31">
+                    </div>
+                    <div class="col d-flex flex-column align-items-center image-block">
+                        <figure style="max-height: calc(100% - 40px)">
+                            <img th:src="@{/uploads/{image4}(image4=*{image4})}"
+                                 class="figure-img img-fluid rounded"
+                                 loading="eager" alt="file">
+                        </figure>
+                        <button type="button" class="btn btn-close btn-sm clear-image"></button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm upload-button" id="uploadButton6">
+                            Додати
+                        </button>
+                        <input type="file" id="fileInput6" class="file-input" accept="image/png, image/jpg, image/jpeg"
+                               name="image41">
+                    </div>
+                    <div class="col d-flex flex-column align-items-center image-block">
+                        <figure style="max-height: calc(100% - 40px)">
+                            <img th:src="@{/uploads/{image5}(image5=*{image5})}"
+                                 class="figure-img img-fluid rounded"
+                                 loading="eager" alt="file">
+                        </figure>
+                        <button type="button" class="btn btn-close btn-sm clear-image"></button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm upload-button" id="uploadButton7">
+                            Додати
+                        </button>
+                        <input type="file" id="fileInput7" class="file-input" accept="image/png, image/jpg, image/jpeg"
+                               name="image51">
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-2">
+                    <label class="col-form-label-sm">SEO блок</label>
+                </div>
+                <div class="col-10">
+                    <div class="seo_block col-sm-10">
+                        <div class="row">
+                            <label for="seoUrl" class="col-sm-2 col-form-label-sm justify-content-end">SEO url:</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="seoUrl" class="form-control form-control-sm col-sm-8"
+                                       th:field="*{seoUrl}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="seo_block col-sm-10 mt-2">
+                        <div class="row">
+                            <label for="seoTitle" class="col-sm-2 col-form-label-sm justify-content-end">SEO
+                                title:</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="seoTitle" class="form-control form-control-sm col-sm-8"
+                                       th:field="*{seoTitle}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="seo_block col-sm-10 mt-2">
+                        <div class="row">
+                            <label for="seoKeywords" class="col-sm-2 col-form-label-sm justify-content-end">SEO
+                                keywords:</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="seoKeywords" class="form-control form-control-sm col-sm-8"
+                                       th:field="*{seoKeywords}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="seo_block col-sm-10 mt-2">
+                        <div class="row">
+                            <label for="seoDescription" class="col-sm-2 col-form-label-sm justify-content-end">SEO
+                                description:</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="seoDescription" class="form-control form-control-lg col-sm-8"
+                                       th:field="*{seoDescription}" style="height: 4rem">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="d-grid gap-2 col-3 mx-auto mt-3">
+                        <button type="submit" class="btn btn-outline-primary">Зберегти
+                        </button>
+                    </div>
+                </div>
+                <div class="hidden">
+                    <input type="hidden" th:field="*{id}">
+                    <input type="hidden" th:field="*{createTime}">
+                    <input type="hidden" th:field="*{language}">
+                    <input type="hidden" th:field="*{cinemaId}">
+                </div>
+            </div>
+        </form>
+    </div>
+
+</main>
+<script type="text/javascript" th:src="@{/js/file-upload.js}"></script>
+
+<script src="/assets/js/core/libs.min.js"></script>
+
+<!-- External Library Bundle Script -->
+<script src="/assets/js/core/external.min.js"></script>
+
+<!-- Widgetchart Script -->
+<script src="/assets/js/charts/widgetcharts.js"></script>
+
+<!-- mapchart Script -->
+<script src="/assets/js/charts/vectore-chart.js"></script>
+<script src="/assets/js/charts/dashboard.js"></script>
+
+<!-- fslightbox Script -->
+<script src="/assets/js/plugins/fslightbox.js"></script>
+
+<!-- Settings Script -->
+<script src="/assets/js/plugins/setting.js"></script>
+
+<!-- Slider-tab Script -->
+<script src="/assets/js/plugins/slider-tabs.js"></script>
+
+<!-- Form Wizard Script -->
+<script src="/assets/js/plugins/form-wizard.js"></script>
+
+<!-- AOS Animation Plugin-->
+<script src="/assets/vendor/aos/dist/aos.js"></script>
+<!-- App Script -->
+<script src="/assets/js/hope-ui.js" defer></script>
+
+</body>
+</html>

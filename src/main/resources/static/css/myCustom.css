@@ -58,4 +58,30 @@ button.clear-image.btn-close {
     border: solid 0.1rem #0b1530;
     border-radius: .5rem;
 }
+.cinema-item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    align-content: space-between;
+}
+.cinema-item figure {
+    margin: 0;
+}
+.cinema-item figure img {
+    width: 14rem;
+    height: 8rem;
+}
+.cinema-list {
+    display: flex;
+    gap: 3rem 4rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+}
+.add-cinema {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
 
