@@ -97,9 +97,6 @@
             <div class="row col-11 d-flex row-cols-auto border align-items-center image-block">
                 <label for="fileInput1" class="form-control-sm my-auto col-sm-2">Головна картинка</label>
                 <figure class="figure">
-                    <!--                    <img th:src="@{/uploads/{mainImage}(mainImage=*{mainImage})}" id="mainImage"-->
-                    <!--                         class="figure-img img-fluid rounded" style="width: 15rem; height: 15rem"-->
-                    <!--                         loading="eager" alt="file">-->
                     <img th:src="@{/uploads/{mainImage}(mainImage=*{mainImage})}"
                          style="width: 14rem; height: 8rem;"
                          class="figure-img img-fluid rounded" id="mainImage"
@@ -118,7 +115,7 @@
                     <span class="form-control-sm">Галерея картинок</span>
                 </div>
                 <div class="row col-10 d-flex flex-row gap-2">
-                    <div class="col">
+                    <div class="col d-flex align-items-center pb-5">
                         <span class="form-control-sm mt-4">Розмір 1000х190</span>
                     </div>
                     <div class="col d-flex flex-column align-items-center image-block">
