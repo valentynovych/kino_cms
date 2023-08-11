@@ -26,6 +26,7 @@ public class UserDTO {
     private City city;
     @Enumerated(EnumType.STRING)
     private Language language;
+    public UserDTO(){}
 
     public UserDTO(Long id, String username, String email, String createTime,
                    String firstName, String lastName, String address,

@@ -36,7 +36,7 @@ public class UserController {
     @PostMapping("/admin/edit-user/{id}")
     public String saveUser(@ModelAttribute UserDTO user, @PathVariable Long id) {
 
-        if (user.getCreateTime() == null) {
+        if (id == 0L) {
             user.setCreateTime(LocalDateTime.now().format(dateTimeFormatter));
         }
         System.out.println(user);
@@ -49,9 +49,12 @@ public class UserController {
     @GetMapping("admin/edit-user/{id}")
     public String editUser(Model model, @PathVariable Long id) {
         Optional<UserDTO> optionalUser = userService.getUserDTOById(id);
-        UserDTO user = null;
+        UserDTO user;
         if (optionalUser.isPresent()) {
             user = optionalUser.get();
+        } else {
+            user = new UserDTO();
+            user.setId(id);
         }
         model.addAttribute("user", user);
         return "/admin/edit_user";

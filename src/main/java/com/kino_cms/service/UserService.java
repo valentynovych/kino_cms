@@ -46,6 +46,7 @@ public class UserService {
 
         user.setEmail(userDTO.getEmail());
         user.setUsername(userDTO.getUsername());
+        user.setCreateTime(userDTO.getCreateTime());
 
         userDetails.setSex(userDTO.getSex());
         userDetails.setCity(userDTO.getCity());
