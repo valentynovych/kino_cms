@@ -7,7 +7,6 @@ import jakarta.persistence.Enumerated;
 import lombok.Data;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 @Data
 public class UserDTO {
@@ -26,7 +25,9 @@ public class UserDTO {
     private City city;
     @Enumerated(EnumType.STRING)
     private Language language;
-    public UserDTO(){}
+
+    public UserDTO() {
+    }
 
     public UserDTO(Long id, String username, String email, String createTime,
                    String firstName, String lastName, String address,

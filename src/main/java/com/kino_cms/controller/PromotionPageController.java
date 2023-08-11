@@ -11,14 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Controller
 public class PromotionPageController {
@@ -49,13 +47,13 @@ public class PromotionPageController {
 
     @PostMapping("/admin/edit-promotion/{id}")
     public String savePromotionPage(@ModelAttribute FeedPage feedPageModel,
-                                  @PathVariable Long id,
-                                  @RequestParam("mainImage1") MultipartFile mainImage,
-                                  @RequestParam("image11") MultipartFile image1,
-                                  @RequestParam("image21") MultipartFile image2,
-                                  @RequestParam("image31") MultipartFile image3,
-                                  @RequestParam("image41") MultipartFile image4,
-                                  @RequestParam("image51") MultipartFile image5) throws IOException {
+                                    @PathVariable Long id,
+                                    @RequestParam("mainImage1") MultipartFile mainImage,
+                                    @RequestParam("image11") MultipartFile image1,
+                                    @RequestParam("image21") MultipartFile image2,
+                                    @RequestParam("image31") MultipartFile image3,
+                                    @RequestParam("image41") MultipartFile image4,
+                                    @RequestParam("image51") MultipartFile image5) throws IOException {
         ArrayList<MultipartFile> images = new ArrayList<>(List.of(mainImage, image1, image2, image3, image4, image5));
         Optional<FeedPage> feedPageOptional = feedPageService.getFeedPageById(id);
         List<String> fileNamesFromDB;

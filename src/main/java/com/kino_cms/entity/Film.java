@@ -2,10 +2,9 @@ package com.kino_cms.entity;
 
 import com.kino_cms.enums.FilmType;
 import com.kino_cms.enums.Language;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import jakarta.persistence.*;
 
 import java.sql.Date;
 import java.util.List;

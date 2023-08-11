@@ -47,7 +47,7 @@ public class CinemaService {
         Optional<Cinema> cinemaOptional = getCinemaById(cinemaDTO.getId());
         Cinema cinemaToSave;
         SeoBlock seoBlock;
-        if (cinemaOptional.isPresent()){
+        if (cinemaOptional.isPresent()) {
             cinemaToSave = cinemaOptional.get();
             seoBlock = cinemaToSave.getSeoBlock();
         } else {
@@ -77,7 +77,7 @@ public class CinemaService {
         saveCinema(cinemaToSave);
     }
 
-    public List<String> getListImagesFileNameById(Long id){
+    public List<String> getListImagesFileNameById(Long id) {
         List<String> fileNamesFromDB = new ArrayList<>(List.of("", "", "", "", "", "", ""));
         Cinema cinema;
         Optional<Cinema> cinemaOptional = getCinemaById(id);

@@ -1,7 +1,6 @@
 package com.kino_cms.controller;
 
 import com.kino_cms.dto.HallDTO;
-import com.kino_cms.entity.Hall;
 import com.kino_cms.service.HallService;
 import com.kino_cms.service.SaveUploadService;
 import org.springframework.beans.factory.annotation.Autowired;

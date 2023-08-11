@@ -28,7 +28,7 @@ public class GeneralPageDTO {
     private String seoKeywords;
     private String seoDescription;
 
-    public GeneralPageDTO(){
+    public GeneralPageDTO() {
 
     }
 

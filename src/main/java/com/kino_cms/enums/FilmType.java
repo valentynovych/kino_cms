@@ -10,9 +10,10 @@ public enum FilmType {
     FilmType() {
     }
 
-    FilmType(String description){
+    FilmType(String description) {
         this.description = description;
     }
+
     public String getDescription() {
         return description;
     }

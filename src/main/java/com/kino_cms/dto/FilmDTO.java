@@ -2,7 +2,8 @@ package com.kino_cms.dto;
 
 import com.kino_cms.enums.FilmType;
 import com.kino_cms.enums.Language;
-import jakarta.persistence.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

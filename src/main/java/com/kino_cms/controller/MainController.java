@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
     @Autowired
     UserRepository userRepository;
+
     @GetMapping("/1")
     public String main(Model model) {
         model.addAttribute("users", userRepository.findAll());

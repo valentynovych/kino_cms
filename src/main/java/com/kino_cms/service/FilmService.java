@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class FilmService {
@@ -24,6 +23,7 @@ public class FilmService {
     SaveUploadService uploadService;
     private static final Date today = new Date(System.currentTimeMillis());
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
     public void saveFilm(Film film) {
         filmRepo.save(film);
     }
@@ -40,28 +40,30 @@ public class FilmService {
         return filmRepo.getAllFilmDto();
     }
 
-    public List<FilmDTO> getAllFilmIsReleasedNow(){
+    public List<FilmDTO> getAllFilmIsReleasedNow() {
         List<FilmDTO> allFilms = getAllFilmDto();
-        List<FilmDTO> filmIsReleasedNow =  allFilms
+        List<FilmDTO> filmIsReleasedNow = allFilms
                 .stream()
                 .filter(filmDTO -> filmDTO.getDateOfPremiere().before(Date.valueOf(today.toLocalDate().plusDays(1))))
                 .toList();
         return filmIsReleasedNow;
     }
-    public List<FilmDTO> getAllFilmReleasedSoon(){
+
+    public List<FilmDTO> getAllFilmReleasedSoon() {
         List<FilmDTO> allFilms = getAllFilmDto();
-        List<FilmDTO> filmReleasedSoon =  allFilms
+        List<FilmDTO> filmReleasedSoon = allFilms
                 .stream()
                 .filter(filmDTO -> filmDTO.getDateOfPremiere().after(Date.valueOf(today.toLocalDate())))
                 .sorted(Comparator.comparing(FilmDTO::getDateOfPremiere))
                 .toList();
         return filmReleasedSoon;
     }
-    public List<FilmType> getFilmTypeListById(Long id){
+
+    public List<FilmType> getFilmTypeListById(Long id) {
         Optional<Film> optionalFilm = getFilmById(id);
         List<FilmType> filmTypeList;
 
-        if (optionalFilm.isPresent()){
+        if (optionalFilm.isPresent()) {
             Film film = optionalFilm.get();
             filmTypeList = film.getFilmTypeList();
         } else {
@@ -110,7 +112,7 @@ public class FilmService {
         Optional<Film> filmOptional = getFilmById(filmDTOModel.getId());
         Film filmToSave;
         SeoBlock seoBlock;
-        if (filmOptional.isPresent()){
+        if (filmOptional.isPresent()) {
             filmToSave = filmOptional.get();
             seoBlock = filmToSave.getSeoBlock();
         } else {

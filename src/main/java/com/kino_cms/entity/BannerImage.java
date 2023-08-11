@@ -1,9 +1,8 @@
 package com.kino_cms.entity;
 
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import jakarta.persistence.*;
 
 @NoArgsConstructor
 @Data

@@ -69,13 +69,13 @@ public class FilmPageController {
         return "redirect:/admin/view-films";
     }
 
-//    @GetMapping("/admin/delete-film/{id}")
+    //    @GetMapping("/admin/delete-film/{id}")
 //    public String deleteFilm(@PathVariable Long id) {
 //        filmService.deleteFilmById(id);
 //        return "redirect:/admin/view-films";
 //    }
     @GetMapping("/admin/view-films")
-    public String viewFilms(Model model){
+    public String viewFilms(Model model) {
         List<FilmDTO> filmIsReleasedNow = filmService.getAllFilmIsReleasedNow();
         List<FilmDTO> filmReleasedSoon = filmService.getAllFilmReleasedSoon();
 

@@ -5,10 +5,7 @@ import com.kino_cms.enums.FeedType;
 import com.kino_cms.repository.FeedPageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +19,19 @@ public class FeedPageService {
     SaveUploadService uploadService;
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public Optional<FeedPage> getFeedPageById(Long id){
+    public Optional<FeedPage> getFeedPageById(Long id) {
         return feedPageRepo.findById(id);
     }
-    public List<FeedPage> getAllFeedPages(){
+
+    public List<FeedPage> getAllFeedPages() {
         return feedPageRepo.findAll();
     }
-    public void saveFeedPage(FeedPage feedPage){
+
+    public void saveFeedPage(FeedPage feedPage) {
         feedPageRepo.save(feedPage);
     }
-    public void deleteFeedPage(FeedPage feedPage){
+
+    public void deleteFeedPage(FeedPage feedPage) {
         feedPageRepo.delete(feedPage);
     }
 
@@ -39,7 +39,7 @@ public class FeedPageService {
         return feedPageRepo.findFeedPagesByFeedType(feedType);
     }
 
-    public List<String> getListImagesFileNameById(Long id){
+    public List<String> getListImagesFileNameById(Long id) {
         List<String> fileNamesFromDB = new ArrayList<>(List.of("", "", "", "", "", ""));
         FeedPage feedPage;
 

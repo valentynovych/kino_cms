@@ -11,10 +11,13 @@ public enum PageType {
     OTHER_PAGE;
 
     String description;
+
     PageType(String description) {
         this.description = description;
     }
-    PageType(){}
+
+    PageType() {
+    }
 
     public String getDescription() {
         return description;

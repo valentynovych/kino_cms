@@ -3,13 +3,9 @@ package com.kino_cms.entity;
 import com.kino_cms.dto.Page;
 import com.kino_cms.enums.Language;
 import com.kino_cms.enums.PageType;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-
-import jakarta.persistence.*;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Data

@@ -23,5 +23,5 @@ public interface HallRepo extends JpaRepository<Hall, Long> {
             "h.image1, h.image2, h.image3, h.image4, h.image5, h.language, h.createTime, h.cinema.id, h.seoBlock.seoUrl, " +
             "h.seoBlock.seoTitle, h.seoBlock.seoKeywords, h.seoBlock.seoDescription) " +
             "FROM Hall h WHERE h.cinema =:cinema")
-    List<HallDTO> getAllHallByCinema(@Param("cinema")Cinema cinema);
+    List<HallDTO> getAllHallByCinema(@Param("cinema") Cinema cinema);
 }
