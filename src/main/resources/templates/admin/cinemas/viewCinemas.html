@@ -50,7 +50,7 @@
                     </figure>
                     <div th:if="${iter.index} > 0">
                         <button  type="button"
-                                class="btn btn-close btn-sm deleteRecord clear-image" data-bs-toggle="modal"
+                                class="btn btn-close btn-sm deleteRecord" data-bs-toggle="modal"
                                 data-bs-target="#deletedPage" onclick="copyHref(this)">
                         </button>
                         <a class="hidden" th:href="@{/admin/delete-cinema/{id}(id=*{cinema.id})}"></a>
@@ -108,6 +108,7 @@
         document.getElementById('deleteLink').href = el.nextElementSibling.getAttribute("href");
     }
 </script>
+<script type="text/javascript" th:src="@{/js/file-upload.js}"></script>
 
 <script src="/assets/js/core/libs.min.js"></script>
 

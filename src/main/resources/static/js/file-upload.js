@@ -45,9 +45,8 @@ document.querySelectorAll('.clear-image').forEach(button => {
     button.addEventListener('click', clearImage);
 });
 
-document.querySelectorAll('img').forEach(img => {
+window.onload = document.querySelectorAll('img').forEach(img => {
     img.addEventListener('error', function () {
         img.src = "/image/placeholder_images.svg";
-        // img.onerror = null;
     })
 });

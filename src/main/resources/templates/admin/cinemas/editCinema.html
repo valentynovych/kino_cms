@@ -86,7 +86,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row col-11 d-flex row-cols-auto align-items-center image-block">
+            <div class="row col-11 row-cols-auto flex-row image-block">
                 <label for="fileInput1" class="form-control-sm my-auto col-sm-2">Логотип</label>
                 <figure class="figure">
                     <img th:src="@{/uploads/{logoImage}(logoImage=*{logoImage})}"
@@ -101,7 +101,7 @@
                        accept="image/png, image/jpg, image/jpeg" name="logoImage1">
                 <button type="button" class="btn btn-outline-secondary btn-sm clear-image">Видалити</button>
             </div>
-            <div class="row col-11 d-flex row-cols-auto align-items-center image-block">
+            <div class="row col-11 row-cols-auto flex-row image-block">
                 <label for="fileInput1" class="form-control-sm my-auto col-sm-2">Головний банер</label>
                 <figure class="figure">
                     <img th:src="@{/uploads/{firstBanner}(firstBanner=*{firstBanner})}"
@@ -225,7 +225,7 @@
                                                   stroke-linecap="round" stroke-linejoin="round"></path>
                                         </svg>
                                     </a>
-                                    <button type="button" class="btn btn-link deleteRecord p-0" data-bs-toggle="modal"
+                                    <button th:if="${hall.id} != 0" type="button" class="btn btn-link deleteRecord p-0" data-bs-toggle="modal"
                                             data-bs-target="#deletedPage" onclick="copyHref(this)">
                                         <svg class="icon-22" width="32" viewBox="0 0 24 24" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
@@ -356,15 +356,12 @@
     }
 
     const editLink = document.querySelector('.edit-cinema');
-    console.log(editLink);
     const cinemaId = document.querySelector('.cinema-id').value;
-    console.log(cinemaId);
     if (cinemaId === '0') {
         editLink.href = '#';
-        editLink.style.cssText = 'pointer-events: none;cursor: default';
-        editLink.addEventListener('click', function () {
-            alert("Перед дованням залу потрібно зберегти кінотеатр");
-        })
+        editLink.setAttribute('data-bs-toggle', 'tooltip');
+        editLink.setAttribute('data-bs-placement', 'top');
+        editLink.setAttribute('title', 'Спочатку потрібно створити кінотеатр');
     }
 </script>
 <script type="text/javascript" th:src="@{/js/file-upload.js}"></script>

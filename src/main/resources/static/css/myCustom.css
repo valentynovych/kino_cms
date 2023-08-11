@@ -1,5 +1,5 @@
 img {
-    background: url("/image/placeholder_images.svg") no-repeat scroll 0 0;
+    /*background: url("/image/placeholder_images.svg") no-repeat scroll 0 0;*/
     object-fit: cover;
 }
 
@@ -40,9 +40,20 @@ figure {
 
 .image-block {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 button.clear-image.btn-close {
+    position: absolute;
+    right: 0;
+    top: -1rem;
+    background-color: #fff;
+    padding: .4rem;
+    border-radius: 50%;
+}
+button.btn.btn-close.btn-sm.deleteRecord {
     position: absolute;
     right: 0;
     top: -1rem;
@@ -64,8 +75,18 @@ button.clear-image.btn-close {
     flex-direction: column;
     align-content: space-between;
 }
+.cinema-item figure:hover{
+    transform: scale(1.1);
+}
 .cinema-item figure {
     margin: 0;
+    transition: 0.4s;
+}
+.add-cinema svg {
+    transition: 0.4s;
+}
+.add-cinema svg:hover {
+    transform: scale(1.1);
 }
 .cinema-item figure img {
     width: 14rem;
