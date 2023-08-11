@@ -106,3 +106,11 @@ button.btn.btn-close.btn-sm.deleteRecord {
     justify-content: space-between;
 }
 
+.film-list {
+    display: flex;
+    gap: 3rem 4rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+}
+

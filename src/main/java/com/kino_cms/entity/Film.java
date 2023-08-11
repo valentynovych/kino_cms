@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
+
+import java.sql.Date;
 import java.util.List;
 
 @NoArgsConstructor
@@ -35,4 +37,5 @@ public class Film {
     private List<FilmType> filmTypeList;
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     private List<FilmSession> filmSessions;
+    private Date dateOfPremiere;
 }
