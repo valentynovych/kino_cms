@@ -106,7 +106,7 @@
                                 <button type="button" class="btn btn-outline-secondary btn-sm clear-image">Видалити
                                 </button>
                             </div>
-                            <input type="hidden" th:field="*{contactCinemaList[__${item.index}__].id}">
+                            <input type="hidden" th:field="*{contactCinemaList[__${item.index}__].id}" class="contact-cinema-id">
                             <input type="hidden" th:field="*{contactCinemaList[__${item.index}__].contactPage.id}">
                         </div>
                     </div>
@@ -199,6 +199,8 @@
 
         cloneCinema.setAttribute('id', cloneCinema.id.replace(/\d/g, num => Number(num) + 1));
         const selectorAll = cloneCinema.querySelectorAll('input, textarea');
+        const contactCinemaId = cloneCinema.querySelector('.contact-cinema-id');
+        contactCinemaId.setAttribute('value', '');
         for (const element of selectorAll) {
             console.log(element)
 
