@@ -68,10 +68,11 @@
                     </div>
                 </div>
                 <div class="col d-flex flex-row justify-content-end">
-                    <label class="col-sm-3 col-form-label-sm">Дата прим'єри</label>
-                    <div class="col-sm-5">
-                        <input type="date" th:field="*{dateOfPremiere}"
-                               class="form-control form-control-sm" min="" required>
+                    <label class="col-sm-3 col-form-label-sm">Період показу</label>
+                    <div class="col-sm-7 form-group">
+                        <input type="text" th:field="*{datePremiereFromTo}"
+                               class="form-control form-control-sm range_flatpicker" placeholder="Виберіть дату показу"
+                               required>
                         <div class="invalid-feedback">
                             Обов'язкове поле
                         </div>
@@ -190,8 +191,9 @@
             <div class="row mt-4">
                 <label class="col-sm-2 col-form-label-sm">Тип кіно</label>
                 <div class="col-sm-9 film-types d-flex flex-row ">
-                    <div class="col-1 form-check form-check-inline"  th:each="type, iter : ${filmTypes}">
-                        <input type="checkbox" class="form-check-input" th:field="*{filmTypeList}" name="filmTypes" th:value="${type.name()}">
+                    <div class="col-1 form-check form-check-inline" th:each="type, iter : ${filmTypes}">
+                        <input type="checkbox" class="form-check-input" th:field="*{filmTypeList}" name="filmTypes"
+                               th:value="${type.name()}">
                         <label class="form-label" th:text="${type.description}"></label>
                     </div>
                 </div>
@@ -260,10 +262,11 @@
     </div>
 
 </main>
-<script>
-    document.querySelector('input[type="date"]').setAttribute('min', new Date().toISOString().slice(0, 10));
-</script>
+<!--<script>-->
+<!--    document.querySelector('input[type="date"]').setAttribute('min', new Date().toISOString().slice(0, 10));-->
+<!--</script>-->
 <script type="text/javascript" th:src="@{/js/file-upload.js}"></script>
+
 
 <script src="/assets/js/core/libs.min.js"></script>
 
@@ -293,6 +296,11 @@
 <script src="/assets/vendor/aos/dist/aos.js"></script>
 <!-- App Script -->
 <script src="/assets/js/hope-ui.js" defer></script>
+
+<script src="/assets/vendor/flatpickr/dist/flatpickr.min.js"></script>
+<script src="/assets/js/plugins/flatpickr.js" defer></script>
+
+<script src="/assets/js/plugins/prism.mini.js"></script>
 
 </body>
 </html>

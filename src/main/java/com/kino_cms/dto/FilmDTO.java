@@ -34,9 +34,14 @@ public class FilmDTO {
     private String seoKeywords;
     private String seoDescription;
     private Date dateOfPremiere;
+    private Date dateEndPremiere;
+    private String datePremiereFromTo;
     private List<Boolean> isCheckedType;
 
-    public FilmDTO(Long id, String name, String description, String mainImage, String image1, String image2, String image3, String image4, String image5, String urlVideo, Language language, String seoUrl, String seoTitle, String seoKeywords, String seoDescription, Date dateOfPremiere) {
+    public FilmDTO(Long id, String name, String description, String mainImage, String image1,
+                   String image2, String image3, String image4, String image5, String urlVideo,
+                   Language language, String seoUrl, String seoTitle, String seoKeywords, String seoDescription,
+                   Date dateOfPremiere, Date dateEndPremiere, String datePremiereFromTo) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -53,6 +58,8 @@ public class FilmDTO {
         this.seoKeywords = seoKeywords;
         this.seoDescription = seoDescription;
         this.dateOfPremiere = dateOfPremiere;
+        this.dateEndPremiere = dateEndPremiere;
+        this.datePremiereFromTo = datePremiereFromTo;
     }
 
 }

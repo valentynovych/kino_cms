@@ -74,8 +74,8 @@ public class HallPageController {
 
     @GetMapping("/admin/delete-hall/{id}")
     public String deleteHall(@PathVariable Long id) {
-        hallService.deleteHall(id);
         Long cinemaId = hallService.getCinemaIdByHall(id);
+        hallService.deleteHall(id);
         return "redirect:/admin/edit-cinema/" + cinemaId;
     }
 

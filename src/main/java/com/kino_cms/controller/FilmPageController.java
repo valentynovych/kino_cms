@@ -49,7 +49,8 @@ public class FilmPageController {
                            @RequestParam("image21") MultipartFile image2,
                            @RequestParam("image31") MultipartFile image3,
                            @RequestParam("image41") MultipartFile image4,
-                           @RequestParam("image51") MultipartFile image5) throws IOException {
+                           @RequestParam("image51") MultipartFile image5,
+                           @RequestParam(value = "start", required = false) String start) throws IOException {
 
         ArrayList<MultipartFile> images = new ArrayList<>(
                 List.of(mainImage, image1, image2, image3, image4, image5));
@@ -68,12 +69,6 @@ public class FilmPageController {
         filmService.saveFilmDTO(filmDTOModel);
         return "redirect:/admin/view-films";
     }
-
-    //    @GetMapping("/admin/delete-film/{id}")
-//    public String deleteFilm(@PathVariable Long id) {
-//        filmService.deleteFilmById(id);
-//        return "redirect:/admin/view-films";
-//    }
     @GetMapping("/admin/view-films")
     public String viewFilms(Model model) {
         List<FilmDTO> filmIsReleasedNow = filmService.getAllFilmIsReleasedNow();

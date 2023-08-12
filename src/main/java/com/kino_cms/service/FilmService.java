@@ -9,11 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class FilmService {
@@ -21,8 +17,6 @@ public class FilmService {
     FilmRepo filmRepo;
     @Autowired
     SaveUploadService uploadService;
-    private static final Date today = new Date(System.currentTimeMillis());
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public void saveFilm(Film film) {
         filmRepo.save(film);
@@ -41,21 +35,13 @@ public class FilmService {
     }
 
     public List<FilmDTO> getAllFilmIsReleasedNow() {
-        List<FilmDTO> allFilms = getAllFilmDto();
-        List<FilmDTO> filmIsReleasedNow = allFilms
-                .stream()
-                .filter(filmDTO -> filmDTO.getDateOfPremiere().before(Date.valueOf(today.toLocalDate().plusDays(1))))
-                .toList();
+        List<FilmDTO> filmIsReleasedNow = filmRepo.getAllFilmIsReleasedNow();
         return filmIsReleasedNow;
     }
 
     public List<FilmDTO> getAllFilmReleasedSoon() {
-        List<FilmDTO> allFilms = getAllFilmDto();
-        List<FilmDTO> filmReleasedSoon = allFilms
-                .stream()
-                .filter(filmDTO -> filmDTO.getDateOfPremiere().after(Date.valueOf(today.toLocalDate())))
-                .sorted(Comparator.comparing(FilmDTO::getDateOfPremiere))
-                .toList();
+
+        List<FilmDTO> filmReleasedSoon = filmRepo.getAllFilmReleasedSoon();
         return filmReleasedSoon;
     }
 
@@ -112,14 +98,22 @@ public class FilmService {
         Optional<Film> filmOptional = getFilmById(filmDTOModel.getId());
         Film filmToSave;
         SeoBlock seoBlock;
+
+
         if (filmOptional.isPresent()) {
             filmToSave = filmOptional.get();
             seoBlock = filmToSave.getSeoBlock();
+
         } else {
             filmToSave = new Film();
             seoBlock = new SeoBlock();
         }
-
+        String dateFromTo = filmDTOModel.getDatePremiereFromTo();
+        List<String> twoDate = Arrays.stream(dateFromTo.split(" ")).toList();
+        if (twoDate.size() > 2) {
+            filmToSave.setDateOfPremiere(Date.valueOf(twoDate.get(0)));
+            filmToSave.setDateEndPremiere(Date.valueOf(twoDate.get(2)));
+        }
         filmToSave.setName(filmDTOModel.getName());
         filmToSave.setDescription(filmDTOModel.getDescription());
         filmToSave.setMainImage(filmDTOModel.getMainImage());
@@ -137,9 +131,16 @@ public class FilmService {
         seoBlock.setSeoKeywords(filmDTOModel.getSeoKeywords());
         seoBlock.setSeoDescription(filmDTOModel.getSeoDescription());
         filmToSave.setSeoBlock(seoBlock);
-        filmToSave.setDateOfPremiere(filmDTOModel.getDateOfPremiere());
+        filmToSave.setDatePremiereFromTo(filmDTOModel.getDatePremiereFromTo());
 
         saveFilm(filmToSave);
+    }
 
+    private List<String> splitStringDate(String string) {
+        String[] array = string.split(" ");
+        List<String> twoDate = new ArrayList<>();
+        twoDate.add(array[0]);
+        twoDate.add(array[2]);
+        return twoDate;
     }
 }

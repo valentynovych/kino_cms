@@ -37,4 +37,6 @@ public class Film {
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     private List<FilmSession> filmSessions;
     private Date dateOfPremiere;
+    private Date dateEndPremiere;
+    private String datePremiereFromTo;
 }
