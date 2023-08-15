@@ -15,6 +15,7 @@ public class Banner {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
+    @Column(name = "banner_type")
     private BannerType bannerType;
     private Integer slideSpeed;
     private String backgroundColor;

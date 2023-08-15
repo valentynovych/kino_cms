@@ -18,6 +18,13 @@ public class SaveUploadService {
     public List<String> saveUploadFiles(List<MultipartFile> multipartFileList, List<String> imageNames) throws IOException {
 
         ArrayList<String> fileNameList = new ArrayList<>(imageNames);
+        if (multipartFileList.size() > imageNames.size()) {
+            int res = multipartFileList.size() - imageNames.size();
+            for (int i = 0; i < res; i++) {
+                fileNameList.add("");
+            }
+        }
+
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdir();
@@ -36,7 +43,6 @@ public class SaveUploadService {
             }
         }
         return fileNameList;
-
     }
 
     public void deleteUploadFiles(List<String> fileNameImages) {

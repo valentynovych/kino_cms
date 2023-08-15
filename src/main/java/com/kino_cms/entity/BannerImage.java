@@ -11,7 +11,7 @@ public class BannerImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Banner banner;
     private String image;
     private String url;

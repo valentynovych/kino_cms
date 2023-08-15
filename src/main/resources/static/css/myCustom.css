@@ -34,6 +34,9 @@ figure {
     width: 10rem;
     height: 7rem;
 }
+.gallery-images figure {
+    max-height: calc(100% - 4rem);
+}
 .file-input {
     display: none;
 }

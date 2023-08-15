@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Банери</title>
+    <link rel="stylesheet" href="/css/myCustom.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="/assets/css/core/libs.min.css"/>
+    <link rel="stylesheet" href="/assets/vendor/aos/dist/aos.css">
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="/assets/css/hope-ui.min.css?v=2.0.0"/>
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="/assets/css/custom.min.css?v=2.0.0"/>
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="/assets/css/dark.min.css"/>
+    <!-- Customizer Css -->
+    <link rel="stylesheet" href="/assets/css/customizer.min.css"/>
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
+    <!-- Flatpickr css -->
+    <link rel="stylesheet" href="/assets/vendor/flatpickr/dist/flatpickr.min.css"/>
+
+</head>
+<body>
+<div id="loading">
+    <div class="loader simple-loader">
+        <div class="loader-body"></div>
+    </div>
+</div>
+<aside th:replace="fragments/sidebar"></aside>
+<main class="main-content">
+    <nav th:replace="fragments/navbar_admin"></nav>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" th:action="@{/admin/save-header-banner}" th:object="${headerBanner}" enctype="multipart/form-data" novalidate>
+                    <div class="row form-check form-switch form-check-inline d-flex justify-content-end">
+                        <input type="checkbox" class="form-check-input" th:field="${headerBanner.isActivate}">
+                    </div>
+                    <div class="row gallery-images">
+                        <div class="row d-flex flex-wrap">
+                            <div class="row mb-4">
+                                <span class="form-control-sm">Розмір 1000х190</span>
+                            </div>
+                            <div class="row d-flex flex-row flex-wrap image-list ">
+                                <div class="col-2 image-block mb-4" th:id="${iter.index}"
+                                     th:each="imageItem, iter : ${headerBanner.bannerImages}">
+                                    <figure>
+                                        <img th:src="@{/uploads/{image}(image=${headerBanner.bannerImages[__${iter.index}__].image})}"
+                                             class="figure-img img-fluid rounded" loading="eager" alt="image">
+                                    </figure>
+                                    <button type="button" class="btn btn-close btn-sm clear-image"></button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm upload-button">
+                                        Додати
+                                    </button>
+                                    <input type="file" class="file-input" accept="image/png, image/jpg, image/jpeg"
+                                           name="headerBannerImg">
+                                    <label class="col-form-label-sm start-0">Url:</label>
+                                    <input class="form-control-sm form-control" type="text"
+                                           th:field="${headerBanner.bannerImages[__${iter.index}__].url}">
+                                    <label class="col-form-label-sm start-0">Text:</label>
+                                    <input class="form-control-sm form-control" type="text"
+                                           th:field="${headerBanner.bannerImages[__${iter.index}__].text}">
+                                    <input type="hidden" class="banner-id" th:field="${headerBanner.bannerImages[__${iter.index}__].id}">
+                                    <input type="hidden" th:field="${headerBanner.bannerImages[__${iter.index}__].banner.id}">
+                                </div>
+                                <button type="button" class="btn-outline-primary btn btn-link add-imageBlock mt-4"
+                                        style="width: 8rem; height: 8rem; margin-left: 1.5rem">
+                                    <svg class="icon-30" width="30" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.0001 8.32739V15.6537" stroke="currentColor" stroke-width="1.5"
+                                              stroke-linecap="round"
+                                              stroke-linejoin="round"></path>
+                                        <path d="M15.6668 11.9904H8.3335" stroke="currentColor" stroke-width="1.5"
+                                              stroke-linecap="round"
+                                              stroke-linejoin="round"></path>
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                              d="M16.6857 2H7.31429C4.04762 2 2 4.31208 2 7.58516V16.4148C2 19.6879 4.0381 22 7.31429 22H16.6857C19.9619 22 22 19.6879 22 16.4148V7.58516C22 4.31208 19.9619 2 16.6857 2Z"
+                                              stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                              stroke-linejoin="round"></path>
+                                    </svg>
+                                    <span><br>Додати<br>картинку</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mt-4 ms-5 my-auto d-flex flex-row">
+                        <div class="col d-flex flex-row my-auto col-sm-auto">
+                            <label class="col-form-label-sm">Швидкість слайду</label>
+                            <select class="col-sm form-select form-select-sm text-capitalize"
+                                    aria-label="form-select-lg" th:field="${headerBanner.slideSpeed}" required>
+                                <option th:each="sec : ${seconds}"
+                                        th:value="${sec}"
+                                        th:text="${sec} + 'c'">
+
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-3 mx-auto">
+                            <button type="submit" class="btn-outline-primary btn">Зберегти</button>
+                        </div>
+                    </div>
+                    <div class="hidden">
+                        <input type="hidden" th:field="${headerBanner.bannerType}">
+                        <input type="hidden" th:field="${headerBanner.id}">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <form method="post" th:action="@{/admin/save-perforating-banner}" th:object="${perforatingBanner}" enctype="multipart/form-data" novalidate>
+                    <div class="row d-flex flex-row">
+                        <div class="col-2">
+                            <label class="col-form-label-sm">Розмір 2000х3000</label>
+                            <div class="form-check mt-3">
+                                <input type="radio" class="form-check-input" th:field="${perforatingBanner.isActivate}" name="isActivate"
+                                       th:value="*{true}">
+                                <label class="form-check-label">Картинка на фоні</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" th:field="${perforatingBanner.isActivate}" name="isActivate"
+                                       th:value="*{false}">
+                                <label class="form-check-label">Просто фон</label>
+                            </div>
+                        </div>
+                        <div class="row col-10 row-cols-auto flex-row image-block">
+                            <figure class="figure">
+                                <img th:src="@{/uploads/{logoImage}(logoImage=${perforatingBanner.bannerImages[__${0}__].image})}"
+                                     style="width: 14rem; height: 8rem;"
+                                     class="figure-img img-fluid rounded"
+                                     loading="eager" alt="file">
+                            </figure>
+                            <button type="button" class="btn btn-outline-secondary btn-sm upload-button mx-5">
+                                Додати
+                            </button>
+                            <input type="file" class="file-input perforatingBanner" accept="image/png, image/jpg, image/jpeg"
+                                   name="perforatingBannerImg">
+                            <button type="button" class="btn btn-outline-secondary btn-sm clear-image">Видалити</button>
+                        </div>
+                        <div class="col-3 mx-auto">
+                            <button type="submit" class="btn-outline-primary btn">Зберегти</button>
+                        </div>
+                    </div>
+                    <div class="hidden">
+                        <input type="hidden" th:field="${perforatingBanner.bannerType}">
+                        <input type="hidden" th:field="${perforatingBanner.id}">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <form method="post" th:action="@{/admin/save-promotion-banner}" th:object="${promotionBanner}" enctype="multipart/form-data" novalidate>
+                    <div class="row form-check form-switch form-check-inline d-flex justify-content-end">
+                        <input type="checkbox" class="form-check-input" th:field="${promotionBanner.isActivate}">
+                    </div>
+                    <div class="row gallery-images">
+                        <div class="row d-flex flex-wrap">
+                            <div class="row mb-4">
+                                <span class="form-control-sm">Розмір 1000х190</span>
+                            </div>
+                            <div class="row d-flex flex-row flex-wrap image-list ">
+                                <div class="col-2 image-block mb-4" th:id="${iter.index}"
+                                     th:each="imageItem, iter : ${promotionBanner.bannerImages}">
+                                    <figure>
+                                        <img th:src="@{/uploads/{image}(image=${promotionBanner.bannerImages[__${iter.index}__].image})}"
+                                             class="figure-img img-fluid rounded" loading="eager" alt="image">
+                                    </figure>
+                                    <button type="button" class="btn btn-close btn-sm clear-image"></button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm upload-button">
+                                        Додати
+                                    </button>
+                                    <input type="file" class="file-input" accept="image/png, image/jpg, image/jpeg"
+                                           name="promotionBannerImg">
+                                    <label class="col-form-label-sm start-0">Url:</label>
+                                    <input class="form-control-sm form-control" type="text"
+                                           th:field="${promotionBanner.bannerImages[__${iter.index}__].url}">
+                                    <label class="col-form-label-sm start-0">Text:</label>
+                                    <input class="form-control-sm form-control" type="text"
+                                           th:field="${promotionBanner.bannerImages[__${iter.index}__].text}">
+                                    <input type="hidden" class="banner-id" th:field="${promotionBanner.bannerImages[__${iter.index}__].id}">
+                                    <input type="hidden" th:field="${promotionBanner.bannerImages[__${iter.index}__].banner.id}">
+
+                                </div>
+                                <button type="button" class="btn-outline-primary btn btn-link add-imageBlock mt-4"
+                                        style="width: 8rem; height: 8rem; margin-left: 1.5rem">
+                                    <svg class="icon-30" width="30" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.0001 8.32739V15.6537" stroke="currentColor" stroke-width="1.5"
+                                              stroke-linecap="round"
+                                              stroke-linejoin="round"></path>
+                                        <path d="M15.6668 11.9904H8.3335" stroke="currentColor" stroke-width="1.5"
+                                              stroke-linecap="round"
+                                              stroke-linejoin="round"></path>
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                              d="M16.6857 2H7.31429C4.04762 2 2 4.31208 2 7.58516V16.4148C2 19.6879 4.0381 22 7.31429 22H16.6857C19.9619 22 22 19.6879 22 16.4148V7.58516C22 4.31208 19.9619 2 16.6857 2Z"
+                                              stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                              stroke-linejoin="round"></path>
+                                    </svg>
+                                    <span><br>Додати<br>картинку</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mt-4 ms-5 my-auto d-flex flex-row">
+                        <div class="col d-flex flex-row my-auto col-sm-auto">
+                            <label class="col-form-label-sm">Швидкість слайду</label>
+                            <select class="col-sm form-select form-select-sm text-capitalize"
+                                    aria-label="form-select-lg" th:field="${promotionBanner.slideSpeed}" required>
+                                <option th:each="sec : ${seconds}"
+                                        th:value="${sec}"
+                                        th:text="${sec} + 'c'">
+
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-3 mx-auto">
+                            <button type="submit" class="btn-outline-primary btn">Зберегти</button>
+                        </div>
+                    </div>
+                    <div class="hidden">
+                        <input type="hidden" th:field="${promotionBanner.bannerType}">
+                        <input type="hidden" th:field="${promotionBanner.id}">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    document.querySelectorAll('.add-imageBlock')
+        .forEach(value => value.addEventListener("click", addCinemaBlock));
+
+    function addCinemaBlock() {
+        const imageBlock = this.previousElementSibling;
+        console.log(imageBlock);
+        const cloneBlock = imageBlock.cloneNode(true);
+
+        cloneBlock.setAttribute('id', cloneBlock.id.replace(/\d/g, num => Number(num) + 1));
+        const selectorAll = cloneBlock.querySelectorAll('input');
+
+        cloneBlock.querySelector('.banner-id').setAttribute('value', '');
+        cloneBlock.querySelector('img').setAttribute('src', '/uploads/');
+
+        for (const element of selectorAll) {
+
+            element.setAttribute('id', element.id.replace(/\d/g, num => Number(num) + 1));
+            element.setAttribute('name', element.name.replace(/\d/g, num => Number(num) + 1));
+            if (element.value !== 'true'
+                && element.value !== 'false'
+                && element.type !== 'hidden') {
+                element.setAttribute('value', '');
+            }
+        }
+        cloneBlock.querySelector('.upload-button').addEventListener('click', uploadImage);
+        cloneBlock.querySelector('.clear-image').addEventListener('click', clearImage);
+        this.insertAdjacentElement("beforebegin", cloneBlock)
+    }
+</script>
+
+<script src="/js/file-upload.js"></script>
+
+<script src="/assets/js/core/libs.min.js"></script>
+
+<!-- External Library Bundle Script -->
+<script src="/assets/js/core/external.min.js"></script>
+
+<!-- Widgetchart Script -->
+<script src="/assets/js/charts/widgetcharts.js"></script>
+
+<!-- mapchart Script -->
+<script src="/assets/js/charts/vectore-chart.js"></script>
+<script src="/assets/js/charts/dashboard.js"></script>
+
+<!-- fslightbox Script -->
+<script src="/assets/js/plugins/fslightbox.js"></script>
+
+<!-- Settings Script -->
+<script src="/assets/js/plugins/setting.js"></script>
+
+<!-- Slider-tab Script -->
+<script src="/assets/js/plugins/slider-tabs.js"></script>
+
+<!-- Form Wizard Script -->
+<script src="/assets/js/plugins/form-wizard.js"></script>
+
+<!-- AOS Animation Plugin-->
+<script src="/assets/vendor/aos/dist/aos.js"></script>
+<!-- App Script -->
+<script src="/assets/js/hope-ui.js" defer></script>
+
+</body>
+</html>
