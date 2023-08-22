@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Статистика</title>
+    <link rel="stylesheet" href="/css/myCustom.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="/assets/css/core/libs.min.css"/>
+    <link rel="stylesheet" href="/assets/vendor/aos/dist/aos.css">
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="/assets/css/hope-ui.min.css?v=2.0.0"/>
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="/assets/css/custom.min.css?v=2.0.0"/>
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="/assets/css/dark.min.css"/>
+    <!-- Customizer Css -->
+    <link rel="stylesheet" href="/assets/css/customizer.min.css"/>
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
+    <!-- Flatpickr css -->
+    <link rel="stylesheet" href="/assets/vendor/flatpickr/dist/flatpickr.min.css"/>
+
+</head>
+<body>
+<div id="loading">
+    <div class="loader simple-loader">
+        <div class="loader-body"></div>
+    </div>
+</div>
+<aside th:replace="fragments/sidebar"></aside>
+<main class="main-content">
+    <nav th:replace="fragments/navbar_admin"></nav>
+    <div class="container d-grid gap-2 py-3">
+        <div class="row">
+            <div class="card">
+                <!-- Users -->
+                <div class="col-lg-3 col-md-6 m-2">
+                    <div class="card bg-soft-primary">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="bg-soft-primary rounded p-3">
+                                    <svg class="icon-20" xmlns="http://www.w3.org/2000/svg" width="20px"
+                                         viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                              d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                              clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div class="text-end">
+                                    <h2 class="counter" th:text="${userCount}"></h2>
+                                    Користувачів
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Active Promotion-->
+                <div class="col-lg-6 m-2">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="header-title">
+                                <h4 class="card-title">Активні акції</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap mb-2"
+                                 th:each="page : ${feedPages}">
+                                <div class="col-5">
+                                    <h5 th:text="${page.title}"></h5>
+                                    <p th:text="${page.description}"></p>
+                                </div>
+                                <div>
+                                    <span class="text-danger">Опубліковано</span>
+                                    <p th:text="${page.publishDate}"></p>
+                                </div>
+                                <a th:href="@{/admin/edit-promotion/{id}(id=${page.id})}">
+                                    <button type="button" class="btn btn-outline-danger btn-sm">
+                                    <span class="btn-inner">
+                                        <svg class="icon-20" xmlns="http://www.w3.org/2000/svg" width="20" fill="none"
+                                             viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                         </svg>
+                                    </span>
+                                    </button>
+                                </a>
+                            </div>
+                            <hr class="mt-0 mb-2 border-top border-3 border-opacity-10"/>
+                            <div class="d-flex justify-content-between align-items-center flex-wrap mb-2">
+                                <div>
+                                    <h5>Всі акції</h5>
+                                </div>
+                                <div>
+                                <span>
+                                    <a th:href="@{/admin/view-promotons}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="currentColor"
+                                             class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                  d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                                        </svg>
+                                    </a>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="/js/file-upload.js"></script>
+
+<script src="/assets/js/core/libs.min.js"></script>
+
+<!-- External Library Bundle Script -->
+<script src="/assets/js/core/external.min.js"></script>
+
+<!-- Widgetchart Script -->
+<script src="/assets/js/charts/widgetcharts.js"></script>
+
+<!-- mapchart Script -->
+<script src="/assets/js/charts/vectore-chart.js"></script>
+<script src="/assets/js/charts/dashboard.js"></script>
+
+<!-- fslightbox Script -->
+<script src="/assets/js/plugins/fslightbox.js"></script>
+
+<!-- Settings Script -->
+<script src="/assets/js/plugins/setting.js"></script>
+
+<!-- Slider-tab Script -->
+<script src="/assets/js/plugins/slider-tabs.js"></script>
+
+<!-- Form Wizard Script -->
+<script src="/assets/js/plugins/form-wizard.js"></script>
+
+<!-- AOS Animation Plugin-->
+<script src="/assets/vendor/aos/dist/aos.js"></script>
+<!-- App Script -->
+<script src="/assets/js/hope-ui.js" defer></script>
+
+</body>
+</html>
