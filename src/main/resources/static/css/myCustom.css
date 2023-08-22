@@ -69,7 +69,7 @@ button.btn.btn-close.btn-sm.deleteRecord {
 }
 
 .card-body {
-    border: solid 0.1rem #0b1530;
+
     border-radius: .5rem;
 }
 .cinema-item {
@@ -115,5 +115,8 @@ button.btn.btn-close.btn-sm.deleteRecord {
     flex-direction: row;
     flex-wrap: wrap;
     align-content: center;
+}
+.text-blue {
+    color: #2e46ba;
 }
 

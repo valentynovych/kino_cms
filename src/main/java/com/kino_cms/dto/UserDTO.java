@@ -25,6 +25,7 @@ public class UserDTO {
     private City city;
     @Enumerated(EnumType.STRING)
     private Language language;
+    private Boolean forMailing;
 
     public UserDTO() {
     }

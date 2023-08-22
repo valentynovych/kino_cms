@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Розсилка</title>
+    <link rel="stylesheet" href="/css/myCustom.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="/assets/css/core/libs.min.css"/>
+    <link rel="stylesheet" href="/assets/vendor/aos/dist/aos.css">
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="/assets/css/hope-ui.min.css?v=2.0.0"/>
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="/assets/css/custom.min.css?v=2.0.0"/>
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="/assets/css/dark.min.css"/>
+    <!-- Customizer Css -->
+    <link rel="stylesheet" href="/assets/css/customizer.min.css"/>
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
+    <!-- Flatpickr css -->
+    <link rel="stylesheet" href="/assets/vendor/flatpickr/dist/flatpickr.min.css"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+</head>
+<body>
+<div id="loading">
+    <div class="loader simple-loader">
+        <div class="loader-body"></div>
+    </div>
+</div>
+<aside th:replace="fragments/sidebar"></aside>
+<main class="main-content">
+    <nav th:replace="fragments/navbar_admin"></nav>
+    <div class="container d-grid gap-2 py-3">
+        <div class="card">
+            <div class="card-header d-flex justify-content-center">
+                <span class="h3">SMS</span>
+            </div>
+            <div class="card-body">
+                <div class="row d-flex flex-row justify-content-between align-items-baseline">
+                    <label class="form-label col-2">Кому надсилати: </label>
+                    <div class="col-3 form-check form-check-inline">
+                        <input type="radio" class="form-check-input" name="optional">
+                        <label class="form-label">Всім користувачам</label>
+                    </div>
+                    <div class="col-2 form-check form-check-inline">
+                        <input type="radio" class="form-check-input" name="optional">
+                        <label class="form-label">Вибірково</label>
+                    </div>
+                    <button type="button" class="btn-outline-primary btn col-3">Вибрати користувачів</button>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <div class="row d-flex flex-row justify-content-between">
+                            <label class="col-form-label-sm col-4">Текст SMS</label>
+                            <label class="col-form-label-sm col-4">Символів: 23</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="col w-100 form-control" rows="6" name="text-sms"
+                                      placeholder="Введіть текст SMS">
+
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row col-8 d-flex flex-row mt-5">
+                            <label class="form-label col-5">Кіль-ть SMS: </label>
+                            <label class="form-label col-5">173 629</label>
+                        </div>
+                        <div class="row d-flex flex-row">
+                            <label class="form-label col-5">Розсилка виконана на: </label>
+                            <label class="form-label col-2">46%</label>
+                            <label class="form-label col-3 ms-3">20 000</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <button type="button" class="btn btn-outline-primary col-3">Почати розсилку</button>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header d-flex justify-content-center">
+                <span class="h3">E-mail</span>
+            </div>
+            <div class="card-body">
+                <form method="post" class="mail-form" th:object="${mailingDTO}" enctype="multipart/form-data"
+                      novalidate>
+                    <div class="hidden">
+                        <div th:each="id, iterStat : ${mailingDTO.userDTOS}">
+                            <input type="hidden" th:field="${mailingDTO.userDTOS[__${iterStat.index}__].id}">
+                            <input type="hidden" th:field="${mailingDTO.userDTOS[__${iterStat.index}__].email}">
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-row justify-content-between align-items-baseline">
+                        <label class="form-label col-2">Кому надсилати: </label>
+                        <div class="col-3 form-check form-check-inline">
+                            <input type="radio" class="form-check-input change-user" name="optionalEmail" value="opt"
+                                   checked>
+                            <label class="form-label">Всім користувачам</label>
+                        </div>
+                        <div class="col-2 form-check form-check-inline">
+                            <input type="radio" class="form-check-input change-user" name="optionalEmail" value="all">
+                            <label class="form-label">Вибірково</label>
+                        </div>
+                        <button type="button" class="btn-outline-primary btn col-3 chose-user"
+                                onclick="location.href='/admin/chose-users'" disabled>Вибрати користувачів
+                        </button>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-6">
+                            <div class="row d-flex flex-row justify-content-between">
+                                <label class="col-form-label-sm w-auto">Завантажити HTML-лист</label>
+                                <label class="btn btn-outline-primary btn-sm w-auto" for="file-html">Завантажити</label>
+                                <input type="file" id="file-html" name="htmlTemplate"
+                                       class="file-input" accept=".html">
+                            </div>
+                            <div class="row d-flex flex-row col-sm-auto mt-4">
+                                <label class="col-form-label-sm col">Завантажений файл: </label>
+                                <label class="col-form-label-sm col text-blue" id="show-upload">файл</label>
+                            </div>
+                            <div class="row d-flex flex-row col-sm-auto">
+                                <label class="col-form-label-sm col">Використовується зараз: </label>
+                                <label class="col-form-label-sm col text-blue" id="used-template">шаблон</label>
+                            </div>
+                            <div class="col mt-5">
+                                <div class="row d-flex flex-row justify-content-md-start">
+                                    <label class="form-label w-auto">Кіль-ть листів: </label>
+                                    <label class="form-label text-blue w-auto">
+                                        <input type="text" class="form-control form-control-plaintext form-control-sm text-blue"
+                                               th:field="*{countMails}">
+                                    </label>
+                                </div>
+                                <div class="row d-flex flex-row col-sm-auto">
+                                    <label class="form-label col-6">Розсилка виконана на:</label>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="wrapper-progress">
+                                    <div class="percentage-progress d-flex justify-content-end mb-2">
+                                        <div><span id="progress">0%</span></div>
+                                    </div>
+                                </div>
+                                <div class="progress" style="height:10px">
+                                    <div class="progress-bar bg-primary progress-bar-striped" role="progressbar"
+                                         style="width: 0; height:10px" aria-valuenow="25" aria-valuemin="0"
+                                         aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <label class="form-label">Список завантажених шаблонів</label>
+                                    <div class="list-group">
+                                        <div class="list-group-item" th:each="templ, iter : *{lastTemplates}">
+                                            <input class="form-check-input me-1" type="radio" name="lastUsedTemplate"
+                                                   th:field="*{lastUsedTemplate}"
+                                                   th:value="*{lastTemplates[__${iter.index}__]}">
+                                            <input type="hidden" th:field="*{lastTemplates[__${iter.index}__]}">
+                                            <label th:text="*{lastTemplates[__${iter.index}__]}"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center mt-4">
+                        <button type="button" class="btn btn-outline-primary col-3 start-mailing">Почати розсилку
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    const inputHtml = document.getElementById('file-html');
+    const showHtml = document.getElementById('show-upload');
+    const usedHtml = document.getElementById('used-template');
+
+    inputHtml.onchange = () => {
+        const file = inputHtml.files[0];
+        showHtml.innerText = file.name;
+    }
+
+    document.querySelectorAll('div.list-group-item').forEach(elem => {
+        const checkbox = elem.querySelector('input[type="radio"]');
+        checkbox.addEventListener('change', () => {
+            usedHtml.innerText = elem.textContent.trim();
+        })
+    })
+
+    const button = document.querySelector('.chose-user');
+    document.querySelectorAll('.change-user').forEach(radio => {
+
+        radio.addEventListener('click', () => {
+            if (radio.value === 'opt') {
+                button.setAttribute('disabled', '')
+            } else {
+                button.removeAttribute('disabled')
+            }
+        })
+    })
+
+</script>
+<script>
+    $(document).ready(function () {
+        $(".start-mailing").click(function () {
+
+            const formData = new FormData($(".mail-form")[0]);
+            formData.append("htmlTemplate", $("#file-html")[0].files[0]);
+
+            $("#progress").text("0%");
+            $(".progress-bar").css('width', 0);
+
+            $.ajax({
+                url: "/admin/mailing",
+                type: "POST",
+                data: formData,
+                processData: false, //for formData
+                contentType: false, //for formData
+                success: function (response) {
+                    console.log(response);
+                    updateProgress();
+                },
+                error: function (error) {
+                    console.log("Помилка:" + error);
+                }
+            });
+
+            function updateProgress() {
+                $.ajax({
+                    type: "GET",
+                    url: "/admin/progress",
+                    success: function (data) {
+                        // Оновлення прогресу на сторінці
+                        $("#progress").text(data.toFixed(2) + "%");
+                        $(".progress-bar").css('width', data.toFixed(2)  + '%');
+
+                        // Перевірка, чи розсилка завершена
+                        if (data < 100) {
+                            setTimeout(updateProgress, 500);
+                        }
+                    },
+                    error: function (e) {
+                        console.log("Помилка: ", e);
+                    }
+                });
+            }
+            updateProgress();
+        });
+    });
+</script>
+
+<script src="/js/file-upload.js"></script>
+
+<script src="/assets/js/core/libs.min.js"></script>
+
+<!-- External Library Bundle Script -->
+<script src="/assets/js/core/external.min.js"></script>
+
+<!-- Widgetchart Script -->
+<script src="/assets/js/charts/widgetcharts.js"></script>
+
+<!-- mapchart Script -->
+<script src="/assets/js/charts/vectore-chart.js"></script>
+<script src="/assets/js/charts/dashboard.js"></script>
+
+<!-- fslightbox Script -->
+<script src="/assets/js/plugins/fslightbox.js"></script>
+
+<!-- Settings Script -->
+<script src="/assets/js/plugins/setting.js"></script>
+
+<!-- Slider-tab Script -->
+<script src="/assets/js/plugins/slider-tabs.js"></script>
+
+<!-- Form Wizard Script -->
+<script src="/assets/js/plugins/form-wizard.js"></script>
+
+<!-- AOS Animation Plugin-->
+<script src="/assets/vendor/aos/dist/aos.js"></script>
+<!-- App Script -->
+<script src="/assets/js/hope-ui.js" defer></script>
+
+</body>
+</html>
