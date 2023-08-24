@@ -1,6 +1,7 @@
 package com.kino_cms.controller.admin;
 
 import com.kino_cms.dto.FilmDTO;
+import com.kino_cms.entity.FilmDetails;
 import com.kino_cms.enums.FilmType;
 import com.kino_cms.service.FilmService;
 import com.kino_cms.service.SaveUploadService;

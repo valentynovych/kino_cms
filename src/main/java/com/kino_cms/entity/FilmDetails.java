@@ -2,18 +2,21 @@ package com.kino_cms.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Time;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 public class FilmDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Film film;
     private Integer year;
     private String country;
@@ -23,5 +26,5 @@ public class FilmDetails {
     private String genre;
     private String budget;
     private Integer fromAge;
-    private Time duration;
+    private Integer duration;
 }

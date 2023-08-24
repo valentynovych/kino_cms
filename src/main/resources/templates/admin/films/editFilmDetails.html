@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Фільми</title>
+    <link rel="stylesheet" href="/css/myCustom.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="/assets/css/core/libs.min.css"/>
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="/assets/css/hope-ui.min.css?v=2.0.0"/>
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="/assets/css/custom.min.css?v=2.0.0"/>
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="/assets/css/dark.min.css"/>
+    <!-- Customizer Css -->
+    <link rel="stylesheet" href="/assets/css/customizer.min.css"/>
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
+    <!-- Flatpickr css -->
+    <link rel="stylesheet" href="/assets/vendor/flatpickr/dist/flatpickr.min.css"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+
+</head>
+<body>
+<div id="loading">
+    <div class="loader simple-loader">
+        <div class="loader-body"></div>
+    </div>
+</div>
+<aside th:replace="fragments/sidebar"></aside>
+<main class="main-content">
+    <nav th:replace="fragments/navbar_admin"></nav>
+
+    <div class="container-fluid" style="padding: 2rem;">
+        <div class="card">
+            <form class="needs-validation" th:method="post" th:object="${filmDetails}" novalidate
+                  enctype="multipart/form-data">
+                <div class="card-body">
+                    <div class="row col-11 d-flex flex-column justify-content-center p-4 gap-2">
+                        <div class="col d-flex flex-row">
+                            <label class="col-2 col-form-label-sm">Рік виходу</label>
+                            <div class="col-5 flex-row">
+                                <input type="number" th:field="*{year}"
+                                       class="form-control form-control-sm" placeholder="Введіть рік">
+                            </div>
+                        </div>
+                        <div class="col d-flex flex-row">
+                            <label class="col-2 col-form-label-sm">Країна</label>
+                            <div class="col-5 flex-row">
+                                <input type="text" th:field="*{country}"
+                                       class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="col d-flex flex-row">
+                            <label class="col-2 col-form-label-sm">Композитор</label>
+                            <div class="col-5 flex-row">
+                                <input type="text" th:field="*{compositor}"
+                                       class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="col d-flex flex-row">
+                            <label class="col-2 col-form-label-sm">Продюсер</label>
+                            <div class="col-5 flex-row">
+                                <input type="text" th:field="*{producer}"
+                                       class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="col d-flex flex-row">
+                            <label class="col-2 col-form-label-sm">Сценарист</label>
+                            <div class="col-5 flex-row">
+                                <input type="text" th:field="*{scenarist}"
+                                       class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="col d-flex flex-row">
+                            <label class="col-2 col-form-label-sm">Жанр</label>
+                            <div class="col-5 flex-row">
+                                <input type="text" th:field="*{genre}"
+                                       class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="col d-flex flex-row">
+                            <label class="col-2 col-form-label-sm">Бюджет</label>
+                            <div class="col-5 flex-row">
+                                <input type="number" th:field="*{budget}"
+                                       class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="col d-flex flex-row">
+                            <label class="col-2 col-form-label-sm">Вікове обмеження</label>
+                            <div class="col-5 flex-row">
+                                <input type="number" th:field="*{fromAge}"
+                                       class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="col d-flex flex-row">
+                            <label class="col-2 col-form-label-sm">Тривалість</label>
+                            <div class="col-5 flex-row">
+                                <input type="number" th:field="*{duration}"
+                                       class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <input type="hidden" th:field="*{film.id}" id="filmId">
+                        <input type="hidden" th:field="*{id}">
+
+                    </div>
+                    <button class="btn btn-outline-primary" type="submit"
+                            style="position: relative; left: 30%">Зберегти
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</main>
+
+<script type="text/javascript" th:src="@{/js/file-upload.js}"></script>
+
+
+<script src="/assets/js/core/libs.min.js"></script>
+
+<!-- External Library Bundle Script -->
+<script src="/assets/js/core/external.min.js"></script>
+
+<!-- Widgetchart Script -->
+<script src="/assets/js/charts/widgetcharts.js"></script>
+
+<!-- mapchart Script -->
+<script src="/assets/js/charts/vectore-chart.js"></script>
+<script src="/assets/js/charts/dashboard.js"></script>
+
+<!-- fslightbox Script -->
+<script src="/assets/js/plugins/fslightbox.js"></script>
+
+<!-- Settings Script -->
+<script src="/assets/js/plugins/setting.js"></script>
+
+<!-- Slider-tab Script -->
+<script src="/assets/js/plugins/slider-tabs.js"></script>
+
+<!-- Form Wizard Script -->
+<script src="/assets/js/plugins/form-wizard.js"></script>
+
+<!-- AOS Animation Plugin-->
+<script src="/assets/vendor/aos/dist/aos.js"></script>
+<!-- App Script -->
+<script src="/assets/js/hope-ui.js" defer></script>
+
+<script src="/assets/vendor/flatpickr/dist/flatpickr.min.js"></script>
+<script src="/assets/js/plugins/flatpickr.js" defer></script>
+
+<script src="/assets/js/plugins/prism.mini.js"></script>
+
+</body>
+</html>

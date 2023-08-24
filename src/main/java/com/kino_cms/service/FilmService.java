@@ -2,6 +2,7 @@ package com.kino_cms.service;
 
 import com.kino_cms.dto.FilmDTO;
 import com.kino_cms.entity.Film;
+import com.kino_cms.entity.FilmDetails;
 import com.kino_cms.entity.SeoBlock;
 import com.kino_cms.enums.FilmType;
 import com.kino_cms.repository.FilmRepo;
@@ -9,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FilmService {

@@ -22,6 +22,8 @@
     <!-- Flatpickr css -->
     <link rel="stylesheet" href="/assets/vendor/flatpickr/dist/flatpickr.min.css"/>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
 </head>
 <body>
 <div id="loading">
@@ -188,15 +190,18 @@
                            class="form-control form-control-sm">
                 </div>
             </div>
-            <div class="row mt-4">
+            <div class="row mt-4 d-flex flex-row">
                 <label class="col-sm-2 col-form-label-sm">Тип кіно</label>
-                <div class="col-sm-9 film-types d-flex flex-row ">
-                    <div class="col-1 form-check form-check-inline" th:each="type, iter : ${filmTypes}">
+                <div class="col-sm-5 film-types d-flex flex-row align-items-baseline">
+                    <div class="col-2 form-check form-check-inline" th:each="type, iter : ${filmTypes}">
                         <input type="checkbox" class="form-check-input" th:field="*{filmTypeList}" name="filmTypes"
                                th:value="${type.name()}">
                         <label class="form-label" th:text="${type.description}"></label>
                     </div>
                 </div>
+                <a th:href="@{/admin/edit-details/{id}(id=${filmDTO.id})}" id="addDetails"
+                   class="btn btn-success col-3">Додати деталі
+                    фільму</a>
             </div>
             <div class="row mt-4">
                 <div class="col-2">
@@ -249,12 +254,12 @@
                         </button>
                     </div>
                     <div class="col-4">
-                        <button type="button" class="btn btn-outline-primary">Відновити попередню версію
+                        <button type="button" class="btn btn-outline-primary" onclick="window.history.back()">Відновити попередню версію
                         </button>
                     </div>
                 </div>
                 <div class="hidden">
-                    <input type="hidden" th:field="*{id}">
+                    <input type="hidden" th:field="*{id}" id="filmId">
                     <input type="hidden" th:field="*{language}">
                 </div>
             </div>
@@ -262,9 +267,28 @@
     </div>
 
 </main>
-<!--<script>-->
-<!--    document.querySelector('input[type="date"]').setAttribute('min', new Date().toISOString().slice(0, 10));-->
-<!--</script>-->
+<script>
+    $(document).ready(function () {
+        const filmId = $("#filmId").val();
+        if (filmId < 1) {
+            $("#addDetails").attr('data-bs-toggle', 'tooltip')
+                .attr('data-bs-placement', 'top')
+                .attr('title', 'Спочатку потрібно дододати фільм')
+                .removeAttr('href')
+                .attr('disabled')
+        }
+    });
+    // const editLinks = document.querySelectorAll('.edit-cinema');
+    // const cinemaId = document.querySelector('.cinema-id').value;
+    // if (cinemaId === '0') {
+    //     editLinks.forEach((element) => {
+    //         element.removeAttribute('href');
+    //         element.setAttribute('data-bs-toggle', 'tooltip');
+    //         element.setAttribute('data-bs-placement', 'top');
+    //         element.setAttribute('title', 'Спочатку потрібно створити кінотеатр');
+    //     });
+    // }
+</script>
 <script type="text/javascript" th:src="@{/js/file-upload.js}"></script>
 
 
