@@ -3,12 +3,15 @@ package com.kino_cms.entity;
 import com.kino_cms.enums.BannerType;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 public class Banner {
     @Id

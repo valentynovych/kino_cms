@@ -41,7 +41,7 @@
 
     <div class="container-md ms-5" style="padding: 2rem;">
         <div class="mx-auto cinema-list">
-            <div class="col-2 cinema-item" th:each="cinema, iter : *{cinemaList}">
+            <div class="col-2 fiml-item" th:each="cinema, iter : *{cinemaList}">
                 <div class="col image-block">
                     <figure>
                         <a th:href="@{/admin/edit-cinema/{id}(id=*{cinema.id})}">

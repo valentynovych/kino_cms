@@ -1,6 +1,7 @@
 package com.kino_cms.service;
 
 import com.kino_cms.dto.GeneralPageDTO;
+import com.kino_cms.dto.Page;
 import com.kino_cms.entity.GeneralPage;
 import com.kino_cms.entity.SeoBlock;
 import com.kino_cms.repository.GeneralPageRepo;
@@ -102,6 +103,11 @@ public class GeneralPageService {
         } else {
             logger.error("Method - deleteImage | file:" + image.getAbsolutePath() + "not exists in filesystem");
         }
+    }
+
+    public List<GeneralPageDTO> getAllOtherPages() {
+        List<GeneralPageDTO> otherPages = generalPageRepo.getAllByPageTypeOtherPage();
+        return otherPages;
     }
 }
 

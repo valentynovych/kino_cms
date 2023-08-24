@@ -1,4 +1,4 @@
-package com.kino_cms.controller;
+package com.kino_cms.controller.admin;
 
 import com.kino_cms.dto.BannerDTO;
 import com.kino_cms.enums.BannerType;

@@ -61,7 +61,7 @@
             </div>
         </div>
         <div class="mx-auto film-list">
-            <div class="col-2 cinema-item" th:each="film, iter : *{filmIsReleasedNow}">
+            <div class="col-2 fiml-item" th:each="film, iter : *{filmIsReleasedNow}">
                 <div class="col image-block">
                     <figure>
                         <a th:href="@{/admin/edit-film/{id}(id=*{film.id})}">
@@ -78,7 +78,7 @@
             </div>
         </div>
         <div class="mx-auto film-list ">
-            <div class="col-2 cinema-item" th:each="film, iter : *{filmReleasedSoon}">
+            <div class="col-2 fiml-item" th:each="film, iter : *{filmReleasedSoon}">
                 <div class="col image-block">
                     <figure>
                         <a th:href="@{/admin/edit-film/{id}(id=*{film.id})}">

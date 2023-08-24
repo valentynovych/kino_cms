@@ -33,7 +33,8 @@
 <aside th:replace="fragments/sidebar"></aside>
 <main class="main-content">
     <nav th:replace="fragments/navbar_admin"></nav>
-    <div class="container">
+    <div class="container d-grid gap-2 py-3">
+        <span class="h3 mx-auto">Для головної сторінки</span>
         <div class="card">
             <div class="card-body">
                 <form method="post" th:action="@{/admin/save-header-banner}" th:object="${headerBanner}" enctype="multipart/form-data" novalidate>
@@ -110,6 +111,7 @@
                 </form>
             </div>
         </div>
+        <span class="h3 mx-auto">Фон сторінок</span>
         <div class="card">
             <div class="card-body">
                 <form method="post" th:action="@{/admin/save-perforating-banner}" th:object="${perforatingBanner}" enctype="multipart/form-data" novalidate>
@@ -152,6 +154,7 @@
                 </form>
             </div>
         </div>
+        <span class="h3 mx-auto">Новини / Акції</span>
         <div class="card">
             <div class="card-body">
                 <form method="post" th:action="@{/admin/save-promotion-banner}" th:object="${promotionBanner}" enctype="multipart/form-data" novalidate>

@@ -1,6 +1,5 @@
 package com.kino_cms.sendMailer;
 
-import com.kino_cms.dto.UserDTO;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 import java.util.Scanner;
 
 
@@ -65,15 +63,4 @@ public class MailSenderService {
         }
         mailSender.send(message);
     }
-
-    public void sendAll(List<UserDTO> users) {
-        for (UserDTO user : users) {
-            String mail = user.getEmail();
-            String name = user.getFirstName() + " " + user.getLastName();
-            String body = "Hi, dear " + name + " nice to meet you :)";
-
-            sendEmail(mail, " new feed", body);
-        }
-    }
-
 }

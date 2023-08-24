@@ -24,7 +24,7 @@ public class GeneralPage implements Page {
     private String image3;
     private String image4;
     private String image5;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private SeoBlock seoBlock;
     @Enumerated(EnumType.STRING)
     private Language language;
