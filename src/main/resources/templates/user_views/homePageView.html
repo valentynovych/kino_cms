@@ -30,9 +30,9 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
-
 </head>
-<body class="">
+<body th:style="${perforatingBanner.isActivate} ?
+'background: url(/uploads/' + ${perforatingBanner.bannerImages[0].image} + ') repeat-y fixed; background-size: contain'">
 <span class="screen-darken"></span>
 <!-- loader Start -->
 <div id="loading">
@@ -42,15 +42,11 @@
 </div>
 <!-- loader END -->
 <main class="main-content">
-    <th:block th:if="${perforatingBanner.isActivate}">
-        <img th:src="@{/uploads/{image}(image=${perforatingBanner.bannerImages[0].image})}"
-             style="width: 100%; height: 5rem;">
-    </th:block>
     <!--Nav Start-->
     <th:block th:insert="~{fragments/publicPage.html :: navFirstLevel}"></th:block>
     <th:block th:insert="~{fragments/publicPage.html :: navSecondLevel}"></th:block>
     <!--Nav End-->
-    <div class="container-xl">
+    <div class="container-xl" style="background: #f6f5fa">
         <article class="slider-image mt-5">
             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
@@ -64,8 +60,10 @@
                          th:each="image, iter : ${headerBanner.bannerImages}"
                          th:attr="data-bs-interval=(${headerBanner.slideSpeed} * 1000)">
                         <figure>
-                            <img class="bd-placeholder-img bd-placeholder-img-lg d-block"
-                                 th:src="@{/uploads/{imageName}(imageName=${image.image})}">
+                            <a th:href="@{${image.url}}" target="_blank">
+                                <img class="bd-placeholder-img bd-placeholder-img-lg d-block"
+                                     th:src="@{/uploads/{imageName}(imageName=${image.image})}">
+                            </a>
                         </figure>
                         <div class="carousel-caption d-none d-md-block">
                             <p th:text="${image.text}"></p>
@@ -85,9 +83,9 @@
             </div>
         </article>
         <article class="film-list-block">
-            <div class="row my-4">
-                <div class="col d-flex justify-content-center align-items-center text-bg-light">
-                    <span class="h3 p-2">Показують сьогодні</span>
+            <div class="col my-4">
+                <div class="col-11 d-flex justify-content-center align-items-center bg-light w-100 p-0">
+                    <span class="h3 p-2 ">Показують сьогодні</span>
                     <span class="tomorrow h5 text-blue mt-1"></span>
                 </div>
             </div>
@@ -104,8 +102,8 @@
                     <button class="btn btn-sm btn-soft-success mt-1">Купити білет</button>
                 </div>
             </div>
-            <div class="row my-4">
-                <div class="col d-flex justify-content-center text-bg-light">
+            <div class="col my-4">
+                <div class="col d-flex justify-content-center text-bg-light  w-100">
                     <span class="h3 p-2">Скоро в прокаті</span>
                 </div>
             </div>
@@ -124,6 +122,7 @@
             </div>
         </article>
         <article class="slider-image mt-5">
+            <h3 class="col-3 mx-auto my-4 ">Новини та Акції</h3>
             <div id="carouselCaptions" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <button th:each="images, iter : ${promotionBanner.bannerImages}" type="button"
@@ -136,8 +135,10 @@
                          th:each="image, iter : ${promotionBanner.bannerImages}"
                          th:attr="data-bs-interval=(${promotionBanner.slideSpeed} * 1000)">
                         <figure>
-                            <img class="bd-placeholder-img bd-placeholder-img-lg d-block"
-                                 th:src="@{/uploads/{imageName}(imageName=${image.image})}">
+                            <a th:href="@{${image.url}}" target="_blank">
+                                <img class="bd-placeholder-img bd-placeholder-img-lg d-block"
+                                     th:src="@{/uploads/{imageName}(imageName=${image.image})}">
+                            </a>
                         </figure>
                         <div class="carousel-caption d-none d-md-block">
                             <p th:text="${image.text}"></p>
@@ -156,13 +157,20 @@
                 </button>
             </div>
         </article>
+        <div class="advertising">
+            <th:block th:insert="~{fragments/publicPage.html :: context-advertising(heigth='200')}"></th:block>
+        </div>
+        <div class="col seo-text-block my-3 d-flex flex-column align-items-center">
+            <span class="h4 col-2">СЕО текст</span>
+            <p class="col-12 p-4" th:text="${homePage.seoText}"></p>
+        </div>
     </div>
     <!-- Footer Section Start -->
     <th:block th:insert="~{fragments/publicPage.html :: footer}"></th:block>
     <!-- Footer Section End -->
 </main>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         var images = $("img");
         for (var i = 0; i < images.length; i++) {
             // Перевіряємо, чи вдалося завантажити зображення

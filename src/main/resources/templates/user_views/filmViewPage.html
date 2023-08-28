@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title th:text="'Фільм ' + ${filmDtoById.name}"></title>
+    <title th:text="'Фільм ' + ${filmDto.name}"></title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
@@ -48,29 +48,136 @@
     <!--Nav End-->
 
     <div class="container-xl">
-        <article class="slider-image mt-5">
-
+        <article class="video-prev mt-5">
+            <div class="embed-responsive embed-responsive-16by9"
+                 style="background-image: url('/image/placeholder_images.svg')">
+                <iframe width="100%" height="498" th:src="*{filmDto.urlVideo}" allowfullscreen></iframe>
+            </div>
         </article>
-        <article class="timetable"></article>
+        <article class="timetable w-75 mx-auto">
+            <div>
+                <div class="row d-flex flex-row mb-3">
+                    <span class="h4 col-5">Розклад сеансів кінотеатру:</span>
+                    <div class="col-2">
+                        <select class="form-select form-select-sm col-sm-2"
+                                aria-label="form-select-lg"
+                                id="cinema">
+                            <option th:each="filmSeesion : ${filmSessionList}"
+                                    th:value="${filmSeesion.cinema.id}"
+                                    th:text="${filmSeesion.cinema.name}"></option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <span class="border-2 border-primary">Всі</span>
+                        <span class="border-2">3D</span>
+                        <span class="border-2">2D</span>
+                    </div>
+                </div>
+                <div class="row d-grid grid-cols--7 gap-3">
+                    <div class="day d-flex flex-column align-items-center p-0">
+                        <div class="numberDay h3">18 Th</div>
+                        <div class="currentMonth h4">August</div>
+                    </div>
+                    <div class="day d-flex flex-column align-items-center p-0">
+                        <div class="col numberDay h3">18 Th</div>
+                        <div class="col currentMonth h4">August</div>
+                    </div>
+                    <div class="day d-flex flex-column align-items-center p-0">
+                        <div class="numberDay h3">18 Th</div>
+                        <div class="currentMonth h4">August</div>
+                    </div>
+                    <div class="day d-flex flex-column align-items-center p-0">
+                        <div class="numberDay h3">18 Th</div>
+                        <div class="currentMonth h4">August</div>
+                    </div>
+                    <div class="day d-flex flex-column align-items-center p-0">
+                        <div class="numberDay h3">18 Th</div>
+                        <div class="currentMonth h4">August</div>
+                    </div>
+                    <div class="day d-flex flex-column align-items-center p-0">
+                        <div class="numberDay h3">18 Th</div>
+                        <div class="currentMonth h4">August</div>
+                    </div>
+                    <div class="day d-flex flex-column align-items-center p-0">
+                        <div class="numberDay h3">18 Th</div>
+                        <div class="currentMonth h4">August</div>
+                    </div>
+                </div>
+                <div class="sessions row d-flex flex-row gap-3 mt-3">
+                    <div class="session-item col-2 d-flex flex-column align-items-center p-0" th:each="sessionItem : ${filmSessionList}">
+                        <div class="d-flex flex-row">
+                            <span class="hours h3" th:text="${sessionItem.dateTime.hour} + ':' + ${sessionItem.dateTime.minute}"></span>
+                            <span class="film-type h4" th:text="${sessionItem.filmType.description}"></span>
+                        </div>
+                        <div class="d-flex flex-row">
+                            <span class="hall" th:text="${sessionItem.hall.name}"></span>
+                            <span class="price" th:text="${sessionItem.price}"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </article>
         <article class="film-details">
             <div class="container">
                 <div class="row justify-content-between">
                     <div class="col-5 film-img">
                         <figure>
-                            <img width="100%" th:src="@{/uploads/{mainImage}(mainImage=${filmDtoById.mainImage})}">
+                            <img th:src="@{/uploads/{mainImage}(mainImage=${filmDto.mainImage})}"
+                                 style="width: 100%; height: 26rem">
                         </figure>
                     </div>
-                    <div class="col-5 film-description">
+                    <div class="col-6 film-description">
                         <button class="btn btn-soft-success">Купити білет</button>
-                        <span class="h4" th:text="${filmDtoById.name}"></span>
-                        <p class="film-description-text" th:text="${filmDtoById.description}"></p>
+                        <span class="h4" th:text="${filmDto.name}"></span>
+                        <p class="film-description-text" th:text="${filmDto.description}"></p>
                     </div>
                 </div>
                 <div class="row justify-content-between mt-4">
-                    <div class="col-5 film-detail">
-                        div for film details
+                    <div class="col-5 film-detail table-responsive">
+                        <table class="table table-dark table-sm table-bordered">
+                            <tbody>
+                            <tr th:if="${filmDetails.year}">
+                                <td th:text="Рік"></td>
+                                <td th:text="${filmDetails.year}"></td>
+                            </tr>
+                            <tr th:if="${filmDetails.country}">
+                                <td th:text="Країна"></td>
+                                <td th:text="${filmDetails.country}"></td>
+                            </tr>
+                            <tr th:if="${filmDetails.compositor}">
+                                <td th:text="Композитор"></td>
+                                <td th:text="${filmDetails.compositor}"></td>
+                            </tr>
+                            <tr th:if="${filmDetails.producer}">
+                                <td th:text="Продюсер"></td>
+                                <td th:text="${filmDetails.producer}"></td>
+                            </tr>
+                            <tr th:if="${filmDetails.scenarist}">
+                                <td th:text="Сценарист"></td>
+                                <td th:text="${filmDetails.scenarist}"></td>
+                            </tr>
+                            <tr th:if="${filmDetails.genre}">
+                                <td th:text="Жанр"></td>
+                                <td th:text="${filmDetails.genre}"></td>
+                            </tr>
+                            <tr th:if="${filmDetails.budget}">
+                                <td th:text="Бюджет"></td>
+                                <td th:text="${filmDetails.budget}"></td>
+                            </tr>
+                            <tr th:if="${filmDetails.fromAge}">
+                                <td th:text="Вік"></td>
+                                <td th:text="${filmDetails.fromAge}"></td>
+                            </tr>
+                            <tr th:if="${filmDetails.duration}">
+                                <td th:text="Тривалість"></td>
+                                <td th:text="${filmDetails.duration}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="col-6 film-img-slider">
+                    <div class="col-6 film-img-slider d-flex flex-column">
+                        <span class="h4 mb-3 mx-auto">Кадри та постери</span>
                         <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-indicators">
                                 <button th:each="images, iter : ${filmImages}" type="button"
@@ -105,6 +212,9 @@
                 </div>
             </div>
         </article>
+        <th:block th:insert="~{fragments/publicPage.html :: context-advertising(heigth='200')}">
+
+        </th:block>
     </div>
     <!-- Footer Section Start -->
     <th:block th:insert="~{fragments/publicPage.html :: footer}"></th:block>
@@ -114,13 +224,12 @@
     $(document).ready(function () {
         var images = $("img");
         for (var i = 0; i < images.length; i++) {
-            // Перевіряємо, чи вдалося завантажити зображення
             if (!images[i].complete || images[i].naturalWidth === 0) {
-                // Якщо зображення не завантажилося, замінюємо його на плейсхолдер
                 images[i].src = "/image/placeholder_images.svg";
             }
         }
     });
+
     const currentLocation = location.href;
     const menuItem = document.querySelectorAll('.nav-link');
     const menuLenght = menuItem.length
@@ -129,7 +238,23 @@
             menuItem[i].className = "nav-link active";
         }
     }
+</script>
+<script>
+    $(document).ready(function () {
+        const daysOfWeek = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'];
+        const currentDate = new Date();
 
+        $('.day').each(function (index) {
+            const dayOfMonth = new Date(Date.now() + index * 24 * 60 * 60 * 1000);
+            const dayOfWeekIndex = (currentDate.getDay() + index) % 7;
+            const monthNames = ['Січня', 'Лютого', 'Березня', 'Квітня', 'Травня', 'Червня', 'Липня', 'Серпня', 'Вересня',
+                'Жовтня', 'Листопада', 'Грудня'];
+            const currentMonth = monthNames[dayOfMonth.getMonth()];
+
+            $(this).find('.numberDay').text(`${dayOfMonth.getUTCDate()} ${daysOfWeek[dayOfWeekIndex]}`);
+            $(this).find('.currentMonth').text(currentMonth);
+        });
+    });
 </script>
 <!-- Library Bundle Script -->
 <script src="/assets/js/core/libs.min.js"></script>

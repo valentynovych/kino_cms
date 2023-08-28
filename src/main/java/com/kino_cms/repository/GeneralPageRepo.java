@@ -28,4 +28,16 @@ public interface GeneralPageRepo extends JpaRepository<GeneralPage, Long> {
             "gep.createTime, gep.seoBlock.seoUrl, gep.seoBlock.seoTitle, gep.seoBlock.seoKeywords, " +
             "gep.seoBlock.seoDescription) FROM GeneralPage gep WHERE gep.pageType = com.kino_cms.enums.PageType.OTHER_PAGE")
     List<GeneralPageDTO> getAllByPageTypeOtherPage();
+
+    @Query(value = "FROM GeneralPage gp WHERE gp.pageType = com.kino_cms.enums.PageType.ADVERTISING " +
+            "AND gp.language = com.kino_cms.enums.Language.UKRAINIAN " +
+            "UNION FROM GeneralPage gp WHERE gp.pageType = com.kino_cms.enums.PageType.CAFE_BAR " +
+            "AND gp.language = com.kino_cms.enums.Language.UKRAINIAN " +
+            "UNION FROM GeneralPage gp WHERE gp.pageType = com.kino_cms.enums.PageType.CONTACT_PAGE " +
+            "AND gp.language = com.kino_cms.enums.Language.UKRAINIAN " +
+            "UNION FROM GeneralPage gp WHERE gp.pageType = com.kino_cms.enums.PageType.CHILD_ROOM " +
+            "AND gp.language = com.kino_cms.enums.Language.UKRAINIAN " +
+            "UNION FROM GeneralPage gp WHERE gp.pageType = com.kino_cms.enums.PageType.VIP_HALL " +
+            "AND gp.language = com.kino_cms.enums.Language.UKRAINIAN")
+    List<GeneralPage> getAllUkPageByPageTypeUnion();
 }

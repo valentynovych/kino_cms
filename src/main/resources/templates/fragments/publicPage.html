@@ -1,31 +1,31 @@
 <!doctype html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Hope UI | Responsive Bootstrap 5 Admin Dashboard Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Hope UI | Responsive Bootstrap 5 Admin Dashboard Template</title>
 
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
 
-  <!-- Library / Plugin Css Build -->
-  <link rel="stylesheet" href="/assets/css/core/libs.min.css"/>
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="/assets/css/core/libs.min.css"/>
 
 
-  <!-- Hope Ui Design System Css -->
-  <link rel="stylesheet" href="/assets/css/hope-ui.min.css?v=2.0.0"/>
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="/assets/css/hope-ui.min.css?v=2.0.0"/>
 
-  <!-- Custom Css -->
-  <link rel="stylesheet" href="/assets/css/custom.min.css?v=2.0.0"/>
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="/assets/css/custom.min.css?v=2.0.0"/>
 
-  <!-- Dark Css -->
-  <link rel="stylesheet" href="/assets/css/dark.min.css"/>
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="/assets/css/dark.min.css"/>
 
-  <!-- Customizer Css -->
-  <link rel="stylesheet" href="/assets/css/customizer.min.css"/>
+    <!-- Customizer Css -->
+    <link rel="stylesheet" href="/assets/css/customizer.min.css"/>
 
-  <!-- RTL Css -->
-  <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
 
 
 </head>
@@ -33,28 +33,29 @@
 <span class="screen-darken"></span>
 <!-- loader Start -->
 <div id="loading">
-  <div class="loader simple-loader">
-    <div class="loader-body"></div>
-  </div>
+    <div class="loader simple-loader">
+        <div class="loader-body"></div>
+    </div>
 </div>
 <!-- loader END -->
 <main class="main-content">
-  <!--Nav Start-->
-  <nav th:fragment="navFirstLevel" class="nav navbar navbar-expand-lg navbar-light iq-navbar">
-    <div class="container-fluid navbar-inner">
-      <button data-trigger="navbar_main" class="d-xl-none btn btn-primary rounded-pill p-1 pt-0" type="button">
-        <svg width="20px" class="icon-20" viewBox="0 0 24 24">
-          <path fill="currentColor"
-                d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"></path>
-        </svg>
-      </button>
-      <a th:href="@{/}" class="navbar-brand">
-        <!--Logo start-->
-        <img src="/image/CM_Logo.svg" class="icon-30">
-        <!--logo End-->
-        <h4 class="logo-title">Kino CMS</h4>
-      </a>
-      <div class="input-group search-input">
+    <!--Nav Start-->
+
+    <nav th:fragment="navFirstLevel" class="nav navbar navbar-expand-lg navbar-light iq-navbar">
+        <div class="container-fluid navbar-inner">
+            <button data-trigger="navbar_main" class="d-xl-none btn btn-primary rounded-pill p-1 pt-0" type="button">
+                <svg width="20px" class="icon-20" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                          d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"></path>
+                </svg>
+            </button>
+            <a th:href="@{/}" class="navbar-brand">
+                <!--Logo start-->
+                <img src="/image/CM_Logo.svg" class="icon-30">
+                <!--logo End-->
+                <h4 class="logo-title">Kino CMS</h4>
+            </a>
+            <div class="input-group search-input">
             <span class="input-group-text" id="search-input">
               <svg class="icon-18" width="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="11.7669" cy="11.7666" r="8.98856" stroke="currentColor" stroke-width="1.5"
@@ -63,178 +64,242 @@
                         stroke-linejoin="round"></path>
               </svg>
             </span>
-        <input type="search" class="form-control" placeholder="Пошук ....">
-      </div>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-              aria-expanded="false" aria-label="Toggle navigation">
+                <input type="search" class="form-control" placeholder="Пошук ....">
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon">
                 <span class="navbar-toggler-bar bar1 mt-2"></span>
                 <span class="navbar-toggler-bar bar2"></span>
                 <span class="navbar-toggler-bar bar3"></span>
               </span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto  navbar-list mb-2 mb-lg-0">
-          <li class="nav-item me-4 d-flex align-self-end gap-2">
-            <img src="/assets/images/brands/li.svg">
-            <img src="/assets/images/brands/im.svg">
-            <img src="/assets/images/brands/fb.svg">
-            <img src="/assets/images/brands/gm.svg">
-          </li>
-          <li class="nav-item me-4">
-            <a class="nav-link p-0" th:href="@{tel:{phone_main}(phone_main=${phone_main})}"
-               th:text="${phone_main}"></a>
-            <a class="nav-link p-0" th:href="@{tel:{phone_other}(phone_other=${phone_other})}"
-               th:text="${phone_other}"></a>
-          </li>
-          <li class="nav-item dropdown">
-            <a href="#" class="search-toggle nav-link" id="dropdownMenuButton2" data-bs-toggle="dropdown"
-               aria-haspopup="true" aria-expanded="false">
-              <img src="/assets/images/Flag/icons8-ukraine-96.png" class="img-fluid rounded-circle"
-                   alt="user"
-                   style="height: 30px; min-width: 30px; width: 30px;">
-              <span class="bg-primary"></span>
-            </a>
-            <div class="sub-drop dropdown-menu dropdown-menu-end p-0" aria-labelledby="dropdownMenuButton2">
-              <div class="card shadow-none m-0 border-0 general-zindex">
-                <div class="p-0">
-                  <ul class="list-group list-group-flush p-0 ">
-                    <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
-                            src="/assets/images/Flag/icons8-ukraine-96.png" alt="img-flaf"
-                            class="img-fluid me-2"
-                            style="width: 15px;height: 15px;min-width: 15px;">Українська</a></li>
-                    <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
-                            src="/assets/images/Flag/flag-01.png" alt="img-flaf"
-                            class="img-fluid me-2"
-                            style="width: 15px;height: 15px;min-width: 15px;">Англійська</a></li>
-                  </ul>
-                </div>
-              </div>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto  navbar-list mb-2 mb-lg-0">
+                    <li class="nav-item me-4 d-flex align-self-end gap-2">
+                        <img src="/assets/images/brands/li.svg">
+                        <img src="/assets/images/brands/im.svg">
+                        <img src="/assets/images/brands/fb.svg">
+                        <img src="/assets/images/brands/gm.svg">
+                    </li>
+                    <li class="nav-item me-4">
+                        <a class="nav-link p-0" th:href="@{tel:{phone_main}(phone_main=${phone_main})}"
+                           th:text="${phone_main}"></a>
+                        <a class="nav-link p-0" th:href="@{tel:{phone_other}(phone_other=${phone_other})}"
+                           th:text="${phone_other}"></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="search-toggle nav-link" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <img src="/assets/images/Flag/icons8-ukraine-96.png" class="img-fluid rounded-circle"
+                                 alt="user"
+                                 style="height: 30px; min-width: 30px; width: 30px;">
+                            <span class="bg-primary"></span>
+                        </a>
+                        <div class="sub-drop dropdown-menu dropdown-menu-end p-0" aria-labelledby="dropdownMenuButton2">
+                            <div class="card shadow-none m-0 border-0">
+                                <div class="p-0">
+                                    <ul class="list-group list-group-flush p-0 ">
+                                        <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
+                                                src="/assets/images/Flag/icons8-ukraine-96.png" alt="img-flaf"
+                                                class="img-fluid me-2"
+                                                style="width: 15px;height: 15px;min-width: 15px;">Українська</a></li>
+                                        <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
+                                                src="/assets/images/Flag/flag-01.png" alt="img-flaf"
+                                                class="img-fluid me-2"
+                                                style="width: 15px;height: 15px;min-width: 15px;">Англійська</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link py-0 d-flex align-items-center" href="#" id="navbarDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="/assets/images/avatars/01.png" alt="User-Profile"
+                                 class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
+                            <div class="caption ms-3 d-none d-md-block ">
+                                <h6 class="mb-0 caption-title">User</h6>
+                                <p class="mb-0 caption-sub-title">Role</p>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/sign-in.html">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link py-0 d-flex align-items-center" href="#" id="navbarDropdown" role="button"
-               data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="/assets/images/avatars/01.png" alt="User-Profile"
-                   class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
-              <div class="caption ms-3 d-none d-md-block ">
-                <h6 class="mb-0 caption-title">User</h6>
-                <p class="mb-0 caption-sub-title">Role</p>
-              </div>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="/sign-in.html">Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <div th:fragment="navSecondLevel" class="navbar dual-horizontal">
-    <!-- Horizontal Menu Start -->
-    <nav id="navbar_main" class="mobile-offcanvas nav navbar navbar-expand-xl hover-nav horizontal-nav mx-md-auto">
-      <div class="container-fluid">
-        <div class="offcanvas-header px-0">
-          <div class="navbar-brand ms-3">
-            <!--Logo start-->
-            <!--logo End-->
-
-            <!--Logo start-->
-            <div class="logo-main">
-              <div class="logo-normal">
-                <svg class="text-primary icon-30" viewBox="0 0 30 30" fill="none"
-                     xmlns="http://www.w3.org/2000/svg">
-                  <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
-                        transform="rotate(-45 -0.757324 19.2427)" fill="currentColor"/>
-                  <rect x="7.72803" y="27.728" width="28" height="4" rx="2"
-                        transform="rotate(-45 7.72803 27.728)" fill="currentColor"/>
-                  <rect x="10.5366" y="16.3945" width="16" height="4" rx="2"
-                        transform="rotate(45 10.5366 16.3945)" fill="currentColor"/>
-                  <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
-                        transform="rotate(45 10.5562 -0.556152)" fill="currentColor"/>
-                </svg>
-              </div>
-              <div class="logo-mini">
-                <svg class="text-primary icon-30" viewBox="0 0 30 30" fill="none"
-                     xmlns="http://www.w3.org/2000/svg">
-                  <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
-                        transform="rotate(-45 -0.757324 19.2427)" fill="currentColor"/>
-                  <rect x="7.72803" y="27.728" width="28" height="4" rx="2"
-                        transform="rotate(-45 7.72803 27.728)" fill="currentColor"/>
-                  <rect x="10.5366" y="16.3945" width="16" height="4" rx="2"
-                        transform="rotate(45 10.5366 16.3945)" fill="currentColor"/>
-                  <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
-                        transform="rotate(45 10.5562 -0.556152)" fill="currentColor"/>
-                </svg>
-              </div>
-            </div>
-            <!--logo End-->
-            <h4 class="logo-title">Kino CMS</h4>
-          </div>
-          <button class="btn-close float-end"></button>
         </div>
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link " href="/poster"> Афіша </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/timetable"> Розклад сеансів </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="/soon">
-              <span class="item-name"> Скоро </span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="/cinemas"> Кінотеатри </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="/promotions"> Акції </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="/about-cinema"> Про кінотеатр </a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="pages" role="button"
-               data-bs-toggle="dropdown" aria-expanded="false">
-              Сторінки
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="pages">
-              <li th:each="page : ${other_pages}">
-                <a class="dropdown-item" th:href="@{/other-page/{id}(id=${page.id})}" th:text="${page.title}"></a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div> <!-- container-fluid.// -->
     </nav>
-    <!-- Sidebar Menu End -->
-  </div>      <!--Nav End-->
+    <div th:fragment="navSecondLevel" class="navbar dual-horizontal">
+        <!-- Horizontal Menu Start -->
+        <nav id="navbar_main" class="mobile-offcanvas nav navbar navbar-expand-xl hover-nav horizontal-nav mx-md-auto">
+            <div class="container-fluid">
+                <div class="offcanvas-header px-0">
+                    <div class="navbar-brand ms-3">
+                        <!--Logo start-->
+                        <!--logo End-->
 
-  <!-- Footer Section Start -->
-  <footer th:fragment="footer" class="footer">
-    <div class="footer-body">
-      <ul class="left-panel list-inline mb-0 p-0">
-        <li class="list-inline-item"><a href="/dashboard/extra/privacy-policy.html">Privacy Policy</a></li>
-        <li class="list-inline-item"><a href="/dashboard/extra/terms-of-service.html">Terms of Use</a></li>
-      </ul>
-      <div class="right-panel">
-        ©
-        <script>document.write(new Date().getFullYear())</script>
-        Hope UI, Made with
-        <span class="">
-                      <svg class="icon-15" width="15" viewBox="0 0 24 24" fill="none"
-                           xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M15.85 2.50065C16.481 2.50065 17.111 2.58965 17.71 2.79065C21.401 3.99065 22.731 8.04065 21.62 11.5806C20.99 13.3896 19.96 15.0406 18.611 16.3896C16.68 18.2596 14.561 19.9196 12.28 21.3496L12.03 21.5006L11.77 21.3396C9.48102 19.9196 7.35002 18.2596 5.40102 16.3796C4.06102 15.0306 3.03002 13.3896 2.39002 11.5806C1.26002 8.04065 2.59002 3.99065 6.32102 2.76965C6.61102 2.66965 6.91002 2.59965 7.21002 2.56065H7.33002C7.61102 2.51965 7.89002 2.50065 8.17002 2.50065H8.28002C8.91002 2.51965 9.52002 2.62965 10.111 2.83065H10.17C10.21 2.84965 10.24 2.87065 10.26 2.88965C10.481 2.96065 10.69 3.04065 10.89 3.15065L11.27 3.32065C11.3618 3.36962 11.4649 3.44445 11.554 3.50912C11.6104 3.55009 11.6612 3.58699 11.7 3.61065C11.7163 3.62028 11.7329 3.62996 11.7496 3.63972C11.8354 3.68977 11.9247 3.74191 12 3.79965C13.111 2.95065 14.46 2.49065 15.85 2.50065ZM18.51 9.70065C18.92 9.68965 19.27 9.36065 19.3 8.93965V8.82065C19.33 7.41965 18.481 6.15065 17.19 5.66065C16.78 5.51965 16.33 5.74065 16.18 6.16065C16.04 6.58065 16.26 7.04065 16.68 7.18965C17.321 7.42965 17.75 8.06065 17.75 8.75965V8.79065C17.731 9.01965 17.8 9.24065 17.94 9.41065C18.08 9.58065 18.29 9.67965 18.51 9.70065Z"
-                                fill="currentColor"></path>
-                      </svg>
-                  </span> by <a href="https://iqonic.design/">IQONIC Design</a>.
-      </div>
+                        <!--Logo start-->
+                        <div class="logo-main">
+                            <div class="logo-normal">
+                                <svg class="text-primary icon-30" viewBox="0 0 30 30" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
+                                          transform="rotate(-45 -0.757324 19.2427)" fill="currentColor"/>
+                                    <rect x="7.72803" y="27.728" width="28" height="4" rx="2"
+                                          transform="rotate(-45 7.72803 27.728)" fill="currentColor"/>
+                                    <rect x="10.5366" y="16.3945" width="16" height="4" rx="2"
+                                          transform="rotate(45 10.5366 16.3945)" fill="currentColor"/>
+                                    <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
+                                          transform="rotate(45 10.5562 -0.556152)" fill="currentColor"/>
+                                </svg>
+                            </div>
+                            <div class="logo-mini">
+                                <svg class="text-primary icon-30" viewBox="0 0 30 30" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
+                                          transform="rotate(-45 -0.757324 19.2427)" fill="currentColor"/>
+                                    <rect x="7.72803" y="27.728" width="28" height="4" rx="2"
+                                          transform="rotate(-45 7.72803 27.728)" fill="currentColor"/>
+                                    <rect x="10.5366" y="16.3945" width="16" height="4" rx="2"
+                                          transform="rotate(45 10.5366 16.3945)" fill="currentColor"/>
+                                    <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
+                                          transform="rotate(45 10.5562 -0.556152)" fill="currentColor"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <!--logo End-->
+                        <h4 class="logo-title">Kino CMS</h4>
+                    </div>
+                    <button class="btn-close float-end"></button>
+                </div>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link " href="/poster"> Афіша </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/timetable"> Розклад сеансів </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/soon">
+                            <span class="item-name"> Скоро </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/cinemas"> Кінотеатри </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/promotions"> Акції </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle" href="#" id="about-cinema" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false"> Про кінотеатр </a>
+                        <ul class="dropdown-menu" aria-labelledby="about-cinema">
+                            <li>
+                                <a class="dropdown-item" th:href="@{/feeds}">Новини</a>
+                            </li>
+                            <li th:each="aboutPage : ${list_about_pages}">
+                                <a class="dropdown-item"
+                                   th:href="@{/{pageType}/{id}(pageType=${aboutPage.pageType}, id=${aboutPage.id})}"
+                                   th:text="${aboutPage.title}"></a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="pages" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Сторінки
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="pages">
+                            <li th:each="page : ${other_pages}">
+                                <a class="dropdown-item" th:href="@{/other-page/{id}(id=${page.id})}"
+                                   th:text="${page.title}"></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div> <!-- container-fluid.// -->
+        </nav>
+        <!-- Sidebar Menu End -->
+    </div>      <!--Nav End-->
+
+
+    <div th:fragment="context-advertising(heigth)" class="context-advertising position-relative">
+        <figure style="height: 100%">
+            <img src="/image/placeholder_images.svg" width="100%" th:height="${heigth}">
+        </figure>
+        <span class="h3" style="position: absolute; top: 50%; left: 50%">Реклама</span>
     </div>
-  </footer>
-  <!-- Footer Section End -->
+
+    <!-- Footer Section Start -->
+    <footer th:fragment="footer" class="footer pt-4">
+        <div class="footer-body d-flex flex-row mt-3">
+            <div class="footer-mobile col-4 d-flex flex-column">
+                <span class="col">Мобільні додатки</span>
+                <div class="d-flex flex-row gap-2 mt-2">
+                    <figure class="google-pay col-4">
+                        <img class="app-logo rounded-1" th:src="@{/image/app-store-apple-logo.svg}"
+                             style="width: 100%; height: 3rem">
+                    </figure>
+                    <figure class="app-store col-4">
+                        <img class="app-logo rounded-1" th:src="@{/image/google-play-badge-logo.svg}"
+                             style="width: 100%; height: 3rem">
+                    </figure>
+                </div>
+                <span class="col mt-5">Розробка сайтів: <a href="https://avada-media.ua/ua/services/razrabotka-sajtov/"
+                                                           target="_blank">AVADA MEDIA</a></span>
+            </div>
+            <div class="footer-menu col-5 d-flex gap-3 justify-content-center">
+                <div class="">
+                    <a class="nav-link h3" href="/poster"><span class="h4">Афіша</span></a>
+                    <ul class="nav flex-sm-column">
+                        <li>
+                            <a class="nav-link py-1" href="/timetable">Розклад сеансів</a>
+                        </li>
+                        <li>
+                            <a class="nav-link py-1" href="/soon">Скоро</a>
+                        </li>
+                        <li>
+                            <a class="nav-link py-1" href="/cinemas">Кінотеатри</a>
+                        </li>
+                        <li>
+                            <a class="nav-link py-1" href="/promotions"> Акції </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <a class="nav-link h3" th:href="@{/about-cinema}"><span class="h4">Про кінотеатр</span></a>
+                    <ul class="nav flex-sm-column">
+                        <li>
+                            <a class="nav-link py-1" th:href="@{/feeds}">Новини</a>
+                        </li>
+                        <li th:each="aboutPage : ${list_about_pages}">
+                            <a class="nav-link py-1"
+                               th:href="@{/{pageType}/{id}(pageType=${aboutPage.pageType}, id=${aboutPage.id})}"
+                               th:text="${aboutPage.title}"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-3 socials">
+                <ul>
+                    <li class="nav-item me-4 d-flex align-self-end gap-2">
+                        <img src="/assets/images/brands/li.svg" alt="">
+                        <img src="/assets/images/brands/im.svg" alt="">
+                        <img src="/assets/images/brands/fb.svg" alt="">
+                        <img src="/assets/images/brands/gm.svg" alt="">
+                    </li>
+                </ul>
+            </div>
+            <div class="col d-flex justify-content-center">
+                <span class="col-3">© KinoCMS 2016, All rights reserved</span>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
 </main>
 <!-- Library Bundle Script -->
 <script src="/assets/js/core/libs.min.js"></script>

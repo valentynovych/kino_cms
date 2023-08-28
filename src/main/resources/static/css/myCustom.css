@@ -205,3 +205,36 @@ article {
 .film-list-poster .film-item .film-item-img img {
     height: 14rem;
 }
+
+figure img.app-logo {
+    width: 14rem;
+    height: 4rem;
+}
+
+.day {
+    width: 100%;
+    border: 1px solid;
+}
+.day div:last-child {
+    border-top: 1px solid;
+}
+
+.session-item {
+    border: 1px solid
+}
+
+.session-item div {
+    gap: 1rem;
+}
+
+.session-item div:last-child {
+    border-top: 1px solid;
+    border-color: black;
+    width: 100%;
+
+}
+.session-item span:last-child {
+    border-left: 1px solid;
+    border-color: black;
+    padding-left: 10px
+}

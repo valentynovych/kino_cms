@@ -21,6 +21,7 @@ public class HomePage implements Page {
     private String title;
     private String phone_main;
     private String phone_other;
+    @Column(length = 2000)
     private String seoText;
     @OneToOne(cascade = CascadeType.ALL)
     private SeoBlock seoBlock;

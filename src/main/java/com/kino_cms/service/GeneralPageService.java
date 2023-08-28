@@ -109,5 +109,10 @@ public class GeneralPageService {
         List<GeneralPageDTO> otherPages = generalPageRepo.getAllByPageTypeOtherPage();
         return otherPages;
     }
+
+    public List<GeneralPage> getAllUkPageByPageTypeForMenu(){
+        List<GeneralPage> ukPageByPageTypeUnion = generalPageRepo.getAllUkPageByPageTypeUnion();
+        return ukPageByPageTypeUnion;
+    }
 }
 

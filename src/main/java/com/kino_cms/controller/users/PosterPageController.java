@@ -2,6 +2,8 @@ package com.kino_cms.controller.users;
 
 import com.kino_cms.dto.FilmDTO;
 import com.kino_cms.service.FilmService;
+import com.kino_cms.service.GeneralPageService;
+import com.kino_cms.service.HomePageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,13 +15,21 @@ import java.util.List;
 public class PosterPageController {
     @Autowired
     FilmService filmService;
+
+    @Autowired
+    HomePageService homePageService;
+
+    @Autowired
+    GeneralPageService generalPageService;
+
     @GetMapping("/poster")
-    public String viewPoster(){
+    public String viewPoster() {
 
         return "redirect:/poster/now";
     }
+
     @GetMapping("/poster/now")
-    public String viewPosterNow(Model model){
+    public String viewPosterNow(Model model) {
         List<FilmDTO> filmIsReleasedNow = filmService.getAllFilmIsReleasedNow();
         model.addAttribute("filmList", filmIsReleasedNow);
 
@@ -27,7 +37,7 @@ public class PosterPageController {
     }
 
     @GetMapping("/poster/soon")
-    public String viewPosterSoon(Model model){
+    public String viewPosterSoon(Model model) {
         List<FilmDTO> filmReleasedSoon = filmService.getAllFilmReleasedSoon();
         model.addAttribute("filmList", filmReleasedSoon);
 
