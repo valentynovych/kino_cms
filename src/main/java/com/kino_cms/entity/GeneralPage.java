@@ -17,6 +17,7 @@ public class GeneralPage implements Page {
     @Enumerated(EnumType.STRING)
     private PageType pageType;
     private String title;
+    @Column(length = 5000)
     private String description;
     private String mainImage;
     private String image1;

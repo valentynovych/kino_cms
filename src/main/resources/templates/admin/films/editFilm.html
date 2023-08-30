@@ -187,21 +187,23 @@
                 <label class="col-sm-2 col-form-label-sm">Посилання на трейлер</label>
                 <div class="col-sm-9">
                     <input type="text" th:field="*{urlVideo}"
-                           class="form-control form-control-sm">
+                           class="form-control form-control-sm" required>
+                    <div class="invalid-feedback">
+                        Обов'язкове поле
+                    </div>
                 </div>
             </div>
             <div class="row mt-4 d-flex flex-row">
                 <label class="col-sm-2 col-form-label-sm">Тип кіно</label>
-                <div class="col-sm-5 film-types d-flex flex-row align-items-baseline">
-                    <div class="col-2 form-check form-check-inline" th:each="type, iter : ${filmTypes}">
+                <div class="col-sm-3 film-types d-flex flex-row align-items-baseline">
+                    <div class="col-3 form-check form-check-inline" th:each="type, iter : ${filmTypes}">
                         <input type="checkbox" class="form-check-input" th:field="*{filmTypeList}" name="filmTypes"
                                th:value="${type.name()}">
                         <label class="form-label" th:text="${type.description}"></label>
                     </div>
                 </div>
                 <a th:href="@{/admin/edit-details/{id}(id=${filmDTO.id})}" id="addDetails"
-                   class="btn btn-success col-3">Додати деталі
-                    фільму</a>
+                   class="btn btn-success col-3">Додати деталі фільму</a>
             </div>
             <div class="row mt-4">
                 <div class="col-2">
@@ -278,16 +280,6 @@
                 .attr('disabled')
         }
     });
-    // const editLinks = document.querySelectorAll('.edit-cinema');
-    // const cinemaId = document.querySelector('.cinema-id').value;
-    // if (cinemaId === '0') {
-    //     editLinks.forEach((element) => {
-    //         element.removeAttribute('href');
-    //         element.setAttribute('data-bs-toggle', 'tooltip');
-    //         element.setAttribute('data-bs-placement', 'top');
-    //         element.setAttribute('title', 'Спочатку потрібно створити кінотеатр');
-    //     });
-    // }
 </script>
 <script type="text/javascript" th:src="@{/js/file-upload.js}"></script>
 

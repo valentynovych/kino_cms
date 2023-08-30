@@ -45,64 +45,64 @@
                         <div class="col d-flex flex-row">
                             <label class="col-2 col-form-label-sm">Рік виходу</label>
                             <div class="col-5 flex-row">
-                                <input type="number" th:field="*{year}"
-                                       class="form-control form-control-sm" placeholder="Введіть рік">
+                                <input type="number" th:field="*{year}" min="2017" max="2050"
+                                       class="form-control form-control-sm" placeholder="Рік виходу">
                             </div>
                         </div>
                         <div class="col d-flex flex-row">
                             <label class="col-2 col-form-label-sm">Країна</label>
                             <div class="col-5 flex-row">
                                 <input type="text" th:field="*{country}"
-                                       class="form-control form-control-sm">
+                                       class="form-control form-control-sm" placeholder="Введіть країну">
                             </div>
                         </div>
                         <div class="col d-flex flex-row">
                             <label class="col-2 col-form-label-sm">Композитор</label>
                             <div class="col-5 flex-row">
                                 <input type="text" th:field="*{compositor}"
-                                       class="form-control form-control-sm">
+                                       class="form-control form-control-sm" placeholder="Введіть композитора">
                             </div>
                         </div>
                         <div class="col d-flex flex-row">
                             <label class="col-2 col-form-label-sm">Продюсер</label>
                             <div class="col-5 flex-row">
                                 <input type="text" th:field="*{producer}"
-                                       class="form-control form-control-sm">
+                                       class="form-control form-control-sm" placeholder="Введіть продюсера">
                             </div>
                         </div>
                         <div class="col d-flex flex-row">
                             <label class="col-2 col-form-label-sm">Сценарист</label>
                             <div class="col-5 flex-row">
                                 <input type="text" th:field="*{scenarist}"
-                                       class="form-control form-control-sm">
+                                       class="form-control form-control-sm" placeholder="Введіть сценариста">
                             </div>
                         </div>
                         <div class="col d-flex flex-row">
                             <label class="col-2 col-form-label-sm">Жанр</label>
                             <div class="col-5 flex-row">
                                 <input type="text" th:field="*{genre}"
-                                       class="form-control form-control-sm">
+                                       class="form-control form-control-sm" placeholder="Введіть жанр фільму">
                             </div>
                         </div>
                         <div class="col d-flex flex-row">
                             <label class="col-2 col-form-label-sm">Бюджет</label>
                             <div class="col-5 flex-row">
                                 <input type="number" th:field="*{budget}"
-                                       class="form-control form-control-sm">
+                                       class="form-control form-control-sm" placeholder="Введіть бюджет">
                             </div>
                         </div>
                         <div class="col d-flex flex-row">
                             <label class="col-2 col-form-label-sm">Вікове обмеження</label>
                             <div class="col-5 flex-row">
                                 <input type="number" th:field="*{fromAge}"
-                                       class="form-control form-control-sm">
+                                       class="form-control form-control-sm" placeholder="Рекомендований вік">
                             </div>
                         </div>
                         <div class="col d-flex flex-row">
                             <label class="col-2 col-form-label-sm">Тривалість</label>
                             <div class="col-5 flex-row">
                                 <input type="number" th:field="*{duration}"
-                                       class="form-control form-control-sm">
+                                       class="form-control form-control-sm" placeholder="Введіть тривалість фільму">
                             </div>
                         </div>
                         <input type="hidden" th:field="*{film.id}" id="filmId">

@@ -17,6 +17,7 @@ public class Film {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Column(length = 2000)
     private String description;
     private String mainImage;
     private String image1;

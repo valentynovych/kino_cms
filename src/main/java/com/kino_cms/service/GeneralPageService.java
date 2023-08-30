@@ -114,5 +114,10 @@ public class GeneralPageService {
         List<GeneralPage> ukPageByPageTypeUnion = generalPageRepo.getAllUkPageByPageTypeUnion();
         return ukPageByPageTypeUnion;
     }
+
+    public GeneralPageDTO getGeneralPageDTOAboutCinema() {
+        GeneralPageDTO aboutCinemaPage = generalPageRepo.getAboutCinemaPageUk();
+        return aboutCinemaPage;
+    }
 }
 
