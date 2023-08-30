@@ -1,6 +1,6 @@
 img {
-    /*background: url("/image/placeholder_images.svg") no-repeat scroll 0 0;*/
     object-fit: cover;
+    width: 100%;
 }
 
 figure {
@@ -237,4 +237,25 @@ figure img.app-logo {
     border-left: 1px solid;
     border-color: black;
     padding-left: 10px
+}
+
+.sidebar-right {
+    float: right;
+    position: sticky;
+    top: 6rem;
+    width: 20%;
+    height: 100%
+}
+
+ul.nav.nav-tabs.nav-fill.mb-auto.flex-column {
+    position: sticky;
+    top: 6rem;
+    min-width: 100%;
+}
+.left-sidebar.d-flex.flex-column.p-3 {
+    width: 14rem;
+    position: relative;
+    top: 0;
+    left: -3rem;
+    min-width: 14rem;
 }

@@ -1,5 +1,6 @@
 package com.kino_cms.service;
 
+import com.kino_cms.dto.FeedDTO;
 import com.kino_cms.entity.FeedPage;
 import com.kino_cms.enums.FeedType;
 import com.kino_cms.repository.FeedPageRepo;
@@ -68,5 +69,19 @@ public class FeedPageService {
         feedPageModel.setImage4(fileNamesFromDB.get(4));
         feedPageModel.setImage5(fileNamesFromDB.get(5));
         return feedPageModel;
+    }
+
+    public List<FeedDTO> getAllFeedDTOByFeedTypeFeed() {
+        List<FeedDTO> allFeedDTO = feedPageRepo.getAllFeedDTOByTypeFeed();
+        return allFeedDTO;
+    }
+    public List<FeedDTO> getAllFeedDTOByFeedTypePromotion() {
+        List<FeedDTO> allFeedDTO = feedPageRepo.getAllFeedDTOByTypePromotion();
+        return allFeedDTO;
+    }
+
+    public FeedDTO getFeedDTOById(Long feedId) {
+        FeedDTO feedDTO = feedPageRepo.getFeedDTOById(feedId);
+        return feedDTO;
     }
 }

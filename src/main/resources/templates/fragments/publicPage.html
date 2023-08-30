@@ -177,32 +177,30 @@
                 </div>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link " href="/poster"> Афіша </a>
+                        <a class="nav-link " href="/poster">Афіша</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/timetable"> Розклад сеансів </a>
+                        <a class="nav-link" href="/timetable">Розклад сеансів</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="/soon">
-                            <span class="item-name"> Скоро </span>
-                        </a>
+                        <a class="nav-link " href="/poster/soon">Скоро</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="/cinemas"> Кінотеатри </a>
+                        <a class="nav-link " href="/cinemas">Кінотеатри</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="/promotions"> Акції </a>
+                        <a class="nav-link " href="/promotions">Акції</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link dropdown-toggle" href="#" id="about-cinema" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false"> Про кінотеатр </a>
-                        <ul class="dropdown-menu" aria-labelledby="about-cinema">
+                        <a class="nav-link dropdown-toggle" href="/about-cinema" id="about" role="link"
+                           aria-expanded="false">Про кінотеатр</a>
+                        <ul class="dropdown-menu" aria-labelledby="about">
                             <li>
                                 <a class="dropdown-item" th:href="@{/feeds}">Новини</a>
                             </li>
                             <li th:each="aboutPage : ${list_about_pages}">
                                 <a class="dropdown-item"
-                                   th:href="@{/{pageType}/{id}(pageType=${aboutPage.pageType}, id=${aboutPage.id})}"
+                                   th:href="@{/page/{pageType}/{id}(pageType=${aboutPage.pageType}, id=${aboutPage.id})}"
                                    th:text="${aboutPage.title}"></a>
                             </li>
                         </ul>
@@ -215,7 +213,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="pages">
                             <li th:each="page : ${other_pages}">
-                                <a class="dropdown-item" th:href="@{/other-page/{id}(id=${page.id})}"
+                                <a class="dropdown-item" th:href="@{/page/{pageType}/{id}(id=${page.id}, pageType=${page.pageType})}"
                                    th:text="${page.title}"></a>
                             </li>
                         </ul>
@@ -231,7 +229,7 @@
         <figure style="height: 100%">
             <img src="/image/placeholder_images.svg" width="100%" th:height="${heigth}">
         </figure>
-        <span class="h3" style="position: absolute; top: 50%; left: 50%">Реклама</span>
+        <span class="h3" style="position: absolute; top: 45%; left: calc(50% - 3.5rem)">Реклама</span>
     </div>
 
     <!-- Footer Section Start -->
@@ -260,7 +258,7 @@
                             <a class="nav-link py-1" href="/timetable">Розклад сеансів</a>
                         </li>
                         <li>
-                            <a class="nav-link py-1" href="/soon">Скоро</a>
+                            <a class="nav-link py-1" href="/poster/soon">Скоро</a>
                         </li>
                         <li>
                             <a class="nav-link py-1" href="/cinemas">Кінотеатри</a>
