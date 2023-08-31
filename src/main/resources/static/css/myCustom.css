@@ -272,3 +272,7 @@ ul.nav.nav-tabs.nav-fill.mb-auto.flex-column {
 .hover-item label {
     margin-bottom: 0;
 }
+.socials img {
+    object-fit: contain;
+    width: min-content;
+}

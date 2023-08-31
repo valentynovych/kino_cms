@@ -203,6 +203,9 @@
                                    th:href="@{/page/{pageType}/{id}(pageType=${aboutPage.pageType}, id=${aboutPage.id})}"
                                    th:text="${aboutPage.title}"></a>
                             </li>
+                            <li>
+                                <a class="nav-link py-1" th:href="@{/contacts}">Контакти</a>
+                            </li>
                         </ul>
                     </li>
 
@@ -250,7 +253,7 @@
                 <span class="col mt-5">Розробка сайтів: <a href="https://avada-media.ua/ua/services/razrabotka-sajtov/"
                                                            target="_blank">AVADA MEDIA</a></span>
             </div>
-            <div class="footer-menu col-5 d-flex gap-3 justify-content-center">
+            <div class="footer-menu col-5 d-flex gap-3 justify-content-center mb-4">
                 <div class="">
                     <a class="nav-link h3" href="/poster"><span class="h4">Афіша</span></a>
                     <ul class="nav flex-sm-column">
@@ -279,20 +282,23 @@
                                th:href="@{/{pageType}/{id}(pageType=${aboutPage.pageType}, id=${aboutPage.id})}"
                                th:text="${aboutPage.title}"></a>
                         </li>
+                        <li>
+                            <a class="nav-link py-1" th:href="@{/contacts}">Контакти</a>
+                        </li>
                     </ul>
                 </div>
             </div>
             <div class="col-3 socials">
                 <ul>
                     <li class="nav-item me-4 d-flex align-self-end gap-2">
-                        <img src="/assets/images/brands/li.svg" alt="">
-                        <img src="/assets/images/brands/im.svg" alt="">
-                        <img src="/assets/images/brands/fb.svg" alt="">
-                        <img src="/assets/images/brands/gm.svg" alt="">
+                        <img src="/assets/images/brands/li.svg" alt="" width="40" height="40">
+                        <img src="/assets/images/brands/im.svg" alt="" width="40" height="40">
+                        <img src="/assets/images/brands/fb.svg" alt="" width="40" height="40">
+                        <img src="/assets/images/brands/gm.svg" alt="" width="40" height="40">
                     </li>
                 </ul>
             </div>
-            <div class="col d-flex justify-content-center">
+            <div class="col d-flex justify-content-center bg-light">
                 <span class="col-3">© KinoCMS 2016, All rights reserved</span>
             </div>
         </div>
