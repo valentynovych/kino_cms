@@ -29,4 +29,9 @@ public class FilmSessionService {
         }
         return filmSessionList;
     }
+
+    public List<FilmSession> getAllSessionByCinemaId(Long cinemaId) {
+        List<FilmSession> filmSessions = filmSessionRepo.getFilmSessionByCinema(cinemaId);
+        return filmSessions;
+    }
 }

@@ -12,4 +12,7 @@ import java.util.List;
 public interface FilmSessionRepo extends JpaRepository<FilmSession, Long> {
     @Query(value = "FROM FilmSession fs WHERE fs.film =:film")
     List<FilmSession> getFilmSessionByFilm(Film film);
+
+    @Query("FROM FilmSession fs WHERE fs.cinema.id =:cinemaId")
+    List<FilmSession> getFilmSessionByCinema(Long cinemaId);
 }

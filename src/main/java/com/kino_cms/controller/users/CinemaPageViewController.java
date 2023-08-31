@@ -1,0 +1,66 @@
+package com.kino_cms.controller.users;
+
+import com.kino_cms.dto.CinemaDTO;
+import com.kino_cms.dto.HallDTO;
+import com.kino_cms.entity.FilmSession;
+import com.kino_cms.service.CinemaService;
+import com.kino_cms.service.FilmSessionService;
+import com.kino_cms.service.HallService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
+import java.util.Optional;
+
+@Controller
+public class CinemaPageViewController {
+
+    @Autowired
+    CinemaService cinemaService;
+    @Autowired
+    HallService hallService;
+    @Autowired
+    FilmSessionService filmSessionService;
+
+    @GetMapping("/cinemas")
+    public ModelAndView viewAllCinemas(){
+        ModelAndView modelAndView = new ModelAndView("user_views/cinemas/allCinemaViewPage");
+        List<CinemaDTO> allCinemaDto = cinemaService.getAllCinemaDto();
+        modelAndView.addObject("allCinemaList", allCinemaDto);
+        return modelAndView;
+    }
+
+    @GetMapping("/cinema/{cinemaId}")
+    public ModelAndView viewCinema(@PathVariable Long cinemaId){
+        ModelAndView modelAndView = new ModelAndView("user_views/cinemas/cinemaViewPage");
+        CinemaDTO cinemaDto = cinemaService.getPresentCinemaDtoById(cinemaId);
+        modelAndView.addObject("cinemaDto", cinemaDto);
+
+        List<HallDTO> allHallByCinema = hallService.getAllHallByCinema(cinemaDto);
+        modelAndView.addObject("allHallByCinema", allHallByCinema);
+
+        List<FilmSession> allSessionByCinemaId = filmSessionService.getAllSessionByCinemaId(cinemaId);
+        modelAndView.addObject("allSessionByCinema", allSessionByCinemaId);
+
+        List<String> listImagesFileNameById = cinemaService.getListImagesFileNameById(cinemaId);
+        modelAndView.addObject("listImages", listImagesFileNameById);
+        return modelAndView;
+    }
+
+    @GetMapping("/hall/{hallId}")
+    public ModelAndView viewHall(@PathVariable Long hallId) {
+        ModelAndView modelAndView = new ModelAndView("user_views/cinemas/hallViewPage");
+        Optional<HallDTO> hallDtoById = hallService.getHallDtoById(hallId);
+        modelAndView.addObject("hallDTO", hallDtoById.get());
+
+        List<FilmSession> allSessionByCinemaId = filmSessionService.getAllSessionByCinemaId(hallId);
+        modelAndView.addObject("allSessionByCinema", allSessionByCinemaId);
+
+        List<String> listImagesFileNameById = hallService.getListImagesFileNameById(hallId);
+        modelAndView.addObject("listImages", listImagesFileNameById);
+        return modelAndView;
+    }
+}

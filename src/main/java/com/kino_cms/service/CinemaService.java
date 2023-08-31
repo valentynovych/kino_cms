@@ -43,6 +43,13 @@ public class CinemaService {
         return cinemaRepo.getCinemaDtoById(id);
     }
 
+    public CinemaDTO getPresentCinemaDtoById(Long id) {
+        Optional<CinemaDTO> cinemaDtoById = cinemaRepo.getCinemaDtoById(id);
+        CinemaDTO cinemaDTO;
+        cinemaDTO = cinemaDtoById.orElseGet(CinemaDTO::new);
+        return cinemaDTO;
+    }
+
     public void saveCinemaDto(CinemaDTO cinemaDTO) {
         Optional<Cinema> cinemaOptional = getCinemaById(cinemaDTO.getId());
         Cinema cinemaToSave;

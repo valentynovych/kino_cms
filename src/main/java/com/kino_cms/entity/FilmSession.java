@@ -28,4 +28,5 @@ public class FilmSession {
     private List<Ticket> ticketList;
     @Enumerated(EnumType.STRING)
     private FilmType filmType;
+    private String sessionName;
 }

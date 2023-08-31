@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title th:text="'Кінотеатр | ' + ${cinemaDto.name}"></title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
+
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="/assets/css/core/libs.min.css"/>
+
+
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="/assets/css/hope-ui.min.css?v=2.0.0"/>
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="/assets/css/custom.min.css?v=2.0.0"/>
+
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="/assets/css/dark.min.css"/>
+
+    <!-- Customizer Css -->
+    <link rel="stylesheet" href="/assets/css/customizer.min.css"/>
+
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
+    <link rel="stylesheet" href="/css/myCustom.css"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+</head>
+<body>
+<span class="screen-darken"></span>
+<!-- loader Start -->
+<div id="loading">
+    <div class="loader simple-loader">
+        <div class="loader-body"></div>
+    </div>
+</div>
+<!-- loader END -->
+<main class="main-content">
+    <!--Nav Start-->
+    <th:block th:insert="~{fragments/publicPage.html :: navFirstLevel}"></th:block>
+    <th:block th:insert="~{fragments/publicPage.html :: navSecondLevel}"></th:block>
+    <article class="top-image mb-3">
+        <figure>
+            <img th:src="@{/uploads/{firstBanner}(firstBanner=${cinemaDto.firstBanner})}" height="500">
+        </figure>
+    </article>
+    <!--Nav End-->
+    <div class="container-xl">
+        <article class="main-content-block">
+            <div class="main">
+                <div class="text-block d-flex" style="column-gap: 3rem; width: 100%">
+                    <aside class="sidebar-right">
+                        <th:block
+                                th:insert="~{fragments/publicPage.html :: context-advertising(heigth='400')}"></th:block>
+                        <div class="hall-list list-group">
+                            <div class="hall-count mb-2">
+                                <span class="h5" th:text="'Кількість залів : ' + ${allHallByCinema.size()}"></span>
+                            </div>
+                            <div class="list-group-item hover-item" th:each="hall : ${allHallByCinema}">
+                                <a th:href="@{/hall/{hallId}(hallId=${hall.id})}"> <label class="form-label"
+                                                                                          th:text="${hall.name}"></label></a>
+                            </div>
+                        </div>
+                        <div class="session-list list-group mt-3">
+                            <div class="sessions mb-2">
+                                <span class="h5" th:text="'Дивіться сьогодні:'"></span>
+                            </div>
+                            <div class="list-group-item hover-item" th:each="sessionItem : ${allSessionByCinema}">
+                                <a th:href="@{/session/{sessionId}(sessionId=${sessionItem.id})}"> <label
+                                        class="form-label"
+                                        th:text="${sessionItem.sessionName}"></label></a>
+                            </div>
+                            <a href="/timetable">
+                                <button class="btn btn-soft-success mt-4">Розклад всіх сеансів</button>
+                            </a>
+                        </div>
+                    </aside>
+                    <div style="width: 78%;" class="mt-4">
+                        <div class="cinema-header d-flex flex-row">
+                            <div class="col-5 cinema-logo me-4 d-flex flex-row justify-content-md-start gap-2">
+                                <label class="h4" th:text="${cinemaDto.name}"></label>
+                                <figure class="rounded-2">
+                                    <img th:src="@{/uploads/{logoImage}(logoImage=${cinemaDto.logoImage})}"
+                                         style="width:200px; height: 120px">
+                                </figure>
+                            </div>
+                            <div class="col-7 button-with-tags">
+                                <button class="btn btn-soft-success btn-lg">Розклад сеансів</button>
+                                <div class="tags-list d-flex gap-2 mt-3">
+                                    <span class="text-bg-success px-2 rounded-5">3D</span>
+                                    <span class="text-bg-success px-2 rounded-5">D-BOX</span>
+                                    <span class="text-bg-success px-2 rounded-5">DOLBY ATMOS</span>
+                                    <span class="text-bg-success px-2 rounded-5">VIP</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cinema-main">
+                            <div class="cinema-desc mt-3">
+                                <p th:utext="${cinemaDto.description}" style="text-indent: 20px"></p>
+                            </div>
+                            <div class="cinema-conditions mt-3">
+                                <div class="text-center">
+                                    <h4 th:text="'Умови кінотеатру'"></h4>
+                                </div>
+                                <div class="cinema-condition-text mt-3">
+                                    <p th:utext="${cinemaDto.conditions}"></p>
+                                </div>
+                            </div>
+                            <article class="slider-image mt-5">
+                                <div class="text-center">
+                                    <h3>Фотогалерея</h3>
+                                </div>
+                                <div id="imageSlider" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-indicators">
+                                        <button th:each="image, iter : ${listImages}" type="button"
+                                                data-bs-target="#carouselExampleCaptions" th:attr="data-bs-slide-to=${iter.index}"
+                                                th:class="${iter.index} == 0 ? 'active': ''"
+                                                th:attrappend="aria-label='Slide ' + ${iter.index}"></button>
+                                    </div>
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item" th:classappend="${iter.index} == 0 ? 'active' : ''"
+                                             th:each="image, iter : ${listImages}"
+                                             th:attr="data-bs-interval=(5 * 1000)">
+                                            <figure>
+                                                    <img class="bd-placeholder-img bd-placeholder-img-lg d-block"
+                                                         th:src="@{/uploads/{imageName}(imageName=${image})}">
+                                            </figure>
+                                        </div>
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#imageSlider"
+                                            data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#imageSlider"
+                                            data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+    <!-- Footer Section Start -->
+    <th:block th:insert="~{fragments/publicPage.html :: footer}"></th:block>
+    <!-- Footer Section End -->
+</main>
+<script>
+    $(document).ready(function () {
+        var images = $("img");
+        for (var i = 0; i < images.length; i++) {
+            if (!images[i].complete || images[i].naturalWidth === 0) {
+                images[i].src = "/image/placeholder_images.svg";
+            }
+        }
+    });
+</script>
+
+<!-- Library Bundle Script -->
+<script src="/assets/js/core/libs.min.js"></script>
+<!-- External Library Bundle Script -->
+<script src="/assets/js/core/external.min.js"></script>
+<!-- Widgetchart Script -->
+<script src="/assets/js/charts/widgetcharts.js"></script>
+<!-- mapchart Script -->
+<script src="/assets/js/charts/vectore-chart.js"></script>
+<script src="/assets/js/charts/dashboard.js"></script>
+<!-- fslightbox Script -->
+<script src="/assets/js/plugins/fslightbox.js"></script>
+<!-- Settings Script -->
+<script src="/assets/js/plugins/setting.js"></script>
+<!-- Slider-tab Script -->
+<script src="/assets/js/plugins/slider-tabs.js"></script>
+<!-- Form Wizard Script -->
+<script src="/assets/js/plugins/form-wizard.js"></script>
+
+<!-- AOS Animation Plugin-->
+
+<!-- App Script -->
+<script src="/assets/js/hope-ui.js" defer></script>
+
+</body>
+</html>

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Objects;
 
 @NoArgsConstructor
 @Data
@@ -15,7 +16,9 @@ public class Cinema {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Column(length = 3000)
     private String description;
+    @Column(length = 3000)
     private String conditions;
     private String logoImage;
     private String firstBanner;
