@@ -58,7 +58,7 @@ public class MailingPageController {
 
     @ResponseBody
     @PostMapping("/admin/mailing")
-    public void sendMails(@ModelAttribute MailingDTO mailingDTO) throws IOException {
+    public void sendMails(@ModelAttribute MailingDTO mailingDTO) throws IOException, InterruptedException {
         progress = 0.0;
         List<UserDTO> users = mailingDTO.getUserDTOS();
         int countUsersToSend = users.size();
@@ -73,12 +73,12 @@ public class MailingPageController {
             mailingDTO.setLastUsedTemplate(template.getOriginalFilename());
         }
         for (int i = 0; i < countUsersToSend; i++) {
-            progress = (i + 1) / (double) countUsersToSend * 100;
             String mailTo = users.get(i).getEmail();
-            mailSenderService.sendTemplate(mailTo, mailingDTO.getLastUsedTemplate());
+            //mailSenderService.sendTemplate(mailTo, mailingDTO.getLastUsedTemplate());
+            Thread.sleep(1000);
+            progress = (i + 1) / (double) countUsersToSend * 100;
             allCountMails++;
         }
-        progress = 100.0;
 
         mailingDTO.setCountMails(allCountMails);
         mailingService.saveMailingEntity(mailingDTO);
@@ -98,7 +98,8 @@ public class MailingPageController {
         return "redirect:/admin/mailing";
     }
     @GetMapping("/admin/progress")
-    public ResponseEntity<Double> getProgress(){
+    public ResponseEntity<Double> getProgress() throws InterruptedException {
+        Thread.sleep(300);
         return ResponseEntity.ok(progress);
     }
 }
