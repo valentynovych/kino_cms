@@ -34,4 +34,19 @@ public class FilmSessionService {
         List<FilmSession> filmSessions = filmSessionRepo.getFilmSessionByCinema(cinemaId);
         return filmSessions;
     }
+
+    public List<FilmSession> getAllSession() {
+        List<FilmSession> filmSessionList = filmSessionRepo.findAll();
+        return filmSessionList;
+    }
+
+    public FilmSession getSessionById(Long sessionId) {
+        Optional<FilmSession> sessionById = filmSessionRepo.findById(sessionId);
+        if (sessionById.isPresent()) {
+            return sessionById.get();
+        } else {
+            return new FilmSession();
+        }
+
+    }
 }

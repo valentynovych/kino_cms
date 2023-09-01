@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Розклад сеансів</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
+
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="/assets/css/core/libs.min.css"/>
+
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="/assets/css/hope-ui.min.css?v=2.0.0"/>
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="/assets/css/custom.min.css?v=2.0.0"/>
+
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="/assets/css/dark.min.css"/>
+
+    <!-- Customizer Css -->
+    <link rel="stylesheet" href="/assets/css/customizer.min.css"/>
+
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
+    <link rel="stylesheet" href="/css/myCustom.css"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+</head>
+<body>
+<span class="screen-darken"></span>
+<!-- loader Start -->
+<div id="loading">
+    <div class="loader simple-loader">
+        <div class="loader-body"></div>
+    </div>
+</div>
+<!-- loader END -->
+<main class="main-content">
+    <!--Nav Start-->
+    <th:block th:insert="~{fragments/publicPage.html :: navFirstLevel}"></th:block>
+    <th:block th:insert="~{fragments/publicPage.html :: navSecondLevel}"></th:block>
+    <!--Nav End-->
+    <div class="container-xl">
+        <article class="main-content-block">
+            <div class="main">
+                <div class="text-block d-flex" style="column-gap: 3rem; width: 100%">
+                    <div style="width: 78%;" class="mt-4">
+                        <div class="filters d-flex flex-row align-items-center">
+                            <label class="form-label pe-2">Показати тільки: </label>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input">
+                                <label class="form-check-label">3D</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input">
+                                <label class="form-check-label">DBOX</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="form-check-input">
+                                <label class="form-check-label">VIP</label>
+                            </div>
+                            <div class="selectors form-check-inline d-flex flex-row gap-2">
+                                <div class="select-wrap">
+                                    <select class="form-select">
+                                        <option selected="">Кінотеатр</option>
+                                    </select>
+                                </div>
+                                <div class="select-wrap">
+                                    <select class="form-select">
+                                        <option selected="">Дата</option>
+                                    </select>
+                                </div>
+                                <div class="select-wrap">
+                                    <select class="form-select">
+                                        <option selected="">Фільм: всі</option>
+                                    </select>
+                                </div>
+                                <div class="select-wrap">
+                                    <select class="form-select">
+                                        <option selected="">Зал: всі</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="session-list mt-4">
+                            <div>
+                                <table class="table table-striped table-sm table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <td>Час</td>
+                                        <td>Фільм</td>
+                                        <td>Зал</td>
+                                        <td>Ціна в грн.</td>
+                                        <td><span class="text-danger">Бронювати</span></td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="sessionItem : ${listSessions}">
+                                        <td th:text="${sessionItem.dateTime.hour} + ':' + ${sessionItem.dateTime.minute}"></td>
+                                        <td th:text="${sessionItem.film.name}"></td>
+                                        <td th:text="${sessionItem.hall.name}"></td>
+                                        <td th:text="${sessionItem.price}"></td>
+                                        <td><a th:href="@{/session/{sessionId}(sessionId=${sessionItem.id})}">></a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="session-list mt-4">
+                            <div>
+                                <table class="table table-striped table-sm table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <td>Час</td>
+                                        <td>Фільм</td>
+                                        <td>Зал</td>
+                                        <td>Ціна в грн.</td>
+                                        <td><span class="text-danger">Бронювати</span></td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="sessionItem : ${listSessions}">
+                                        <td th:text="${sessionItem.dateTime.hour} + ':' + ${sessionItem.dateTime.minute}"></td>
+                                        <td th:text="${sessionItem.film.name}"></td>
+                                        <td th:text="${sessionItem.hall.name}"></td>
+                                        <td th:text="${sessionItem.price}"></td>
+                                        <td><a th:href="@{/session/{sessionId}(sessionId=${sessionItem.id})}">></a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="sidebar-right mt-3">
+                        <th:block
+                                th:insert="~{fragments/publicPage.html :: context-advertising(heigth='200')}"></th:block>
+                        <th:block
+                                th:insert="~{fragments/publicPage.html :: context-advertising(heigth='400')}"></th:block>
+                    </aside>
+                </div>
+            </div>
+        </article>
+    </div>
+    <!-- Footer Section Start -->
+    <th:block th:insert="~{fragments/publicPage.html :: footer}"></th:block>
+    <!-- Footer Section End -->
+</main>
+<script>
+    $(document).ready(function () {
+        var images = $("img");
+        for (var i = 0; i < images.length; i++) {
+            if (!images[i].complete || images[i].naturalWidth === 0) {
+                images[i].src = "/image/placeholder_images.svg";
+            }
+        }
+    });
+</script>
+
+<!-- Library Bundle Script -->
+<script src="/assets/js/core/libs.min.js"></script>
+<!-- External Library Bundle Script -->
+<script src="/assets/js/core/external.min.js"></script>
+<!-- Widgetchart Script -->
+<script src="/assets/js/charts/widgetcharts.js"></script>
+<!-- mapchart Script -->
+<script src="/assets/js/charts/vectore-chart.js"></script>
+<script src="/assets/js/charts/dashboard.js"></script>
+<!-- fslightbox Script -->
+<script src="/assets/js/plugins/fslightbox.js"></script>
+<!-- Settings Script -->
+<script src="/assets/js/plugins/setting.js"></script>
+<!-- Slider-tab Script -->
+<script src="/assets/js/plugins/slider-tabs.js"></script>
+<!-- Form Wizard Script -->
+<script src="/assets/js/plugins/form-wizard.js"></script>
+
+<!-- AOS Animation Plugin-->
+
+<!-- App Script -->
+<script src="/assets/js/hope-ui.js" defer></script>
+
+</body>
+</html>

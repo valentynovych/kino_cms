@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title th:text="${filmSession.sessionName}"></title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
+
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="/assets/css/core/libs.min.css"/>
+
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="/assets/css/hope-ui.min.css?v=2.0.0"/>
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="/assets/css/custom.min.css?v=2.0.0"/>
+
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="/assets/css/dark.min.css"/>
+
+    <!-- Customizer Css -->
+    <link rel="stylesheet" href="/assets/css/customizer.min.css"/>
+
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
+    <link rel="stylesheet" href="/css/myCustom.css"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+</head>
+<body>
+<span class="screen-darken"></span>
+<!-- loader Start -->
+<div id="loading">
+    <div class="loader simple-loader">
+        <div class="loader-body"></div>
+    </div>
+</div>
+<!-- loader END -->
+<main class="main-content">
+    <!--Nav Start-->
+    <th:block th:insert="~{fragments/publicPage.html :: navFirstLevel}"></th:block>
+    <th:block th:insert="~{fragments/publicPage.html :: navSecondLevel}"></th:block>
+    <!--Nav End-->
+    <th:block class="mb-3">
+        <img th:src="@{/uploads/{hallImage}(hallImage=${filmSession.hall.firstBanner})}" height="450">
+    </th:block>
+    <div class="container-xl">
+        <article class="main-content-block">
+            <div class="main">
+                <div class="text-block d-flex" style="column-gap: 3rem; width: 100%">
+                    <aside class="sidebar-right">
+                        <div class="film-logo my-3">
+                            <img th:src="@{/uploads/{filmLogo}(filmLogo=${filmSession.film.mainImage})}" height="400">
+                        </div>
+                        <th:block
+                                th:insert="~{fragments/publicPage.html :: context-advertising(heigth='400')}"></th:block>
+                    </aside>
+                    <div style="width: 78%;" class="mt-4">
+                        <div class="session-main">
+                            <div class="session-header mt-2 d-flex justify-content-start flex-column flex-wrap align-content-start">
+                                <h3 class="bg-danger px-2 text-white " th:text="${filmSession.film.name}"></h3>
+                                <span class="mt-2" th:text="${filmSession.dateTime.dayOfMonth} + ' '
+                                                + ${filmSession.dateTime.month.name()} + ', '
+                                                + ${filmSession.dateTime.hour} + ':'
+                                                + ${filmSession.dateTime.minute} + ', '
+                                                + ${filmSession.hall.name}"></span>
+                            </div>
+                            <div class="session-details d-flex justify-content-between mt-3">
+                                <div>
+                                    <span>Ціна в грн.:</span>
+                                    <span class="me-2 text-bg-warning p-1" th:text="${filmSession.price}"></span>
+                                </div>
+                                <div class="d-flex flex-row col-7 justify-content-between">
+                                    <div class="d-flex flex-row gap-2">
+                                        <span>Заброньовано:</span>
+                                        <span class="bg-gray">
+                                        <svg class="icon-32" width="32" viewBox="0 0 24 24" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                  d="M17.857 20.417C19.73 20.417 21.249 18.899 21.25 17.026V17.024V14.324C20.013 14.324 19.011 13.322 19.01 12.085C19.01 10.849 20.012 9.846 21.249 9.846H21.25V7.146C21.252 5.272 19.735 3.752 17.862 3.75H17.856H6.144C4.27 3.75 2.751 5.268 2.75 7.142V7.143V9.933C3.944 9.891 4.945 10.825 4.987 12.019C4.988 12.041 4.989 12.063 4.989 12.085C4.99 13.32 3.991 14.322 2.756 14.324H2.75V17.024C2.749 18.897 4.268 20.417 6.141 20.417H6.142H17.857Z"
+                                                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                                  stroke-linejoin="round"></path>
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                  d="M12.3711 9.06303L12.9871 10.31C13.0471 10.432 13.1631 10.517 13.2981 10.537L14.6751 10.738C15.0161 10.788 15.1511 11.206 14.9051 11.445L13.9091 12.415C13.8111 12.51 13.7671 12.647 13.7891 12.782L14.0241 14.152C14.0821 14.491 13.7271 14.749 13.4231 14.589L12.1921 13.942C12.0711 13.878 11.9271 13.878 11.8061 13.942L10.5761 14.589C10.2711 14.749 9.91609 14.491 9.97409 14.152L10.2091 12.782C10.2321 12.647 10.1871 12.51 10.0891 12.415L9.09409 11.445C8.84809 11.206 8.98309 10.788 9.32309 10.738L10.7001 10.537C10.8351 10.517 10.9521 10.432 11.0121 10.31L11.6271 9.06303C11.7791 8.75503 12.2191 8.75503 12.3711 9.06303Z"
+                                                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                                  stroke-linejoin="round"></path>
+                                        </svg>
+                                            </span>
+                                    </div>
+                                    <div class="session-counts border-info d-flex flex-row gap-5">
+                                        <span>Білетів: 0</span>
+                                        <span>Сума: 0 грн</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hall-schema mt-3">
+                                <div class="text-center">
+                                    <h4 th:text="'Карта залу'"></h4>
+                                </div>
+                                <div class="cinema-condition-text mt-5">
+                                    <figure>
+                                        <img th:src="@{/uploads/{schema}(schema=${filmSession.hall.hallSchema})}">
+                                    </figure>
+                                </div>
+                            </div>
+                            <div class="info mt-3 d-flex flex-column">
+                                <span>Вартість послуги бронювання - 3 грн. за кожне місце</span>
+                                <span class="text-uppercase mt-2">Заброньовані білети потрібно викупити в касі кінотеатру не пізніше ніж за годину до початку сеансу.</span>
+                                <div class="d-flex flex-row justify-content-center mt-2 gap-3">
+                                    <button class="btn btn-outline-secondary col-2">Забронювати</button>
+                                    <button class="btn btn-soft-success col-2">Купити</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+    <!-- Footer Section Start -->
+    <th:block th:insert="~{fragments/publicPage.html :: footer}"></th:block>
+    <!-- Footer Section End -->
+</main>
+<script>
+    $(document).ready(function () {
+        var images = $("img");
+        for (var i = 0; i < images.length; i++) {
+            if (!images[i].complete || images[i].naturalWidth === 0) {
+                images[i].src = "/image/placeholder_images.svg";
+            }
+        }
+    });
+</script>
+
+<!-- Library Bundle Script -->
+<script src="/assets/js/core/libs.min.js"></script>
+<!-- External Library Bundle Script -->
+<script src="/assets/js/core/external.min.js"></script>
+<!-- Widgetchart Script -->
+<script src="/assets/js/charts/widgetcharts.js"></script>
+<!-- mapchart Script -->
+<script src="/assets/js/charts/vectore-chart.js"></script>
+<script src="/assets/js/charts/dashboard.js"></script>
+<!-- fslightbox Script -->
+<script src="/assets/js/plugins/fslightbox.js"></script>
+<!-- Settings Script -->
+<script src="/assets/js/plugins/setting.js"></script>
+<!-- Slider-tab Script -->
+<script src="/assets/js/plugins/slider-tabs.js"></script>
+<!-- Form Wizard Script -->
+<script src="/assets/js/plugins/form-wizard.js"></script>
+
+<!-- App Script -->
+<script src="/assets/js/hope-ui.js" defer></script>
+
+</body>
+</html>

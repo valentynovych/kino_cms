@@ -276,3 +276,17 @@ ul.nav.nav-tabs.nav-fill.mb-auto.flex-column {
     object-fit: contain;
     width: min-content;
 }
+
+.select-wrap {
+    width: fit-content;
+}
+
+.session-list .table {
+    overflow: hidden;
+    border-style: groove;
+    border-color: antiquewhite;
+    text-align: center;
+}
+.session-list tbody tr:hover {
+    background-color: antiquewhite;
+}
