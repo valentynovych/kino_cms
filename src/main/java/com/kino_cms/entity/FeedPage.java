@@ -20,6 +20,7 @@ public class FeedPage {
     @Column(name = "feed_type")
     private FeedType feedType;
     private String title;
+    @Column(length = 2000)
     private String description;
     private Date publishDate;
     private String mainImage;

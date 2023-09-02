@@ -7,7 +7,6 @@ import com.kino_cms.repository.FeedPageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +17,6 @@ public class FeedPageService {
     FeedPageRepo feedPageRepo;
     @Autowired
     SaveUploadService uploadService;
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public Optional<FeedPage> getFeedPageById(Long id) {
         return feedPageRepo.findById(id);
@@ -75,6 +73,7 @@ public class FeedPageService {
         List<FeedDTO> allFeedDTO = feedPageRepo.getAllFeedDTOByTypeFeed();
         return allFeedDTO;
     }
+
     public List<FeedDTO> getAllFeedDTOByFeedTypePromotion() {
         List<FeedDTO> allFeedDTO = feedPageRepo.getAllFeedDTOByTypePromotion();
         return allFeedDTO;

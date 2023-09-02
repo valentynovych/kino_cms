@@ -62,7 +62,7 @@
                                 <span class="h5" th:text="'Кількість залів : ' + ${allHallByCinema.size()}"></span>
                             </div>
                             <div class="list-group-item hover-item" th:each="hall : ${allHallByCinema}">
-                                <a th:href="@{/hall/{hallId}(hallId=${hall.id})}"> <label class="form-label"
+                                <a th:href="@{/cinemas/hall/{hallId}(hallId=${hall.id})}"> <label class="form-label"
                                                                                           th:text="${hall.name}"></label></a>
                             </div>
                         </div>

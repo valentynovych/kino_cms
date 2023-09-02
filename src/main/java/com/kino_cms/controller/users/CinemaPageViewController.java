@@ -6,26 +6,26 @@ import com.kino_cms.entity.FilmSession;
 import com.kino_cms.service.CinemaService;
 import com.kino_cms.service.FilmSessionService;
 import com.kino_cms.service.HallService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
 
 @Controller
+@RequiredArgsConstructor
+@RequestMapping("cinemas")
 public class CinemaPageViewController {
 
-    @Autowired
-    CinemaService cinemaService;
-    @Autowired
-    HallService hallService;
-    @Autowired
-    FilmSessionService filmSessionService;
+    private final CinemaService cinemaService;
+    private final HallService hallService;
+    private final FilmSessionService filmSessionService;
 
-    @GetMapping("/cinemas")
+    @GetMapping("")
     public ModelAndView viewAllCinemas(){
         ModelAndView modelAndView = new ModelAndView("user_views/cinemas/allCinemaViewPage");
         List<CinemaDTO> allCinemaDto = cinemaService.getAllCinemaDto();
@@ -33,7 +33,7 @@ public class CinemaPageViewController {
         return modelAndView;
     }
 
-    @GetMapping("/cinema/{cinemaId}")
+    @GetMapping("{cinemaId}")
     public ModelAndView viewCinema(@PathVariable Long cinemaId){
         ModelAndView modelAndView = new ModelAndView("user_views/cinemas/cinemaViewPage");
         CinemaDTO cinemaDto = cinemaService.getPresentCinemaDtoById(cinemaId);
@@ -50,7 +50,7 @@ public class CinemaPageViewController {
         return modelAndView;
     }
 
-    @GetMapping("/hall/{hallId}")
+    @GetMapping("hall/{hallId}")
     public ModelAndView viewHall(@PathVariable Long hallId) {
         ModelAndView modelAndView = new ModelAndView("user_views/cinemas/hallViewPage");
         Optional<HallDTO> hallDtoById = hallService.getHallDtoById(hallId);
