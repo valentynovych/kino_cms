@@ -12,6 +12,7 @@ import java.sql.Date;
 public class UserDTO {
     private Long id;
     private String username;
+    private String password;
     private String email;
     private String createTime;
     private String firstName;
@@ -28,6 +29,26 @@ public class UserDTO {
     private Boolean forMailing;
 
     public UserDTO() {
+    }
+
+    public UserDTO(Long id, String username, String password, String email, String createTime,
+                   String firstName, String lastName, String address,
+                   String cardNumber, String sex, String phone, Date dateOfBirth,
+                   City city, Language language) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.createTime = createTime;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.cardNumber = cardNumber;
+        this.sex = sex;
+        this.phone = phone;
+        this.dateOfBirth = dateOfBirth;
+        this.city = city;
+        this.language = language;
     }
 
     public UserDTO(Long id, String username, String email, String createTime,
