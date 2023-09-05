@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class ContactPage implements Page {
+public class ContactPage extends Page {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

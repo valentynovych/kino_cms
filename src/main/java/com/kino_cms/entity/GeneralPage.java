@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class GeneralPage implements Page {
+public class GeneralPage extends Page {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

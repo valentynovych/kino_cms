@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class HomePage implements Page {
+public class HomePage extends Page {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

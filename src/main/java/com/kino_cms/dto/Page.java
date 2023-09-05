@@ -6,11 +6,11 @@ import jakarta.persistence.Enumerated;
 
 import java.sql.Timestamp;
 
-public interface Page {
-    Long id = null;
-    String title = null;
-    Timestamp createTime = null;
-    Boolean isActive = null;
+public abstract class Page {
+    private Long id;
+    private String title;
+    private Timestamp createTime ;
+    private Boolean isActive;
     @Enumerated(EnumType.STRING)
-    PageType pageType = null;
+    private PageType pageType;
 }
