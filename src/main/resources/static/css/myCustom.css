@@ -290,3 +290,7 @@ ul.nav.nav-tabs.nav-fill.mb-auto.flex-column {
 .session-list tbody tr:hover {
     background-color: antiquewhite;
 }
+
+.dual-horizontal {
+    z-index: 888 !important;
+}

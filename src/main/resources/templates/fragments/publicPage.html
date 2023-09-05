@@ -90,14 +90,14 @@
                            th:text="${phone_other}"></a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="search-toggle nav-link" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                        <a href="#" class="search-toggle nav-link" id="languages" data-bs-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <img src="/assets/images/Flag/icons8-ukraine-96.png" class="img-fluid rounded-circle"
                                  alt="user"
                                  style="height: 30px; min-width: 30px; width: 30px;">
                             <span class="bg-primary"></span>
                         </a>
-                        <div class="sub-drop dropdown-menu dropdown-menu-end p-0" aria-labelledby="dropdownMenuButton2">
+                        <div class="sub-drop dropdown-menu dropdown-menu-end p-0" aria-labelledby="languages" style="width: fit-content">
                             <div class="card shadow-none m-0 border-0">
                                 <div class="p-0">
                                     <ul class="list-group list-group-flush p-0 ">
@@ -115,17 +115,24 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link py-0 d-flex align-items-center" href="#" id="navbarDropdown" role="button"
+                        <a class="nav-link py-0 d-flex align-items-center dropdown-toggle" href="#" id="userMenu" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="/assets/images/avatars/01.png" alt="User-Profile"
                                  class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
                             <div class="caption ms-3 d-none d-md-block ">
-                                <h6 class="mb-0 caption-title">User</h6>
-                                <p class="mb-0 caption-sub-title">Role</p>
+                                <th:block th:if="${#ctx.session.SPRING_SECURITY_CONTEXT}">
+                                    <h6 class="mb-0 caption-title"
+                                        th:text="${session.SPRING_SECURITY_CONTEXT.authentication.name}">User</h6>
+                                </th:block>
+                                <th:block th:unless="${#ctx.session.SPRING_SECURITY_CONTEXT}">
+                                    <h6 class="mb-0 caption-title">Увійти</h6>
+                                </th:block>
                             </div>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/sign-in.html">Logout</a></li>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                            <li><a class="dropdown-item" href="/profile">Профіль</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/logout">Вийти</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -216,7 +223,8 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="pages">
                             <li th:each="page : ${other_pages}">
-                                <a class="dropdown-item" th:href="@{/page/{pageType}/{id}(id=${page.id}, pageType=${page.pageType})}"
+                                <a class="dropdown-item"
+                                   th:href="@{/page/{pageType}/{id}(id=${page.id}, pageType=${page.pageType})}"
                                    th:text="${page.title}"></a>
                             </li>
                         </ul>

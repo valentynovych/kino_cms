@@ -1,7 +1,6 @@
 <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
     <div class="container-fluid navbar-inner">
-        <a href="#" class="navbar-brand">
-
+        <a href="/" class="navbar-brand">
             <h4 class="logo-title">Kino CMS</h4>
         </a>
         <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
@@ -31,16 +30,16 @@
                     </a>
                     <div class="p-0 sub-drop dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton2">
                         <div class="m-0 border-0 shadow-none card">
-                            <div class="p-0 ">
-                                <ul class="p-0 list-group list-group-flush">
+                            <div class="p-0">
+                                <ul class="list-group list-group-flush p-0 ">
                                     <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
-                                            src="/assets/images/Flag/flag-03.png" alt="img-flaf"
-                                            class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>Spanish</a>
-                                    </li>
+                                            src="/assets/images/Flag/icons8-ukraine-96.png" alt="img-flaf"
+                                            class="img-fluid me-2"
+                                            style="width: 15px;height: 15px;min-width: 15px;">Українська</a></li>
                                     <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
-                                            src="/assets/images/Flag/flag-04.png" alt="img-flaf"
-                                            class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>Italian</a>
-                                    </li>
+                                            src="/assets/images/Flag/flag-01.png" alt="img-flaf"
+                                            class="img-fluid me-2"
+                                            style="width: 15px;height: 15px;min-width: 15px;">Англійська</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -53,13 +52,12 @@
                         <img src="/assets/images/avatars/01.png" alt="User-Profile"
                              class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
                         <div class="caption ms-3 d-none d-md-block ">
-                            <h6 class="mb-0 caption-title">Austin Robertson</h6>
-                            <p class="mb-0 caption-sub-title">Marketing Administrator</p>
+                            <h6 class="mb-0 caption-title" th:text="${session.SPRING_SECURITY_CONTEXT.authentication.name}">Austin Robertson</h6>
+                            <p class="mb-0 caption-sub-title" th:text="${session.SPRING_SECURITY_CONTEXT.authentication.authorities}">Marketing Administrator</p>
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                        <li><a class="dropdown-item" href="/logout">Вийти</a></li>
                     </ul>
                 </li>
             </ul>
