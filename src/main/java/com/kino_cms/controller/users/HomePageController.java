@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Controller
@@ -33,9 +34,9 @@ public class HomePageController {
     FilmService filmService;
 
     @GetMapping("/")
-    public String viewHomePage(Model model) {
+    public String viewHomePage(Model model, Locale locale) {
 
-        Optional<HomePage> homePageById = homePageService.getHomePageById(2L);
+        Optional<HomePage> homePageById = homePageService.getHomePageByLocale(locale);
         if (homePageById.isPresent()) {
             model.addAttribute("homePage", homePageById.get());
         }
@@ -62,35 +63,5 @@ public class HomePageController {
         return "user_views/homePageView";
     }
 
-    @ModelAttribute("phone_main")
-    public String getPhoneName() {
-        Optional<HomePage> homePageById = homePageService.getHomePageById(2L);
-        if (homePageById.isPresent()) {
-            return homePageById.get().getPhone_main();
-        } else {
-            return "";
-        }
-    }
 
-    @ModelAttribute("phone_other")
-    public String getPhoneOther() {
-        Optional<HomePage> homePageById = homePageService.getHomePageById(2L);
-        if (homePageById.isPresent()) {
-            return homePageById.get().getPhone_other();
-        } else {
-            return "";
-        }
-    }
-
-    @ModelAttribute("other_pages")
-    public List<GeneralPageDTO> getOtherPages() {
-        List<GeneralPageDTO> pages = generalPageService.getAllOtherPages();
-        return pages;
-    }
-
-    @ModelAttribute("list_about_pages")
-    public List<GeneralPage> getListAboutPages() {
-        List<GeneralPage> allUkPageByPageTypeForMenu = generalPageService.getAllUkPageByPageTypeForMenu();
-        return allUkPageByPageTypeForMenu;
-    }
 }

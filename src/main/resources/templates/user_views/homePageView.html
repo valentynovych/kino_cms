@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Kino CMS | Головна</title>
 
@@ -31,8 +31,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 </head>
-<body th:style="${perforatingBanner.isActivate} ?
-'background: url(/uploads/' + ${perforatingBanner.bannerImages[0].image} + ') repeat-y fixed;'">
+<body th:style="${perforatingBanner.isActivate} ? 'background: url(/uploads/' + ${perforatingBanner.bannerImages[0].image} + ') repeat-y fixed;'">
 <span class="screen-darken"></span>
 <!-- loader Start -->
 <div id="loading">
@@ -85,7 +84,7 @@
         <article class="film-list-block">
             <div class="col my-4">
                 <div class="col-11 d-flex justify-content-center align-items-center bg-light w-100 p-0">
-                    <span class="h3 p-2 ">Показують сьогодні</span>
+                    <span class="h3 p-2" th:text="#{views-today}"></span>
                     <span class="tomorrow h5 text-blue mt-1"></span>
                 </div>
             </div>
@@ -95,16 +94,16 @@
                         <figure class="film-item-img m-0">
                             <a th:href="@{/film/{id}(id=*{film.id})}">
                                 <img th:src="@{/uploads/{logoImage}(logoImage=*{film.mainImage})}"
-                                     class="figure-img img-fluid rounded" loading="eager" alt="file"> </a>
+                                     class="figure-img img-fluid rounded" loading="eager" alt="file"></a>
                         </figure>
                     </div>
                     <p th:text="*{film.name}"></p>
-                    <button class="btn btn-sm btn-soft-success mt-1">Купити білет</button>
+                    <button class="btn btn-sm btn-soft-success mt-1" th:text="#{buy-ticket}"></button>
                 </div>
             </div>
             <div class="col my-4">
                 <div class="col d-flex justify-content-center text-bg-light  w-100">
-                    <span class="h3 p-2">Скоро в прокаті</span>
+                    <span class="h3 p-2" th:text="#{view-soon}"></span>
                 </div>
             </div>
             <div class="mx-auto film-list-show">
@@ -113,7 +112,7 @@
                         <figure class="film-item-img m-0">
                             <a th:href="@{/film/{id}(id=*{film.id})}">
                                 <img th:src="@{/uploads/{logoImage}(logoImage=*{film.mainImage})}"
-                                     class="figure-img img-fluid rounded" loading="eager" alt="file"> </a>
+                                     class="figure-img img-fluid rounded" loading="eager" alt="file"></a>
                         </figure>
                     </div>
                     <p th:text="*{film.name}"></p>
@@ -122,7 +121,7 @@
             </div>
         </article>
         <article class="slider-image mt-5">
-            <h3 class="col-3 mx-auto my-4 ">Новини та Акції</h3>
+            <h3 class="col-3 mx-auto my-4 " th:text="#{feed-and-promotion}">Новини та Акції</h3>
             <div id="carouselCaptions" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <button th:each="images, iter : ${promotionBanner.bannerImages}" type="button"
@@ -161,7 +160,7 @@
             <th:block th:insert="~{fragments/publicPage.html :: context-advertising(heigth='200')}"></th:block>
         </div>
         <div class="col seo-text-block my-3 d-flex flex-column align-items-center">
-            <span class="h4 col-2">СЕО текст</span>
+            <span class="h4 col-2" th:text="#{seo-text}"></span>
             <p class="col-12 p-4" th:text="${homePage.seoText}"></p>
         </div>
     </div>
@@ -185,6 +184,14 @@
         return new Date().toISOString().slice(0, 10);
     });
 
+</script>
+<script>
+    $(document).ready(function () {
+        $(".lang-tab").click(function(event) {
+                var param = $(this).attr("href");
+                //window.location.replace(window.location.href + param);
+            });
+    });
 </script>
 <!-- Library Bundle Script -->
 <script src="/assets/js/core/libs.min.js"></script>

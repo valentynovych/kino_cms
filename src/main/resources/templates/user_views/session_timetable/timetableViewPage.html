@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Розклад сеансів</title>
+    <title th:text="#{title-timetable}">Розклад сеансів</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
@@ -50,7 +50,7 @@
                 <div class="text-block d-flex" style="column-gap: 3rem; width: 100%">
                     <div style="width: 78%;" class="mt-4">
                         <div class="filters d-flex flex-row align-items-center">
-                            <label class="form-label pe-2">Показати тільки: </label>
+                            <label class="form-label pe-2" th:text="#{show-filters} + ' '">Показати тільки: </label>
                             <div class="form-check form-check-inline">
                                 <input type="checkbox" class="form-check-input">
                                 <label class="form-check-label">3D</label>
@@ -66,22 +66,22 @@
                             <div class="selectors form-check-inline d-flex flex-row gap-2">
                                 <div class="select-wrap">
                                     <select class="form-select">
-                                        <option selected="">Кінотеатр</option>
+                                        <option selected="" th:text="#{cinema}">Кінотеатр</option>
                                     </select>
                                 </div>
                                 <div class="select-wrap">
                                     <select class="form-select">
-                                        <option selected="">Дата</option>
+                                        <option selected="" th:text="#{date}">Дата</option>
                                     </select>
                                 </div>
                                 <div class="select-wrap">
                                     <select class="form-select">
-                                        <option selected="">Фільм: всі</option>
+                                        <option selected="" th:text="#{film}">Фільм: всі</option>
                                     </select>
                                 </div>
                                 <div class="select-wrap">
                                     <select class="form-select">
-                                        <option selected="">Зал: всі</option>
+                                        <option selected="" th:text="#{hall}">Зал: всі</option>
                                     </select>
                                 </div>
                             </div>
@@ -91,11 +91,11 @@
                                 <table class="table table-striped table-sm table-bordered">
                                     <thead>
                                     <tr>
-                                        <td>Час</td>
-                                        <td>Фільм</td>
-                                        <td>Зал</td>
-                                        <td>Ціна в грн.</td>
-                                        <td><span class="text-danger">Бронювати</span></td>
+                                        <td th:text="#{label-time}">Час</td>
+                                        <td th:text="#{label-film}">Фільм</td>
+                                        <td th:text="#{label-hall}">Зал</td>
+                                        <td th:text="#{label-price}">Ціна в грн.</td>
+                                        <td><span class="text-danger" th:text="#{label-book-ticket}">Бронювати</span></td>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -115,11 +115,11 @@
                                 <table class="table table-striped table-sm table-bordered">
                                     <thead>
                                     <tr>
-                                        <td>Час</td>
-                                        <td>Фільм</td>
-                                        <td>Зал</td>
-                                        <td>Ціна в грн.</td>
-                                        <td><span class="text-danger">Бронювати</span></td>
+                                        <td th:text="#{label-time}">Час</td>
+                                        <td th:text="#{label-film}">Фільм</td>
+                                        <td th:text="#{label-hall}">Зал</td>
+                                        <td th:text="#{label-price}">Ціна в грн.</td>
+                                        <td><span class="text-danger" th:text="#{label-book-ticket}">Бронювати</span></td>
                                     </tr>
                                     </thead>
                                     <tbody>

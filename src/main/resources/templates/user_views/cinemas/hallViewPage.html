@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title th:text="'Зал | ' + ${hallDTO.name}"></title>
+    <title th:text="#{hall} + ' | ' + ${hallDTO.name}"></title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
@@ -58,7 +58,7 @@
                                 th:insert="~{fragments/publicPage.html :: context-advertising(heigth='400')}"></th:block>
                         <div class="session-list list-group mt-3">
                             <div class="sessions mb-2">
-                                <span class="h5" th:text="'Дивіться сьогодні:'"></span>
+                                <span class="h5" th:text="#{views-today} + ':'"></span>
                             </div>
                             <div class="list-group-item hover-item" th:each="sessionItem : ${allSessionByCinema}">
                                 <a th:href="@{/session/{sessionId}(sessionId=${sessionItem.id})}"> <label
@@ -67,7 +67,7 @@
                                 </a>
                             </div>
                             <a href="/timetable">
-                                <button class="btn btn-soft-success mt-4">Розклад всіх сеансів</button>
+                                <button class="btn btn-soft-success mt-4" th:text="#{schedule-all-session}">Розклад всіх сеансів</button>
                             </a>
                         </div>
                     </aside>
@@ -81,7 +81,7 @@
                             </div>
                             <div class="hall-schema mt-3">
                                 <div class="text-center">
-                                    <h4 th:text="'Карта залу'"></h4>
+                                    <h4 th:text="#{label-hall-schema}"></h4>
                                 </div>
                                 <div class="cinema-condition-text mt-3">
                                     <figure>
@@ -90,8 +90,8 @@
                                 </div>
                             </div>
                             <article class="slider-image mt-5">
-                                <div class="text-center">
-                                    <h3>Фотогалерея</h3>
+                                <div class="text-center my-3">
+                                    <h3 th:text="#{media-gallery}">Фотогалерея</h3>
                                 </div>
                                 <div id="imageSlider" class="carousel slide" data-bs-ride="carousel">
                                     <div class="carousel-indicators">

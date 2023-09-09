@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title th:text="'Кінотеатр | ' + ${cinemaDto.name}"></title>
+    <title th:text="#{cinema} + ' | ' + ${cinemaDto.name}"></title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
@@ -59,16 +59,16 @@
                                 th:insert="~{fragments/publicPage.html :: context-advertising(heigth='400')}"></th:block>
                         <div class="hall-list list-group">
                             <div class="hall-count mb-2">
-                                <span class="h5" th:text="'Кількість залів : ' + ${allHallByCinema.size()}"></span>
+                                <span class="h5" th:text="#{halls-count} + ' : ' + ${allHallByCinema.size()}"></span>
                             </div>
                             <div class="list-group-item hover-item" th:each="hall : ${allHallByCinema}">
-                                <a th:href="@{/cinemas/hall/{hallId}(hallId=${hall.id})}"> <label class="form-label"
-                                                                                          th:text="${hall.name}"></label></a>
+                                <a th:href="@{/cinemas/hall/{hallId}(hallId=${hall.id})}">
+                                    <label class="form-label" th:text="${hall.name}"></label></a>
                             </div>
                         </div>
                         <div class="session-list list-group mt-3">
                             <div class="sessions mb-2">
-                                <span class="h5" th:text="'Дивіться сьогодні:'"></span>
+                                <span class="h5" th:text="#{view-today} + ':'"></span>
                             </div>
                             <div class="list-group-item hover-item" th:each="sessionItem : ${allSessionByCinema}">
                                 <a th:href="@{/session/{sessionId}(sessionId=${sessionItem.id})}"> <label
@@ -76,7 +76,7 @@
                                         th:text="${sessionItem.sessionName}"></label></a>
                             </div>
                             <a href="/timetable">
-                                <button class="btn btn-soft-success mt-4">Розклад всіх сеансів</button>
+                                <button class="btn btn-soft-success mt-4" th:text="#{schedule-all-session}">Розклад всіх сеансів</button>
                             </a>
                         </div>
                     </aside>
@@ -90,7 +90,7 @@
                                 </figure>
                             </div>
                             <div class="col-7 button-with-tags">
-                                <button class="btn btn-soft-success btn-lg">Розклад сеансів</button>
+                                <button class="btn btn-soft-success btn-lg" th:text="#{title-timetable}">Розклад сеансів</button>
                                 <div class="tags-list d-flex gap-2 mt-3">
                                     <span class="text-bg-success px-2 rounded-5">3D</span>
                                     <span class="text-bg-success px-2 rounded-5">D-BOX</span>
@@ -105,15 +105,15 @@
                             </div>
                             <div class="cinema-conditions mt-3">
                                 <div class="text-center">
-                                    <h4 th:text="'Умови кінотеатру'"></h4>
+                                    <h4 th:text="#{cinema-conditions}"></h4>
                                 </div>
                                 <div class="cinema-condition-text mt-3">
                                     <p th:utext="${cinemaDto.conditions}"></p>
                                 </div>
                             </div>
                             <article class="slider-image mt-5">
-                                <div class="text-center">
-                                    <h3>Фотогалерея</h3>
+                                <div class="text-center my-3">
+                                    <h3 th:text="#{media-gallery}">Фотогалерея</h3>
                                 </div>
                                 <div id="imageSlider" class="carousel slide" data-bs-ride="carousel">
                                     <div class="carousel-indicators">

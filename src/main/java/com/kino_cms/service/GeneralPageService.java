@@ -4,6 +4,7 @@ import com.kino_cms.dto.GeneralPageDTO;
 import com.kino_cms.dto.Page;
 import com.kino_cms.entity.GeneralPage;
 import com.kino_cms.entity.SeoBlock;
+import com.kino_cms.enums.Language;
 import com.kino_cms.repository.GeneralPageRepo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -105,19 +107,29 @@ public class GeneralPageService {
         }
     }
 
-    public List<GeneralPageDTO> getAllOtherPages() {
-        List<GeneralPageDTO> otherPages = generalPageRepo.getAllByPageTypeOtherPage();
-        return otherPages;
+    public List<GeneralPageDTO> getAllOtherPages(Locale locale) {
+        List<GeneralPageDTO> otherPages;
+        if (locale.getLanguage().equals("en")) {
+            return generalPageRepo.getAllByPageTypeOtherPage(Language.ENGLISH);
+        }
+        return generalPageRepo.getAllByPageTypeOtherPage(Language.UKRAINIAN);
     }
 
     public List<GeneralPage> getAllUkPageByPageTypeForMenu(){
-        List<GeneralPage> ukPageByPageTypeUnion = generalPageRepo.getAllUkPageByPageTypeUnion();
+        List<GeneralPage> ukPageByPageTypeUnion = generalPageRepo.getAllUkPageByPageTypeUnion(Language.UKRAINIAN);
         return ukPageByPageTypeUnion;
     }
 
     public GeneralPageDTO getGeneralPageDTOAboutCinema() {
         GeneralPageDTO aboutCinemaPage = generalPageRepo.getAboutCinemaPageUk();
         return aboutCinemaPage;
+    }
+
+    public List<GeneralPage> getAllPageByPageTypeForMenu(Locale locale) {
+        if (locale.getLanguage().equals("en")) {
+            return null;
+        }
+        return generalPageRepo.getAllUkPageByPageTypeUnion(Language.UKRAINIAN);
     }
 }
 

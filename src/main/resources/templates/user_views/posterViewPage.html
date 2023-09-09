@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Афіша</title>
+    <title th:text="#{label.menu.poster}">Афіша</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
@@ -53,12 +53,12 @@
             <ul class="nav nav-tabs nav-fill mb-auto flex-column" role="tablist">
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" th:href="@{/poster/now}">
-                        <span class="item-name">Афіша</span>
+                        <span class="item-name" th:text="#{label.menu.poster}"></span>
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" th:href="@{/poster/soon}">
-                        <span class="item-name">Скоро</span>
+                        <span class="item-name" th:text="#{label.menu.soon}"></span>
                     </a>
                 </li>
             </ul>
@@ -74,7 +74,7 @@
                         </figure>
                     </div>
                     <p th:text="*{film.name}"></p>
-                    <button class="btn btn-sm btn-soft-success mt-1">Купити білет</button>
+                    <button class="btn btn-sm btn-soft-success mt-1" th:text="#{buy-ticket}"></button>
                 </div>
             </div>
         </article>

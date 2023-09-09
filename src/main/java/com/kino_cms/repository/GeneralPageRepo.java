@@ -2,12 +2,14 @@ package com.kino_cms.repository;
 
 import com.kino_cms.dto.GeneralPageDTO;
 import com.kino_cms.entity.GeneralPage;
+import com.kino_cms.enums.Language;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Repository
@@ -24,20 +26,20 @@ public interface GeneralPageRepo extends JpaRepository<GeneralPage, Long> {
             "gep.mainImage, gep.image1, gep.image2, gep.image3, " +
             "gep.image4, gep.image5, gep.language, gep.isActive, " +
             "gep.createTime, gep.seoBlock.seoUrl, gep.seoBlock.seoTitle, gep.seoBlock.seoKeywords, " +
-            "gep.seoBlock.seoDescription) FROM GeneralPage gep WHERE gep.pageType = com.kino_cms.enums.PageType.OTHER_PAGE")
-    List<GeneralPageDTO> getAllByPageTypeOtherPage();
+            "gep.seoBlock.seoDescription) FROM GeneralPage gep WHERE gep.pageType = com.kino_cms.enums.PageType.OTHER_PAGE AND gep.language =:locale")
+    List<GeneralPageDTO> getAllByPageTypeOtherPage(Language locale);
 
     @Query(value = "FROM GeneralPage gp WHERE gp.pageType = com.kino_cms.enums.PageType.ADVERTISING " +
-            "AND gp.language = com.kino_cms.enums.Language.UKRAINIAN " +
+            "AND gp.language =:language " +
             "UNION FROM GeneralPage gp WHERE gp.pageType = com.kino_cms.enums.PageType.CAFE_BAR " +
-            "AND gp.language = com.kino_cms.enums.Language.UKRAINIAN " +
+            "AND gp.language =:language " +
             "UNION FROM GeneralPage gp WHERE gp.pageType = com.kino_cms.enums.PageType.CONTACT_PAGE " +
-            "AND gp.language = com.kino_cms.enums.Language.UKRAINIAN " +
+            "AND gp.language =:language " +
             "UNION FROM GeneralPage gp WHERE gp.pageType = com.kino_cms.enums.PageType.CHILD_ROOM " +
-            "AND gp.language = com.kino_cms.enums.Language.UKRAINIAN " +
+            "AND gp.language =:language " +
             "UNION FROM GeneralPage gp WHERE gp.pageType = com.kino_cms.enums.PageType.VIP_HALL " +
-            "AND gp.language = com.kino_cms.enums.Language.UKRAINIAN")
-    List<GeneralPage> getAllUkPageByPageTypeUnion();
+            "AND gp.language =:language")
+    List<GeneralPage> getAllUkPageByPageTypeUnion(Language language);
 
     @Query(value = "SELECT NEW com.kino_cms.dto.GeneralPageDTO(gp.id, gp.pageType, gp.title, gp.description, " +
             "gp.mainImage, gp.image1, gp.image2, gp.image3, " +

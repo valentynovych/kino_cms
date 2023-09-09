@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title th:text="Новини"></title>
+    <title th:text="#{feed-and-promotion}"></title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
@@ -54,7 +54,13 @@
         <article class="main-content-block">
             <div class="col my-4">
                 <div class="col-2 mx-auto">
-                    <h3 th:text="${allFeedPages[0].feedType.name()} == 'FEED' ? 'Новини' : 'Акції'"></h3>
+                    <th:block th:if="${allFeedPages[0].feedType.name()} == 'FEED'">
+                        <h3 th:text="#{label.menu.feeds}"></h3>
+                    </th:block>
+                    <th:block th:unless="${allFeedPages[0].feedType.name()} == 'FEED'">
+                        <h3 th:text="#{promotions}"></h3>
+                    </th:block>
+
                 </div>
             </div>
             <div class="main">

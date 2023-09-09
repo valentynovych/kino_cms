@@ -70,12 +70,12 @@
                             </div>
                             <div class="session-details d-flex justify-content-between mt-3">
                                 <div>
-                                    <span>Ціна в грн.:</span>
+                                    <span th:text="#{label-price} + ': '">Ціна в грн.:</span>
                                     <span class="me-2 text-bg-warning p-1" th:text="${filmSession.price}"></span>
                                 </div>
                                 <div class="d-flex flex-row col-7 justify-content-between">
                                     <div class="d-flex flex-row gap-2">
-                                        <span>Заброньовано:</span>
+                                        <span th:text="#{label-book-now} + ':'">Заброньовано:</span>
                                         <span class="bg-gray">
                                         <svg class="icon-32" width="32" viewBox="0 0 24 24" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
@@ -91,14 +91,14 @@
                                             </span>
                                     </div>
                                     <div class="session-counts border-info d-flex flex-row gap-5">
-                                        <span>Білетів: 0</span>
-                                        <span>Сума: 0 грн</span>
+                                        <span th:text="#{label-tickets} + ': 0'">Білетів: 0</span>
+                                        <span th:text="#{label-price-count} + ': 0'">Сума: 0 грн</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="hall-schema mt-3">
                                 <div class="text-center">
-                                    <h4 th:text="'Карта залу'"></h4>
+                                    <h4 th:text="#{label-hall-schema}"></h4>
                                 </div>
                                 <div class="cinema-condition-text mt-5">
                                     <figure>
@@ -107,11 +107,11 @@
                                 </div>
                             </div>
                             <div class="info mt-3 d-flex flex-column">
-                                <span>Вартість послуги бронювання - 3 грн. за кожне місце</span>
-                                <span class="text-uppercase mt-2">Заброньовані білети потрібно викупити в касі кінотеатру не пізніше ніж за годину до початку сеансу.</span>
+                                <span th:text="#{label-session-info1}">Вартість послуги бронювання - 3 грн. за кожне місце</span>
+                                <span th:text="#{label-session-info2}" class="text-uppercase mt-2">Заброньовані білети потрібно викупити в касі кінотеатру не пізніше ніж за годину до початку сеансу.</span>
                                 <div class="d-flex flex-row justify-content-center mt-2 gap-3">
-                                    <button class="btn btn-outline-secondary col-2">Забронювати</button>
-                                    <button class="btn btn-soft-success col-2">Купити</button>
+                                    <button class="btn btn-outline-secondary col-2" th:text="#{label-book-ticket}">Забронювати</button>
+                                    <button class="btn btn-soft-success col-2" th:text="#{buy-ticket}">Купити</button>
                                 </div>
                             </div>
                         </div>
