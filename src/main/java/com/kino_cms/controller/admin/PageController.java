@@ -6,6 +6,7 @@ import com.kino_cms.entity.ContactCinema;
 import com.kino_cms.entity.ContactPage;
 import com.kino_cms.entity.GeneralPage;
 import com.kino_cms.entity.HomePage;
+import com.kino_cms.enums.Language;
 import com.kino_cms.enums.PageType;
 import com.kino_cms.service.ContactPageService;
 import com.kino_cms.service.GeneralPageService;
@@ -75,15 +76,16 @@ public class PageController {
 
     //mapping for home page
     @GetMapping("/admin/edit-homepage/{id}")
-    public String editHomePage(@PathVariable Long id, Model model) {
-
-        Optional<HomePage> optionalHomePage = homePageService.getHomePageById(id);
+    public String editHomePage(@PathVariable Long id, Model model,
+                               @RequestParam(value = "language", required = false) Language language) {
+        Optional<HomePage> optionalHomePage = homePageService.getHomePageByLanguageOrId(language, id);
         if (optionalHomePage.isPresent()) {
             HomePage homePage = optionalHomePage.get();
             model.addAttribute("page", homePage);
         } else {
             HomePage homePage = new HomePage();
             homePage.setPageType(PageType.HOME_PAGE);
+            homePage.setLanguage(language);
             homePage.setCreateTime(LocalDateTime.now().format(dateTimeFormatter));
             model.addAttribute("page", homePage);
         }
@@ -91,8 +93,7 @@ public class PageController {
     }
 
     @PostMapping("/admin/edit-homepage/{id}")
-    public String saveHomePage(@ModelAttribute HomePage homePage, @PathVariable Long id) {
-        homePage.setId(id);
+    public String saveHomePage(@ModelAttribute HomePage homePage) {
         homePageService.save(homePage);
         return "redirect:/admin/view-pages";
     }
@@ -100,16 +101,51 @@ public class PageController {
     // mapping for general page
     @GetMapping("/admin/edit-generalpage/{id}")
     public String editGeneralPage(@PathVariable Long id, Model model,
-                                  @RequestParam(required = false) String pageType) {
-        Optional<GeneralPageDTO> generalPage = generalPageService.getGeneralPageDTOById(id);
+                                  @RequestParam(required = false) String pageType,
+                                  @RequestParam(required = false) Language language) {
+        Optional<GeneralPageDTO> pageDTOByLanguagePageId = Optional.empty();
+        Optional<GeneralPageDTO> pageDTOById = generalPageService.getGeneralPageDTOById(id);
+        GeneralPageDTO generalPageDTO;
+        if (language != null) {
+            pageDTOByLanguagePageId = generalPageService.getGeneralPageDTOByLanguagePageId(id);
+            if (pageDTOByLanguagePageId.isPresent()) {
+                generalPageDTO = pageDTOById.get();
+                generalPageDTO.setTranslatePageId(pageDTOByLanguagePageId.get().getId());
+                generalPageService.saveGeneralPageDTO(generalPageDTO);
+                return "redirect:/admin/edit-generalpage/" + generalPageDTO.getTranslatePageId() + "?pageType=" + pageType;
+            }
+        }
 
-        if (generalPage.isPresent()) {
-            GeneralPageDTO generalPageDTO = generalPage.get();
+        if (pageDTOById.isPresent()) {
+            generalPageDTO = pageDTOById.get();
+            if (pageDTOByLanguagePageId.isPresent()) {
+                GeneralPageDTO newGeneralPageDTO = pageDTOByLanguagePageId.get();
+                generalPageDTO.setTranslatePageId(newGeneralPageDTO.getId());
+                newGeneralPageDTO.setTranslatePageId(generalPageDTO.getId());
+                generalPageService.saveGeneralPageDTO(generalPageDTO);
+                generalPageDTO = newGeneralPageDTO;
+            } else if (language != null && pageDTOByLanguagePageId.isEmpty()) {
+                generalPageDTO = new GeneralPageDTO();
+                generalPageDTO.setId(0L);
+                generalPageDTO.setCreateTime(LocalDateTime.now().format(dateTimeFormatter));
+                generalPageDTO.setPageType(PageType.valueOf(pageType));
+                generalPageDTO.setTranslatePageId(id);
+                generalPageDTO.setLanguage(language);
+            } else {
+                generalPageDTO = pageDTOById.get();
+            }
             model.addAttribute("generalPage", generalPageDTO);
         } else {
             GeneralPageDTO newPage = new GeneralPageDTO();
+            newPage.setId(0L);
             newPage.setCreateTime(LocalDateTime.now().format(dateTimeFormatter));
             newPage.setPageType(PageType.valueOf(pageType));
+            if (language != null) {
+                newPage.setTranslatePageId(id);
+                newPage.setLanguage(language);
+            } else {
+                newPage.setLanguage(Language.UKRAINIAN);
+            }
             model.addAttribute("generalPage", newPage);
         }
         return "admin/pages/editGeneralPage";
@@ -124,8 +160,9 @@ public class PageController {
                                   @RequestParam("image31") MultipartFile image3,
                                   @RequestParam("image41") MultipartFile image4,
                                   @RequestParam("image51") MultipartFile image5) throws IOException {
-        Optional<GeneralPageDTO> optionalGeneralPage = generalPageService.getGeneralPageDTOById(id);
+        Optional<GeneralPageDTO> optionalGeneralPage = generalPageService.getGeneralPageDTOById(generalPageModel.getId());
         GeneralPageDTO generalPage1;
+
         ArrayList<String> imageList;
         if (optionalGeneralPage.isPresent()) {
             generalPage1 = optionalGeneralPage.get();
@@ -137,7 +174,7 @@ public class PageController {
             imageList.add(generalPage1.getImage4());
             imageList.add(generalPage1.getImage5());
         } else {
-            generalPageModel.setId(id);
+            generalPageModel.setId(0L);
             imageList = new ArrayList<>(List.of("", "", "", "", "", ""));
             generalPageModel.setCreateTime(LocalDateTime.now().format(dateTimeFormatter));
         }

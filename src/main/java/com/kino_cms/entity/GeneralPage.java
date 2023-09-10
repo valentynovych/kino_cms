@@ -31,5 +31,6 @@ public class GeneralPage extends Page {
     private Language language;
     private Boolean isActive;
     private String createTime;
+    private Long translatePageId;
 
 }

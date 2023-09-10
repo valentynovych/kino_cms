@@ -27,6 +27,8 @@ public class GeneralPageDTO {
     private String seoTitle;
     private String seoKeywords;
     private String seoDescription;
+    private Long translatePageId;
+
 
     public GeneralPageDTO() {
 
@@ -36,7 +38,7 @@ public class GeneralPageDTO {
                           String mainImage, String image1, String image2, String image3,
                           String image4, String image5, Language language, Boolean isActive,
                           String createTime, String seoUrl, String seoTitle, String seoKeywords,
-                          String seoDescription) {
+                          String seoDescription, Long translatePageId) {
         this.id = id;
         this.pageType = pageType;
         this.title = title;
@@ -54,5 +56,6 @@ public class GeneralPageDTO {
         this.seoTitle = seoTitle;
         this.seoKeywords = seoKeywords;
         this.seoDescription = seoDescription;
+        this.translatePageId = translatePageId;
     }
 }

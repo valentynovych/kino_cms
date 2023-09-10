@@ -1,7 +1,6 @@
 package com.kino_cms.service;
 
 import com.kino_cms.dto.GeneralPageDTO;
-import com.kino_cms.dto.Page;
 import com.kino_cms.entity.GeneralPage;
 import com.kino_cms.entity.SeoBlock;
 import com.kino_cms.enums.Language;
@@ -10,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -51,6 +51,7 @@ public class GeneralPageService {
             seoBlock = generalPage.getSeoBlock();
         } else {
             generalPage = new GeneralPage();
+            generalPage.setId(0L);
             seoBlock = new SeoBlock();
         }
 
@@ -66,6 +67,9 @@ public class GeneralPageService {
         generalPage.setIsActive(generalPageDTO.getIsActive());
         generalPage.setCreateTime(generalPageDTO.getCreateTime());
 
+        generalPage.setTranslatePageId(generalPageDTO.getTranslatePageId());
+        generalPage.setLanguage(generalPageDTO.getLanguage());
+
         seoBlock.setSeoUrl(generalPageDTO.getSeoUrl());
         seoBlock.setSeoTitle(generalPageDTO.getSeoTitle());
         seoBlock.setSeoKeywords(generalPageDTO.getSeoKeywords());
@@ -73,7 +77,18 @@ public class GeneralPageService {
 
         generalPage.setSeoBlock(seoBlock);
 
-        generalPageRepo.save(generalPage);
+        updateTranslateLink(generalPageRepo.save(generalPage));
+    }
+
+    private void updateTranslateLink(GeneralPage save) {
+        if (save.getTranslatePageId() != null) {
+            Optional<GeneralPage> generalPage = generalPageRepo.findById(save.getTranslatePageId());
+            if (generalPage.isPresent()) {
+                GeneralPage generalPage1 = generalPage.get();
+                generalPage1.setTranslatePageId(save.getId());
+                generalPageRepo.save(generalPage1);
+            }
+        }
     }
 
     public void delete(GeneralPage generalPage) {
@@ -107,29 +122,38 @@ public class GeneralPageService {
         }
     }
 
-    public List<GeneralPageDTO> getAllOtherPages(Locale locale) {
+    public List<GeneralPageDTO> getAllOtherPages() {
         List<GeneralPageDTO> otherPages;
+        Locale locale = LocaleContextHolder.getLocale();
         if (locale.getLanguage().equals("en")) {
             return generalPageRepo.getAllByPageTypeOtherPage(Language.ENGLISH);
         }
         return generalPageRepo.getAllByPageTypeOtherPage(Language.UKRAINIAN);
     }
 
-    public List<GeneralPage> getAllUkPageByPageTypeForMenu(){
+    public List<GeneralPage> getAllUkPageByPageTypeForMenu() {
         List<GeneralPage> ukPageByPageTypeUnion = generalPageRepo.getAllUkPageByPageTypeUnion(Language.UKRAINIAN);
         return ukPageByPageTypeUnion;
     }
 
     public GeneralPageDTO getGeneralPageDTOAboutCinema() {
-        GeneralPageDTO aboutCinemaPage = generalPageRepo.getAboutCinemaPageUk();
-        return aboutCinemaPage;
+        Locale locale = LocaleContextHolder.getLocale();
+        GeneralPageDTO aboutCinemaPage;
+        if (locale.getLanguage().equals("en")) {
+            return generalPageRepo.getAboutCinemaPageUk(Language.ENGLISH);
+        }
+        return generalPageRepo.getAboutCinemaPageUk(Language.UKRAINIAN);
     }
 
     public List<GeneralPage> getAllPageByPageTypeForMenu(Locale locale) {
         if (locale.getLanguage().equals("en")) {
-            return null;
+            return generalPageRepo.getAllUkPageByPageTypeUnion(Language.ENGLISH);
         }
         return generalPageRepo.getAllUkPageByPageTypeUnion(Language.UKRAINIAN);
+    }
+
+    public Optional<GeneralPageDTO> getGeneralPageDTOByLanguagePageId(Long id) {
+        return generalPageRepo.getGeneralPageDTOByLanguagePageId(id);
     }
 }
 

@@ -38,22 +38,20 @@
                     <input class="form-check-input" type="checkbox" th:field="*{isActive}"/>
                 </div>
                 <div class="d-flex justify-content-end col-2 ">
-                    <ul class="nav nav-tabs nav-tunnel nav-slider" data-toggle="slider-tab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active d-flex align-items-center" data-bs-toggle="tab"
-                                    data-bs-target="#content-accordion-prv" type="button" role="tab"
-                                    aria-selected="true">
+                    <div class="nav nav-tabs" role="tablist">
+                            <button class="nav-link d-flex align-items-center" data-bs-toggle="tab" type="button" role="tab"
+                                    th:classappend="*{language.name()} == 'UKRAINIAN' ? 'active' : ''"
+                                    th:attrappend="aria-selected=(*{language.name()} == 'UKRAINIAN' ? true : false)"
+                                    onclick="window.location.replace('?language=UKRAINIAN')">
                                 UK
                             </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link d-flex align-items-center" data-bs-toggle="tab"
-                                    data-bs-target="#content-accordion-code" type="button" role="tab"
-                                    aria-selected="false">
+                            <button class="nav-link d-flex align-items-center" data-bs-toggle="tab" type="button" role="tab"
+                                    th:classappend="*{language.name()} == 'ENGLISH' ? 'active' : ''"
+                                    th:attrappend="aria-selected=(*{language.name()} == 'ENGLISH' ? true : false)"
+                            onclick="window.location.replace('?language=ENGLISH')">
                                 EN
                             </button>
-                        </li>
-                    </ul>
+                    </div>
                 </div>
             </div>
             <div class="row mb-4">
@@ -127,11 +125,11 @@
                     </div>
                 </div>
                 <div class="hidden">
-<!--                    <input type="hidden" th:field="*{seoBlock.id}">-->
-<!--                    <input type="hidden" th:field="*{createTime}">-->
                     <input type="hidden" th:field="*{pageType}">
                     <input type="hidden" th:field="*{title}">
                     <input type="hidden" th:field="*{language}">
+                    <input type="hidden" th:field="*{id}">
+                    <input type="hidden" th:field="*{seoBlock.id}">
                 </div>
             </div>
         </form>
