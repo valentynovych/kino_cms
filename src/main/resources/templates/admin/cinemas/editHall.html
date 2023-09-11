@@ -38,22 +38,20 @@
               enctype="multipart/form-data">
             <div class="row justify-content-end">
                 <div class="d-flex justify-content-end col-2 ">
-                    <ul class="nav nav-tabs nav-tunnel nav-slider" data-toggle="slider-tab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active d-flex align-items-center" data-bs-toggle="tab"
-                                    data-bs-target="#content-accordion-prv" type="button" role="tab"
-                                    aria-selected="true">
-                                UK
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link d-flex align-items-center" data-bs-toggle="tab"
-                                    data-bs-target="#content-accordion-code" type="button" role="tab"
-                                    aria-selected="false">
-                                EN
-                            </button>
-                        </li>
-                    </ul>
+                    <div class="nav nav-tabs" role="tablist">
+                        <button class="nav-link d-flex align-items-center" data-bs-toggle="tab" type="button" role="tab"
+                                th:classappend="*{language.name()} == 'UKRAINIAN' ? 'active' : ''"
+                                th:attrappend="aria-selected=(*{language.name()} == 'UKRAINIAN' ? true : false)"
+                                onclick="updateLanguage('UKRAINIAN')">
+                            UK
+                        </button>
+                        <button class="nav-link d-flex align-items-center" data-bs-toggle="tab" type="button" role="tab"
+                                th:classappend="*{language.name()} == 'ENGLISH' ? 'active' : ''"
+                                th:attrappend="aria-selected=(*{language.name()} == 'ENGLISH' ? true : false)"
+                                onclick="updateLanguage('ENGLISH')">
+                            EN
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="row mb-4">
@@ -237,12 +235,27 @@
                     <input type="hidden" th:field="*{createTime}">
                     <input type="hidden" th:field="*{language}">
                     <input type="hidden" th:field="*{cinemaId}">
+                    <input type="hidden" th:field="*{translatePageId}">
                 </div>
             </div>
         </form>
     </div>
 
 </main>
+<script>
+    function updateLanguage(language) {
+        var url = new URL(window.location.href);
+        var params = url.searchParams;
+
+        if (params.has('language')) {
+            params.set('language', language);
+        } else {
+            params.append('language', language);
+        }
+
+        window.location.href = url.toString();
+    }
+</script>
 <script type="text/javascript" th:src="@{/js/file-upload.js}"></script>
 
 <script src="/assets/js/core/libs.min.js"></script>
