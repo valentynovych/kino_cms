@@ -37,4 +37,5 @@ public class FeedPage {
     private Language language;
     private String createTime;
     private String tags;
+    private Long translatePageId;
 }

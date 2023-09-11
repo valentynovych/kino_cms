@@ -1,6 +1,8 @@
 package com.kino_cms.controller.admin;
 
+import com.kino_cms.dto.CinemaDTO;
 import com.kino_cms.dto.HallDTO;
+import com.kino_cms.enums.Language;
 import com.kino_cms.service.HallService;
 import com.kino_cms.service.SaveUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +29,32 @@ public class HallPageController {
     @GetMapping("/admin/edit-hall/{id}/{cinema}")
     public String editHall(@PathVariable Long id,
                            @PathVariable Long cinema,
+                           @RequestParam(required = false) Language language,
                            Model model) {
-        Optional<HallDTO> optionalFeedPage = hallService.getHallDtoById(id);
-
+        Optional<HallDTO> optionalHallDTO = hallService.getHallDtoById(id);
+        Optional<HallDTO> optionalHallDTOByTranslate = Optional.empty();
+        if (language != null) {
+            optionalHallDTOByTranslate = hallService.getHallDtoByTranslatePageId(id);
+            if (optionalHallDTOByTranslate.isPresent()) {
+                return "redirect:/admin/edit-hall/" +
+                        optionalHallDTOByTranslate.get().getId() +
+                        "/" + optionalHallDTOByTranslate.get().getCinemaId();
+            }
+        }
         HallDTO hallDTO;
-        if (optionalFeedPage.isPresent()) {
-            hallDTO = optionalFeedPage.get();
+        if (optionalHallDTO.isPresent()) {
+            hallDTO = optionalHallDTO.get();
+            if (language != null && optionalHallDTOByTranslate.isEmpty()) {
+                hallDTO = new HallDTO();
+                hallDTO.setId(0L);
+                hallDTO.setTranslatePageId(id);
+                hallDTO.setLanguage(language);
+            }
         } else {
             hallDTO = new HallDTO();
+            hallDTO.setId(0L);
             hallDTO.setCinemaId(cinema);
+            hallDTO.setLanguage(Language.UKRAINIAN);
             hallDTO.setCreateTime(LocalDateTime.now().format(dateTimeFormatter));
         }
         model.addAttribute("hallDTO", hallDTO);
@@ -45,6 +64,7 @@ public class HallPageController {
     @PostMapping("/admin/edit-hall/{id}/{cinema}")
     public String saveHall(@ModelAttribute HallDTO hallDTOModel,
                            @PathVariable Long id,
+                           @PathVariable Long cinema,
                            @RequestParam("hallSchema1") MultipartFile hallSchema,
                            @RequestParam("firstBanner1") MultipartFile firstBanner,
                            @RequestParam("image11") MultipartFile image1,
@@ -55,12 +75,13 @@ public class HallPageController {
 
         ArrayList<MultipartFile> images = new ArrayList<>(
                 List.of(hallSchema, firstBanner, image1, image2, image3, image4, image5));
-        Optional<HallDTO> hallOptional = hallService.getHallDtoById(id);
+        Optional<HallDTO> hallOptional = hallService.getHallDtoById(hallDTOModel.getId());
         List<String> fileNamesFromDB;
         if (hallOptional.isPresent()) {
-            fileNamesFromDB = hallService.getListImagesFileNameById(id);
+            fileNamesFromDB = hallService.getListImagesFileNameById(hallDTOModel.getId());
         } else {
-            hallDTOModel.setId(id);
+            hallDTOModel.setId(hallDTOModel.getId());
+            hallDTOModel.setCinemaId(cinema);
             fileNamesFromDB = new ArrayList<>(List.of("", "", "", "", "", "", ""));
             hallDTOModel.setCreateTime(LocalDateTime.now().format(dateTimeFormatter));
         }

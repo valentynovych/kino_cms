@@ -3,13 +3,16 @@ package com.kino_cms.entity;
 import com.kino_cms.enums.Language;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.Objects;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 public class Cinema {
     @Id
@@ -35,4 +38,5 @@ public class Cinema {
     private List<Hall> hallList;
     @OneToMany(mappedBy = "cinema", cascade = CascadeType.ALL)
     private List<FilmSession> filmSessions;
+    private Long translatePageId;
 }

@@ -37,11 +37,12 @@ public class FilmDTO {
     private Date dateEndPremiere;
     private String datePremiereFromTo;
     private List<Boolean> isCheckedType;
+    private Long translatePageId;
 
     public FilmDTO(Long id, String name, String description, String mainImage, String image1,
                    String image2, String image3, String image4, String image5, String urlVideo,
                    Language language, String seoUrl, String seoTitle, String seoKeywords, String seoDescription,
-                   Date dateOfPremiere, Date dateEndPremiere, String datePremiereFromTo) {
+                   Date dateOfPremiere, Date dateEndPremiere, String datePremiereFromTo, Long translatePageId) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -60,6 +61,7 @@ public class FilmDTO {
         this.dateOfPremiere = dateOfPremiere;
         this.dateEndPremiere = dateEndPremiere;
         this.datePremiereFromTo = datePremiereFromTo;
+        this.translatePageId = translatePageId;
     }
 
 }

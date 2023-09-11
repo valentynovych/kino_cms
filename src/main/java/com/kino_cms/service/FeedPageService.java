@@ -27,7 +27,14 @@ public class FeedPageService {
     }
 
     public void saveFeedPage(FeedPage feedPage) {
-        feedPageRepo.save(feedPage);
+        if (feedPage.getTranslatePageId() != null) {
+            FeedPage feedPage1 = feedPageRepo.save(feedPage);
+            FeedPage toSetTranslate = feedPageRepo.findById(feedPage.getTranslatePageId()).get();
+            toSetTranslate.setTranslatePageId(feedPage1.getId());
+            feedPageRepo.save(toSetTranslate);
+        } else {
+            feedPageRepo.save(feedPage);
+        }
     }
 
     public void deleteFeedPage(FeedPage feedPage) {
@@ -82,5 +89,9 @@ public class FeedPageService {
     public FeedDTO getFeedDTOById(Long feedId) {
         FeedDTO feedDTO = feedPageRepo.getFeedDTOById(feedId);
         return feedDTO;
+    }
+
+    public Optional<FeedPage> getFeedPageByTranslatePageId(Long id) {
+        return feedPageRepo.findByTranslatePageId(id);
     }
 }

@@ -31,11 +31,12 @@ public class CinemaDTO {
     private String seoKeywords;
     private String seoDescription;
     private List<HallDTO> hallDTOList;
+    private Long translatePageId;
 
     public CinemaDTO(Long id, String name, String description, String conditions, String logoImage,
                      String firstBanner, String image1, String image2, String image3, String image4,
                      String image5, Language language, String seoUrl, String seoTitle, String seoKeywords,
-                     String seoDescription) {
+                     String seoDescription, Long translatePageId) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -52,5 +53,6 @@ public class CinemaDTO {
         this.seoTitle = seoTitle;
         this.seoKeywords = seoKeywords;
         this.seoDescription = seoDescription;
+        this.translatePageId = translatePageId;
     }
 }

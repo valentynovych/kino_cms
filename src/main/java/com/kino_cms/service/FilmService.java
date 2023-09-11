@@ -2,7 +2,6 @@ package com.kino_cms.service;
 
 import com.kino_cms.dto.FilmDTO;
 import com.kino_cms.entity.Film;
-import com.kino_cms.entity.FilmDetails;
 import com.kino_cms.entity.SeoBlock;
 import com.kino_cms.enums.FilmType;
 import com.kino_cms.repository.FilmRepo;
@@ -23,7 +22,14 @@ public class FilmService {
     SaveUploadService uploadService;
 
     public void saveFilm(Film film) {
-        filmRepo.save(film);
+        if (film.getTranslatePageId() != null) {
+            Film save = filmRepo.save(film);
+            Film toSetTranslate = filmRepo.findById(save.getTranslatePageId()).get();
+            toSetTranslate.setTranslatePageId(save.getId());
+            filmRepo.save(toSetTranslate);
+        } else {
+            filmRepo.save(film);
+        }
     }
 
     public Optional<Film> getFilmById(Long id) {
@@ -103,7 +109,6 @@ public class FilmService {
         Film filmToSave;
         SeoBlock seoBlock;
 
-
         if (filmOptional.isPresent()) {
             filmToSave = filmOptional.get();
             seoBlock = filmToSave.getSeoBlock();
@@ -136,6 +141,7 @@ public class FilmService {
         seoBlock.setSeoDescription(filmDTOModel.getSeoDescription());
         filmToSave.setSeoBlock(seoBlock);
         filmToSave.setDatePremiereFromTo(filmDTOModel.getDatePremiereFromTo());
+        filmToSave.setTranslatePageId(filmDTOModel.getTranslatePageId());
 
         saveFilm(filmToSave);
     }
@@ -146,5 +152,9 @@ public class FilmService {
         twoDate.add(array[0]);
         twoDate.add(array[2]);
         return twoDate;
+    }
+
+    public Optional<FilmDTO> getFilmDtoByTranslatePageId(Long id) {
+        return filmRepo.getFilmDtoByTranslatePageId(id);
     }
 }

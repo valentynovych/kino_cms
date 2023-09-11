@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface FeedPageRepo extends JpaRepository<FeedPage, Long> {
@@ -30,4 +31,6 @@ public interface FeedPageRepo extends JpaRepository<FeedPage, Long> {
             "fp.language, fp.createTime, fp.seoBlock.id, fp.seoBlock.seoUrl, fp.seoBlock.seoTitle, " +
             "fp.seoBlock.seoKeywords, fp.seoBlock.seoDescription) FROM  FeedPage fp WHERE fp.id =:feedId")
     FeedDTO getFeedDTOById(Long feedId);
+
+    Optional<FeedPage> findByTranslatePageId(Long id);
 }

@@ -7,6 +7,7 @@ import com.kino_cms.entity.Hall;
 import com.kino_cms.entity.SeoBlock;
 import com.kino_cms.repository.HallRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,7 +32,24 @@ public class HallService {
     }
 
     public void saveHall(Hall hall) {
-        hallRepo.save(hall);
+        Optional<Cinema> cinemaById = cinemaService.getCinemaById(hall.getCinema().getId());
+        if (cinemaById.isPresent()) {
+            Cinema cinema = cinemaById.get();
+            // check of cinema and hall languages is equals
+            if (!cinema.getLanguage().equals(hall.getLanguage())) {
+                Cinema cinema1 = cinemaService.getCinemaById(cinema.getTranslatePageId()).get();
+                hall.setCinema(cinema1);
+            }
+        }
+
+        if (hall.getTranslatePageId() != null) {
+            Hall save = hallRepo.save(hall);
+            Hall toSetTranslate = hallRepo.findById(save.getTranslatePageId()).get();
+            toSetTranslate.setTranslatePageId(save.getId());
+            hallRepo.save(toSetTranslate);
+        } else {
+            hallRepo.save(hall);
+        }
     }
 
     public void deleteHall(Long id) {
@@ -126,7 +144,12 @@ public class HallService {
         hallToSave.setImage4(hallDTOModel.getImage4());
         hallToSave.setImage5(hallDTOModel.getImage5());
         hallToSave.setLanguage(hallDTOModel.getLanguage());
+        hallToSave.setTranslatePageId(hallDTOModel.getTranslatePageId());
 
         saveHall(hallToSave);
+    }
+
+    public Optional<HallDTO> getHallDtoByTranslatePageId(Long id) {
+        return hallRepo.findByTranslatePageId(id);
     }
 }

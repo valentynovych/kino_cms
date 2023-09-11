@@ -40,4 +40,5 @@ public class Film {
     private Date dateOfPremiere;
     private Date dateEndPremiere;
     private String datePremiereFromTo;
+    private Long translatePageId;
 }

@@ -15,13 +15,18 @@ public interface CinemaRepo extends JpaRepository<Cinema, Long> {
 
     @Query("SELECT new com.kino_cms.dto.CinemaDTO(c.id, c.name, c.description, c.conditions, c.logoImage, " +
             "c.firstBanner, c.image1, c.image2, c.image3, c.image4, c.image5, c.language, c.seoBlock.seoUrl, " +
-            "c.seoBlock.seoTitle, c.seoBlock.seoKeywords, c.seoBlock.seoDescription) " +
+            "c.seoBlock.seoTitle, c.seoBlock.seoKeywords, c.seoBlock.seoDescription, c.translatePageId) " +
             "FROM Cinema c WHERE c.id =:id")
     Optional<CinemaDTO> getCinemaDtoById(@Param("id") Long id);
 
     @Query("SELECT new com.kino_cms.dto.CinemaDTO(c.id, c.name, c.description, c.conditions, c.logoImage, " +
             "c.firstBanner, c.image1, c.image2, c.image3, c.image4, c.image5, c.language, c.seoBlock.seoUrl, " +
-            "c.seoBlock.seoTitle, c.seoBlock.seoKeywords, c.seoBlock.seoDescription) " +
+            "c.seoBlock.seoTitle, c.seoBlock.seoKeywords, c.seoBlock.seoDescription, c.translatePageId) " +
             "FROM Cinema c")
     List<CinemaDTO> getAllCinemaDto();
+    @Query("SELECT new com.kino_cms.dto.CinemaDTO(c.id, c.name, c.description, c.conditions, c.logoImage, " +
+            "c.firstBanner, c.image1, c.image2, c.image3, c.image4, c.image5, c.language, c.seoBlock.seoUrl, " +
+            "c.seoBlock.seoTitle, c.seoBlock.seoKeywords, c.seoBlock.seoDescription, c.translatePageId) " +
+            "FROM Cinema c WHERE c.translatePageId =:id")
+    Optional<CinemaDTO> getCinemaDtoByTranslatePageId(Long id);
 }

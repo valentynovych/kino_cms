@@ -2,6 +2,9 @@ package com.kino_cms.controller.admin;
 
 import com.kino_cms.dto.CinemaDTO;
 import com.kino_cms.dto.HallDTO;
+import com.kino_cms.entity.FeedPage;
+import com.kino_cms.enums.FeedType;
+import com.kino_cms.enums.Language;
 import com.kino_cms.service.CinemaService;
 import com.kino_cms.service.HallService;
 import com.kino_cms.service.SaveUploadService;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,12 +30,28 @@ public class CinemaPageController {
     SaveUploadService uploadService;
 
     @GetMapping("/admin/edit-cinema/{id}")
-    public String editCinema(@PathVariable Long id, Model model) {
+    public String editCinema(@PathVariable Long id,
+                             @RequestParam(required = false) Language language,
+                             Model model) {
         Optional<CinemaDTO> optionalCinemaDTO = cinemaService.getCinemaDtoById(id);
+        Optional<CinemaDTO> cinemaByTranslatePageId = Optional.empty();
         CinemaDTO cinemaDTO;
         ArrayList<HallDTO> hallDTOList;
+
+        if (language != null) {
+            cinemaByTranslatePageId = cinemaService.getCinemaByTranslatePageId(id);
+            if (cinemaByTranslatePageId.isPresent()) {
+                return "redirect:/admin/edit-cinema/" + cinemaByTranslatePageId.get().getId();
+            }
+        }
         if (optionalCinemaDTO.isPresent()) {
             cinemaDTO = optionalCinemaDTO.get();
+            if (language != null && cinemaByTranslatePageId.isEmpty()) {
+                cinemaDTO = new CinemaDTO();
+                cinemaDTO.setId(0L);
+                cinemaDTO.setTranslatePageId(id);
+                cinemaDTO.setLanguage(language);
+            }
             hallDTOList = (ArrayList<HallDTO>) hallService.getAllHallByCinema(cinemaDTO);
             if (!hallDTOList.isEmpty()) {
                 cinemaDTO.setHallDTOList(hallDTOList);
@@ -44,7 +64,13 @@ public class CinemaPageController {
             }
         } else {
             cinemaDTO = new CinemaDTO();
-            cinemaDTO.setId(id);
+            if ( language != null) {
+                cinemaDTO.setLanguage(language);
+                cinemaDTO.setTranslatePageId(id);
+            } else {
+                cinemaDTO.setLanguage(Language.UKRAINIAN);
+            }
+            cinemaDTO.setId(0L);
             hallDTOList = new ArrayList<>();
             HallDTO hallDTO = new HallDTO();
             hallDTO.setId(0L);
@@ -70,12 +96,12 @@ public class CinemaPageController {
 
         ArrayList<MultipartFile> images = new ArrayList<>(
                 List.of(logoImage, firstBanner, image1, image2, image3, image4, image5));
-        Optional<CinemaDTO> cinemaDTOOptional = cinemaService.getCinemaDtoById(id);
+        Optional<CinemaDTO> cinemaDTOOptional = cinemaService.getCinemaDtoById(cinemaDTOModel.getId());
         List<String> fileNamesFromDB;
         if (cinemaDTOOptional.isPresent()) {
             fileNamesFromDB = cinemaService.getListImagesFileNameById(id);
         } else {
-            cinemaDTOModel.setId(id);
+            cinemaDTOModel.setId(cinemaDTOModel.getId());
             fileNamesFromDB = new ArrayList<>(List.of("", "", "", "", "", "", ""));
 
         }
@@ -86,13 +112,6 @@ public class CinemaPageController {
         cinemaService.saveCinemaDto(cinemaDTOModel);
         return "redirect:/admin/view-cinemas";
     }
-
-//    @GetMapping("/admin/view-feeds")
-//    public String viewHals(Model model) {
-//        List<FeedPage> feedPageList = hallService.findFeedPagesByFeedType(FeedType.FEED);
-//        model.addAttribute("feedPages", feedPageList);
-//        return "admin/feedAndPromotion/viewFeeds";
-//    }
 
     @GetMapping("/admin/delete-cinema/{id}")
     public String deleteCinema(@PathVariable Long id) {

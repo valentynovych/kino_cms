@@ -30,11 +30,12 @@ public class HallDTO {
     private String seoTitle;
     private String seoKeywords;
     private String seoDescription;
+    private Long translatePageId;
 
     public HallDTO(Long id, String name, String descriptions, String hallSchema, String firstBanner,
                    String image1, String image2, String image3, String image4, String image5,
                    Language language, String createTime, Long cinemaId,
-                   String seoUrl, String seoTitle, String seoKeywords, String seoDescription) {
+                   String seoUrl, String seoTitle, String seoKeywords, String seoDescription, Long translatePageId) {
         this.id = id;
         this.name = name;
         this.descriptions = descriptions;
@@ -52,5 +53,6 @@ public class HallDTO {
         this.seoTitle = seoTitle;
         this.seoKeywords = seoKeywords;
         this.seoDescription = seoDescription;
+        this.translatePageId = translatePageId;
     }
 }

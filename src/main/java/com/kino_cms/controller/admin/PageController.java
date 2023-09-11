@@ -79,16 +79,16 @@ public class PageController {
     public String editHomePage(@PathVariable Long id, Model model,
                                @RequestParam(value = "language", required = false) Language language) {
         Optional<HomePage> optionalHomePage = homePageService.getHomePageByLanguageOrId(language, id);
+        HomePage homePage;
         if (optionalHomePage.isPresent()) {
-            HomePage homePage = optionalHomePage.get();
-            model.addAttribute("page", homePage);
+            homePage = optionalHomePage.get();
         } else {
-            HomePage homePage = new HomePage();
+            homePage = new HomePage();
             homePage.setPageType(PageType.HOME_PAGE);
             homePage.setLanguage(language);
             homePage.setCreateTime(LocalDateTime.now().format(dateTimeFormatter));
-            model.addAttribute("page", homePage);
         }
+        model.addAttribute("page", homePage);
         return "admin/pages/editHomePage";
     }
 

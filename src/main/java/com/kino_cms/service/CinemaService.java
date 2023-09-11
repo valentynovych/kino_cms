@@ -36,7 +36,14 @@ public class CinemaService {
     }
 
     public void saveCinema(Cinema cinema) {
-        cinemaRepo.save(cinema);
+        if (cinema.getTranslatePageId() != null) {
+            Cinema save = cinemaRepo.save(cinema);
+            Cinema getTranslatePage = cinemaRepo.findById(save.getTranslatePageId()).get();
+            getTranslatePage.setTranslatePageId(save.getId());
+            cinemaRepo.save(getTranslatePage);
+        } else {
+            cinemaRepo.save(cinema);
+        }
     }
 
     public Optional<CinemaDTO> getCinemaDtoById(Long id) {
@@ -80,6 +87,7 @@ public class CinemaService {
 
         cinemaToSave.setSeoBlock(seoBlock);
         cinemaToSave.setLanguage(cinemaDTO.getLanguage());
+        cinemaToSave.setTranslatePageId(cinemaDTO.getTranslatePageId());
 
         saveCinema(cinemaToSave);
     }
@@ -112,5 +120,9 @@ public class CinemaService {
         cinemaDTO.setImage4(fileNamesFromDB.get(5));
         cinemaDTO.setImage5(fileNamesFromDB.get(6));
         return cinemaDTO;
+    }
+
+    public Optional<CinemaDTO> getCinemaByTranslatePageId(Long id) {
+        return cinemaRepo.getCinemaDtoByTranslatePageId(id);
     }
 }

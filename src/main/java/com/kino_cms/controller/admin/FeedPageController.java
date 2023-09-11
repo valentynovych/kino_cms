@@ -3,6 +3,7 @@ package com.kino_cms.controller.admin;
 
 import com.kino_cms.entity.FeedPage;
 import com.kino_cms.enums.FeedType;
+import com.kino_cms.enums.Language;
 import com.kino_cms.service.FeedPageService;
 import com.kino_cms.service.SaveUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,17 +31,47 @@ public class FeedPageController {
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     @GetMapping("/admin/edit-feed/{id}")
-    public String editFeedPage(@PathVariable Long id, Model model) {
+    public String editFeedPage(@PathVariable Long id,
+                               @RequestParam(required = false) Language language,
+                               Model model) {
         Optional<FeedPage> optionalFeedPage = feedPageService.getFeedPageById(id);
-
+        Optional<FeedPage> optionalFeedPageByTranslate = Optional.empty();
         FeedPage feedPageFromDB;
+        if (language != null) {
+            optionalFeedPageByTranslate = feedPageService.getFeedPageByTranslatePageId(id);
+            if (optionalFeedPageByTranslate.isPresent()) {
+                feedPageFromDB = optionalFeedPage.get();
+                feedPageFromDB.setTranslatePageId(optionalFeedPageByTranslate.get().getId());
+                feedPageService.saveFeedPage(feedPageFromDB);
+                return "redirect:/admin/edit-feed/" + feedPageFromDB.getTranslatePageId();
+            }
+        }
+
         if (optionalFeedPage.isPresent()) {
             feedPageFromDB = optionalFeedPage.get();
+            if (optionalFeedPageByTranslate.isPresent()) {
+                FeedPage newFeedPage = optionalFeedPageByTranslate.get();
+                feedPageFromDB.setTranslatePageId(newFeedPage.getId());
+                newFeedPage.setTranslatePageId(feedPageFromDB.getId());
+                feedPageService.saveFeedPage(feedPageFromDB);
+                feedPageFromDB = newFeedPage;
+            } else if (language != null && optionalFeedPageByTranslate.isEmpty()) {
+                feedPageFromDB = new FeedPage();
+                feedPageFromDB.setId(0L);
+                feedPageFromDB.setCreateTime(LocalDateTime.now().format(dateTimeFormatter));
+                feedPageFromDB.setFeedType(FeedType.FEED);
+                feedPageFromDB.setTranslatePageId(id);
+                feedPageFromDB.setLanguage(language);
+            } else {
+                feedPageFromDB = optionalFeedPage.get();
+            }
             model.addAttribute("feedPage", feedPageFromDB);
         } else {
             feedPageFromDB = new FeedPage();
+            feedPageFromDB.setId(0L);
             feedPageFromDB.setCreateTime(LocalDateTime.now().format(dateTimeFormatter));
             feedPageFromDB.setFeedType(FeedType.FEED);
+            feedPageFromDB.setLanguage(Language.UKRAINIAN);
             model.addAttribute("feedPage", feedPageFromDB);
         }
         return "admin/feedAndPromotion/feedPage";
@@ -57,7 +88,7 @@ public class FeedPageController {
                                @RequestParam("image51") MultipartFile image5) throws IOException {
 
         ArrayList<MultipartFile> images = new ArrayList<>(List.of(mainImage, image1, image2, image3, image4, image5));
-        Optional<FeedPage> feedPageOptional = feedPageService.getFeedPageById(id);
+        Optional<FeedPage> feedPageOptional = feedPageService.getFeedPageById(feedPageModel.getId());
         List<String> fileNamesFromDB;
         if (feedPageOptional.isPresent()) {
             fileNamesFromDB = feedPageService.getListImagesFileNameById(id);
