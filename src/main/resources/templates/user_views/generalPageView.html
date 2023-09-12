@@ -124,6 +124,40 @@
                                 </table>
                             </div>
                         </div>
+                        <article class="slider-image mt-5">
+                            <div class="text-center my-3">
+                                <h3 th:text="#{media-gallery}">Фотогалерея</h3>
+                            </div>
+                            <div id="imageSlider" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-indicators">
+                                    <button th:each="image, iter : ${listImages}" type="button"
+                                            data-bs-target="#carouselExampleCaptions"
+                                            th:attr="data-bs-slide-to=${iter.index}"
+                                            th:class="${iter.index} == 0 ? 'active': ''"
+                                            th:attrappend="aria-label='Slide ' + ${iter.index}"></button>
+                                </div>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item" th:classappend="${iter.index} == 0 ? 'active' : ''"
+                                         th:each="image, iter : ${listImages}"
+                                         th:attr="data-bs-interval=(5 * 1000)">
+                                        <figure>
+                                            <img class="bd-placeholder-img bd-placeholder-img-lg d-block"
+                                                 th:src="@{/uploads/{imageName}(imageName=${image})}">
+                                        </figure>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#imageSlider"
+                                        data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#imageSlider"
+                                        data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </article>
                     </div>
                     <aside class="sidebar-right">
                         <th:block

@@ -221,7 +221,7 @@ public class PageController {
     public String editContactsPage(@PathVariable Long id, Model model,
                                    @RequestParam(required = false) String firstTitle) {
 
-        Optional<ContactPage> optionalHomePage = contactPageService.getContactPageById(id);
+        Optional<ContactPage> optionalHomePage = contactPageService.getContactPage();
         ContactPage contactPage;
 
         if (optionalHomePage.isPresent()) {
@@ -241,7 +241,7 @@ public class PageController {
                                    @RequestParam("logo_image") MultipartFile[] logo_images) throws IOException {
         contactPageModel.setId(id);
 
-        Optional<ContactPage> contactPageOptional = contactPageService.getContactPageById(id);
+        Optional<ContactPage> contactPageOptional = contactPageService.getContactPage();
         ContactPage contactPage1;
         ArrayList<String> imagesFromEntity;
 

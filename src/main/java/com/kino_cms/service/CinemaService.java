@@ -3,12 +3,15 @@ package com.kino_cms.service;
 import com.kino_cms.dto.CinemaDTO;
 import com.kino_cms.entity.Cinema;
 import com.kino_cms.entity.SeoBlock;
+import com.kino_cms.enums.Language;
 import com.kino_cms.repository.CinemaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -23,7 +26,11 @@ public class CinemaService {
     }
 
     public List<CinemaDTO> getAllCinemaDto() {
-        return cinemaRepo.getAllCinemaDto();
+        Locale locale = LocaleContextHolder.getLocale();
+        if (locale.getLanguage().equals("en")) {
+            return cinemaRepo.getAllCinemaDto(Language.ENGLISH);
+        }
+        return cinemaRepo.getAllCinemaDto(Language.UKRAINIAN);
     }
 
     public void deleteCinemaById(Long id) {

@@ -8,7 +8,6 @@ import com.kino_cms.enums.Role;
 import com.kino_cms.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -95,5 +94,14 @@ public class UserService {
     public UserDTO getUserDTOByEmail(String email) {
         Optional<UserDTO> byEmail = userRepository.getUserDTOByEmail(email);
         return byEmail.orElseGet(UserDTO::new);
+    }
+
+    public boolean passwordIsCorrect(String password, String username) {
+        Optional<User> userOptional = findByEmail(username);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            return passwordEncoder.matches(password, user.getPassword());
+        }
+        return false;
     }
 }

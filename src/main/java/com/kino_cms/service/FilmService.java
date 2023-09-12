@@ -4,15 +4,14 @@ import com.kino_cms.dto.FilmDTO;
 import com.kino_cms.entity.Film;
 import com.kino_cms.entity.SeoBlock;
 import com.kino_cms.enums.FilmType;
+import com.kino_cms.enums.Language;
 import com.kino_cms.repository.FilmRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class FilmService {
@@ -45,13 +44,25 @@ public class FilmService {
     }
 
     public List<FilmDTO> getAllFilmIsReleasedNow() {
-        List<FilmDTO> filmIsReleasedNow = filmRepo.getAllFilmIsReleasedNow();
+        Locale locale = LocaleContextHolder.getLocale();
+        List<FilmDTO> filmIsReleasedNow;
+        if (locale.getLanguage().equals("en")) {
+            filmIsReleasedNow = filmRepo.getAllFilmIsReleasedNow(Language.ENGLISH);
+        } else {
+            filmIsReleasedNow = filmRepo.getAllFilmIsReleasedNow(Language.UKRAINIAN);
+        }
         return filmIsReleasedNow;
     }
 
     public List<FilmDTO> getAllFilmReleasedSoon() {
 
-        List<FilmDTO> filmReleasedSoon = filmRepo.getAllFilmReleasedSoon();
+        Locale locale = LocaleContextHolder.getLocale();
+        List<FilmDTO> filmReleasedSoon;
+        if (locale.getLanguage().equals("en")) {
+            filmReleasedSoon = filmRepo.getAllFilmReleasedSoon(Language.ENGLISH);
+        } else {
+            filmReleasedSoon = filmRepo.getAllFilmReleasedSoon(Language.UKRAINIAN);
+        }
         return filmReleasedSoon;
     }
 

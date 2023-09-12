@@ -31,10 +31,21 @@ public class UserPageController {
     }
 
     @PostMapping
-    public ModelAndView saveUserProfile(@ModelAttribute("userDto") UserDTO userDTO) {
+    public ModelAndView saveUserProfile(@ModelAttribute("userDto") UserDTO userDTO,
+                                        @ModelAttribute("confirmPassword") String confirmPassword) {
         ModelAndView modelAndView = new ModelAndView("profile");
-        userService.saveUserDTO(userDTO);
         modelAndView.addObject("userDto", userDTO);
+        String password = userDTO.getPassword();
+        if (!password.equals(confirmPassword)) {
+            modelAndView.addObject("errorMessage", "Пароль та підтвердження не співпадають");
+            return modelAndView;
+        }
+        if (!userService.passwordIsCorrect(password, userDTO.getEmail())) {
+            modelAndView.addObject("errorMessage", "Не вірний пароль");
+            return modelAndView;
+        }
+
+        userService.saveUserDTO(userDTO);
         return modelAndView;
     }
 

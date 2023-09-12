@@ -16,11 +16,6 @@ public class HomePageService {
 
     private final HomePageRepo homePageRepo;
 
-    public Optional<HomePage> getHomePage(Long id) {
-
-        return homePageRepo.findById(id);
-    }
-
     public void save(HomePage homePage) {
         homePageRepo.save(homePage);
     }
@@ -32,6 +27,7 @@ public class HomePageService {
         }
         return homePageRepo.findByLanguage(Language.UKRAINIAN);
     }
+
     public Optional<HomePage> getHomePageByLanguageOrId(Language language, Long pageId) {
         if (language != null) {
             return homePageRepo.findByLanguage(language);

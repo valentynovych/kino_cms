@@ -2,8 +2,6 @@ package com.kino_cms.controller.users;
 
 import com.kino_cms.dto.BannerDTO;
 import com.kino_cms.dto.FilmDTO;
-import com.kino_cms.dto.GeneralPageDTO;
-import com.kino_cms.entity.GeneralPage;
 import com.kino_cms.entity.HomePage;
 import com.kino_cms.service.BannerService;
 import com.kino_cms.service.FilmService;
@@ -15,10 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 @Controller
@@ -34,9 +30,9 @@ public class HomePageController {
     FilmService filmService;
 
     @GetMapping("/")
-    public String viewHomePage(Model model, Locale locale) {
+    public String viewHomePage(Model model) {
 
-        Optional<HomePage> homePageById = homePageService.getHomePageByLocale(locale);
+        Optional<HomePage> homePageById = homePageService.getHomePageByLocale();
         if (homePageById.isPresent()) {
             model.addAttribute("homePage", homePageById.get());
         }

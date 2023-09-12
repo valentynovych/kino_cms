@@ -26,7 +26,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
 
-    @Query("SELECT new com.kino_cms.dto.UserDTO(u.id, u.usrname, u.password, u.email, u.createTime, " +
+    @Query("SELECT new com.kino_cms.dto.UserDTO(u.id, u.usrname, u.email, u.createTime, " +
             "u.userDetails.firstName,u.userDetails.lastName, u.userDetails.address, " +
             "u.userDetails.cardNumber, u.userDetails.sex, u.userDetails.phone, " +
             "u.userDetails.dateOfBirth, u.userDetails.city, u.userDetails.language) from User u where u.email =:email")

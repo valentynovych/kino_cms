@@ -3,12 +3,15 @@ package com.kino_cms.service;
 import com.kino_cms.dto.FeedDTO;
 import com.kino_cms.entity.FeedPage;
 import com.kino_cms.enums.FeedType;
+import com.kino_cms.enums.Language;
 import com.kino_cms.repository.FeedPageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -77,12 +80,24 @@ public class FeedPageService {
     }
 
     public List<FeedDTO> getAllFeedDTOByFeedTypeFeed() {
-        List<FeedDTO> allFeedDTO = feedPageRepo.getAllFeedDTOByTypeFeed();
+        Locale locale = LocaleContextHolder.getLocale();
+        List<FeedDTO> allFeedDTO;
+        if (locale.getLanguage().equals("en")) {
+            allFeedDTO = feedPageRepo.getAllFeedDTOByTypeFeed(Language.ENGLISH);
+        } else {
+            allFeedDTO = feedPageRepo.getAllFeedDTOByTypeFeed(Language.UKRAINIAN);
+        }
         return allFeedDTO;
     }
 
     public List<FeedDTO> getAllFeedDTOByFeedTypePromotion() {
-        List<FeedDTO> allFeedDTO = feedPageRepo.getAllFeedDTOByTypePromotion();
+        Locale locale = LocaleContextHolder.getLocale();
+        List<FeedDTO> allFeedDTO;
+        if (locale.getLanguage().equals("en")) {
+            allFeedDTO = feedPageRepo.getAllFeedDTOByTypePromotion(Language.ENGLISH);
+        } else {
+            allFeedDTO = feedPageRepo.getAllFeedDTOByTypePromotion(Language.UKRAINIAN);
+        }
         return allFeedDTO;
     }
 

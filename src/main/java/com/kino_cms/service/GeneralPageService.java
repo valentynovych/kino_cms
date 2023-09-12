@@ -2,6 +2,7 @@ package com.kino_cms.service;
 
 import com.kino_cms.dto.GeneralPageDTO;
 import com.kino_cms.entity.GeneralPage;
+import com.kino_cms.entity.Hall;
 import com.kino_cms.entity.SeoBlock;
 import com.kino_cms.enums.Language;
 import com.kino_cms.repository.GeneralPageRepo;
@@ -154,6 +155,23 @@ public class GeneralPageService {
 
     public Optional<GeneralPageDTO> getGeneralPageDTOByLanguagePageId(Long id) {
         return generalPageRepo.getGeneralPageDTOByLanguagePageId(id);
+    }
+
+    public List<String> getListImagesFileNameById(Long id) {
+        List<String> fileNamesFromDB = new ArrayList<>(List.of("", "", "", "", "", "", ""));
+        GeneralPage generalPage;
+        Optional<GeneralPage> generalPageOptional = generalPageRepo.findById(id);
+        if (generalPageOptional.isPresent()) {
+            generalPage = generalPageOptional.get();
+
+            fileNamesFromDB.set(0, generalPage.getMainImage());
+            fileNamesFromDB.set(1, generalPage.getImage1());
+            fileNamesFromDB.set(2, generalPage.getImage2());
+            fileNamesFromDB.set(3, generalPage.getImage3());
+            fileNamesFromDB.set(4, generalPage.getImage4());
+            fileNamesFromDB.set(5, generalPage.getImage5());
+        }
+        return fileNamesFromDB;
     }
 }
 

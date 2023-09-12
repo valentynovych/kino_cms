@@ -54,7 +54,9 @@ public class CinemaPageViewController {
     public ModelAndView viewHall(@PathVariable Long hallId) {
         ModelAndView modelAndView = new ModelAndView("user_views/cinemas/hallViewPage");
         Optional<HallDTO> hallDtoById = hallService.getHallDtoById(hallId);
-        modelAndView.addObject("hallDTO", hallDtoById.get());
+
+        HallDTO hallDTO = hallDtoById.orElseGet(HallDTO::new);
+        modelAndView.addObject("hallDTO", hallDTO);
 
         List<FilmSession> allSessionByCinemaId = filmSessionService.getAllSessionByCinemaId(hallId);
         modelAndView.addObject("allSessionByCinema", allSessionByCinemaId);

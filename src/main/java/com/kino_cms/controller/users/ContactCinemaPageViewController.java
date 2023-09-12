@@ -16,7 +16,7 @@ public class ContactCinemaPageViewController {
     @GetMapping("/contacts")
     public ModelAndView viewContacts() {
         ModelAndView modelAndView = new ModelAndView("user_views/contacts/contactsViewPage");
-        ContactPage contactPage = contactPageService.getContactPageById(1L).get();
+        ContactPage contactPage = contactPageService.getContactPage().get();
         modelAndView.addObject("contactPage", contactPage);
         return modelAndView;
     }

@@ -22,8 +22,8 @@ public class AttributeController {
     private final GeneralPageService generalPageService;
 
     @ModelAttribute("phone_main")
-    public String getPhoneName(Locale locale) {
-        Optional<HomePage> homePageById = homePageService.getHomePageByLocale(locale);
+    public String getPhoneName() {
+        Optional<HomePage> homePageById = homePageService.getHomePageByLocale();
         if (homePageById.isPresent()) {
             return homePageById.get().getPhone_main();
         } else {
@@ -32,8 +32,8 @@ public class AttributeController {
     }
 
     @ModelAttribute("phone_other")
-    public String getPhoneOther(Locale locale) {
-        Optional<HomePage> homePageById = homePageService.getHomePageByLocale(locale);
+    public String getPhoneOther() {
+        Optional<HomePage> homePageById = homePageService.getHomePageByLocale();
         if (homePageById.isPresent()) {
             return homePageById.get().getPhone_other();
         } else {
@@ -42,8 +42,8 @@ public class AttributeController {
     }
 
     @ModelAttribute("other_pages")
-    public List<GeneralPageDTO> getOtherPages(Locale locale) {
-        List<GeneralPageDTO> pages = generalPageService.getAllOtherPages(locale);
+    public List<GeneralPageDTO> getOtherPages() {
+        List<GeneralPageDTO> pages = generalPageService.getAllOtherPages();
         return pages;
     }
 

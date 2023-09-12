@@ -12,8 +12,8 @@ public class ContactPageService {
     @Autowired
     ContactPageRepo contactPageRepo;
 
-    public Optional<ContactPage> getContactPageById(Long id) {
-        return contactPageRepo.findById(id);
+    public Optional<ContactPage> getContactPage() {
+        return contactPageRepo.findById(1L);
     }
 
     public void save(ContactPage contactPage) {

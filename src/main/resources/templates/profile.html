@@ -53,7 +53,7 @@
                         <label for="last" class="col-sm-4 col-form-label-sm" th:text="#{last-name}">Прізвище</label>
                         <div class="col-sm-8">
                             <input type="text" id="last" th:field="*{lastName}"
-                                   class="form-control form-control-sm" required>
+                                   class="form-control form-control-sm" >
                             <div class="invalid-feedback" th:text="#{required-input}">
                                 Обов'язкове поле
                             </div>
@@ -63,7 +63,7 @@
                         <label for="username" class="col-sm-4 col-form-label-sm" th:text="#{username}">Псевдонім</label>
                         <div class="col-sm-8">
                             <input type="text" id="username" th:field="*{username}"
-                                   class="form-control form-control-sm" required>
+                                   class="form-control form-control-sm" >
                             <div class="invalid-feedback" th:text="#{required-input}">
                                 Обов'язкове поле
                             </div>
@@ -83,7 +83,7 @@
                         <label for="address" class="col-sm-4 col-form-label-sm" th:text="#{address}">Адреса</label>
                         <div class="col-sm-8">
                             <input type="text" id="address" th:field="*{address}"
-                                   class="form-control form-control-sm" required>
+                                   class="form-control form-control-sm" >
                             <div class="invalid-feedback" th:text="#{required-input}">
                                 Обов'язкове поле
                             </div>
@@ -103,7 +103,7 @@
                         <label for="card_number" class="col-sm-4 col-form-label-sm" th:text="#{card-number}">Номер карти</label>
                         <div class="col-sm-8">
                             <input type="text" id="card_number" th:field="*{cardNumber}"
-                                   class="form-control form-control-sm" required>
+                                   class="form-control form-control-sm" >
                             <div class="invalid-feedback" th:text="#{required-input}">
                                 Обов'язкове поле
                             </div>
@@ -162,7 +162,7 @@
                         <label for="date_of_birth" class="col-sm-4 col-form-label-sm" th:text="#{date-of-birth}">Дата народження</label>
                         <div class="col-sm-8">
                             <input type="date" id="date_of_birth" class="form-control form-control-sm"
-                                   th:field="*{dateOfBirth}" required>
+                                   th:field="*{dateOfBirth}">
                             <div class="invalid-feedback" th:text="#{required-input}">
                                 Обов'язкове поле
                             </div>
@@ -196,6 +196,9 @@
                         </div>
                     </div>
                 </div>
+                <th:block th:if="${!#strings.isEmpty(errorMessage)}">
+                    <span class="text-center text-danger my-3" th:text="${errorMessage}"></span>
+                </th:block>
             </div>
             <div class="row justify-content-center">
                 <div class="d-grid gap-2 col-3 mx-auto">
