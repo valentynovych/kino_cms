@@ -1,4 +1,4 @@
-package com.kino_cms.service;
+package com.kino_cms.utils;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class SaveUploadService {
+public class SaveUploadFileUtils {
     @Value("${upload.path}")
     private String uploadPath;
 

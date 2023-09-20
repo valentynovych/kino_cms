@@ -2,22 +2,31 @@ package com.kino_cms.service;
 
 import com.kino_cms.entity.ContactPage;
 import com.kino_cms.repository.ContactPageRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
+@Log4j2
 public class ContactPageService {
-    @Autowired
-    ContactPageRepo contactPageRepo;
+
+    private final ContactPageRepo contactPageRepo;
 
     public Optional<ContactPage> getContactPage() {
-        return contactPageRepo.findById(1L);
+        log.info("-> start execution method getContactPage()");
+        Optional<ContactPage> byId = contactPageRepo.findById(1L);
+        log.info("-> exit from method getContactPage(), return optional isPresent: " + byId.isPresent());
+        return byId;
     }
 
-    public void save(ContactPage contactPage) {
-        contactPageRepo.save(contactPage);
+    public ContactPage save(ContactPage contactPage) {
+        log.info("-> start execution method save(ContactPage)");
+        ContactPage save = contactPageRepo.save(contactPage);
+        log.info("-> success saving ContactPage");
+        return save;
     }
 
 }
