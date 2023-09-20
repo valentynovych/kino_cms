@@ -2,7 +2,7 @@ package com.kino_cms.controller.admin;
 
 import com.kino_cms.dto.MailingDTO;
 import com.kino_cms.dto.UserDTO;
-import com.kino_cms.sendMailer.MailSenderService;
+import com.kino_cms.service.MailSenderService;
 import com.kino_cms.service.MailingService;
 import com.kino_cms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -58,7 +57,7 @@ public class MailingPageController {
 
     @ResponseBody
     @PostMapping("/admin/mailing")
-    public void sendMails(@ModelAttribute MailingDTO mailingDTO) throws IOException, InterruptedException {
+    public void sendMails(@ModelAttribute MailingDTO mailingDTO) throws IOException {
         progress = 0.0;
         List<UserDTO> users = mailingDTO.getUserDTOS();
         int countUsersToSend = users.size();
@@ -74,8 +73,8 @@ public class MailingPageController {
         }
         for (int i = 0; i < countUsersToSend; i++) {
             String mailTo = users.get(i).getEmail();
-            //mailSenderService.sendTemplate(mailTo, mailingDTO.getLastUsedTemplate());
-            Thread.sleep(1000);
+            mailSenderService.sendEmail(mailTo, mailingDTO.getLastUsedTemplate());
+            //Thread.sleep(1000);
             progress = (i + 1) / (double) countUsersToSend * 100;
             allCountMails++;
         }

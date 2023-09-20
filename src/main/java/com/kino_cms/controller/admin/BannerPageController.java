@@ -3,7 +3,7 @@ package com.kino_cms.controller.admin;
 import com.kino_cms.dto.BannerDTO;
 import com.kino_cms.enums.BannerType;
 import com.kino_cms.service.BannerService;
-import com.kino_cms.service.SaveUploadService;
+import com.kino_cms.utils.SaveUploadFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +23,7 @@ public class BannerPageController {
     @Autowired
     BannerService bannerService;
     @Autowired
-    SaveUploadService uploadService;
+    SaveUploadFileUtils uploadService;
 
     @GetMapping("/admin/edit-banners")
     public String editBanner(Model model) {
@@ -39,7 +39,7 @@ public class BannerPageController {
     public String saveHeaderBanner(@ModelAttribute("headerBanner") BannerDTO bannerDTOModel,
                                    @RequestParam("headerBannerImg") MultipartFile[] headerBannerImg) throws IOException {
         ArrayList<MultipartFile> images = new ArrayList<>(Arrays.stream(headerBannerImg).toList());
-        List<String> fileNamesFromDB = bannerService.getListImagesFileNameById(BannerType.HEADER);
+        List<String> fileNamesFromDB = bannerService.getListImagesFileNameByBannerType(BannerType.HEADER);
         fileNamesFromDB = uploadService.saveUploadFiles(images, fileNamesFromDB);
         bannerDTOModel = bannerService.updateImagesOnModel(bannerDTOModel, fileNamesFromDB);
 
@@ -52,7 +52,7 @@ public class BannerPageController {
                                         @RequestParam("perforatingBannerImg") MultipartFile perforatingBannerImg) throws IOException {
         ArrayList<MultipartFile> images = new ArrayList<>();
         images.add(perforatingBannerImg);
-        List<String> fileNamesFromDB = bannerService.getListImagesFileNameById(BannerType.PERFORATING);
+        List<String> fileNamesFromDB = bannerService.getListImagesFileNameByBannerType(BannerType.PERFORATING);
         BannerDTO dto = bannerService.getPerforatingBanner();
         bannerDTOModel.setBannerImages(dto.getBannerImages());
         fileNamesFromDB = uploadService.saveUploadFiles(images, fileNamesFromDB);
@@ -66,7 +66,7 @@ public class BannerPageController {
     public String savePromotionBanner(@ModelAttribute("promotionBanner") BannerDTO bannerDTOModel,
                                       @RequestParam("promotionBannerImg") MultipartFile[] promotionBannerImg) throws IOException {
         ArrayList<MultipartFile> images = new ArrayList<>(Arrays.stream(promotionBannerImg).toList());
-        List<String> fileNamesFromDB = bannerService.getListImagesFileNameById(BannerType.PROMOTION);
+        List<String> fileNamesFromDB = bannerService.getListImagesFileNameByBannerType(BannerType.PROMOTION);
         fileNamesFromDB = uploadService.saveUploadFiles(images, fileNamesFromDB);
         bannerDTOModel = bannerService.updateImagesOnModel(bannerDTOModel, fileNamesFromDB);
 

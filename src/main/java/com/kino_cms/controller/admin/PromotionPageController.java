@@ -1,12 +1,10 @@
 package com.kino_cms.controller.admin;
 
-import com.kino_cms.dto.GeneralPageDTO;
 import com.kino_cms.entity.FeedPage;
 import com.kino_cms.enums.FeedType;
 import com.kino_cms.enums.Language;
-import com.kino_cms.enums.PageType;
 import com.kino_cms.service.FeedPageService;
-import com.kino_cms.service.SaveUploadService;
+import com.kino_cms.utils.SaveUploadFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -28,7 +26,7 @@ public class PromotionPageController {
     @Autowired
     FeedPageService feedPageService;
     @Autowired
-    SaveUploadService uploadService;
+    SaveUploadFileUtils uploadService;
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     @GetMapping("/admin/edit-promotion/{id}")
@@ -100,7 +98,7 @@ public class PromotionPageController {
         }
 
         fileNamesFromDB = uploadService.saveUploadFiles(images, fileNamesFromDB);
-        feedPageModel = feedPageService.updateImagesOnModel(feedPageModel, id, fileNamesFromDB);
+        feedPageModel = feedPageService.updateImagesOnModel(feedPageModel, fileNamesFromDB);
 
         feedPageService.saveFeedPage(feedPageModel);
         return "redirect:/admin/view-promotions";

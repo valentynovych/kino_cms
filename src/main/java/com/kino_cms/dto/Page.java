@@ -13,4 +13,8 @@ public abstract class Page {
     private Boolean isActive;
     @Enumerated(EnumType.STRING)
     private PageType pageType;
+
+    public PageType getPageType() {
+        return pageType;
+    }
 }

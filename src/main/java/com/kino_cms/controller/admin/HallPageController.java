@@ -1,10 +1,9 @@
 package com.kino_cms.controller.admin;
 
-import com.kino_cms.dto.CinemaDTO;
 import com.kino_cms.dto.HallDTO;
 import com.kino_cms.enums.Language;
 import com.kino_cms.service.HallService;
-import com.kino_cms.service.SaveUploadService;
+import com.kino_cms.utils.SaveUploadFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +22,7 @@ public class HallPageController {
     @Autowired
     HallService hallService;
     @Autowired
-    SaveUploadService uploadService;
+    SaveUploadFileUtils uploadService;
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     @GetMapping("/admin/edit-hall/{id}/{cinema}")

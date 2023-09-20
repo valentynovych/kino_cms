@@ -5,7 +5,10 @@ import com.kino_cms.entity.GeneralPage;
 import com.kino_cms.entity.HomePage;
 import com.kino_cms.service.GeneralPageService;
 import com.kino_cms.service.HomePageService;
+import com.kino_cms.service.UserSessionService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,11 +18,21 @@ import java.util.Locale;
 import java.util.Optional;
 
 @Controller
-@ControllerAdvice
+@ControllerAdvice(basePackageClasses = {CinemaPageViewController.class,
+        ContactCinemaPageViewController.class,
+        FeedPageViewController.class,
+        FilmPageViewController.class,
+        GeneralPageViewController.class,
+        HomePageController.class,
+        PosterPageController.class,
+        TimeTableViewPageController.class,
+        UserPageController.class})
 @RequiredArgsConstructor
+@Log4j2
 public class AttributeController {
     private final HomePageService homePageService;
     private final GeneralPageService generalPageService;
+    private final UserSessionService userSessionService;
 
     @ModelAttribute("phone_main")
     public String getPhoneName() {
@@ -51,5 +64,10 @@ public class AttributeController {
     public List<GeneralPage> getListAboutPages(Locale locale) {
         List<GeneralPage> allUkPageByPageTypeForMenu = generalPageService.getAllPageByPageTypeForMenu(locale);
         return allUkPageByPageTypeForMenu;
+    }
+
+    @ModelAttribute
+    public void logSession(HttpSession httpSessionListener) {
+        userSessionService.createSession(httpSessionListener);
     }
 }

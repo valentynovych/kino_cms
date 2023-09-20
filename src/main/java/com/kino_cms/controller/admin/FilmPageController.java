@@ -4,7 +4,7 @@ import com.kino_cms.dto.FilmDTO;
 import com.kino_cms.enums.FilmType;
 import com.kino_cms.enums.Language;
 import com.kino_cms.service.FilmService;
-import com.kino_cms.service.SaveUploadService;
+import com.kino_cms.utils.SaveUploadFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +21,7 @@ public class FilmPageController {
     @Autowired
     FilmService filmService;
     @Autowired
-    SaveUploadService uploadService;
+    SaveUploadFileUtils uploadService;
 
     @GetMapping("/admin/edit-film/{id}")
     public String editFilm(@PathVariable Long id,

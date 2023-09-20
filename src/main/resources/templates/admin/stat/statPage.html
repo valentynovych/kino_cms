@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
     <!-- Flatpickr css -->
     <link rel="stylesheet" href="/assets/vendor/flatpickr/dist/flatpickr.min.css"/>
+    <!-- Charts   -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 <body>
@@ -33,11 +35,11 @@
 <aside th:replace="fragments/sidebar"></aside>
 <main class="main-content">
     <nav th:replace="fragments/navbar_admin"></nav>
-    <div class="container d-grid gap-2 py-3">
-        <div class="row">
-            <div class="card">
+    <div class="container-xl d-flex gap-2">
+        <div class="row p-3">
+            <div class="card d-flex flex-wrap flex-row">
                 <!-- Users -->
-                <div class="col-lg-3 col-md-6 m-2">
+                <div class="col-lg-3 m-2">
                     <div class="card bg-soft-primary">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
@@ -57,26 +59,44 @@
                         </div>
                     </div>
                 </div>
-                <!-- User activity table -->
-                <div class="col-md-12 col-xl-6">
-                    <div class="card" data-aos="fade-up" data-aos-delay="1000">
-                        <div class="flex-wrap card-header d-flex justify-content-between">
-                            <div class="header-title">
-                                <h4 class="card-title">Conversions</h4>
-                            </div>
-                            <div class="dropdown">
-                                <a href="#" class="text-gray dropdown-toggle" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
-                                    This Week
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton3">
-                                    <li><a class="dropdown-item" href="#">This Week</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
+                <div class="col-lg-3 m-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="bg-info text-white rounded p-3">
+                                    <svg class="icon-20" xmlns="http://www.w3.org/2000/svg" width="20px" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                    </svg>
+                                </div>
+                                <div class="text-end">
+                                    Фільмів у показі
+                                    <h2 class="counter" style="visibility: visible;" th:text="${filmCount}"></h2>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div id="d-activity" class="d-activity"></div>
+                    </div>
+                </div>
+
+                <!-- User activity table -->
+            </div>
+            <div class="row d-flex flex-wrap">
+                <div class="card col-4">
+                    <h5 class="card-header text-center">Користувачі</h5>
+                    <div class="card-body">
+                        <div>
+                            <canvas id="myChart"></canvas>
+                        </div>
+                        <div class="hidden d-none" th:each="entry : ${usersGender}">
+                            <span th:id="${entry.key}" th:text="${entry.value}"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- User activity -->
+                <div class="card col-7 ms-3">
+                    <h5 class="card-header text-center">Активність за останній тиждень</h5>
+                    <div class="card-body">
+                        <div>
+                            <canvas id="statistics-chart" width="100%"></canvas>
                         </div>
                     </div>
                 </div>
@@ -131,14 +151,83 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
 </main>
 
-<script src="/js/file-upload.js"></script>
+<script>
+    const ctx = document.getElementById('myChart');
+
+    const maleCount = document.getElementById('Male').innerText;
+    const femaleCount = document.getElementById('Female').innerText;
+    const data = {
+        labels: [
+            'Чоловіки',
+            'Жінки'
+        ],
+        datasets: [{
+            label: 'Усього зареєстровано: ',
+            data: [maleCount, femaleCount],
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)'
+            ],
+            hoverOffset: 4
+        }]
+    };
+    const config = {
+        type: 'doughnut',
+        data: data,
+    };
+    new Chart(ctx, config);
+
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        drawChart()
+    })
+    async function drawChart() {
+        const request = new Request("/admin/getSessionsLastWeek");
+        request.headers.set("Accept", "application/json");
+
+        const response = await fetch(request);
+        const data = await response.json();
+
+        const ctx = document.getElementById("statistics-chart").getContext("2d");
+        new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: Object.keys(data),
+                datasets: [{
+                    label: "Кількість сесій",
+                    data: Object.values(data)
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: "category",
+                        position: "bottom",
+                        title: {
+                            style: {
+                                textTransform: "capitalize"
+                            }
+                        }
+                    },
+                    y: {
+                        type: "linear",
+                        position: "left",
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+            }
+        });
+    }
+</script>
+
 
 <script src="/assets/js/core/libs.min.js"></script>
 

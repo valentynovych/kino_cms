@@ -4,13 +4,16 @@ import com.kino_cms.enums.FeedType;
 import com.kino_cms.enums.Language;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Date;
 import java.util.List;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 public class FeedPage {
     @Id

@@ -1,5 +1,6 @@
 package com.kino_cms.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kino_cms.enums.Role;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class User implements org.springframework.security.core.userdetails.UserD
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Ticket> tickets;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<UserSession> userSessionList;
 
     @Enumerated(EnumType.STRING)
