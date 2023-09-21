@@ -32,6 +32,7 @@ public class BannerService {
             dto.setId(0L);
             dto.setBannerType(BannerType.HEADER);
              dto.setBannerImages(createEmptyList(5));
+             dto.setSlideSpeed(10);
         }
         log.info("-> exit from method getHeaderBanner() with banner id: " + dto.getId());
         return dto;
@@ -49,6 +50,7 @@ public class BannerService {
             dto.setId(0L);
             dto.setBannerType(BannerType.PERFORATING);
             dto.setBannerImages(createEmptyList(1));
+            dto.setSlideSpeed(10);
         }
         log.info("-> exit from method getPerforatingBanner() with banner id: " + dto.getId());
         return dto;
@@ -66,6 +68,7 @@ public class BannerService {
             dto.setId(0L);
             dto.setBannerType(BannerType.PROMOTION);
             dto.setBannerImages(createEmptyList(5));
+            dto.setSlideSpeed(10);
         }
         log.info("-> exit from method getPromotionBanner() with banner id: " + dto.getId());
         return dto;

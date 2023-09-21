@@ -54,11 +54,16 @@
         <article class="main-content-block">
             <div class="col my-4">
                 <div class="col-2 mx-auto">
-                    <th:block th:if="${allFeedPages[0].feedType.name()} == 'FEED'">
-                        <h3 th:text="#{label.menu.feeds}"></h3>
+                    <th:block th:if="${not #lists.isEmpty(allFeedPages)}">
+                        <th:block th:if="${allFeedPages[0].feedType.name()} == 'FEED'">
+                            <h3 th:text="#{label.menu.feeds}"></h3>
+                        </th:block>
+                        <th:block th:unless="${allFeedPages[0].feedType.name()} == 'FEED'">
+                            <h3 th:text="#{promotions}"></h3>
+                        </th:block>
                     </th:block>
-                    <th:block th:unless="${allFeedPages[0].feedType.name()} == 'FEED'">
-                        <h3 th:text="#{promotions}"></h3>
+                    <th:block th:unless="${not #lists.isEmpty(allFeedPages)}">
+                        <h3 class="text-center text-info" th:text="'Акцій немає'"></h3>
                     </th:block>
 
                 </div>
