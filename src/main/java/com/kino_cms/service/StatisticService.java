@@ -1,8 +1,10 @@
 package com.kino_cms.service;
 
 import com.kino_cms.dto.FilmDTO;
+import com.kino_cms.dto.UserDTO;
 import com.kino_cms.entity.FeedPage;
 import com.kino_cms.entity.User;
+import com.kino_cms.enums.City;
 import com.kino_cms.enums.FeedType;
 import com.kino_cms.enums.Language;
 import com.kino_cms.enums.Role;
@@ -13,6 +15,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,6 +64,7 @@ public class StatisticService {
         List<User> userWithoutAdmin = all
                 .stream()
                 .filter(userDTO -> userDTO.getRole().equals(Role.ROLE_USER))
+                .filter(user -> user.getUserDetails().getSex() != null)
                 .toList();
         log.info("-> getUsersGender > filter users by sex(Male)");
         List<User> males = userWithoutAdmin
@@ -77,5 +83,30 @@ public class StatisticService {
         log.info(String.format("-> exit from method getUsersGender(), return Map has Male: %s, Female: %s users",
                 males.size(), females.size()));
         return genderMap;
+    }
+
+
+    public Map<String, Integer> getCityStat() {
+        Map<String, Integer> cityOnCount = new HashMap<>();
+        List<UserDTO> userDTOList = userRepository.getUserDTOList()
+                .stream()
+                .filter(userDTO -> userDTO.getCity() != null)
+                .toList();
+        List<City> cityList = Arrays.stream(City.values()).toList();
+
+        for (City city : cityList) {
+            long countUsers = userDTOList.stream().filter(userDTO -> userDTO.getCity() == city).count();
+            if (countUsers > 0) {
+                cityOnCount.put(city.getDescription(), (int) countUsers);
+            }
+        }
+        return cityOnCount;
+    }
+
+    public Integer getUserCountForLastWeek() {
+        List<User> all = userRepository.findAll().stream().filter(user -> user.getCreateTime() != null && user.getCreateTime().length() > 1).toList();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        long count = all.stream().filter(user -> LocalDateTime.parse(user.getCreateTime(), formatter).isAfter(LocalDateTime.now().minusDays(7))).count();
+        return (int) count;
     }
 }

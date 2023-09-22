@@ -56,13 +56,15 @@ public class AttributeController {
 
     @ModelAttribute("other_pages")
     public List<GeneralPageDTO> getOtherPages() {
-        List<GeneralPageDTO> pages = generalPageService.getAllOtherPages();
+        List<GeneralPageDTO> pages = generalPageService.getAllOtherPages()
+                .stream().filter(GeneralPageDTO::getIsActive).toList();
         return pages;
     }
 
     @ModelAttribute("list_about_pages")
     public List<GeneralPage> getListAboutPages(Locale locale) {
-        List<GeneralPage> allUkPageByPageTypeForMenu = generalPageService.getAllPageByPageTypeForMenu(locale);
+        List<GeneralPage> allUkPageByPageTypeForMenu = generalPageService.getAllPageByPageTypeForMenu(locale)
+                .stream().filter(GeneralPage::getIsActive).toList();
         return allUkPageByPageTypeForMenu;
     }
 

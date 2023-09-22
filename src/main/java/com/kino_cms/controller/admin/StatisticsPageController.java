@@ -44,11 +44,19 @@ public class StatisticsPageController {
         Map<String, Integer> usersGender = statisticService.getUsersGender();
         model.addAttribute("usersGender", usersGender);
 
+        Integer registerUserLastWeek = statisticService.getUserCountForLastWeek();
+        model.addAttribute("userLastWeek", registerUserLastWeek);
+
         return "admin/stat/statPage";
     }
 
     @GetMapping("/admin/getSessionsLastWeek")
     public @ResponseBody Map<String, Integer> getSessionsLastWeek() {
         return userSessionService.getLastWeekActivity();
+    }
+
+    @GetMapping("/admin/getCityStat")
+    public @ResponseBody Map<String, Integer> getCityStat() {
+        return statisticService.getCityStat();
     }
 }

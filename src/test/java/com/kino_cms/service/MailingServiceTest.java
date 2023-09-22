@@ -82,7 +82,7 @@ class MailingServiceTest {
         assertEquals(mailingDTO.getCountMails(), entity1.getCountMails());
         assertEquals(mailingDTO.getLastUsedTemplate(), entity1.getLastUsedTemplate());
         List<String> stringList1 = mailingDTO.getLastTemplates();
-        for (String temp : stringList) {
+        for (String temp : stringList1) {
             assertTrue(entity1.getLastTemplates().contains(temp));
         }
 

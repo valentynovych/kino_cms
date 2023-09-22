@@ -294,3 +294,7 @@ ul.nav.nav-tabs.nav-fill.mb-auto.flex-column {
 .dual-horizontal {
     z-index: 888 !important;
 }
+
+div#datatable_info, div#datatable_length, div#datatable_filter {
+    display: none;
+}

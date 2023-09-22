@@ -14,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -95,7 +97,7 @@ public class UserService {
         User user = new User();
         user.setUserDetails(new UserDetails());
         user.setRole(Role.ROLE_USER);
-        user.setCreateTime(new Date().toString());
+        user.setCreateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         log.info("-> exit from method createNewUser: ");
         return user;
     }

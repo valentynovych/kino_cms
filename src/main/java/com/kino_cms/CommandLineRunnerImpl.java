@@ -36,7 +36,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
     }
 
     private void createAndSaveDefaultEntity() {
-        if (!userRepository.existsById(1L)) {
+        if (userRepository.count() == 0) {
             log.info("create default users");
             userRepository.saveAll(createDefaultUsers());
         }

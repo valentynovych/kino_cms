@@ -1,9 +1,11 @@
 package com.kino_cms.service;
 
 import com.kino_cms.dto.FilmDTO;
+import com.kino_cms.dto.UserDTO;
 import com.kino_cms.entity.FeedPage;
 import com.kino_cms.entity.User;
 import com.kino_cms.entity.UserDetails;
+import com.kino_cms.enums.City;
 import com.kino_cms.enums.FeedType;
 import com.kino_cms.enums.Language;
 import com.kino_cms.enums.Role;
@@ -16,6 +18,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +43,7 @@ class StatisticServiceTest {
     void setUp() {
         statisticService = new StatisticService(userRepository, filmRepo, feedPageRepo);
     }
+
     @Test
     void getUserCount() {
         when(userRepository.findAll()).thenReturn(List.of(new User(), new User(), new User()));
@@ -104,5 +111,37 @@ class StatisticServiceTest {
 
         assertEquals(2, male);
         assertEquals(2, female);
+    }
+
+    @Test
+    void getCityStat() {
+        List<City> cityList = Arrays.stream(City.values()).toList();
+        List<UserDTO> userDTOS = new ArrayList<>();
+        for (City city : cityList) {
+            UserDTO userDTO = new UserDTO();
+            userDTO.setCity(city);
+            userDTOS.add(userDTO);
+        }
+        userDTOS.remove(userDTOS.size() - 1);
+        when(userRepository.getUserDTOList()).thenReturn(userDTOS);
+        Map<String, Integer> cityStat = statisticService.getCityStat();
+        cityStat.forEach((s, integer) -> {
+            assertEquals(1, integer);
+        });
+    }
+
+    @Test
+    void getUserCountForLastWeek() {
+        List<User> users = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            User userDTO = new User();
+            userDTO.setCreateTime(LocalDateTime.now().minusDays(i)
+                    .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+            users.add(userDTO);
+        }
+        when(userRepository.findAll()).thenReturn(users);
+
+        Integer userCountForLastWeek = statisticService.getUserCountForLastWeek();
+        assertEquals(7, userCountForLastWeek);
     }
 }

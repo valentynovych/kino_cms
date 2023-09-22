@@ -34,7 +34,7 @@ class MailSenderServiceTest {
     void sendEmail_withFile() {
         ReflectionTestUtils.setField(mailSenderService, "uploadPath", "/D:/SpaceLab/kino_cms/uploads");
         MimeMessage mMessage = new MimeMessage(Session.getInstance(new Properties()));
-        // MOCKS
+
         when(mailSender.createMimeMessage()).thenReturn(mMessage);
 
         String to = "mail@mail.com";

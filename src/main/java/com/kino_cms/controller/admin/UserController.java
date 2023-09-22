@@ -3,6 +3,7 @@ package com.kino_cms.controller.admin;
 import com.kino_cms.dto.UserDTO;
 import com.kino_cms.entity.User;
 import com.kino_cms.enums.City;
+import com.kino_cms.enums.Role;
 import com.kino_cms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,14 +62,19 @@ public class UserController {
     @GetMapping("/admin/delete-user/{id}")
     public String deleteUser(@PathVariable Long id) {
         Optional<User> optionalUser = userService.findById(id);
-        optionalUser.ifPresent(user -> userService.delete(user));
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            if (user.getRole() != Role.ROLE_USER) {
+                return "redirect:/admin/view-users";
+            }
+        }
         return "redirect:/admin/view-users";
     }
 
     @ModelAttribute("allCities")
     public List<String> allCity() {
         List<String> cities = Arrays.stream(City.values())
-                .map(city -> city.name())
+                .map(city -> city.getDescription())
                 .collect(Collectors.toList());
         return cities;
     }
