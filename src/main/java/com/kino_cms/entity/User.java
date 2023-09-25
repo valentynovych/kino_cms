@@ -27,9 +27,9 @@ public class User implements org.springframework.security.core.userdetails.UserD
     private String createTime;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private UserDetails userDetails;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     private List<Ticket> tickets;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<UserSession> userSessionList;
 
