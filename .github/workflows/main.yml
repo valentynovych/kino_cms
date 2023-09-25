@@ -17,14 +17,16 @@ jobs:
         with:
           distribution: 'corretto'
           java-version: 17
-
-      - name: Unit Tests
-        run: mvn -B test --file pom.xml
+      - name: Create credential
         env:
           MYSQL_HOSTNAME: avada_slj_kcms03
           MYSQL_PORT: 3306
           MYSQL_USERNAME: avada_slj_kcms03
           MYSQL_PASSWORD: m8rqH2D1BC
+
+      - name: Unit Tests
+        run: mvn -B test --file pom.xml
+
 
       - name: Build application
         run: |
