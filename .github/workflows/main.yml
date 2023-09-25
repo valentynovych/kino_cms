@@ -21,7 +21,7 @@ jobs:
       - name: Unit Tests
         run: mvn -B test --file pom.xml
         env:
-          urlDB: localhost:3306/avada_slj_kcms03
+          urlDB: jdbc:mysql://localhost:3306/avada_slj_kcms03
           usernameDB: avada_slj_kcms03
           passwordDB: m8rqH2D1BC
 
