@@ -6,10 +6,13 @@ import com.kino_cms.enums.Language;
 import com.kino_cms.enums.PageType;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 public class HomePage extends Page {
     @Id

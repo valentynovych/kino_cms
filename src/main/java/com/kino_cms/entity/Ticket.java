@@ -2,12 +2,15 @@ package com.kino_cms.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 public class Ticket {
     @Id

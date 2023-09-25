@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kino_cms.enums.Role;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -12,7 +14,8 @@ import java.util.Collection;
 import java.util.List;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 public class User implements org.springframework.security.core.userdetails.UserDetails {
     @Id

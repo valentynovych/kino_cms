@@ -4,12 +4,15 @@ import com.kino_cms.enums.City;
 import com.kino_cms.enums.Language;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Date;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 public class UserDetails {
     @Id

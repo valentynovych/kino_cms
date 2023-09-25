@@ -17,7 +17,7 @@ public class UserSession {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String httpSessionId;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private User user;
     private LocalDateTime openSession;
 }

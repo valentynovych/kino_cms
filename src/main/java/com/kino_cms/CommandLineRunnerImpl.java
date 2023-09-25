@@ -88,6 +88,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
         aboutCinema.setLanguage(Language.UKRAINIAN);
         aboutCinema.setPageType(PageType.ABOUT_CINEMA);
         aboutCinema.setCreateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern(datePattern)));
+        aboutCinema.setIsActive(Boolean.TRUE);
         aboutCinema.setSeoBlock(new SeoBlock());
 
         GeneralPage cafeBar = new GeneralPage();
@@ -95,6 +96,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
         cafeBar.setLanguage(Language.UKRAINIAN);
         cafeBar.setPageType(PageType.CAFE_BAR);
         cafeBar.setCreateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern(datePattern)));
+        cafeBar.setIsActive(Boolean.TRUE);
         cafeBar.setSeoBlock(new SeoBlock());
 
         GeneralPage vipHall = new GeneralPage();
@@ -102,6 +104,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
         vipHall.setLanguage(Language.UKRAINIAN);
         vipHall.setPageType(PageType.VIP_HALL);
         vipHall.setCreateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern(datePattern)));
+        vipHall.setIsActive(Boolean.TRUE);
         vipHall.setSeoBlock(new SeoBlock());
 
         GeneralPage advertising = new GeneralPage();
@@ -109,6 +112,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
         advertising.setLanguage(Language.UKRAINIAN);
         advertising.setPageType(PageType.ADVERTISING);
         advertising.setCreateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern(datePattern)));
+        advertising.setIsActive(Boolean.TRUE);
         advertising.setSeoBlock(new SeoBlock());
 
         GeneralPage childRoom = new GeneralPage();
@@ -116,6 +120,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
         childRoom.setLanguage(Language.UKRAINIAN);
         childRoom.setPageType(PageType.CHILD_ROOM);
         childRoom.setCreateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern(datePattern)));
+        childRoom.setIsActive(Boolean.TRUE);
         childRoom.setSeoBlock(new SeoBlock());
 
         return List.of(aboutCinema, cafeBar, vipHall, advertising, childRoom);
@@ -127,6 +132,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
         homePage.setLanguage(Language.UKRAINIAN);
         homePage.setPageType(PageType.HOME_PAGE);
         homePage.setCreateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern(datePattern)));
+        homePage.setIsActive(Boolean.TRUE);
         homePage.setSeoBlock(new SeoBlock());
         return homePage;
     }
@@ -139,6 +145,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
         contactPage.setCreateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern(datePattern)));
         ContactCinema contactCinema = new ContactCinema();
         contactCinema.setContactPage(contactPage);
+        contactPage.setIsActive(Boolean.TRUE);
         contactPage.setSeoBlock(new SeoBlock());
         return contactPage;
     }
