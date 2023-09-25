@@ -8,6 +8,21 @@ jobs:
   build-deploy:
     name: Build and Deploy spring boot application
     runs-on: ubuntu-latest
+    services:
+      mysql-master:
+        image: mysql:5.7
+        ports:
+          - 3306/tcp
+        env:
+          urlDB: jdbc:mysql://localhost:3306/avada_slj_kcms03
+          usernameDB: avada_slj_kcms03
+          passwordDB: m8rqH2D1BC
+        options: >-
+          --name=mysql-master
+          --health-cmd="mysqladmin ping"
+          --health-timeout=5s
+          --health-retries=3
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -18,12 +33,8 @@ jobs:
           distribution: 'corretto'
           java-version: 17
 
-#      - name: Unit Tests
-#        run: mvn -B test --file pom.xml
-#        env:
-#          urlDB: jdbc:mysql://localhost:3306/avada_slj_kcms03
-#          usernameDB: avada_slj_kcms03
-#          passwordDB: m8rqH2D1BC
+      - name: Unit Tests
+        run: mvn -B test --file pom.xml
 
       - name: Build application
         run: |
