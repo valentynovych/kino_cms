@@ -59,7 +59,7 @@ public class MailSenderService {
                 string.append(scanner.nextLine());
             }
         } catch (FileNotFoundException e) {
-            log.error("-> ERROR on method convertHtmlToString(), errorMessage:" + e.getMessage());
+            log.info("-> ERROR on method convertHtmlToString(), errorMessage:" + e.getMessage());
         }
         log.info("-> exit from method convertHtmlToString()");
         return string.toString();
