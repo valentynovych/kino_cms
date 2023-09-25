@@ -23,16 +23,18 @@ class MailSenderServiceTest {
 
     private MailSenderService mailSenderService;
     private JavaMailSender mailSender;
+    private File template;
 
     @BeforeEach
     void init() {
         mailSender = mock(JavaMailSender.class);
         mailSenderService = new MailSenderService(mailSender);
+        template = mock(File.class);
     }
 
     @Test
     void sendEmail_withFile() {
-        ReflectionTestUtils.setField(mailSenderService, "uploadPath", "/D:/SpaceLab/kino_cms/uploads");
+        ReflectionTestUtils.setField(mailSenderService, "uploadPath", "");
         MimeMessage mMessage = new MimeMessage(Session.getInstance(new Properties()));
 
         when(mailSender.createMimeMessage()).thenReturn(mMessage);
@@ -42,19 +44,21 @@ class MailSenderServiceTest {
         mailSenderService.sendEmail(to, templateName);
         Mockito.verify(mailSender).createMimeMessage();
 
-        File file = new File(System.getProperty("user.dir") + "/uploads/html_templates/template.html");
+//        template = new File("/html_templates/template.html");
+        when(template.exists()).thenReturn(Boolean.TRUE);
+        when(template.getName()).thenReturn(templateName);
 
-        if (!file.exists()) {
-            try (FileOutputStream fileWriter = new FileOutputStream(file)) {
+        if (!template.exists()) {
+            try (FileOutputStream fileWriter = new FileOutputStream(template)) {
                 fileWriter.write("string\nstring".getBytes());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            mailSenderService.sendEmail(to, file.getName());
+        } else {
+            mailSenderService.sendEmail(to, template.getName());
         }
-
-        if (file.exists()) {
-            if (file.delete()) {
+        if (template.exists()) {
+            if (template.delete()) {
                 System.out.println("file deleted");
             }
         }
