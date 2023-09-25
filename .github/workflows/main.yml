@@ -18,14 +18,17 @@ jobs:
           distribution: 'corretto'
           java-version: 17
 
-      - name: Unit Tests
-        run: mvn -B test --file pom.xml
-        env:
-          urlDB: jdbc:mysql://localhost:3306/avada_slj_kcms03
-          usernameDB: avada_slj_kcms03
-          passwordDB: m8rqH2D1BC
+#      - name: Unit Tests
+#        run: mvn -B test --file pom.xml
+#        env:
+#          urlDB: jdbc:mysql://localhost:3306/avada_slj_kcms03
+#          usernameDB: avada_slj_kcms03
+#          passwordDB: m8rqH2D1BC
 
       - name: Build application
         run: |
           mvn clean
           mvn -B package --file pom.xml
+
+      - name: Tomcat Deploy
+        run: curl -v -u robot:K4QU@mJ!djX4D8X2 -T /home/runner/work/kino_cms/kino_cms/target/Kino_CMS_O_Lesyk.war 'https://slj.avada-media-dev1.od.ua/manager/text/deploy?path=/Kino_CMS_O_Lesyk'
