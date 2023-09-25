@@ -20,9 +20,13 @@ jobs:
 
       - name: Unit Tests
         run: mvn -B test --file pom.xml
+        env:
+          MYSQL_HOSTNAME: avada_slj_kcms03
+          MYSQL_PORT: 3306
+          MYSQL_USERNAME: avada_slj_kcms03
+          MYSQL_PASSWORD: m8rqH2D1BC
 
       - name: Build application
         run: |
           mvn clean
           mvn -B package --file pom.xml
-
