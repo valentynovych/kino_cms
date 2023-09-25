@@ -44,4 +44,4 @@ jobs:
           mvn -B package --file pom.xml
 
       - name: Tomcat Deploy
-        run: curl -v -u robot:K4QU@mJ!djX4D8X2 -T /home/runner/work/kino_cms/kino_cms/target/Kino_CMS_O_Lesyk.war -F overwrite=true 'https://slj.avada-media-dev1.od.ua/manager/text/deploy?path=/Kino_CMS_O_Lesyk'
+        run: curl -v -u robot:K4QU@mJ!djX4D8X2 -T /home/runner/work/kino_cms/kino_cms/target/Kino_CMS_O_Lesyk.war 'https://slj.avada-media-dev1.od.ua/manager/text/deploy?path=/Kino_CMS_O_Lesyk&update=true'
