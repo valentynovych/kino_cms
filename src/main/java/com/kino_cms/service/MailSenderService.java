@@ -42,7 +42,7 @@ public class MailSenderService {
 
             mailSender.send(message);
         } catch (MessagingException e) {
-            log.error("-> ERROR on method sendEmail(), errorMessage:" + e.getMessage());
+            log.info("-> ERROR on method sendEmail(), errorMessage:" + e.getMessage());
         }
         log.info("-> exit from method sendEmail()");
     }
