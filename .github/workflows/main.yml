@@ -18,6 +18,7 @@ jobs:
           MYSQL_USER: avada_slj_kcms03
           MYSQL_PASSWORD: m8rqH2D1BC
           MYSQL_HOST: localhost
+          MYSQL_ROOT_PASSWORD: m8rqH2D1BC
         options: >-
           --name=localhost
           --health-cmd="mysqladmin ping"
