@@ -14,11 +14,12 @@ jobs:
         ports:
           - 3306/tcp
         env:
-          urlDB: jdbc:mysql://localhost:3306/avada_slj_kcms03
-          usernameDB: avada_slj_kcms03
-          passwordDB: m8rqH2D1BC
+          MYSQL_DATABASE: avada_slj_kcms03
+          MYSQL_USER: avada_slj_kcms03
+          MYSQL_PASSWORD: m8rqH2D1BC
+          MYSQL_HOST: localhost
         options: >-
-          --name=mysql-master
+          --name=localhost
           --health-cmd="mysqladmin ping"
           --health-timeout=5s
           --health-retries=3
