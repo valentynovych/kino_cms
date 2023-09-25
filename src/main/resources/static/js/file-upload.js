@@ -25,7 +25,7 @@ function clearImage(event) {
     const img = imageBlock.querySelector('img');
     const input = imageBlock.querySelector('input[type="file"]');
 
-    img.src = '/uploads/image_placeholder.svg';
+    img.src = window.location.pathname.substring(0, 19) + 'image/placeholder_images.svg';
     input.value = null;
 
     const file = new File(['ff'], 'empty.png', {
@@ -45,8 +45,16 @@ document.querySelectorAll('.clear-image').forEach(button => {
     button.addEventListener('click', clearImage);
 });
 
-window.onload = document.querySelectorAll('img').forEach(img => {
-    img.addEventListener('error', function () {
-        img.src = "/image/placeholder_images.svg";
-    })
-});
+// window.onload = document.querySelectorAll('img').forEach(img => {
+//     img.addEventListener('error', function () {
+//         img.src = window.location.pathname.substring(0, 19) + 'image/placeholder_images.svg';
+//     })
+// });
+
+window.onload = function () {
+    var images = document.querySelectorAll("img");
+    for (var i = 0; i < images.length; i++) {
+        if (!images[i].complete || images[i].naturalWidth === 0) {
+            images[i].src = window.location.pathname.substring(0, 18) + 'image/placeholder_images.svg';
+        }
+}};

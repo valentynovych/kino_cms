@@ -6,26 +6,26 @@
     <title>Hope UI | Responsive Bootstrap 5 Admin Dashboard Template</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
+    <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}"/>
 
     <!-- Library / Plugin Css Build -->
-    <link rel="stylesheet" href="/assets/css/core/libs.min.css"/>
+    <link rel="stylesheet" th:href="@{/assets/css/core/libs.min.css}"/>
 
 
     <!-- Hope Ui Design System Css -->
-    <link rel="stylesheet" href="/assets/css/hope-ui.min.css?v=2.0.0"/>
+    <link rel="stylesheet" th:href="@{/assets/css/hope-ui.min.css?v=2.0.0}"/>
 
     <!-- Custom Css -->
-    <link rel="stylesheet" href="/assets/css/custom.min.css?v=2.0.0"/>
+    <link rel="stylesheet" th:href="@{/assets/css/custom.min.css?v=2.0.0}"/>
 
     <!-- Dark Css -->
-    <link rel="stylesheet" href="/assets/css/dark.min.css"/>
+    <link rel="stylesheet" th:href="@{/assets/css/dark.min.css}"/>
 
     <!-- Customizer Css -->
-    <link rel="stylesheet" href="/assets/css/customizer.min.css"/>
+    <link rel="stylesheet" th:href="@{/assets/css/customizer.min.css}"/>
 
     <!-- RTL Css -->
-    <link rel="stylesheet" href="/assets/css/rtl.min.css"/>
+    <link rel="stylesheet" th:href="@{/assets/css/rtl.min.css}"/>
 
 
 </head>
@@ -51,7 +51,7 @@
             </button>
             <a th:href="@{/}" class="navbar-brand">
                 <!--Logo start-->
-                <img src="/image/CM_Logo.svg" class="icon-30">
+                <img th:src="@{/image/CM_Logo.svg}" class="icon-30">
                 <!--logo End-->
                 <h4 class="logo-title">Kino CMS</h4>
             </a>
@@ -78,10 +78,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto  navbar-list mb-2 mb-lg-0">
                     <li class="nav-item me-4 d-flex align-self-end gap-2">
-                        <img src="/assets/images/brands/li.svg">
-                        <img src="/assets/images/brands/im.svg">
-                        <img src="/assets/images/brands/fb.svg">
-                        <img src="/assets/images/brands/gm.svg">
+                        <img th:src="@{/assets/images/brands/li.svg}">
+                        <img th:src="@{/assets/images/brands/im.svg}">
+                        <img th:src="@{/assets/images/brands/fb.svg}">
+                        <img th:src="@{/assets/images/brands/gm.svg}">
                     </li>
                     <li class="nav-item me-4">
                         <a class="nav-link p-0" th:href="@{tel:{phone_main}(phone_main=${phone_main})}"
@@ -90,14 +90,14 @@
                            th:text="${phone_other}"></a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="search-toggle nav-link" data-bs-toggle="dropdown"
+                        <a th:href="@{#}" class="search-toggle nav-link" data-bs-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <th:block th:if="${#locale.displayName == 'українська'}">
-                                <img src="/assets/images/Flag/icons8-ukraine-96.png" class="img-fluid rounded-circle"
+                                <img th:src="@{/assets/images/Flag/icons8-ukraine-96.png}" class="img-fluid rounded-circle"
                                      alt="user" style="height: 30px; min-width: 30px; width: 30px;">
                             </th:block>
                             <th:block th:unless="${#locale.displayName == 'українська'}">
-                                <img src="/assets/images/Flag/icons8-usa-96.png" alt="img-flaf"
+                                <img th:src="@{/assets/images/Flag/icons8-usa-96.png}" alt="img-flaf"
                                      class="img-fluid me-2" style="width: 30px;height: 30px;min-width: 30px;">
                             </th:block>
 
@@ -109,14 +109,14 @@
                                     <ul class="list-group list-group-flush p-0 ">
                                         <li class="iq-sub-card list-group-item">
                                             <a class="p-0 lang-tab" th:href="@{''(lang=uk)}"><img
-                                                    src="/assets/images/Flag/icons8-ukraine-96.png" alt="img-flaf"
+                                                    th:src="@{/assets/images/Flag/icons8-ukraine-96.png}" alt="img-flaf"
                                                     class="img-fluid me-2"
                                                     style="width: 15px;height: 15px;min-width: 15px;"
                                                     th:text="#{lang.ukr}"></a>
                                         </li>
                                         <li class="iq-sub-card list-group-item">
                                             <a class="p-0 lang-tab" th:href="@{''(lang=en)}"><img
-                                                    src="/assets/images/Flag/flag-01.png" alt="img-flaf"
+                                                    th:src="@{/assets/images/Flag/flag-01.png}" alt="img-flaf"
                                                     class="img-fluid me-2"
                                                     style="width: 15px;height: 15px;min-width: 15px;"
                                                     th:text="#{lang.eng}"></a>
@@ -127,10 +127,10 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link py-0 d-flex align-items-center dropdown-toggle" href="#" id="userMenu"
+                        <a class="nav-link py-0 d-flex align-items-center dropdown-toggle" th:href="@{#}" id="userMenu"
                            role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="/assets/images/avatars/01.png" alt="User-Profile"
+                            <img th:src="@{/assets/images/avatars/01.png}" alt="User-Profile"
                                  class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
                             <div class="caption ms-3 d-none d-md-block ">
                                 <th:block th:if="${#ctx.session.SPRING_SECURITY_CONTEXT}">
@@ -143,11 +143,11 @@
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
-                            <li><a class="dropdown-item" href="/profile" th:text="#{label.menu.profile}"></a></li>
+                            <li><a class="dropdown-item" th:href="@{/profile}" th:text="#{label.menu.profile}"></a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="/logout" th:text="#{label.menu.logout}"></a></li>
+                            <li><a class="dropdown-item" th:href="@{/logout}" th:text="#{label.menu.logout}"></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -199,22 +199,22 @@
                 </div>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link " href="/poster" th:text="#{label.menu.poster}"></a>
+                        <a class="nav-link " th:href="@{/poster}" th:text="#{label.menu.poster}"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/timetable" th:text="#{label.mane.timetable}"></a>
+                        <a class="nav-link" th:href="@{/timetable}" th:text="#{label.mane.timetable}"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="/poster/soon" th:text="#{label.menu.soon}"></a>
+                        <a class="nav-link " th:href="@{/poster/soon}" th:text="#{label.menu.soon}"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="/cinemas" th:text="#{label.menu.cinemas}"></a>
+                        <a class="nav-link " th:href="@{/cinemas}" th:text="#{label.menu.cinemas}"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="/promotions" th:text="#{label.menu.promotion}"></a>
+                        <a class="nav-link " th:href="@{/promotions}" th:text="#{label.menu.promotion}"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link dropdown-toggle" href="/about-cinema" id="about" role="link"
+                        <a class="nav-link dropdown-toggle" th:href="@{/about-cinema}" id="about" role="link"
                            aria-expanded="false" th:text="#{label.menu.about-cinema}"></a>
                         <ul class="dropdown-menu" aria-labelledby="about">
                             <li>
@@ -232,7 +232,7 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="pages" role="button"
+                        <a class="nav-link dropdown-toggle" th:href="@{#}" id="pages" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false" th:text="#{label.menu.pages}"></a>
                         <ul class="dropdown-menu" aria-labelledby="pages">
                             <li th:each="page : ${other_pages}">
@@ -249,7 +249,7 @@
     </div>      <!--Nav End-->
     <div th:fragment="context-advertising(heigth)" class="context-advertising position-relative">
         <figure style="height: 100%">
-            <img src="/image/placeholder_images.svg" width="100%" th:height="${heigth}">
+            <img th:src="@{/image/placeholder_images.svg}" width="100%" th:height="${heigth}">
         </figure>
         <span class="h3" style="position: absolute; top: 45%; left: calc(50% - 3.5rem)">Реклама</span>
     </div>
@@ -269,23 +269,23 @@
                     </figure>
                 </div>
                 <span class="col mt-5" th:text="#{label.menu.embed-cites}"></span>
-                <a href="https://avada-media.ua/ua/services/razrabotka-sajtov/"
+                <a th:href="@{https://avada-media.ua/ua/services/razrabotka-sajtov/}"
                    target="_blank">AVADA MEDIA</a>
             </div>
             <div class="footer-menu col-5 d-flex gap-3 justify-content-center mb-4">
                 <div class="">
-                    <a class="nav-link h3" href="/poster"><span class="h4" th:text="#{label.menu.poster}"></span></a>
+                    <a class="nav-link h3" th:href="@{/poster}"><span class="h4" th:text="#{label.menu.poster}"></span></a>
                     <ul class="nav flex-sm-column">
                         <li>
-                            <a class="nav-link py-1" href="/timetable" th:text="#{label.mane.timetable}"></a>
+                            <a class="nav-link py-1" th:href="@{/timetable}" th:text="#{label.mane.timetable}"></a>
                         </li>
                         <li>
-                            <a class="nav-link py-1" href="/poster/soon" th:text="#{label.menu.soon}"></a>
+                            <a class="nav-link py-1" th:href="@{/poster/soon}" th:text="#{label.menu.soon}"></a>
                         </li>
                         <li>
                         </li>
                         <li>
-                            <a class="nav-link py-1" href="/promotions" th:text="#{label.menu.promotion}"></a>
+                            <a class="nav-link py-1" th:href="@{/promotions}" th:text="#{label.menu.promotion}"></a>
                         </li>
                     </ul>
                 </div>
@@ -309,10 +309,10 @@
             <div class="col-3 socials">
                 <ul>
                     <li class="nav-item me-4 d-flex align-self-end gap-2">
-                        <img src="/assets/images/brands/li.svg" alt="" width="40" height="40">
-                        <img src="/assets/images/brands/im.svg" alt="" width="40" height="40">
-                        <img src="/assets/images/brands/fb.svg" alt="" width="40" height="40">
-                        <img src="/assets/images/brands/gm.svg" alt="" width="40" height="40">
+                        <img th:src="@{/assets/images/brands/li.svg}" alt="" width="40" height="40">
+                        <img th:src="@{/assets/images/brands/im.svg}" alt="" width="40" height="40">
+                        <img th:src="@{/assets/images/brands/fb.svg}" alt="" width="40" height="40">
+                        <img th:src="@{/assets/images/brands/gm.svg}" alt="" width="40" height="40">
                     </li>
                 </ul>
             </div>
@@ -324,34 +324,24 @@
     <!-- Footer Section End -->
 </main>
 <!-- Library Bundle Script -->
-<script src="/assets/js/core/libs.min.js"></script>
-
+<script th:src="@{/assets/js/core/libs.min.js}"></script>
 <!-- External Library Bundle Script -->
-<script src="/assets/js/core/external.min.js"></script>
-
+<script th:src="@{/assets/js/core/external.min.js}"></script>
 <!-- Widgetchart Script -->
-<script src="/assets/js/charts/widgetcharts.js"></script>
-
+<script th:src="@{/assets/js/charts/widgetcharts.js}"></script>
 <!-- mapchart Script -->
-<script src="/assets/js/charts/vectore-chart.js"></script>
-<script src="/assets/js/charts/dashboard.js"></script>
-
+<script th:src="@{/assets/js/charts/vectore-chart.js}"></script>
+<script th:src="@{/assets/js/charts/dashboard.js}"></script>
 <!-- fslightbox Script -->
-<script src="/assets/js/plugins/fslightbox.js"></script>
-
+<script th:src="@{/assets/js/plugins/fslightbox.js}"></script>
 <!-- Settings Script -->
-<script src="/assets/js/plugins/setting.js"></script>
-
+<script th:src="@{/assets/js/plugins/setting.js}"></script>
 <!-- Slider-tab Script -->
-<script src="/assets/js/plugins/slider-tabs.js"></script>
-
+<script th:src="@{/assets/js/plugins/slider-tabs.js}"></script>
 <!-- Form Wizard Script -->
-<script src="/assets/js/plugins/form-wizard.js"></script>
-
-<!-- AOS Animation Plugin-->
-
+<script th:src="@{/assets/js/plugins/form-wizard.js}"></script>
 <!-- App Script -->
-<script src="/assets/js/hope-ui.js" defer></script>
+<script th:src="@{/assets/js/hope-ui.js}" defer></script>
 
 </body>
 </html>
