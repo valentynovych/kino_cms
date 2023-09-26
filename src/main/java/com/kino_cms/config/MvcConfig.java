@@ -25,7 +25,7 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/").setCachePeriod(24 * 3600 * 365);
         registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file://" + uploadPath + "/").setCachePeriod(24 * 3600 * 365);
+                .addResourceLocations("file://" + uploadPath + "/").setCachePeriod(0);
     }
 
     @Bean
