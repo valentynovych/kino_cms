@@ -108,7 +108,7 @@
                             <label class="form-label">Вибірково</label>
                         </div>
                         <button type="button" class="btn-outline-primary btn col-3 chose-user"
-                                onclick="location.href='/admin/chose-users'" disabled>Вибрати користувачів
+                                onclick="location.href='/Kino_CMS_O_Lesyk/admin/chose-users'" disabled>Вибрати користувачів
                         </button>
                     </div>
                     <div class="row mt-4">
@@ -219,7 +219,7 @@
             $(".progress-bar").css('width', 0);
 
             $.ajax({
-                url: "/admin/mailing",
+                url: "/Kino_CMS_O_Lesyk/admin/mailing",
                 type: "POST",
                 data: formData,
                 processData: false, //for formData
@@ -236,7 +236,7 @@
             function updateProgress() {
                 $.ajax({
                     type: "GET",
-                    url: "/admin/progress",
+                    url: "/Kino_CMS_O_Lesyk/admin/progress",
                     success: function (data) {
                         // Оновлення прогресу на сторінці
                         $("#progress").text(data.toFixed(2) + "%");

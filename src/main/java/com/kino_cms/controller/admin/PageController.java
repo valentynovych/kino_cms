@@ -226,10 +226,17 @@ public class PageController {
 
         if (optionalHomePage.isPresent()) {
             contactPage = optionalHomePage.get();
+            if (contactPage.getContactCinemaList().isEmpty()) {
+                ContactCinema contactCinema = new ContactCinema();
+                contactCinema.setIsActivate(Boolean.TRUE);
+                contactCinema.setContactPage(contactPage);
+                contactPage.getContactCinemaList().add(contactCinema);
+            }
         } else {
             contactPage = new ContactPage();
             contactPage.setTitle(firstTitle);
             contactPage.setPageType(PageType.HOME_PAGE);
+            contactPage.setIsActive(Boolean.TRUE);
             contactPage.setCreateTime(LocalDateTime.now().format(dateTimeFormatter));
         }
         model.addAttribute("page", contactPage);
