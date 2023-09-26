@@ -33,7 +33,7 @@ public class Film {
     private SeoBlock seoBlock;
     @Enumerated(EnumType.STRING)
     private Language language;
-    @ElementCollection(targetClass = FilmType.class)
+    @ElementCollection(targetClass = FilmType.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "film_types", joinColumns = @JoinColumn(name = "film_id"))
     @Enumerated(EnumType.STRING)
     @Column(name = "film_type_id")

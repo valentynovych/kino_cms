@@ -90,6 +90,8 @@ public class BannerService {
         } else {
             banner = new Banner();
             banner.setBannerType(dto.getBannerType());
+            banner.setId(0L);
+            banner.setBannerImages(List.of(new BannerImage()));
         }
 
         banner.setSlideSpeed(dto.getSlideSpeed());

@@ -23,7 +23,7 @@ public class ContactPage extends Page {
     private PageType pageType;
     @OneToOne(cascade = CascadeType.ALL)
     private SeoBlock seoBlock;
-    @OneToMany(mappedBy = "contactPage", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "contactPage", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ContactCinema> contactCinemaList;
     @Enumerated(EnumType.STRING)
     private Language language;

@@ -22,7 +22,7 @@ public class Banner {
     private BannerType bannerType;
     private Integer slideSpeed;
     private String backgroundColor;
-    @OneToMany(mappedBy = "banner", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "banner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<BannerImage> bannerImages;
     private Boolean isActivate;
 }

@@ -74,7 +74,7 @@ public class UserController {
     @ModelAttribute("allCities")
     public List<String> allCity() {
         List<String> cities = Arrays.stream(City.values())
-                .map(city -> city.getDescription())
+                .map(city -> city.name())
                 .collect(Collectors.toList());
         return cities;
     }
