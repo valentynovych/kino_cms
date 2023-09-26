@@ -131,7 +131,7 @@
                         </div>
                         <div class="row col-10 row-cols-auto flex-row image-block">
                             <figure class="figure">
-                                <img th:src="@{/uploads/{logoImage}(logoImage=${perforatingBanner.bannerImages[__${0}__].image})}"
+                                <img th:src="@{/uploads/{logoImage}(logoImage=${!#lists.isEmpty(perforatingBanner.bannerImages)} ? ${perforatingBanner.bannerImages[__${0}__].image})}"
                                      style="width: 14rem; height: 8rem;"
                                      class="figure-img img-fluid rounded"
                                      loading="eager" alt="file">

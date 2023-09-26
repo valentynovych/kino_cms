@@ -216,7 +216,7 @@
         drawChart()
     })
     async function drawChart() {
-        const request = new Request("/admin/getSessionsLastWeek");
+        const request = new Request("/Kino_CMS_O_Lesyk/admin/getSessionsLastWeek");
         request.headers.set("Accept", "application/json");
 
         const response = await fetch(request);
@@ -251,32 +251,11 @@
     }
 </script>
 <script>
-
-    // const data = {
-    //     labels: [
-    //         'Чоловіки',
-    //         'Жінки'
-    //     ],
-    //     datasets: [{
-    //         label: 'Усього зареєстровано: ',
-    //         data: [maleCount, femaleCount],
-    //         backgroundColor: [
-    //             'rgb(255, 99, 132)',
-    //             'rgb(54, 162, 235)'
-    //         ],
-    //         hoverOffset: 4
-    //     }]
-    // };
-    // const config = {
-    //     type: 'doughnut',
-    //     data: data,
-    // };
-    // new Chart(ctx, config);
     document.addEventListener("DOMContentLoaded", () => {
         drawChartCities()
     })
     async function drawChartCities() {
-        const request = new Request("/admin/getCityStat");
+        const request = new Request("/Kino_CMS_O_Lesyk/admin/getCityStat");
         request.headers.set("Accept", "application/json");
 
         const response = await fetch(request);

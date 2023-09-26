@@ -31,8 +31,8 @@ public class BannerService {
             dto = new BannerDTO();
             dto.setId(0L);
             dto.setBannerType(BannerType.HEADER);
-             dto.setBannerImages(createEmptyList(5));
-             dto.setSlideSpeed(10);
+            dto.setBannerImages(createEmptyList(5));
+            dto.setSlideSpeed(10);
         }
         log.info("-> exit from method getHeaderBanner() with banner id: " + dto.getId());
         return dto;
@@ -91,12 +91,12 @@ public class BannerService {
             banner = new Banner();
             banner.setBannerType(dto.getBannerType());
             banner.setId(0L);
-            banner.setBannerImages(List.of(new BannerImage()));
         }
 
         banner.setSlideSpeed(dto.getSlideSpeed());
         banner.setBackgroundColor(dto.getBackgroundColor());
         banner.setIsActivate(dto.getIsActivate());
+        dto.getBannerImages().forEach(bannerImage -> bannerImage.setBanner(banner));
         banner.setBannerImages(dto.getBannerImages());
 
         Banner save = bannerRepo.save(banner);
@@ -105,7 +105,7 @@ public class BannerService {
     }
 
     private List<BannerImage> createEmptyList(Integer capacity) {
-        log.info(String.format("-> start execution private method createEmptyList(capacity %s)",capacity));
+        log.info(String.format("-> start execution private method createEmptyList(capacity %s)", capacity));
         List<BannerImage> bannerImages = new ArrayList<>();
         for (int i = 0; i < capacity; i++) {
             bannerImages.add(new BannerImage());
@@ -115,7 +115,7 @@ public class BannerService {
     }
 
     public List<String> getListImagesFileNameByBannerType(BannerType bannerType) {
-        log.info(String.format("-> start execution method getListImagesFileNameById(BannerType %s)",bannerType));
+        log.info(String.format("-> start execution method getListImagesFileNameById(BannerType %s)", bannerType));
         List<String> fileNamesFromDB;
         BannerDTO bannerDTO = null;
         if (bannerType.equals(BannerType.HEADER)) {
@@ -132,7 +132,7 @@ public class BannerService {
     }
 
     public BannerDTO updateImagesOnModel(BannerDTO bannerDTO, List<String> fileNamesFromDB) {
-        log.info(String.format("-> start execution private method updateImagesOnModel(bannerId %s)",bannerDTO.getId()));
+        log.info(String.format("-> start execution private method updateImagesOnModel(bannerId %s)", bannerDTO.getId()));
         List<BannerImage> bannerImages = bannerDTO.getBannerImages();
         for (int i = 0; i < bannerImages.size(); i++) {
             BannerImage get = bannerImages.get(i);
