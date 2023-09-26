@@ -38,6 +38,10 @@ public class HomePageController {
         }
 
         BannerDTO headerBanner = bannerService.getHeaderBanner();
+        headerBanner.setBannerImages(headerBanner.getBannerImages()
+                .stream()
+                .filter(bannerImage -> Strings.isNotEmpty(bannerImage.getImage()))
+                .toList());
         model.addAttribute("headerBanner", headerBanner);
 
         List<FilmDTO> filmIsReleasedNow = filmService.getAllFilmIsReleasedNow();

@@ -260,7 +260,8 @@ public class PageController {
             }
         } else {
             contactPage1 = new ContactPage();
-            imagesFromEntity = new ArrayList<>();
+            contactPage1.setIsActive(Boolean.TRUE);
+            imagesFromEntity = new ArrayList<>(1);
             contactPageModel.setCreateTime(LocalDateTime.now().format(dateTimeFormatter));
         }
 
