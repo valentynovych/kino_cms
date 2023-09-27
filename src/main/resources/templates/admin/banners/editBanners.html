@@ -57,7 +57,7 @@
                                     <button type="button" class="btn btn-outline-secondary btn-sm upload-button">
                                         Додати
                                     </button>
-                                    <input type="file" class="file-input" accept="image/png, image/jpg, image/jpeg"
+                                    <input type="file" class="file-input" accept=".png,.jpg,.jpeg"
                                            name="headerBannerImg">
                                     <label class="col-form-label-sm start-0">Url:</label>
                                     <input class="form-control-sm form-control" type="text"
@@ -139,7 +139,7 @@
                             <button type="button" class="btn btn-outline-secondary btn-sm upload-button mx-5">
                                 Додати
                             </button>
-                            <input type="file" class="file-input perforatingBanner" accept="image/png, image/jpg, image/jpeg"
+                            <input type="file" class="file-input perforatingBanner" accept=".png,.jpg,.jpeg"
                                    name="perforatingBannerImg">
                             <button type="button" class="btn btn-outline-secondary btn-sm clear-image">Видалити</button>
                         </div>
@@ -177,7 +177,7 @@
                                     <button type="button" class="btn btn-outline-secondary btn-sm upload-button">
                                         Додати
                                     </button>
-                                    <input type="file" class="file-input" accept="image/png, image/jpg, image/jpeg"
+                                    <input type="file" class="file-input" accept=".png,.jpg,.jpeg"
                                            name="promotionBannerImg">
                                     <label class="col-form-label-sm start-0">Url:</label>
                                     <input class="form-control-sm form-control" type="text"
@@ -240,7 +240,6 @@
 
     function addCinemaBlock() {
         const imageBlock = this.previousElementSibling;
-        console.log(imageBlock);
         const cloneBlock = imageBlock.cloneNode(true);
 
         cloneBlock.setAttribute('id', cloneBlock.id.replace(/\d/g, num => Number(num) + 1));

@@ -98,7 +98,7 @@
                     Додати
                 </button>
                 <input type="file" class="file-input" id="fileInput1"
-                       accept="image/png, image/jpg, image/jpeg" name="logoImage1">
+                       accept=".png,.jpg,.jpeg" name="logoImage1">
                 <button type="button" class="btn btn-outline-secondary btn-sm clear-image">Видалити</button>
             </div>
             <div class="row col-11 row-cols-auto flex-row image-block">
@@ -113,7 +113,7 @@
                     Додати
                 </button>
                 <input type="file" class="file-input" id="fileInput2"
-                       accept="image/png, image/jpg, image/jpeg" name="firstBanner1">
+                       accept=".png,.jpg,.jpeg" name="firstBanner1">
                 <button type="button" class="btn btn-outline-secondary btn-sm clear-image">Видалити</button>
             </div>
             <div class="row gallery-images">
@@ -134,7 +134,7 @@
                             Додати
                         </button>
 
-                        <input type="file" id="fileInput3" class="file-input" accept="image/png, image/jpg, image/jpeg"
+                        <input type="file" id="fileInput3" class="file-input" accept=".png,.jpg,.jpeg"
                                name="image11">
                     </div>
                     <div class="col d-flex flex-column align-items-center image-block">
@@ -147,7 +147,7 @@
                         <button type="button" class="btn btn-outline-secondary btn-sm upload-button" id="uploadButton4">
                             Додати
                         </button>
-                        <input type="file" id="fileInput4" class="file-input" accept="image/png, image/jpg, image/jpeg"
+                        <input type="file" id="fileInput4" class="file-input" accept=".png,.jpg,.jpeg"
                                name="image21">
                     </div>
                     <div class="col d-flex flex-column align-items-center image-block">
@@ -160,7 +160,7 @@
                         <button type="button" class="btn btn-outline-secondary btn-sm upload-button" id="uploadButton5">
                             Додати
                         </button>
-                        <input type="file" id="fileInput5" class="file-input" accept="image/png, image/jpg, image/jpeg"
+                        <input type="file" id="fileInput5" class="file-input" accept=".png,.jpg,.jpeg"
                                name="image31">
                     </div>
                     <div class="col d-flex flex-column align-items-center image-block">
@@ -173,7 +173,7 @@
                         <button type="button" class="btn btn-outline-secondary btn-sm upload-button" id="uploadButton6">
                             Додати
                         </button>
-                        <input type="file" id="fileInput6" class="file-input" accept="image/png, image/jpg, image/jpeg"
+                        <input type="file" id="fileInput6" class="file-input" accept=".png,.jpg,.jpeg"
                                name="image41">
                     </div>
                     <div class="col d-flex flex-column align-items-center image-block">
@@ -186,7 +186,7 @@
                         <button type="button" class="btn btn-outline-secondary btn-sm upload-button" id="uploadButton7">
                             Додати
                         </button>
-                        <input type="file" id="fileInput7" class="file-input" accept="image/png, image/jpg, image/jpeg"
+                        <input type="file" id="fileInput7" class="file-input" accept=".png,.jpg,.jpeg"
                                name="image51">
                     </div>
                 </div>
@@ -275,7 +275,7 @@
                 <div class="col-10">
                     <div class="seo_block col-sm-10">
                         <div class="row">
-                            <label for="seoUrl" class="col-sm-2 col-form-label-sm justify-content-end">SEO url:</label>
+                            <label for="seoUrl" class="col-sm-2 col-form-label-sm justify-content-end">Url:</label>
                             <div class="col-sm-10">
                                 <input type="text" id="seoUrl" class="form-control form-control-sm col-sm-8"
                                        th:field="*{seoUrl}">
@@ -284,8 +284,7 @@
                     </div>
                     <div class="seo_block col-sm-10 mt-2">
                         <div class="row">
-                            <label for="seoTitle" class="col-sm-2 col-form-label-sm justify-content-end">SEO
-                                title:</label>
+                            <label for="seoTitle" class="col-sm-2 col-form-label-sm justify-content-end">Title:</label>
                             <div class="col-sm-10">
                                 <input type="text" id="seoTitle" class="form-control form-control-sm col-sm-8"
                                        th:field="*{seoTitle}">
@@ -294,8 +293,7 @@
                     </div>
                     <div class="seo_block col-sm-10 mt-2">
                         <div class="row">
-                            <label for="seoKeywords" class="col-sm-2 col-form-label-sm justify-content-end">SEO
-                                keywords:</label>
+                            <label for="seoKeywords" class="col-sm-2 col-form-label-sm justify-content-end">Keywords:</label>
                             <div class="col-sm-10">
                                 <input type="text" id="seoKeywords" class="form-control form-control-sm col-sm-8"
                                        th:field="*{seoKeywords}">
@@ -304,8 +302,7 @@
                     </div>
                     <div class="seo_block col-sm-10 mt-2">
                         <div class="row">
-                            <label for="seoDescription" class="col-sm-2 col-form-label-sm justify-content-end">SEO
-                                description:</label>
+                            <label for="seoDescription" class="col-sm-2 col-form-label-sm justify-content-end">Description:</label>
                             <div class="col-sm-10">
                                 <input type="text" id="seoDescription" class="form-control form-control-lg col-sm-8"
                                        th:field="*{seoDescription}" style="height: 4rem">

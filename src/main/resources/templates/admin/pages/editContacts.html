@@ -102,7 +102,7 @@
                                     Додати
                                 </button>
                                 <input type="file" class="file-input" id="fileInput1"
-                                       accept="image/png, image/jpg, image/jpeg" name="logo_image">
+                                       accept=".png,.jpg,.jpeg" name="logo_image">
                                 <button type="button" class="btn btn-outline-secondary btn-sm clear-image">Видалити
                                 </button>
                             </div>
@@ -137,8 +137,7 @@
                     <div class="col-10">
                         <div class="seo_block col-sm-10">
                             <div class="row">
-                                <label for="seoUrl" class="col-sm-2 col-form-label-sm justify-content-end">SEO
-                                    url:</label>
+                                <label for="seoUrl" class="col-sm-2 col-form-label-sm justify-content-end">Url:</label>
                                 <div class="col-sm-10">
                                     <input type="text" id="seoUrl" class="form-control form-control-sm col-sm-8"
                                            th:field="*{seoBlock.seoUrl}">
@@ -147,8 +146,7 @@
                         </div>
                         <div class="seo_block col-sm-10 mt-2">
                             <div class="row">
-                                <label for="seoTitle" class="col-sm-2 col-form-label-sm justify-content-end">SEO
-                                    title:</label>
+                                <label for="seoTitle" class="col-sm-2 col-form-label-sm justify-content-end">Title:</label>
                                 <div class="col-sm-10">
                                     <input type="text" id="seoTitle" class="form-control form-control-sm col-sm-8"
                                            th:field="*{seoBlock.seoTitle}">
@@ -157,8 +155,7 @@
                         </div>
                         <div class="seo_block col-sm-10 mt-2">
                             <div class="row">
-                                <label for="seoKeywords" class="col-sm-2 col-form-label-sm justify-content-end">SEO
-                                    keywords:</label>
+                                <label for="seoKeywords" class="col-sm-2 col-form-label-sm justify-content-end">Keywords:</label>
                                 <div class="col-sm-10">
                                     <input type="text" id="seoKeywords" class="form-control form-control-sm col-sm-8"
                                            th:field="*{seoBlock.seoKeywords}">
@@ -167,8 +164,7 @@
                         </div>
                         <div class="seo_block col-sm-10 mt-2">
                             <div class="row">
-                                <label for="seoDescription" class="col-sm-2 col-form-label-sm justify-content-end">SEO
-                                    description:</label>
+                                <label for="seoDescription" class="col-sm-2 col-form-label-sm justify-content-end">Description:</label>
                                 <div class="col-sm-10">
                                     <input type="text" id="seoDescription" class="form-control form-control-lg col-sm-8"
                                            th:field="*{seoBlock.seoDescription}" style="height: 4rem">
