@@ -93,7 +93,8 @@
                         <a th:href="@{#}" class="search-toggle nav-link" data-bs-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <th:block th:if="${#locale.displayName == 'українська'}">
-                                <img th:src="@{/assets/images/Flag/icons8-ukraine-96.png}" class="img-fluid rounded-circle"
+                                <img th:src="@{/assets/images/Flag/icons8-ukraine-96.png}"
+                                     class="img-fluid rounded-circle"
                                      alt="user" style="height: 30px; min-width: 30px; width: 30px;">
                             </th:block>
                             <th:block th:unless="${#locale.displayName == 'українська'}">
@@ -214,8 +215,9 @@
                         <a class="nav-link " th:href="@{/promotions}" th:text="#{label.menu.promotion}"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link dropdown-toggle" th:href="@{/about-cinema}" id="about" role="link"
-                           aria-expanded="false" th:text="#{label.menu.about-cinema}"></a>
+                        <a class="nav-link dropdown-toggle"
+                           th:attrprepend="href=${link_to_about_page} ? '/about-cinema' : ''"
+                           id="about" role="link" aria-expanded="false" th:text="#{label.menu.about-cinema}"></a>
                         <ul class="dropdown-menu" aria-labelledby="about">
                             <li>
                                 <a class="dropdown-item" th:href="@{/feeds}" th:text="#{label.menu.feeds}"></a>
@@ -230,18 +232,19 @@
                             </li>
                         </ul>
                     </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" th:href="@{#}" id="pages" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false" th:text="#{label.menu.pages}"></a>
-                        <ul class="dropdown-menu" aria-labelledby="pages">
-                            <li th:each="page : ${other_pages}">
-                                <a class="dropdown-item"
-                                   th:href="@{/page/{pageType}/{id}(id=${page.id}, pageType=${page.pageType})}"
-                                   th:text="${page.title}"></a>
-                            </li>
-                        </ul>
-                    </li>
+                    <th:block th:if="${not #lists.isEmpty(other_pages)}">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" th:href="@{#}" id="pages" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false" th:text="#{label.menu.pages}"></a>
+                            <ul class="dropdown-menu" aria-labelledby="pages">
+                                <li th:each="page : ${other_pages}">
+                                    <a class="dropdown-item"
+                                       th:href="@{/page/{pageType}/{id}(id=${page.id}, pageType=${page.pageType})}"
+                                       th:text="${page.title}"></a>
+                                </li>
+                            </ul>
+                        </li>
+                    </th:block>
                 </ul>
             </div> <!-- container-fluid.// -->
         </nav>
@@ -290,7 +293,8 @@
                     </ul>
                 </div>
                 <div>
-                    <a class="nav-link h3" th:href="@{/about-cinema}"><span class="h4" th:text="#{label.menu.about-cinema}"></span></a>
+                    <a class="nav-link h3" th:href="@{/about-cinema}"><span class="h4"
+                                                                            th:text="#{label.menu.about-cinema}"></span></a>
                     <ul class="nav flex-sm-column">
                         <li>
                             <a class="nav-link py-1" th:href="@{/feeds}" th:text="#{label.menu.feeds}"></a>
