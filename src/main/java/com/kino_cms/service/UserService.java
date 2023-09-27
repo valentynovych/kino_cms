@@ -114,7 +114,7 @@ public class UserService {
         user.setPhone(registrationUserDto.getPhoneNumber());
         user.setCity(City.KYIV);
         user.setLanguage(Language.UKRAINIAN);
-        user.setCreateTime(java.sql.Date.valueOf(LocalDate.now()).toString());
+        user.setCreateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         log.info("-> exit from method createNewUser ");
         saveUserDTO(user);
     }
