@@ -72,6 +72,9 @@ class BannerServiceTest {
                 true);
 
         when(bannerRepo.getBannerByTypePerforating()).thenReturn(Optional.of(perforationBanner));
+        Banner banner = new Banner();
+        banner.setId(perforationBanner.getId());
+        when(bannerRepo.findById(perforationBanner.getId())).thenReturn(Optional.of(banner));
         BannerDTO bannerDTO = bannerService.getPerforatingBanner();
         assertEquals(1L, bannerDTO.getId());
         assertEquals(BannerType.PERFORATING, bannerDTO.getBannerType());
