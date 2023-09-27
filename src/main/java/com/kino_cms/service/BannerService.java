@@ -44,7 +44,13 @@ public class BannerService {
         BannerDTO dto;
         if (dtoOptional.isPresent()) {
             dto = dtoOptional.get();
-            dto.setBannerImages(getBannerImagesById(dto.getId()));
+            List<BannerImage> bannerImagesById = getBannerImagesById(dto.getId());
+            if (bannerImagesById.isEmpty()) {
+                BannerImage bannerImage = new BannerImage();
+                bannerImage.setBanner(bannerRepo.findById(dto.getId()).get());
+                bannerImagesById.add(bannerImage);
+            }
+            dto.setBannerImages(bannerImagesById);
         } else {
             dto = new BannerDTO();
             dto.setId(0L);

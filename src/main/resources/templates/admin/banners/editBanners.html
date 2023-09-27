@@ -126,7 +126,7 @@
                             <div class="form-check">
                                 <input type="radio" class="form-check-input" th:field="${perforatingBanner.isActivate}" name="isActivate"
                                        th:value="*{false}">
-                                <label class="form-check-label">Просто фон</label>
+                                <label class="form-check-label">Білий фон</label>
                             </div>
                         </div>
                         <div class="row col-10 row-cols-auto flex-row image-block">
@@ -150,6 +150,7 @@
                     <div class="hidden">
                         <input type="hidden" th:field="${perforatingBanner.bannerType}">
                         <input type="hidden" th:field="${perforatingBanner.id}">
+                        <input type="hidden" th:field="${perforatingBanner.bannerImages[0].id}">
                     </div>
                 </form>
             </div>
