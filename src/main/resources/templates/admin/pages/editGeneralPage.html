@@ -76,15 +76,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="row col-11 row-cols-auto flex-row image-block">
-                    <label for="fileInput1" class="form-control-sm my-auto col-sm-2">Головна картинка</label>
-                    <figure class="figure">
+                <div class="row row-cols-auto flex-row image-block justify-content-start gap-2">
+                    <label for="fileInput1" class="form-control-sm my-auto ps-0">Головна картинка</label>
+                    <figure class="figure ps-0" style="margin-left: 4.5vw;">
                         <img th:src="@{/uploads/{mainImage}(mainImage=*{mainImage})}"
                              style="width: 14rem; height: 8rem;"
                              class="figure-img img-fluid rounded" id="mainImage"
                              loading="eager" alt="file">
                     </figure>
-                    <button type="button" class="btn btn-outline-secondary btn-sm upload-button mx-5"
+                    <button type="button" class="btn btn-outline-secondary btn-sm upload-button ms-4"
                             id="uploadButton1">
                         Додати
                     </button>
@@ -97,8 +97,8 @@
                     <div class="row label">
                         <span class="form-control-sm">Галерея картинок</span>
                     </div>
-                    <div class="row col-10 d-flex flex-row gap-2">
-                        <div class="col">
+                    <div class="row col-10 d-flex flex-row">
+                        <div class="col ps-0">
                             <span class="form-control-sm">Розмір 1000х190</span>
                         </div>
                         <div class="col d-flex flex-column align-items-center image-block">
