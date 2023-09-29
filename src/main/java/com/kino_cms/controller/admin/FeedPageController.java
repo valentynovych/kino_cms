@@ -71,7 +71,11 @@ public class FeedPageController {
             feedPageFromDB.setId(0L);
             feedPageFromDB.setCreateTime(LocalDateTime.now().format(dateTimeFormatter));
             feedPageFromDB.setFeedType(FeedType.FEED);
-            feedPageFromDB.setLanguage(Language.UKRAINIAN);
+            if (language != null) {
+                feedPageFromDB.setLanguage(language);
+            } else {
+                feedPageFromDB.setLanguage(Language.UKRAINIAN);
+            }
             model.addAttribute("feedPage", feedPageFromDB);
         }
         return "admin/feedAndPromotion/feedPage";
