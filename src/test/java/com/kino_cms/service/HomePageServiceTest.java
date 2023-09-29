@@ -81,6 +81,8 @@ class HomePageServiceTest {
 
         LocaleContextHolder.setLocale(Locale.forLanguageTag("en"));
         Optional<HomePage> homePageOptional1 = homePageService.getHomePageByLocale();
-        Assertions.assertTrue(homePageOptional1.isEmpty());
+        Assertions.assertFalse(homePageOptional1.isEmpty());
+        HomePage homePage2 = homePageOptional1.get();
+        Assertions.assertEquals(Language.UKRAINIAN, homePage2.getLanguage());
     }
 }
