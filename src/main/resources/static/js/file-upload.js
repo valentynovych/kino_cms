@@ -25,7 +25,7 @@ function clearImage(event) {
     const img = imageBlock.querySelector('img');
     const input = imageBlock.querySelector('input[type="file"]');
 
-    img.src = window.location.pathname.substring(0, 19) + 'image/placeholder_images.svg';
+    img.src = window.location.pathname.substring(0, 18) + 'image/placeholder_images.svg';
     input.value = null;
 
     const file = new File(['ff'], 'empty.png', {

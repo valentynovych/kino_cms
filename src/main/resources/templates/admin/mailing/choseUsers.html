@@ -56,14 +56,7 @@
                             <td>
                                 <div class="hidden">
                                     <input type="hidden" th:field="${mailingDTO.userDTOS[__${iter.index}__].id}">
-                                    <input type="hidden" th:field="${mailingDTO.userDTOS[__${iter.index}__].createTime}">
-                                    <input type="hidden" th:field="${mailingDTO.userDTOS[__${iter.index}__].dateOfBirth}">
                                     <input type="hidden" th:field="${mailingDTO.userDTOS[__${iter.index}__].email}">
-                                    <input type="hidden" th:field="${mailingDTO.userDTOS[__${iter.index}__].phone}">
-                                    <input type="hidden" th:field="${mailingDTO.userDTOS[__${iter.index}__].firstName}">
-                                    <input type="hidden" th:field="${mailingDTO.userDTOS[__${iter.index}__].lastName}">
-                                    <input type="hidden" th:field="${mailingDTO.userDTOS[__${iter.index}__].username}">
-                                    <input type="hidden" th:field="${mailingDTO.userDTOS[__${iter.index}__].city}">
                                 </div>
                                 <input type="checkbox" class="form-check-input"
                                        th:field="${mailingDTO.userDTOS[__${iter.index}__].forMailing}">
