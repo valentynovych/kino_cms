@@ -256,7 +256,7 @@
         const selectorAll = cloneBlock.querySelectorAll('input');
 
         cloneBlock.querySelector('.banner-id').setAttribute('value', '');
-        cloneBlock.querySelector('img').setAttribute('src', '/uploads/');
+        cloneBlock.querySelector('img').setAttribute('src', window.location.pathname.substring(0, 18) + 'image/placeholder_images.svg');
 
         for (const element of selectorAll) {
 
