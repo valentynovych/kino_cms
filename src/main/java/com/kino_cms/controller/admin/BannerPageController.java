@@ -40,6 +40,7 @@ public class BannerPageController {
                                    @RequestParam("headerBannerImg") MultipartFile[] headerBannerImg) throws IOException {
         ArrayList<MultipartFile> images = new ArrayList<>(Arrays.stream(headerBannerImg).toList());
         List<String> fileNamesFromDB = bannerService.getListImagesFileNameByBannerType(BannerType.HEADER);
+        bannerService.deleteEmptyBannerImage(images, bannerDTOModel);
         fileNamesFromDB = uploadService.saveUploadFiles(images, fileNamesFromDB);
         bannerDTOModel = bannerService.updateImagesOnModel(bannerDTOModel, fileNamesFromDB);
 
@@ -67,6 +68,7 @@ public class BannerPageController {
                                       @RequestParam("promotionBannerImg") MultipartFile[] promotionBannerImg) throws IOException {
         ArrayList<MultipartFile> images = new ArrayList<>(Arrays.stream(promotionBannerImg).toList());
         List<String> fileNamesFromDB = bannerService.getListImagesFileNameByBannerType(BannerType.PROMOTION);
+        bannerService.deleteEmptyBannerImage(images, bannerDTOModel);
         fileNamesFromDB = uploadService.saveUploadFiles(images, fileNamesFromDB);
         bannerDTOModel = bannerService.updateImagesOnModel(bannerDTOModel, fileNamesFromDB);
 

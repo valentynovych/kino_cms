@@ -4,13 +4,16 @@ import com.kino_cms.dto.BannerDTO;
 import com.kino_cms.entity.Banner;
 import com.kino_cms.entity.BannerImage;
 import com.kino_cms.enums.BannerType;
+import com.kino_cms.repository.BannerImageRepo;
 import com.kino_cms.repository.BannerRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -19,6 +22,7 @@ import java.util.Optional;
 public class BannerService {
 
     private final BannerRepo bannerRepo;
+    private final BannerImageRepo  bannerImageRepo;
 
     public BannerDTO getHeaderBanner() {
         log.info("-> start execution method getHeaderBanner()");
@@ -34,6 +38,19 @@ public class BannerService {
             dto.setBannerImages(createEmptyList(5));
             dto.setSlideSpeed(10);
         }
+        List<BannerImage> bannerImages = dto.getBannerImages();
+        int size = bannerImages.size();
+        if (size < 5) {
+            for (int i = 0; i < 5 - size; i++) {
+                Banner banner = new Banner();
+                banner.setId(dto.getId());
+                BannerImage bannerImage = new BannerImage();
+                bannerImage.setBanner(banner);
+                bannerImages.add(bannerImage);
+            }
+    }
+        bannerImages.stream().sorted((o1, o2) -> o1.getImage().compareToIgnoreCase(o2.getImage()));
+        dto.setBannerImages(bannerImages);
         log.info("-> exit from method getHeaderBanner() with banner id: " + dto.getId());
         return dto;
     }
@@ -58,6 +75,19 @@ public class BannerService {
             dto.setBannerImages(createEmptyList(1));
             dto.setSlideSpeed(10);
         }
+        List<BannerImage> bannerImages = dto.getBannerImages();
+        int size = bannerImages.size();
+        if (size < 5) {
+            for (int i = 0; i < 5 - size; i++) {
+                Banner banner = new Banner();
+                banner.setId(dto.getId());
+                BannerImage bannerImage = new BannerImage();
+                bannerImage.setBanner(banner);
+                bannerImages.add(bannerImage);
+            }
+        }
+        bannerImages.stream().sorted((o1, o2) -> o1.getImage().compareToIgnoreCase(o2.getImage()));
+        dto.setBannerImages(bannerImages);
         log.info("-> exit from method getPerforatingBanner() with banner id: " + dto.getId());
         return dto;
     }
@@ -99,11 +129,24 @@ public class BannerService {
             banner.setId(0L);
         }
 
+        List<BannerImage> bannerImages = dto.getBannerImages();
+        for (BannerImage bannerImage : bannerImages) {
+            if (bannerImage.getImage() != null && bannerImage.getImage().isEmpty()) {
+                bannerImage = null;
+            }
+        }
+
+        List<BannerImage> collect = bannerImages
+                .stream()
+                .filter(Objects::nonNull)
+                .filter(bannerImage -> bannerImage.getImage() != null)
+                .filter(bannerImage -> !bannerImage.getImage().isEmpty())
+                .toList();
         banner.setSlideSpeed(dto.getSlideSpeed());
         banner.setBackgroundColor(dto.getBackgroundColor());
         banner.setIsActivate(dto.getIsActivate());
-        dto.getBannerImages().forEach(bannerImage -> bannerImage.setBanner(banner));
-        banner.setBannerImages(dto.getBannerImages());
+        collect.forEach(bannerImage -> bannerImage.setBanner(banner));
+        banner.setBannerImages(collect);
 
         Banner save = bannerRepo.save(banner);
         log.info("-> exit from method saveBannerDTO()");
@@ -146,5 +189,17 @@ public class BannerService {
         }
         log.info("-> exit from method updateImagesOnModel() list size is: " + bannerDTO.getBannerImages().size());
         return bannerDTO;
+    }
+
+    public void deleteEmptyBannerImage(ArrayList<MultipartFile> images, BannerDTO bannerDTOModel) {
+        for (int i = 0; i < images.size(); i++) {
+            if (images.get(i).getOriginalFilename().equals("empty.png")
+                    && bannerDTOModel.getBannerImages().get(i).getId() != null) {
+                Optional<BannerImage> bannerImageOptional = bannerImageRepo.findById(bannerDTOModel.getBannerImages().get(i).getId());
+                BannerImage bannerImage = bannerImageOptional.get();
+                bannerImageRepo.delete(bannerImage);
+
+            }
+        }
     }
 }

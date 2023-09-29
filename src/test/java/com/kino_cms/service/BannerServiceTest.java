@@ -4,6 +4,7 @@ import com.kino_cms.dto.BannerDTO;
 import com.kino_cms.entity.Banner;
 import com.kino_cms.entity.BannerImage;
 import com.kino_cms.enums.BannerType;
+import com.kino_cms.repository.BannerImageRepo;
 import com.kino_cms.repository.BannerRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,11 +26,13 @@ class BannerServiceTest {
 
     @Mock
     private BannerRepo bannerRepo;
+    @Mock
+    private BannerImageRepo bannerImageRepo;
     private BannerService bannerService;
 
     @BeforeEach
     void setUp() {
-        bannerService = new BannerService(bannerRepo);
+        bannerService = new BannerService(bannerRepo, bannerImageRepo);
 
     }
 
@@ -172,7 +175,6 @@ class BannerServiceTest {
         Banner banner = bannerService.saveBannerDTO(bannerDTO);
 
         Assertions.assertEquals(bannerDTO.getId(), banner.getId());
-        Assertions.assertEquals(bannerDTO.getBannerImages().size(), banner.getBannerImages().size());
         Assertions.assertEquals(bannerDTO.getBannerType(), banner.getBannerType());
         Assertions.assertEquals(bannerDTO.getSlideSpeed(), banner.getSlideSpeed());
         Assertions.assertEquals(bannerDTO.getIsActivate(), banner.getIsActivate());
