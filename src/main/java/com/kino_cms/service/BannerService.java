@@ -75,19 +75,6 @@ public class BannerService {
             dto.setBannerImages(createEmptyList(1));
             dto.setSlideSpeed(10);
         }
-        List<BannerImage> bannerImages = dto.getBannerImages();
-        int size = bannerImages.size();
-        if (size < 5) {
-            for (int i = 0; i < 5 - size; i++) {
-                Banner banner = new Banner();
-                banner.setId(dto.getId());
-                BannerImage bannerImage = new BannerImage();
-                bannerImage.setBanner(banner);
-                bannerImages.add(bannerImage);
-            }
-        }
-        bannerImages.stream().sorted((o1, o2) -> o1.getImage().compareToIgnoreCase(o2.getImage()));
-        dto.setBannerImages(bannerImages);
         log.info("-> exit from method getPerforatingBanner() with banner id: " + dto.getId());
         return dto;
     }
@@ -106,6 +93,19 @@ public class BannerService {
             dto.setBannerImages(createEmptyList(5));
             dto.setSlideSpeed(10);
         }
+        List<BannerImage> bannerImages = dto.getBannerImages();
+        int size = bannerImages.size();
+        if (size < 5) {
+            for (int i = 0; i < 5 - size; i++) {
+                Banner banner = new Banner();
+                banner.setId(dto.getId());
+                BannerImage bannerImage = new BannerImage();
+                bannerImage.setBanner(banner);
+                bannerImages.add(bannerImage);
+            }
+        }
+        bannerImages.stream().sorted((o1, o2) -> o1.getImage().compareToIgnoreCase(o2.getImage()));
+        dto.setBannerImages(bannerImages);
         log.info("-> exit from method getPromotionBanner() with banner id: " + dto.getId());
         return dto;
     }
