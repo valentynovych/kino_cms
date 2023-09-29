@@ -472,7 +472,7 @@ window.addEventListener('load', function () {
     if (typeof flatpickr !== typeof undefined) {
       flatpickr(elem, {
         mode: "range",
-        minDate: "today",
+        //minDate: "today",
         dateFormat: "Y-m-d",
       })
     }
