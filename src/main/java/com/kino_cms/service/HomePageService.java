@@ -30,7 +30,10 @@ public class HomePageService {
         log.info("-> start execution method getHomePageByLocale() by locale: " + locale);
         if (locale.getLanguage().equals("en")) {
             log.info("-> returned HomePage by language: " + Language.ENGLISH.name());
-            return homePageRepo.findByLanguage(Language.ENGLISH);
+            Optional<HomePage> byLanguage = homePageRepo.findByLanguage(Language.ENGLISH);
+            if (byLanguage.isPresent()) {
+                return byLanguage;
+            }
         }
         log.info("-> returned HomePage by language: " + Language.UKRAINIAN.name());
         return homePageRepo.findByLanguage(Language.UKRAINIAN);

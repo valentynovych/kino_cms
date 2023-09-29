@@ -70,7 +70,7 @@ public class AttributeController {
     @ModelAttribute("link_to_about_page")
     public Boolean getLinkToAboutPage() {
         GeneralPageDTO generalPage = generalPageService.getGeneralPageDTOAboutCinema();
-        if (generalPage.getIsActive()) {
+        if (generalPage != null && generalPage.getIsActive()) {
             return true;
         }
         return false;
