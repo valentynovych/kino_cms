@@ -216,6 +216,10 @@ article {
     height: 14rem;
 }
 
+.film-list-show .image-block {
+    align-items: normal;
+}
+
 figure img.app-logo {
     width: 14rem;
     height: 4rem;

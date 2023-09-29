@@ -30,7 +30,7 @@
     <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js}"></script>
 
 </head>
-<body th:style="${perforatingBanner.isActivate} ? 'background: url(/uploads/' + ${perforatingBanner.bannerImages[0].image} + ') repeat-y fixed;'">
+<body th:style="${perforatingBanner.isActivate} ? 'background: url(uploads/' + ${perforatingBanner.bannerImages[0].image} + ') repeat-y fixed;'">
 <span class="screen-darken"></span>
 <!-- loader Start -->
 <div id="loading">
