@@ -34,22 +34,20 @@
 <main class="main-content">
     <nav th:replace="fragments/navbar_admin"></nav>
     <div class="row mt-4">
-        <div class="col-9 d-flex justify-content-center">
-            <span class="h3">Список Кінотеатрів</span>
-        </div>
+        <span class="h3 text-center">Список Кінотеатрів</span>
     </div>
 
-    <div class="container-md ms-5" style="padding: 2rem;">
+    <div class="container-xl mx-auto p-3">
         <div class="mx-auto cinema-list">
             <div class="col-2 fiml-item" th:each="cinema, iter : *{cinemaList}">
                 <div class="col image-block">
                     <figure>
                         <a th:href="@{/admin/edit-cinema/{id}(id=*{cinema.id})}">
-                        <img th:src="@{/uploads/{logoImage}(logoImage=*{cinema.logoImage})}"
-                             class="figure-img img-fluid rounded" loading="eager" alt="file"> </a>
+                            <img th:src="@{/uploads/{logoImage}(logoImage=*{cinema.logoImage})}"
+                                 class="figure-img img-fluid rounded" loading="eager" alt="file"> </a>
                     </figure>
                     <div th:if="${iter.index} > 0">
-                        <button  type="button"
+                        <button type="button"
                                 class="btn btn-close btn-sm deleteRecord" data-bs-toggle="modal"
                                 data-bs-target="#deletedPage" onclick="copyHref(this)">
                         </button>

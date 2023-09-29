@@ -92,12 +92,12 @@
                     <li class="nav-item dropdown">
                         <a th:href="@{#}" class="search-toggle nav-link" data-bs-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            <th:block th:if="${#locale.displayName == 'українська'}">
+                            <th:block th:if="${#locale.language == 'uk'}">
                                 <img th:src="@{/assets/images/Flag/icons8-ukraine-96.png}"
                                      class="img-fluid rounded-circle"
                                      alt="user" style="height: 30px; min-width: 30px; width: 30px;">
                             </th:block>
-                            <th:block th:unless="${#locale.displayName == 'українська'}">
+                            <th:block th:unless="${#locale.language == 'uk'}">
                                 <img th:src="@{/assets/images/Flag/icons8-usa-96.png}" alt="img-flaf"
                                      class="img-fluid me-2" style="width: 30px;height: 30px;min-width: 30px;">
                             </th:block>
