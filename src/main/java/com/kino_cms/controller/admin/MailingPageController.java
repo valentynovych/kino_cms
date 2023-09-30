@@ -19,6 +19,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -64,8 +67,13 @@ public class MailingPageController {
         MultipartFile template = mailingDTO.getHtmlTemplate();
         Integer allCountMails = mailingDTO.getCountMails();
         List<String> templates = mailingDTO.getLastTemplates();
+        if (templates == null) {
+            templates = new ArrayList<>();
+        }
 
         if (!template.isEmpty()){
+            File directory = new File(uploadPath + "/html_templates/");
+            if (!directory.exists()) directory.mkdir();
             template.transferTo(new File(uploadPath + "/html_templates/" + template.getOriginalFilename()));
             templates.add(0, template.getOriginalFilename());
             mailingDTO.setLastTemplates(templates.stream().limit(5).toList());
