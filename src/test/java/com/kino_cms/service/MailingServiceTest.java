@@ -28,6 +28,7 @@ class MailingServiceTest {
         mailingService = new MailingService(mailingRepository);
 
         mailingEntity = new MailingEntity();
+        mailingEntity.setId(1L);
         mailingEntity.setCountMails(100);
         mailingEntity.setLastTemplates("template1.html, template2.html, " +
                 "template3.html, template4.html, template5.html");
