@@ -130,9 +130,8 @@
                             <div class="col mt-5">
                                 <div class="row d-flex flex-row justify-content-md-start">
                                     <label class="form-label w-auto">Кіль-ть листів: </label>
-                                    <label class="form-label text-blue w-auto">
-                                        <input type="text" class="form-control form-control-plaintext form-control-sm text-blue"
-                                               th:field="*{countMails}">
+                                    <label class="form-label text-blue w-auto" th:text="*{countMails}">
+                                        <input type="hidden" th:field="*{countMails}">
                                     </label>
                                 </div>
                                 <div class="row d-flex flex-row col-sm-auto">

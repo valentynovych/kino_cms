@@ -23,7 +23,7 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:/static/").setCachePeriod(24 * 3600 * 365);
+                .addResourceLocations("classpath:/static/");
         registry.addResourceHandler("/uploads/**")
                 .addResourceLocations("file://" + uploadPath + "/").setCachePeriod(0);
     }
