@@ -219,7 +219,7 @@
             $(".progress-bar").css('width', 0);
 
             $.ajax({
-                url: "/admin/mailing",
+                url: "/Kino_CMS_O_Lesyk/admin/mailing",
                 type: "POST",
                 data: formData,
                 processData: false, //for formData
@@ -236,7 +236,7 @@
             function updateProgress() {
                 $.ajax({
                     type: "GET",
-                    url: "/admin/progress",
+                    url: "/Kino_CMS_O_Lesyk/admin/progress",
                     success: function (data) {
                         // Оновлення прогресу на сторінці
                         $("#progress").text(data.toFixed(2) + "%");
