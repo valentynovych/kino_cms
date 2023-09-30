@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -38,7 +37,7 @@ public class MailSenderService {
             }
             message.setSubject(SUBJECT);
             String content = convertHtmlToString(templateName);
-            message.setText(content, "UTF-8");
+            message.setContent(content, "text/html; charset=utf-8");
 
             mailSender.send(message);
         } catch (MessagingException e) {
