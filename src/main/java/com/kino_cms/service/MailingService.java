@@ -45,6 +45,7 @@ public class MailingService {
             mailingEntity = entity.get();
         } else {
             mailingEntity = new MailingEntity();
+            mailingEntity.setId(1L);
         }
         mailingEntity.setCountMails(dto.getCountMails());
         mailingEntity.setLastTemplates(String.join(",", dto.getLastTemplates()));
