@@ -19,6 +19,10 @@ public class CustomErrorController implements ErrorController {
             return new ModelAndView("error/error404")
                     .addObject("errorMessage", "This Page Not Found")
                     .addObject("errorCode", status.toString());
+        } else if (status != null && Integer.valueOf(status.toString()) == HttpStatus.FORBIDDEN.value()) {
+            return new ModelAndView("error/error404")
+                    .addObject("errorMessage", "You do not have sufficient permissions to view the page")
+                    .addObject("errorCode", status.toString());
         }
         return new ModelAndView("error/error404")
                 .addObject("errorMessage", "Oops, something went wrong. <br/>Soryanchik :)")
