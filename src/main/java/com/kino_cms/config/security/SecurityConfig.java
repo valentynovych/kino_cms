@@ -52,8 +52,9 @@ public class SecurityConfig {
             AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
     @Bean
-    public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
+    public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
         return new MySimpleUrlAuthenticationSuccessHandler();
     }
 

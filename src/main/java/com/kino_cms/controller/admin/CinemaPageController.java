@@ -61,7 +61,7 @@ public class CinemaPageController {
             }
         } else {
             cinemaDTO = new CinemaDTO();
-            if ( language != null) {
+            if (language != null) {
                 cinemaDTO.setLanguage(language);
                 cinemaDTO.setTranslatePageId(id);
             } else {

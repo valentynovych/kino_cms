@@ -22,7 +22,7 @@ import java.util.Optional;
 public class BannerService {
 
     private final BannerRepo bannerRepo;
-    private final BannerImageRepo  bannerImageRepo;
+    private final BannerImageRepo bannerImageRepo;
 
     public BannerDTO getHeaderBanner() {
         log.info("-> start execution method getHeaderBanner()");
@@ -48,7 +48,7 @@ public class BannerService {
                 bannerImage.setBanner(banner);
                 bannerImages.add(bannerImage);
             }
-    }
+        }
         bannerImages.stream().sorted((o1, o2) -> o1.getImage().compareToIgnoreCase(o2.getImage()));
         dto.setBannerImages(bannerImages);
         log.info("-> exit from method getHeaderBanner() with banner id: " + dto.getId());

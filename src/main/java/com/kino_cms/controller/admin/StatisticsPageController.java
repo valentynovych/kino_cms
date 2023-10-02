@@ -22,8 +22,9 @@ public class StatisticsPageController {
     private final UserSessionService userSessionService;
     @Autowired
     FeedPageService feedPageService;
+
     @GetMapping("/admin/stat")
-    public String viewStatistics(Model model){
+    public String viewStatistics(Model model) {
 
         Integer userCount = statisticService.getUserCount();
         model.addAttribute("userCount", userCount);

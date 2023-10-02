@@ -28,7 +28,7 @@ public class CinemaPageViewController {
     private final FilmSessionService filmSessionService;
 
     @GetMapping("")
-    public ModelAndView viewAllCinemas(){
+    public ModelAndView viewAllCinemas() {
         ModelAndView modelAndView = new ModelAndView("user_views/cinemas/allCinemaViewPage");
         List<CinemaDTO> allCinemaDto = cinemaService.getAllCinemaDto();
         modelAndView.addObject("allCinemaList", allCinemaDto);
@@ -36,7 +36,7 @@ public class CinemaPageViewController {
     }
 
     @GetMapping("{cinemaId}")
-    public ModelAndView viewCinema(@PathVariable Long cinemaId){
+    public ModelAndView viewCinema(@PathVariable Long cinemaId) {
         ModelAndView modelAndView = new ModelAndView("user_views/cinemas/cinemaViewPage");
         CinemaDTO cinemaDto = cinemaService.getPresentCinemaDtoById(cinemaId);
         modelAndView.addObject("cinemaDto", cinemaDto);

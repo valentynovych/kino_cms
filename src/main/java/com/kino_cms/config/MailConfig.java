@@ -1,7 +1,5 @@
 package com.kino_cms.config;
 
-import jakarta.mail.Session;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;

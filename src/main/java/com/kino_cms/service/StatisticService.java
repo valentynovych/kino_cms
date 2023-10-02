@@ -32,7 +32,7 @@ public class StatisticService {
     private final FeedPageRepo feedPageRepo;
 
 
-    public Integer getUserCount(){
+    public Integer getUserCount() {
         log.info("-> start execution method getUserCount()");
         List<User> all = userRepository.findAll();
         log.info("-> exit from method getUserCount()");

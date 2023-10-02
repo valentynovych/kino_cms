@@ -1,9 +1,7 @@
 package com.kino_cms.service;
 
-import com.kino_cms.dto.UserDTO;
 import com.kino_cms.entity.User;
 import com.kino_cms.entity.UserSession;
-import com.kino_cms.enums.City;
 import com.kino_cms.repository.UserSessionRepo;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;

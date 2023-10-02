@@ -67,6 +67,7 @@ public class AttributeController {
                 .stream().filter(GeneralPage::getIsActive).toList();
         return allUkPageByPageTypeForMenu;
     }
+
     @ModelAttribute("link_to_about_page")
     public Boolean getLinkToAboutPage() {
         GeneralPageDTO generalPage = generalPageService.getGeneralPageDTOAboutCinema();

@@ -1,6 +1,5 @@
 package com.kino_cms.controller.users;
 
-import com.kino_cms.dto.CinemaDTO;
 import com.kino_cms.dto.FilmDTO;
 import com.kino_cms.entity.FilmDetails;
 import com.kino_cms.entity.FilmSession;
@@ -15,10 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.lang.reflect.Field;
-import java.text.DateFormatSymbols;
-import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class FilmPageViewController {

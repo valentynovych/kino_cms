@@ -54,7 +54,8 @@ public class UserPageController {
         LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
         if (localeResolver != null) {
             if (userDTO.getLanguage() == Language.ENGLISH) localeResolver.setLocale(request, response, Locale.ENGLISH);
-            if (userDTO.getLanguage() == Language.UKRAINIAN) localeResolver.setLocale(request, response, Locale.forLanguageTag("uk"));
+            if (userDTO.getLanguage() == Language.UKRAINIAN)
+                localeResolver.setLocale(request, response, Locale.forLanguageTag("uk"));
         }
         userService.saveUserDTO(userDTO);
         return modelAndView;
