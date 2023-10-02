@@ -44,42 +44,46 @@
                 <div class="row d-flex flex-row justify-content-between align-items-baseline">
                     <label class="form-label col-2">Кому надсилати: </label>
                     <div class="col-3 form-check form-check-inline">
-                        <input type="radio" class="form-check-input" name="optional">
+                        <input type="radio" class="form-check-input" name="optional" checked>
                         <label class="form-label">Всім користувачам</label>
                     </div>
                     <div class="col-2 form-check form-check-inline">
                         <input type="radio" class="form-check-input" name="optional">
                         <label class="form-label">Вибірково</label>
                     </div>
-                    <button type="button" class="btn-outline-primary btn col-3">Вибрати користувачів</button>
+                    <button type="button" class="btn-outline-primary btn col-3"
+                            onclick="location.href='/Kino_CMS_O_Lesyk/admin/chose-users'">
+                        Вибрати користувачів
+                    </button>
                 </div>
                 <div class="row mt-4">
                     <div class="col-6">
                         <div class="row d-flex flex-row justify-content-between">
                             <label class="col-form-label-sm col-4">Текст SMS</label>
-                            <label class="col-form-label-sm col-4">Символів: 23</label>
+                            <label class="col-form-label-sm col-4">Символів: 0</label>
                         </div>
                         <div class="form-group">
-                            <textarea class="col w-100 form-control" rows="6" name="text-sms"
+                            <textarea class="col w-100 form-control text-blue" rows="6" name="text-sms"
                                       placeholder="Введіть текст SMS">
-
                             </textarea>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="row col-8 d-flex flex-row mt-5">
                             <label class="form-label col-5">Кіль-ть SMS: </label>
-                            <label class="form-label col-5">173 629</label>
+                            <label class="form-label col-5 all-count-sms">1630</label>
                         </div>
                         <div class="row d-flex flex-row">
                             <label class="form-label col-5">Розсилка виконана на: </label>
-                            <label class="form-label col-2">46%</label>
-                            <label class="form-label col-3 ms-3">20 000</label>
+                            <label class="form-label col-2 text-success progress-sms">6%</label>
+                            <label class="form-label col-3 ms-3 count-sms">98</label>
                         </div>
                     </div>
                 </div>
                 <div class="row d-flex justify-content-center">
-                    <button type="button" class="btn btn-outline-primary col-3">Почати розсилку</button>
+                    <button type="button" class="btn btn-outline-primary col-3" onclick="showMagic(1629, 98, 1)">
+                        Почати розсилку
+                    </button>
                 </div>
             </div>
         </div>
@@ -108,7 +112,8 @@
                             <label class="form-label">Вибірково</label>
                         </div>
                         <button type="button" class="btn-outline-primary btn col-3 chose-user"
-                                onclick="location.href='/Kino_CMS_O_Lesyk/admin/chose-users'" disabled>Вибрати користувачів
+                                onclick="location.href='/Kino_CMS_O_Lesyk/admin/chose-users'" disabled>Вибрати
+                            користувачів
                         </button>
                     </div>
                     <div class="row mt-4">
@@ -179,6 +184,28 @@
     </div>
 </main>
 <script>
+    const all_count_sms = $(".all-count-sms");
+    const progress_sms = $(".progress-sms");
+    const count_sms = $(".count-sms");
+
+    function showMagic(allSms, counts, iter) {
+
+        all_count_sms.text((allSms - iter));
+        progress_sms.text(((iter / allSms) * 100).toFixed(1) + '%');
+        count_sms.text(counts + 3);
+
+        if ((allSms - iter) > 0) {
+            setTimeout(() => {
+                showMagic(allSms, counts + 3, iter + 3);
+            }, 50);
+        } else {
+            all_count_sms.text(0);
+            progress_sms.text('100%');
+            count_sms.text(counts + 3);
+        }
+    }
+</script>
+<script>
     const inputHtml = document.getElementById('file-html');
     const showHtml = document.getElementById('show-upload');
     const usedHtml = document.getElementById('used-template');
@@ -240,7 +267,7 @@
                     success: function (data) {
                         // Оновлення прогресу на сторінці
                         $("#progress").text(data.toFixed(2) + "%");
-                        $(".progress-bar").css('width', data.toFixed(2)  + '%');
+                        $(".progress-bar").css('width', data.toFixed(2) + '%');
 
                         // Перевірка, чи розсилка завершена
                         if (data < 100) {
@@ -252,6 +279,7 @@
                     }
                 });
             }
+
             updateProgress();
         });
     });
