@@ -38,6 +38,12 @@
         <form class="needs-validation" th:method="post" th:object="${feedPage}" novalidate
               enctype="multipart/form-data">
             <div class="row justify-content-end">
+                <th:block th:if="*{translatePageId == null and id != 0}">
+                    <div class="alert alert-bottom alert-warning alert-dismissible fade show mb-3" role="alert">
+                        <span>Відсутній переклад сторінки</span>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </th:block>
                 <div class="row col-2 my-auto d-flex flex-row">
                     <label class="form-control-sm col">Вкл</label>
                     <div class="form-check form-switch form-check-inline col">

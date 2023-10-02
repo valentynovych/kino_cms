@@ -43,6 +43,12 @@
                         <input class="form-check-input " th:field="*{isActivate}" type="checkbox"/>
                     </div>
                 </div>
+                <th:block th:if="*{translatePageId == null and id != 0}">
+                    <div class="alert alert-bottom alert-warning alert-dismissible fade show mb-3" role="alert">
+                        <span>Відсутній переклад сторінки</span>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </th:block>
                 <div class="d-flex justify-content-end col-2 ">
                     <div class="nav nav-tabs" role="tablist">
                         <button class="nav-link d-flex align-items-center" data-bs-toggle="tab" type="button" role="tab"

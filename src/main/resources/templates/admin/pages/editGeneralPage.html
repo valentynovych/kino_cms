@@ -37,6 +37,12 @@
         <form class="needs-validation" th:method="post" th:object="${generalPage}" novalidate
               enctype="multipart/form-data">
             <div class="row justify-content-end">
+                <th:block th:if="*{translatePageId == null and id != 0}">
+                    <div class="alert alert-bottom alert-warning alert-dismissible fade show mb-3" role="alert">
+                        <span>Відсутній переклад сторінки</span>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </th:block>
                 <div class="form-check form-switch form-check-inline col-1 my-auto">
                     <input class="form-check-input" th:field="*{isActive}" type="checkbox"/>
                 </div>

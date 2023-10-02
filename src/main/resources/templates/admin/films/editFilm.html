@@ -39,6 +39,12 @@
         <form class="needs-validation" th:method="post" th:object="${filmDTO}" novalidate
               enctype="multipart/form-data">
             <div class="row justify-content-end">
+                <th:block th:if="*{translatePageId == null and id != 0}">
+                    <div class="alert alert-bottom alert-warning alert-dismissible fade show mb-3" role="alert">
+                        <span>Відсутній переклад сторінки</span>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </th:block>
                 <div class="d-flex justify-content-end col-2 ">
                     <div class="nav nav-tabs" role="tablist">
                         <button class="nav-link d-flex align-items-center" data-bs-toggle="tab" type="button" role="tab"
