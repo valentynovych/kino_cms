@@ -7,6 +7,7 @@ import com.kino_cms.service.CinemaService;
 import com.kino_cms.service.FilmSessionService;
 import com.kino_cms.service.HallService;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -46,7 +48,7 @@ public class CinemaPageViewController {
         modelAndView.addObject("allSessionByCinema", allSessionByCinemaId);
 
         List<String> listImagesFileNameById = cinemaService.getListImagesFileNameById(cinemaId);
-        modelAndView.addObject("listImages", listImagesFileNameById);
+        modelAndView.addObject("listImages", listImagesFileNameById.stream().filter(Objects::nonNull).filter(Strings::isNotEmpty));
         return modelAndView;
     }
 

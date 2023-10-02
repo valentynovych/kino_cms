@@ -138,6 +138,17 @@
 </main>
 <!--copy href from link to button on modal-->
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const paginationButtons = document.querySelectorAll('.paginate_button');
+        const datatablesInfo = document.querySelector('div.dataTables_info');
+
+        if (paginationButtons.length < 4) {
+            paginationButtons[0].parentElement.style.display = 'none';
+            datatablesInfo.parentElement.style.display = 'none';
+        }
+    });
+</script>
+<script>
     function copyHref(el) {
         document.getElementById('deleteLink').href = el.nextElementSibling.getAttribute("href");
     }
