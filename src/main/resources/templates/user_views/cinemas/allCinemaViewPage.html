@@ -57,7 +57,7 @@
               <div class="cinema-card" th:each="cinema : ${allCinemaList}">
                 <figure class="cinema-card-img rounded-1"
                         style="aspect-ratio: 1/1">
-                  <img th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(cinema.logoImage)} ? '/uploads/' + ${cinema.logoImage} : '')}">
+                  <img th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(cinema.logoImage)} ? '/Kino_CMS_O_Lesyk/uploads/' + ${cinema.logoImage} : '')}">
                 </figure>
                 <div class="cinema-card-title text-center">
                   <a class="h4" th:href="@{/cinemas/{cinemaId}(cinemaId=${cinema.id})}"

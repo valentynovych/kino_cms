@@ -39,7 +39,7 @@
     <th:block th:insert="~{fragments/publicPage.html :: navSecondLevel}"></th:block>
     <article class="top-image mb-3">
         <figure>
-            <img th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(hallDTO.firstBanner)} ? '/uploads/' + ${hallDTO.firstBanner} : '')}"
+            <img th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(hallDTO.firstBanner)} ? '/Kino_CMS_O_Lesyk/uploads/' + ${hallDTO.firstBanner} : '')}"
                  height="500">
         </figure>
     </article>
@@ -80,7 +80,7 @@
                                 </div>
                                 <div class="cinema-condition-text mt-3">
                                     <figure>
-                                        <img th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(hallDTO.hallSchema)} ? '/uploads/' + ${hallDTO.hallSchema} : '')}">
+                                        <img th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(hallDTO.hallSchema)} ? '/Kino_CMS_O_Lesyk/uploads/' + ${hallDTO.hallSchema} : '')}">
                                     </figure>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
                                              th:attr="data-bs-interval=(5 * 1000)">
                                             <figure>
                                                 <img class="bd-placeholder-img bd-placeholder-img-lg d-block"
-                                                     th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(image)} ? '/uploads/' + ${image} : '')}">
+                                                     th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(image)} ? '/Kino_CMS_O_Lesyk/uploads/' + ${image} : '')}">
                                             </figure>
                                         </div>
                                     </div>

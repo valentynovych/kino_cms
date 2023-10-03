@@ -111,7 +111,7 @@
             <div class="row col-11 row-cols-auto flex-row image-block">
                 <label for="fileInput1" class="form-control-sm my-auto col-sm-2">Головна картинка</label>
                 <figure class="figure">
-                    <img th:src="@{{logoImage}(logoImage=*{!#strings.isEmpty(mainImage)} ? '/uploads/' + *{mainImage} : '')}"
+                    <img th:src="@{{logoImage}(logoImage=*{!#strings.isEmpty(mainImage)} ? '/Kino_CMS_O_Lesyk/uploads/' + *{mainImage} : '')}"
                          style="width: 14rem; height: 8rem;"
                          class="figure-img img-fluid rounded" id="mainImage"
                          loading="eager" alt="file">
@@ -134,7 +134,7 @@
                     </div>
                     <div class="col d-flex flex-column align-items-center image-block">
                         <figure style="max-height: calc(100% - 40px)">
-                            <img th:src="@{{logoImage}(logoImage=*{!#strings.isEmpty(image1)} ? '/uploads/' + *{image1} : '')}"
+                            <img th:src="@{{logoImage}(logoImage=*{!#strings.isEmpty(image1)} ? '/Kino_CMS_O_Lesyk/uploads/' + *{image1} : '')}"
                                  class="figure-img img-fluid rounded" loading="eager" alt="file">
                         </figure>
                         <button type="button" class="btn btn-close btn-sm clear-image"></button>
@@ -147,7 +147,7 @@
                     </div>
                     <div class="col d-flex flex-column align-items-center image-block">
                         <figure style="max-height: calc(100% - 40px)">
-                            <img th:src="@{{logoImage}(logoImage=*{!#strings.isEmpty(image2)} ? '/uploads/' + *{image2} : '')}"
+                            <img th:src="@{{logoImage}(logoImage=*{!#strings.isEmpty(image2)} ? '/Kino_CMS_O_Lesyk/uploads/' + *{image2} : '')}"
                                  class="figure-img img-fluid rounded"
                                  loading="eager" alt="file">
                         </figure>
@@ -160,7 +160,7 @@
                     </div>
                     <div class="col d-flex flex-column align-items-center image-block">
                         <figure style="max-height: calc(100% - 40px)">
-                            <img th:src="@{{logoImage}(logoImage=*{!#strings.isEmpty(image3)} ? '/uploads/' + *{image3} : '')}"
+                            <img th:src="@{{logoImage}(logoImage=*{!#strings.isEmpty(image3)} ? '/Kino_CMS_O_Lesyk/uploads/' + *{image3} : '')}"
                                  class="figure-img img-fluid rounded"
                                  loading="eager" alt="file">
                         </figure>
@@ -173,7 +173,7 @@
                     </div>
                     <div class="col d-flex flex-column align-items-center image-block">
                         <figure style="max-height: calc(100% - 40px)">
-                            <img th:src="@{{logoImage}(logoImage=*{!#strings.isEmpty(image4)} ? '/uploads/' + *{image4} : '')}"
+                            <img th:src="@{{logoImage}(logoImage=*{!#strings.isEmpty(image4)} ? '/Kino_CMS_O_Lesyk/uploads/' + *{image4} : '')}"
                                  class="figure-img img-fluid rounded"
                                  loading="eager" alt="file" id="12">
                         </figure>
@@ -187,7 +187,7 @@
                     </div>
                     <div class="col d-flex flex-column align-items-center image-block">
                         <figure style="max-height: calc(100% - 40px)">
-                            <img th:src="@{{logoImage}(logoImage=*{!#strings.isEmpty(image5)} ? '/uploads/' + *{image5} : '')}"
+                            <img th:src="@{{logoImage}(logoImage=*{!#strings.isEmpty(image5)} ? '/Kino_CMS_O_Lesyk/uploads/' + *{image5} : '')}"
                                  class="figure-img img-fluid rounded"
                                  loading="eager" alt="file" th:field="*{image5}">
                         </figure>

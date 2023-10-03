@@ -61,7 +61,7 @@
                     <div class="col image-block">
                         <figure class="film-item-img m-0">
                             <a th:href="@{/film/{id}(id=*{film.id})}">
-                                <img th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(film.mainImage)} ? '/uploads/' + *{film.mainImage} : '')}"
+                                <img th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(film.mainImage)} ? '/Kino_CMS_O_Lesyk/uploads/' + *{film.mainImage} : '')}"
                                      class="figure-img img-fluid rounded" loading="eager" alt="file"> </a>
                         </figure>
                     </div>

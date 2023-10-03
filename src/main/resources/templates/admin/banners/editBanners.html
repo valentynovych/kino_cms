@@ -52,7 +52,7 @@
                                      th:each="imageItem, iter : ${headerBanner.bannerImages}">
                                     <figure>
                                         <img th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(headerBanner.bannerImages[__${iter.index}__].image)}
-                                        ? '/uploads/' + ${headerBanner.bannerImages[__${iter.index}__].image} : '')}"
+                                        ? '/Kino_CMS_O_Lesyk/uploads/' + ${headerBanner.bannerImages[__${iter.index}__].image} : '')}"
                                              class="figure-img img-fluid rounded" loading="eager" alt="image">
                                     </figure>
                                     <button type="button" class="btn btn-close btn-sm clear-image deleteBanner"></button>
@@ -180,7 +180,7 @@
                                      th:each="imageItem, iter : ${promotionBanner.bannerImages}">
                                     <figure>
                                         <img th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(promotionBanner.bannerImages[__${iter.index}__].image)}
-                                        ? '/uploads/' + ${promotionBanner.bannerImages[__${iter.index}__].image} : '')}"
+                                        ? '/Kino_CMS_O_Lesyk/uploads/' + ${promotionBanner.bannerImages[__${iter.index}__].image} : '')}"
                                              class="figure-img img-fluid rounded" loading="eager" alt="image">
                                     </figure>
                                     <button type="button" class="btn btn-close btn-sm clear-image deleteBanner"></button>
