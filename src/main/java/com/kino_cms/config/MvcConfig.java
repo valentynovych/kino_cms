@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.springframework.web.servlet.resource.EncodedResourceResolver;
 
 import java.util.Locale;
 
@@ -25,7 +26,10 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/");
         registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file://" + uploadPath + "/").setCachePeriod(0);
+                .addResourceLocations("file://" + uploadPath + "/")
+                .setCachePeriod(3600)
+                .resourceChain(true)
+                .addResolver(new EncodedResourceResolver());
     }
 
     @Bean
