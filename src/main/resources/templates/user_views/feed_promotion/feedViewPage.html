@@ -61,7 +61,7 @@
                         <div class="feed-desc d-flex gap-4 mt-4">
                             <div class="feed-img" style="width: 35%">
                                 <figure class="rounded-1">
-                                    <img th:src="@{/uploads/{image}(image=${feedPage.mainImage})}">
+                                    <img th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(feedPage.mainImage)} ? '/uploads/' + ${feedPage.mainImage} : '')}">
                                 </figure>
                             </div>
                             <div class="feed-description" style="width: 100%">

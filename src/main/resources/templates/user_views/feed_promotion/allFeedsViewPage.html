@@ -67,7 +67,7 @@
                         <div class="feeds-card-list d-grid grid-cols--3 gap-4">
                             <div class="feed-card" th:each="feed : ${allFeedPages}">
                                 <figure class="feed-card-img rounded-1" style="aspect-ratio: 1/1">
-                                    <img th:src="@{/uploads/{image}(image=${feed.mainImage})}">
+                                    <img th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(feed.mainImage)} ? '/uploads/' + ${feed.mainImage} : '')}">
                                 </figure>
                                 <div class="feed-card-title">
                                     <a th:href="@{/feed/{feedId}(feedId=${feed.id})}"

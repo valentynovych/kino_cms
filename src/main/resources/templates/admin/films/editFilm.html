@@ -107,7 +107,7 @@
             <div class="row col-11 row-cols-auto border image-block flex-row align-content-center">
                 <label for="fileInput1" class="form-control-sm my-auto col-sm-2">Головна картинка</label>
                 <figure class="figure">
-                    <img th:src="@{/uploads/{mainImage}(mainImage=*{mainImage})}"
+                    <img th:src="@{{logoImage}(logoImage=*{!#strings.isEmpty(mainImage)} ? '/uploads/' + *{mainImage} : '')}"
                          style="width: 14rem; height: 8rem;"
                          class="figure-img img-fluid rounded" id="mainImage"
                          loading="eager" alt="file">
@@ -130,7 +130,7 @@
                     </div>
                     <div class="col image-block">
                         <figure style="max-height: calc(100% - 40px)">
-                            <img th:src="@{/uploads/{image1}(image1=*{image1})}"
+                            <img th:src="@{{logoImage}(logoImage=*{!#strings.isEmpty(image1)} ? '/uploads/' + *{image1} : '')}"
                                  class="figure-img img-fluid rounded" loading="eager" alt="file">
                         </figure>
                         <button type="button" class="btn btn-close btn-sm clear-image"></button>
@@ -143,7 +143,7 @@
                     </div>
                     <div class="col image-block">
                         <figure style="max-height: calc(100% - 40px)">
-                            <img th:src="@{/uploads/{image2}(image2=*{image2})}"
+                            <img th:src="@{{logoImage}(logoImage=*{!#strings.isEmpty(image2)} ? '/uploads/' + *{image2} : '')}"
                                  class="figure-img img-fluid rounded"
                                  loading="eager" alt="file">
                         </figure>
@@ -156,7 +156,7 @@
                     </div>
                     <div class="col image-block">
                         <figure style="max-height: calc(100% - 40px)">
-                            <img th:src="@{/uploads/{image3}(image3=*{image3})}"
+                            <img th:src="@{{logoImage}(logoImage=*{!#strings.isEmpty(image3)} ? '/uploads/' + *{image3} : '')}"
                                  class="figure-img img-fluid rounded"
                                  loading="eager" alt="file">
                         </figure>
@@ -169,12 +169,11 @@
                     </div>
                     <div class="col image-block">
                         <figure style="max-height: calc(100% - 40px)">
-                            <img th:src="@{/uploads/{image4}(image4=*{image4})}"
+                            <img th:src="@{{logoImage}(logoImage=*{!#strings.isEmpty(image4)} ? '/uploads/' + *{image4} : '')}"
                                  class="figure-img img-fluid rounded"
                                  loading="eager" alt="file" id="12">
                         </figure>
-                        <button type="button" class="btn btn-close btn-sm clear-image"
-                                onclick="document.getElementById('12').src = ''"></button>
+                        <button type="button" class="btn btn-close btn-sm clear-image"></button>
                         <button type="button" class="btn btn-outline-secondary btn-sm upload-button" id="uploadButton5">
                             Додати
                         </button>
@@ -183,7 +182,7 @@
                     </div>
                     <div class="col image-block">
                         <figure style="max-height: calc(100% - 40px)">
-                            <img th:src="@{/uploads/{image5}(image5=*{image5})}"
+                            <img th:src="@{{logoImage}(logoImage=*{!#strings.isEmpty(image5)} ? '/uploads/' + *{image5} : '')}"
                                  class="figure-img img-fluid rounded"
                                  loading="eager" alt="file" th:field="*{image5}">
                         </figure>

@@ -39,7 +39,7 @@
     <th:block th:insert="~{fragments/publicPage.html :: navSecondLevel}"></th:block>
     <!--Nav End-->
     <th:block class="mb-3">
-        <img th:src="@{/uploads/{hallImage}(hallImage=${filmSession.hall.firstBanner})}" height="450">
+        <img th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(filmSession.hall.firstBanner)} ? '/uploads/' + ${filmSession.hall.firstBanner} : '')}">
     </th:block>
     <div class="container-xl">
         <article class="main-content-block">
@@ -47,7 +47,7 @@
                 <div class="text-block d-flex" style="column-gap: 3rem; width: 100%">
                     <aside class="sidebar-right">
                         <div class="film-logo my-3">
-                            <img th:src="@{/uploads/{filmLogo}(filmLogo=${filmSession.film.mainImage})}" height="400">
+                            <img th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(filmSession.film.mainImage)} ? '/uploads/' + ${filmSession.film.mainImage} : '')}">
                         </div>
                         <th:block
                                 th:insert="~{fragments/publicPage.html :: context-advertising(heigth='400')}"></th:block>
@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="cinema-condition-text mt-5">
                                     <figure>
-                                        <img th:src="@{/uploads/{schema}(schema=${filmSession.hall.hallSchema})}">
+                                        <img th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(filmSession.hall.hallSchema)} ? '/uploads/' + ${filmSession.hall.hallSchema} : '')}">
                                     </figure>
                                 </div>
                             </div>

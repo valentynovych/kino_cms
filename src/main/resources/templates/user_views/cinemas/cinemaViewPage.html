@@ -39,7 +39,8 @@
     <th:block th:insert="~{fragments/publicPage.html :: navSecondLevel}"></th:block>
     <article class="top-image mb-3">
         <figure>
-            <img th:src="@{/uploads/{firstBanner}(firstBanner=${cinemaDto.firstBanner})}" height="500">
+            <img th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(cinemaDto.firstBanner)} ? '/uploads/' + ${cinemaDto.firstBanner} : '')}"
+                 height="500">
         </figure>
     </article>
     <!--Nav End-->
@@ -78,7 +79,7 @@
                             <div class="col-5 cinema-logo me-4 d-flex flex-row justify-content-md-start gap-2">
                                 <label class="h4" th:text="${cinemaDto.name}"></label>
                                 <figure class="rounded-2">
-                                    <img th:src="@{/uploads/{logoImage}(logoImage=${cinemaDto.logoImage})}"
+                                    <img th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(cinemaDto.logoImage)} ? '/uploads/' + ${cinemaDto.logoImage} : '')}"
                                          style="width:200px; height: 120px">
                                 </figure>
                             </div>
@@ -121,7 +122,7 @@
                                              th:attr="data-bs-interval=(5 * 1000)">
                                             <figure>
                                                     <img class="bd-placeholder-img bd-placeholder-img-lg d-block"
-                                                         th:src="@{/uploads/{imageName}(imageName=${image})}">
+                                                         th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(image)} ? '/uploads/' + ${image} : '')}">
                                             </figure>
                                         </div>
                                     </div>

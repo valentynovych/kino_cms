@@ -43,7 +43,7 @@
                 <div class="col image-block">
                     <figure>
                         <a th:href="@{/admin/edit-cinema/{id}(id=*{cinema.id})}">
-                            <img th:src="@{/uploads/{logoImage}(logoImage=*{cinema.logoImage})}"
+                            <img th:src="@{{logoImage}(logoImage=*{!#strings.isEmpty(cinema.logoImage)} ? '/uploads/' + *{cinema.logoImage} : '')}"
                                  class="figure-img img-fluid rounded" loading="eager" alt="file"> </a>
                     </figure>
                     <div th:if="${iter.index} > 0">

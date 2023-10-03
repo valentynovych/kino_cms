@@ -39,7 +39,8 @@
     <th:block th:insert="~{fragments/publicPage.html :: navSecondLevel}"></th:block>
     <article class="top-image mb-3">
         <figure>
-            <img th:src="@{/uploads/{firstBanner}(firstBanner=${hallDTO.firstBanner})}" height="500">
+            <img th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(hallDTO.firstBanner)} ? '/uploads/' + ${hallDTO.firstBanner} : '')}"
+                 height="500">
         </figure>
     </article>
     <!--Nav End-->
@@ -79,7 +80,7 @@
                                 </div>
                                 <div class="cinema-condition-text mt-3">
                                     <figure>
-                                        <img th:src="@{/uploads/{schema}(schema=${hallDTO.hallSchema})}">
+                                        <img th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(hallDTO.hallSchema)} ? '/uploads/' + ${hallDTO.hallSchema} : '')}">
                                     </figure>
                                 </div>
                             </div>
@@ -101,7 +102,7 @@
                                              th:attr="data-bs-interval=(5 * 1000)">
                                             <figure>
                                                 <img class="bd-placeholder-img bd-placeholder-img-lg d-block"
-                                                     th:src="@{/uploads/{imageName}(imageName=${image})}">
+                                                     th:src="@{{logoImage}(logoImage=${!#strings.isEmpty(image)} ? '/uploads/' + ${image} : '')}">
                                             </figure>
                                         </div>
                                     </div>

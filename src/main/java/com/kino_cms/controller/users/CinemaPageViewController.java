@@ -48,7 +48,11 @@ public class CinemaPageViewController {
         modelAndView.addObject("allSessionByCinema", allSessionByCinemaId);
 
         List<String> listImagesFileNameById = cinemaService.getListImagesFileNameById(cinemaId);
-        modelAndView.addObject("listImages", listImagesFileNameById.stream().filter(Objects::nonNull).filter(Strings::isNotEmpty));
+        modelAndView.addObject("listImages", listImagesFileNameById
+                .stream()
+                .filter(Objects::nonNull)
+                .filter(Strings::isNotEmpty)
+                .toList());
         return modelAndView;
     }
 
