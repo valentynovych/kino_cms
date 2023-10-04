@@ -61,7 +61,7 @@
                                         th:text="${sessionItem.sessionName}"></label>
                                 </a>
                             </div>
-                            <a href="/timetable">
+                            <a th:href="@{/timetable}">
                                 <button class="btn btn-soft-success mt-4" th:text="#{schedule-all-session}">Розклад всіх сеансів</button>
                             </a>
                         </div>
