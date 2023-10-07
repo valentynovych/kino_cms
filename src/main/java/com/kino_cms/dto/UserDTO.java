@@ -5,6 +5,7 @@ import com.kino_cms.enums.Language;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
 
@@ -21,6 +22,7 @@ public class UserDTO {
     private String cardNumber;
     private String sex;
     private String phone;
+    @DateTimeFormat
     private Date dateOfBirth;
     @Enumerated(EnumType.STRING)
     private City city;
