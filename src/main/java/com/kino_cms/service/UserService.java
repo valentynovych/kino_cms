@@ -75,7 +75,9 @@ public class UserService {
         userDetails.setCardNumber(userDTO.getCardNumber());
         userDetails.setFirstName(userDTO.getFirstName());
         userDetails.setLastName(userDTO.getLastName());
-        userDetails.setDateOfBirth( new Date(userDTO.getDateOfBirth().getTime()));
+        if (userDTO.getDateOfBirth() != null) {
+            userDetails.setDateOfBirth(new Date(userDTO.getDateOfBirth().getTime()));
+        }
         user.setUserDetails(userDetails);
         log.info("-> exit from method saveUserDTO: " + userDTO.getEmail());
         saveUser(user);

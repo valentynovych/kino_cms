@@ -16,10 +16,9 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,10 +42,10 @@ class UserServiceTest {
     @Test
     void getUserDTOList() {
         UserDTO userDTO1 = new UserDTO(1L, "username1", "mail@mail.com", "23-11-2020", "First name", "Last Name",
-                "Address", "8888 8888 8888 8888", "MALE", "3800088008", Date.valueOf(LocalDate.now()),
+                "Address", "8888 8888 8888 8888", "MALE", "3800088008", new Date(),
                 City.KYIV, Language.UKRAINIAN);
         UserDTO userDTO2 = new UserDTO(2L, "username2", "mail1@mail.com", "23-11-2020", "First name", "Last Name",
-                "Address", "8888 8888 8888 8888", "MALE", "3800088008", Date.valueOf(LocalDate.now()),
+                "Address", "8888 8888 8888 8888", "MALE", "3800088008", new Date(),
                 City.KYIV, Language.UKRAINIAN);
 
         when(userRepository.getUserDTOList()).thenReturn(List.of(userDTO1, userDTO2));
@@ -62,7 +61,7 @@ class UserServiceTest {
     @Test
     void getUserDTOById() {
         UserDTO userDTO1 = new UserDTO(1L, "username1", "mail@mail.com", "23-11-2020", "First name", "Last Name",
-                "Address", "8888 8888 8888 8888", "MALE", "3800088008", Date.valueOf(LocalDate.now()),
+                "Address", "8888 8888 8888 8888", "MALE", "3800088008", new Date(),
                 City.KYIV, Language.UKRAINIAN);
         when(userRepository.getUserDTOById(1L)).thenReturn(Optional.of(userDTO1));
 
@@ -108,7 +107,7 @@ class UserServiceTest {
     @Test
     void saveUserDTO() {
         UserDTO userDTO1 = new UserDTO(1L, "username1", "testmail@mail.com", "23-11-2020", "First name", "Last Name",
-                "Address", "8888 8888 8888 8888", "MALE", "3800088008", Date.valueOf(LocalDate.now()),
+                "Address", "8888 8888 8888 8888", "MALE", "3800088008", new Date(),
                 City.KYIV, Language.UKRAINIAN);
         userDTO1.setPassword("password");
 
@@ -130,7 +129,7 @@ class UserServiceTest {
         userDetails.setCardNumber(userDTO1.getCardNumber());
         userDetails.setFirstName(userDTO1.getFirstName());
         userDetails.setLastName(userDTO1.getLastName());
-        userDetails.setDateOfBirth(userDTO1.getDateOfBirth());
+        userDetails.setDateOfBirth(new java.sql.Date(userDTO1.getDateOfBirth().getTime()));
         user.setUserDetails(userDetails);
 
         when(userRepository.findByEmail(userDTO1.getEmail())).thenReturn(Optional.of(user));
@@ -193,7 +192,7 @@ class UserServiceTest {
         user.setEmail("testmail@mail.com");
         user.setPassword("password");
         user.setRole(Role.ROLE_USER);
-        user.setCreateTime(Date.valueOf(LocalDate.now()).toString());
+        user.setCreateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-DD-mm HH:mm")));
 
         when(userRepository.findByEmail("testmail@mail.com")).thenReturn(Optional.of(user));
 
@@ -205,7 +204,7 @@ class UserServiceTest {
     @Test
     void getUserDTOByEmail() {
         UserDTO userDTO1 = new UserDTO(1L, "username1", "mail@mail.com", "23-11-2020", "First name", "Last Name",
-                "Address", "8888 8888 8888 8888", "MALE", "3800088008", Date.valueOf(LocalDate.now()),
+                "Address", "8888 8888 8888 8888", "MALE", "3800088008", new Date(),
                 City.KYIV, Language.UKRAINIAN);
         when(userRepository.getUserDTOByEmail("mail@mail.com")).thenReturn(Optional.of(userDTO1));
 
