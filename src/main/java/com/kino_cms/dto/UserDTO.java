@@ -7,7 +7,7 @@ import jakarta.persistence.Enumerated;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Data
 public class UserDTO {
@@ -22,7 +22,7 @@ public class UserDTO {
     private String cardNumber;
     private String sex;
     private String phone;
-    @DateTimeFormat
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
     @Enumerated(EnumType.STRING)
     private City city;

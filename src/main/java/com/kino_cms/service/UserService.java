@@ -13,6 +13,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -74,7 +75,7 @@ public class UserService {
         userDetails.setCardNumber(userDTO.getCardNumber());
         userDetails.setFirstName(userDTO.getFirstName());
         userDetails.setLastName(userDTO.getLastName());
-        userDetails.setDateOfBirth(userDTO.getDateOfBirth());
+        userDetails.setDateOfBirth( new Date(userDTO.getDateOfBirth().getTime()));
         user.setUserDetails(userDetails);
         log.info("-> exit from method saveUserDTO: " + userDTO.getEmail());
         saveUser(user);
